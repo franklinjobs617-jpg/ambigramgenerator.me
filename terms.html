@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | Ambigram Generator</title>
+    <meta name="description" content="Terms of service for using Ambigram Generator, including usage rights and restrictions.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Lobster&family=Pacifico&family=Great+Vibes&family=Orbitron&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C5CE7',
+                        secondary: '#FD79A8',
+                        dark: '#2D3436',
+                        light: '#F8F9FA',
+                        accent: '#00B894',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        roboto: ['Roboto', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        lobster: ['Lobster', 'cursive'],
+                        pacifico: ['Pacifico', 'cursive'],
+                        vibes: ['Great Vibes', 'cursive'],
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .glass-effect {
+                backdrop-filter: blur(10px);
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            .gradient-text {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gradient-to-br from-dark to-gray-800 text-light min-h-screen">
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4">
+        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2">
+                <span class="fa fa-refresh text-primary text-2xl rotate-45"></span>
+                <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary gradient-text">AmbigramGen</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+                <a href="index.html#features" class="hover:text-primary transition-colors">Features</a>
+                <a href="index.html#examples" class="hover:text-primary transition-colors">Examples</a>
+                <a href="index.html#fonts" class="hover:text-primary transition-colors">Fonts</a>
+                <a href="faq.html" class="hover:text-primary transition-colors">FAQ</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a href="index.html#generator" class="hidden md:block bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full transition-all hover:shadow-lg hover:shadow-primary/20">
+                    Generate Now
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-2xl">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-dark/95 glass-effect border-t border-gray-700">
+            <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
+                <a href="index.html" class="py-2 hover:text-primary transition-colors">Home</a>
+                <a href="index.html#features" class="py-2 hover:text-primary transition-colors">Features</a>
+                <a href="index.html#examples" class="py-2 hover:text-primary transition-colors">Examples</a>
+                <a href="index.html#fonts" class="py-2 hover:text-primary transition-colors">Fonts</a>
+                <a href="faq.html" class="py-2 hover:text-primary transition-colors">FAQ</a>
+                <a href="index.html#generator" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-center transition-all">
+                    Generate Now
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Terms of Service Section -->
+    <section class="pt-32 pb-20">
+        <div class="container mx-auto px-4 md:px-6 max-w-4xl">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-6">
+                    Terms of Service
+                </h2>
+                <p class="text-xl text-gray-300">
+                    Please read these terms carefully before using our service.
+                </p>
+                <p class="text-gray-400 mt-2">Last updated: August 28, 2023</p>
+            </div>
+            
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Acceptance of Terms</h3>
+                    <p class="text-gray-300">
+                        By accessing or using AmbigramGen (the "Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, you may not use the Service.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Description of Service</h3>
+                    <p class="text-gray-300">
+                        AmbigramGen provides a free online tool for generating ambigrams - typographical designs that can be read in multiple orientations. Our Service allows users to input text, select fonts and colors, and generate ambigram previews that can be downloaded.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">User Conduct</h3>
+                    <p class="text-gray-300 mb-4">
+                        When using our Service, you agree not to:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-300">
+                        <li>Input text that is unlawful, harmful, threatening, abusive, harassing, defamatory, vulgar, obscene, libelous, invasive of another's privacy, or otherwise objectionable</li>
+                        <li>Use the Service for any illegal purpose or in violation of any local, state, national, or international law</li>
+                        <li>Attempt to interfere with or disrupt the Service</li>
+                        <li>Impersonate any person or entity or falsely state or otherwise misrepresent your affiliation with a person or entity</li>
+                        <li>Attempt to gain unauthorized access to any portion of the Service or any other systems or networks connected to the Service</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Intellectual Property</h3>
+                    <p class="text-gray-300 mb-4">
+                        The Service and its original content, features, and functionality are owned by AmbigramGen and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        You are granted a limited, non-exclusive, non-transferable, revocable license to use the Service for your personal or commercial purposes, subject to these Terms.
+                    </p>
+                    <p class="text-gray-300">
+                        With respect to ambigrams you create using our Service, you retain all rights to those specific creations. You are free to use, modify, and distribute them as you wish, subject to applicable laws.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Font Licensing</h3>
+                    <p class="text-gray-300 mb-4">
+                        Our Service uses various fonts that are either:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-300 mb-4">
+                        <li>Released under open source or free use licenses</li>
+                        <li>Used with permission for our Service</li>
+                        <li>Created specifically for our Service</li>
+                    </ul>
+                    <p class="text-gray-300">
+                        When you generate and download an ambigram using these fonts, you are granted a license to use that specific ambigram creation. Separate licensing may be required if you wish to use the fonts outside of our Service.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Disclaimer of Warranties</h3>
+                    <p class="text-gray-300 mb-4">
+                        THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS. AMBIGRAMGEN MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE OPERATION OF THE SERVICE OR THE INFORMATION, CONTENT, MATERIALS, OR PRODUCTS INCLUDED ON THE SERVICE.
+                    </p>
+                    <p class="text-gray-300">
+                        WITHOUT LIMITING THE FOREGOING, AMBIGRAMGEN DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT OF INTELLECTUAL PROPERTY.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Limitation of Liability</h3>
+                    <p class="text-gray-300">
+                        IN NO EVENT SHALL AMBIGRAMGEN OR ITS OWNERS, EMPLOYEES, OR AGENTS BE LIABLE FOR ANY DAMAGES WHATSOEVER, INCLUDING WITHOUT LIMITATION, DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, OR PUNITIVE DAMAGES, ARISING OUT OF OR IN CONNECTION WITH THE USE OF OR INABILITY TO USE THE SERVICE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Indemnification</h3

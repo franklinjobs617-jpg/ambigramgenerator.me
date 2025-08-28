@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Ambigram Generator</title>
+    <meta name="description" content="Privacy policy for Ambigram Generator, explaining how we handle your data and protect your privacy.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Lobster&family=Pacifico&family=Great+Vibes&family=Orbitron&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C5CE7',
+                        secondary: '#FD79A8',
+                        dark: '#2D3436',
+                        light: '#F8F9FA',
+                        accent: '#00B894',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        roboto: ['Roboto', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        lobster: ['Lobster', 'cursive'],
+                        pacifico: ['Pacifico', 'cursive'],
+                        vibes: ['Great Vibes', 'cursive'],
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .glass-effect {
+                backdrop-filter: blur(10px);
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            .gradient-text {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gradient-to-br from-dark to-gray-800 text-light min-h-screen">
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4">
+        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2">
+                <span class="fa fa-refresh text-primary text-2xl rotate-45"></span>
+                <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary gradient-text">AmbigramGen</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+                <a href="index.html#features" class="hover:text-primary transition-colors">Features</a>
+                <a href="index.html#examples" class="hover:text-primary transition-colors">Examples</a>
+                <a href="index.html#fonts" class="hover:text-primary transition-colors">Fonts</a>
+                <a href="faq.html" class="hover:text-primary transition-colors">FAQ</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a href="index.html#generator" class="hidden md:block bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full transition-all hover:shadow-lg hover:shadow-primary/20">
+                    Generate Now
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-2xl">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-dark/95 glass-effect border-t border-gray-700">
+            <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
+                <a href="index.html" class="py-2 hover:text-primary transition-colors">Home</a>
+                <a href="index.html#features" class="py-2 hover:text-primary transition-colors">Features</a>
+                <a href="index.html#examples" class="py-2 hover:text-primary transition-colors">Examples</a>
+                <a href="index.html#fonts" class="py-2 hover:text-primary transition-colors">Fonts</a>
+                <a href="faq.html" class="py-2 hover:text-primary transition-colors">FAQ</a>
+                <a href="index.html#generator" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-center transition-all">
+                    Generate Now
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Privacy Policy Section -->
+    <section class="pt-32 pb-20">
+        <div class="container mx-auto px-4 md:px-6 max-w-4xl">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-6">
+                    Privacy Policy
+                </h2>
+                <p class="text-xl text-gray-300">
+                    Your privacy is important to us. This policy explains how we handle your information.
+                </p>
+                <p class="text-gray-400 mt-2">Last updated: August 28, 2023</p>
+            </div>
+            
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Introduction</h3>
+                    <p class="text-gray-300 mb-4">
+                        Welcome to AmbigramGen ("we", "our", or "us"). We are committed to protecting your privacy and ensuring you have a positive experience on our website. This Privacy Policy explains how we collect, use, and disclose information about you when you use our ambigram generator service.
+                    </p>
+                    <p class="text-gray-300">
+                        By using our website, you agree to the collection and use of information in accordance with this policy.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Information We Don't Collect</h3>
+                    <p class="text-gray-300 mb-4">
+                        We want to emphasize that we do not collect or store any of the following:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-300">
+                        <li>Any text you input into the ambigram generator</li>
+                        <li>The ambigrams you create using our service</li>
+                        <li>Personal identification information unless you voluntarily provide it (e.g., through contact forms)</li>
+                        <li>Your IP address or location data</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Information We May Collect</h3>
+                    <p class="text-gray-300 mb-4">
+                        While using our service, we may collect the following types of information for analytics and service improvement purposes:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-300 mb-4">
+                        <li>Aggregate usage data (e.g., number of visitors, which features are used most often)</li>
+                        <li>Browser type and version</li>
+                        <li>Operating system</li>
+                        <li>Referral source</li>
+                        <li>Pages visited on our site</li>
+                        <li>Time spent on each page</li>
+                    </ul>
+                    <p class="text-gray-300">
+                        This information is collected anonymously and cannot be used to identify you personally.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">How We Use Collected Information</h3>
+                    <p class="text-gray-300 mb-4">
+                        We use the information we collect to:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-300">
+                        <li>Improve and optimize our website and service</li>
+                        <li>Understand how users interact with our generator</li>
+                        <li>Identify and fix technical issues</li>
+                        <li>Add new features that users will find valuable</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Cookies and Tracking Technologies</h3>
+                    <p class="text-gray-300 mb-4">
+                        Our website uses cookies - small text files placed on your device - to enhance your experience. These cookies:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-300 mb-4">
+                        <li>Remember your font and color preferences</li>
+                        <li>Track usage patterns to improve our service</li>
+                        <li>Do not collect personal information</li>
+                    </ul>
+                    <p class="text-gray-300">
+                        You can disable cookies through your browser settings, though this may affect the functionality of our website.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Third-Party Services</h3>
+                    <p class="text-gray-300 mb-4">
+                        We may use third-party services to help us operate our website and analyze usage. These third parties have their own privacy policies:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-300">
+                        <li>Google Analytics: For website traffic analysis</li>
+                        <li>Font providers: To deliver font styles for your ambigrams</li>
+                    </ul>
+                    <p class="text-gray-300">
+                        These third parties are prohibited from using your information for any purpose other than providing services to us.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Data Security</h3>
+                    <p class="text-gray-300">
+                        We take reasonable measures to protect any information collected through our website. However, since your ambigram creations are processed locally in your browser and not stored on our servers, there is no risk of your designs being accessed by unauthorized parties through our systems.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Children's Privacy</h3>
+                    <p class="text-gray-300">
+                        Our service is not intended for use by children under the age of 13. We do not knowingly collect information from children under 13. If we become aware that we have collected information from a child under 13, we will delete it immediately.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Changes to This Privacy Policy</h3>
+                    <p class="text-gray-300">
+                        We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "last updated" date. We encourage you to review this Privacy Policy periodically for any changes.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Contact Us</h3>
+                    <p class="text-gray-300 mb-4">
+                        If you have any questions or suggestions about our Privacy Policy, please contact us:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-300">
+                        <li>Email: privacy@ambigramgen.com</li>
+                        <li>Through our <a href="faq.html#contact" class="text-primary hover:underline">contact form</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark/80 border-t border-gray-800 py-12">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="fa fa-refresh text-primary text-2xl rotate-45"></span>
+                        <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary gradient-text">AmbigramGen</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Create stunning ambigrams for tattoos, logos, and art projects with our free online generator.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl">
+                            <i class="fa fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="index.html#generator" class="text-gray-400 hover:text-primary transition-colors">Generator</a></li>
+                        <li><a href="index.html#examples" class="text-gray-400 hover:text-primary transition-colors">Examples</a></li>
+                        <li><a href="index.html#fonts" class="text-gray-400 hover:text-primary transition-colors">Fonts</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-primary transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Ambigram Ideas</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Tattoo Tips</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Design Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Font Guide</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">User Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="terms.html" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Cookie Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">DMCA Notice</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; 2023 AmbigramGen. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-dark/90', 'glass-effect', 'py-2', 'shadow-lg');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('bg-dark/90', 'glass-effect', 'py-2', 'shadow-lg');
+                navbar.classList.add('py-4');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
