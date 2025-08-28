@@ -34,18 +34,7 @@
                         orbitron: ['Orbitron', 'sans-serif'],
                         rajdhani: ['Rajdhani', 'sans-serif'],
                     },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'bounce-slow': 'bounce 3s infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
-                    }
-                },
+                }
             }
         }
     </script>
@@ -57,9 +46,6 @@
             }
             .text-shadow {
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            }
-            .text-shadow-lg {
-                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
             }
             .rotate-180 {
                 transform: rotate(180deg);
@@ -86,7 +72,7 @@
     <!-- Navbar -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4">
         <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
-            <a href="#" class="flex items-center gap-2">
+            <a href="index.html" class="flex items-center gap-2">
                 <span class="fa fa-refresh text-primary text-2xl rotate-45"></span>
                 <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary gradient-text">AmbigramGen</span>
             </a>
@@ -97,6 +83,8 @@
                 <a href="index.html#examples" class="hover:text-primary transition-colors">Examples</a>
                 <a href="index.html#fonts" class="hover:text-primary transition-colors">Fonts</a>
                 <a href="faq.html" class="text-primary font-medium">FAQ</a>
+                <a href="privacy.html" class="hover:text-primary transition-colors">Privacy</a>
+                <a href="terms.html" class="hover:text-primary transition-colors">Terms</a>
             </div>
             
             <div class="flex items-center gap-4">
@@ -117,6 +105,8 @@
                 <a href="index.html#examples" class="py-2 hover:text-primary transition-colors">Examples</a>
                 <a href="index.html#fonts" class="py-2 hover:text-primary transition-colors">Fonts</a>
                 <a href="faq.html" class="py-2 text-primary font-medium">FAQ</a>
+                <a href="privacy.html" class="py-2 hover:text-primary transition-colors">Privacy</a>
+                <a href="terms.html" class="py-2 hover:text-primary transition-colors">Terms</a>
                 <a href="index.html#generator" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-center transition-all">
                     Generate Now
                 </a>
@@ -197,218 +187,20 @@
                     </button>
                     <div class="faq-content px-6 pb-6 hidden">
                         <p class="text-gray-300">
-                            Creating effective ambigrams depends on the letters used and their compatibility when rotated. Certain letter combinations work better than others. If your ambigram doesn't look good, try:
+                            Not all words work perfectly as ambigrams. Success depends on letter shapes that can transform into readable characters when rotated. Some letters (b/q, d/p, m/w) work better than others. Try different fonts, as some are designed to work better for ambigrams. Also, shorter words generally produce better results than longer ones.
                         </p>
-                        <ul class="list-disc pl-6 mt-2 space-y-1 text-gray-300">
-                            <li>Using shorter words (3-6 letters work best)</li>
-                            <li>Choosing different fonts - some fonts are better suited for ambigram creation</li>
-                            <li>Experimenting with similar-looking words</li>
-                            <li>Using a single word that reads the same when rotated</li>
-                        </ul>
                     </div>
                 </div>
                 
                 <!-- FAQ Item 6 -->
                 <div class="bg-gradient-to-br from-dark to-gray-800 rounded-xl overflow-hidden border border-white/10">
                     <button class="faq-toggle w-full text-left p-6 focus:outline-none flex justify-between items-center">
-                        <span class="text-xl font-medium">How can I create the best possible ambigram?</span>
+                        <span class="text-xl font-medium">Any tips for creating better ambigrams?</span>
                         <i class="fa fa-chevron-down text-primary transition-transform duration-300"></i>
                     </button>
                     <div class="faq-content px-6 pb-6 hidden">
                         <p class="text-gray-300">
-                            For the best results, follow these tips:
+                            Here are some helpful tips for creating better ambigrams:
                         </p>
                         <ul class="list-disc pl-6 mt-2 space-y-1 text-gray-300">
-                            <li>Choose words with similar letter shapes when rotated (e.g., b/q, d/p, m/w)</li>
-                            <li>Try one-word ambigrams that read the same when rotated</li>
-                            <li>Experiment with different fonts - some work better than others for specific words</li>
-                            <li>Keep words relatively short (2-8 letters)</li>
-                            <li>Use the color gradient feature to enhance the visual effect</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- FAQ Item 7 -->
-                <div class="bg-gradient-to-br from-dark to-gray-800 rounded-xl overflow-hidden border border-white/10">
-                    <button class="faq-toggle w-full text-left p-6 focus:outline-none flex justify-between items-center">
-                        <span class="text-xl font-medium">Do you store the ambigrams I create?</span>
-                        <i class="fa fa-chevron-down text-primary transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-content px-6 pb-6 hidden">
-                        <p class="text-gray-300">
-                            No, we do not store any of the ambigrams you create using our generator. All processing happens locally in your browser, and your creations are not sent to our servers or stored anywhere. This ensures your privacy and means you have full control over your designs.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- FAQ Item 8 -->
-                <div class="bg-gradient-to-br from-dark to-gray-800 rounded-xl overflow-hidden border border-white/10">
-                    <button class="faq-toggle w-full text-left p-6 focus:outline-none flex justify-between items-center">
-                        <span class="text-xl font-medium">Can I request new fonts or features?</span>
-                        <i class="fa fa-chevron-down text-primary transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-content px-6 pb-6 hidden">
-                        <p class="text-gray-300">
-                            Absolutely! We're always looking to improve our generator. If you have suggestions for new fonts, features, or improvements, please feel free to contact us through our feedback form. We value user input and frequently update our tool based on community suggestions.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <p class="text-gray-300 mb-4">Still have questions?</p>
-                <a href="#" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-full transition-all hover:shadow-lg hover:shadow-primary/20">
-                    <i class="fa fa-envelope"></i> Contact Support
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-dark/80 border-t border-gray-800 py-12">
-        <div class="container mx-auto px-4 md:px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="fa fa-refresh text-primary text-2xl rotate-45"></span>
-                        <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary gradient-text">AmbigramGen</span>
-                    </div>
-                    <p class="text-gray-400 mb-4">
-                        Create stunning ambigrams for tattoos, logos, and art projects with our free online generator.
-                    </p>
-                    <div class="flex gap-4">
-                        <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl">
-                            <i class="fa fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl">
-                            <i class="fa fa-pinterest"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
-                        <li><a href="index.html#generator" class="text-gray-400 hover:text-primary transition-colors">Generator</a></li>
-                        <li><a href="index.html#examples" class="text-gray-400 hover:text-primary transition-colors">Examples</a></li>
-                        <li><a href="index.html#fonts" class="text-gray-400 hover:text-primary transition-colors">Fonts</a></li>
-                        <li><a href="faq.html" class="text-gray-400 hover:text-primary transition-colors">FAQ</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Ambigram Ideas</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Tattoo Tips</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Design Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Font Guide</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">User Gallery</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
-                    <ul class="space-y-2">
-                        <li><a href="terms.html" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
-                        <li><a href="privacy.html" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Cookie Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">DMCA Notice</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-                <p>&copy; 2023 AmbigramGen. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (mobileMenu.classList.contains('hidden')) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            }
-        });
-        
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-dark/90', 'glass-effect', 'py-2', 'shadow-lg');
-                navbar.classList.remove('py-4');
-            } else {
-                navbar.classList.remove('bg-dark/90', 'glass-effect', 'py-2', 'shadow-lg');
-                navbar.classList.add('py-4');
-            }
-        });
-        
-        // FAQ toggles
-        const faqToggles = document.querySelectorAll('.faq-toggle');
-        
-        faqToggles.forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                const content = toggle.nextElementSibling;
-                const icon = toggle.querySelector('i');
-                
-                content.classList.toggle('hidden');
-                icon.classList.toggle('rotate-180');
-                
-                // Close other FAQs
-                faqToggles.forEach(otherToggle => {
-                    if (otherToggle !== toggle) {
-                        const otherContent = otherToggle.nextElementSibling;
-                        const otherIcon = otherToggle.querySelector('i');
-                        
-                        otherContent.classList.add('hidden');
-                        otherIcon.classList.remove('rotate-180');
-                    }
-                });
-            });
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                        const icon = mobileMenuBtn.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                            <li>Choose words with similar letter shapes when
