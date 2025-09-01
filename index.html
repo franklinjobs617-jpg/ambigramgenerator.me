@@ -1,24 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-N55FBP8DJ2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-N55FBP8DJ2');
-</script>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ambigram Generator | Create Stunning Word Art Online</title>
-    <meta name="description" content="Create amazing ambigrams with our free generator. Design custom word art that looks great from multiple perspectives, perfect for tattoos, logos, and more.">
-    <meta name="keywords" content="ambigram generator, create ambigrams, word art generator, custom ambigrams, free ambigram maker">
+    <title>Ambigram Generator | Create Stunning Word Art for Tattoos & Designs</title>
+    <meta name="description" content="Free ambigram generator to create stunning word art, perfect for tattoos and designs. Generate 1 or 2 word ambigrams with our easy-to-use tool.">
+    <meta name="keywords" content="ambigram generator, ambigram tattoo generator, free ambigram generator, create ambigram, tattoo ambigram, word art generator">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Lobster&family=Pacifico&family=Great+Vibes&family=Orbitron&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -93,16 +83,17 @@
             
             <div class="hidden md:flex items-center gap-8">
                 <a href="index.html" class="hover:text-primary transition-colors">Home</a>
-                <a href="index.html#features" class="hover:text-primary transition-colors">Features</a>
-                <a href="index.html#examples" class="hover:text-primary transition-colors">Examples</a>
-                <a href="index.html#fonts" class="hover:text-primary transition-colors">Fonts</a>
+                <a href="#features" class="hover:text-primary transition-colors">Features</a>
+                <a href="#examples" class="hover:text-primary transition-colors">Examples</a>
+                <a href="#fonts" class="hover:text-primary transition-colors">Fonts</a>
                 <a href="tattoo-generator.html" class="hover:text-primary transition-colors">Tattoo Ideas</a>
-                <a href="free-generator.html" class="text-primary font-medium">Free Generator</a>
+                <a href="free-generator.html" class="hover:text-primary transition-colors">Free Generator</a>
                 <a href="faq.html" class="hover:text-primary transition-colors">FAQ</a>
+                <a href="ambigram-generator-guide.html" class="text-primary font-medium">Guide</a>
             </div>
             
             <div class="flex items-center gap-4">
-                <a href="free-generator.html" class="hidden md:block bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full transition-all hover:shadow-lg hover:shadow-primary/20">
+                <a href="#generator" class="hidden md:block bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full transition-all hover:shadow-lg hover:shadow-primary/20">
                     Generate Now
                 </a>
                 <button id="mobile-menu-btn" class="md:hidden text-2xl">
@@ -115,13 +106,14 @@
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-dark/95 glass-effect border-t border-gray-700">
             <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
                 <a href="index.html" class="py-2 hover:text-primary transition-colors">Home</a>
-                <a href="index.html#features" class="py-2 hover:text-primary transition-colors">Features</a>
-                <a href="index.html#examples" class="py-2 hover:text-primary transition-colors">Examples</a>
-                <a href="index.html#fonts" class="py-2 hover:text-primary transition-colors">Fonts</a>
+                <a href="#features" class="py-2 hover:text-primary transition-colors">Features</a>
+                <a href="#examples" class="py-2 hover:text-primary transition-colors">Examples</a>
+                <a href="#fonts" class="py-2 hover:text-primary transition-colors">Fonts</a>
                 <a href="tattoo-generator.html" class="py-2 hover:text-primary transition-colors">Tattoo Ideas</a>
-                <a href="free-generator.html" class="py-2 text-primary">Free Generator</a>
+                <a href="free-generator.html" class="py-2 hover:text-primary transition-colors">Free Generator</a>
                 <a href="faq.html" class="py-2 hover:text-primary transition-colors">FAQ</a>
-                <a href="free-generator.html" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-center transition-all">
+                <a href="ambigram-generator-guide.html" class="py-2 text-primary font-medium">Guide</a>
+                <a href="#generator" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-center transition-all">
                     Generate Now
                 </a>
             </div>
@@ -134,17 +126,17 @@
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2 space-y-6">
                     <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight">
-                        Create Amazing <span class="bg-gradient-to-r from-primary to-secondary gradient-text">Ambigrams</span> Online
+                        Create Stunning <span class="bg-gradient-to-r from-primary to-secondary gradient-text">Ambigrams</span> in Seconds
                     </h1>
                     <p class="text-xl text-gray-300 max-w-xl">
-                        Our powerful generator creates stunning word art that looks incredible from multiple perspectives. Perfect for tattoos, logos, and creative projects.
+                        Our <a href="free-generator.html" class="text-primary hover:underline">free ambigram generator</a> creates amazing word art that reads differently when rotated. Perfect for <a href="tattoo-generator.html" class="text-primary hover:underline">tattoos</a>, logos, and creative projects.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                        <a href="free-generator.html" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full text-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20 text-center">
-                            <i class="fa fa-magic mr-2"></i> Free Generator
+                        <a href="#generator" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full text-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20 text-center">
+                            <i class="fa fa-magic mr-2"></i> Generate Free Ambigram
                         </a>
                         <a href="tattoo-generator.html" class="bg-gray-800 hover:bg-gray-700 text-light px-8 py-4 rounded-full text-lg font-medium transition-all hover:shadow-lg text-center">
-                            <i class="fa fa-tattoo mr-2"></i> Tattoo Ideas
+                            <i class="fa fa-paint-brush mr-2"></i> Tattoo Ideas
                         </a>
                     </div>
                 </div>
@@ -152,11 +144,98 @@
                     <div class="ambigram-container bg-gradient-to-br from-dark to-gray-800 p-8 rounded-2xl border border-white/10 shadow-xl">
                         <div class="text-center">
                             <div class="text-[clamp(2.5rem,8vw,5rem)] font-bold mb-8 bg-gradient-to-r from-primary to-secondary gradient-text font-orbitron">
-                                ART
+                                LOVE
                             </div>
                             <div class="w-16 h-1 bg-gray-700 mx-auto my-4"></div>
                             <div class="text-[clamp(2.5rem,8vw,5rem)] font-bold transform rotate-180 bg-gradient-to-r from-secondary to-primary gradient-text font-orbitron">
-                                WORK
+                                HATE
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Generator Section -->
+    <section id="generator" class="py-20 bg-dark/50">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-6">
+                    Create Your Ambigram
+                </h2>
+                <p class="text-xl text-gray-300">
+                    Enter your text below and our free generator will create a stunning ambigram for you
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto bg-gradient-to-br from-dark to-gray-800 rounded-2xl border border-white/10 p-6 md:p-8 shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                    <div class="md:col-span-5 space-y-6">
+                        <div>
+                            <label class="block text-gray-300 mb-2">Ambigram Type</label>
+                            <div class="flex gap-3">
+                                <button class="flex-1 bg-primary text-white py-2 rounded-lg">Single Word</button>
+                                <button class="flex-1 bg-gray-800 hover:bg-gray-700 text-light py-2 rounded-lg transition-colors">Two Words</button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="text-input" class="block text-gray-300 mb-2">Enter Your Text</label>
+                            <input type="text" id="text-input" placeholder="Type your word here" 
+                                class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-light focus:outline-none focus:border-primary">
+                        </div>
+                        
+                        <div>
+                            <label for="font-select" class="block text-gray-300 mb-2">Select Font</label>
+                            <select id="font-select" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-light focus:outline-none focus:border-primary">
+                                <option value="orbitron">Orbitron (Futuristic)</option>
+                                <option value="rajdhani">Rajdhani (Modern)</option>
+                                <option value="playfair">Playfair (Elegant)</option>
+                                <option value="roboto">Roboto (Clean)</option>
+                                <option value="montserrat">Montserrat (Balanced)</option>
+                                <option value="poppins">Poppins (Friendly)</option>
+                                <option value="lobster">Lobster (Curvy)</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-300 mb-2">Color Gradient</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-gradient-to-r from-primary to-secondary h-10 rounded-lg cursor-pointer border-2 border-white"></div>
+                                <div class="bg-gradient-to-r from-blue-400 to-cyan-400 h-10 rounded-lg cursor-pointer border-2 border-transparent hover:border-white/50 transition-all"></div>
+                                <div class="bg-gradient-to-r from-purple-400 to-pink-400 h-10 rounded-lg cursor-pointer border-2 border-transparent hover:border-white/50 transition-all"></div>
+                                <div class="bg-gradient-to-r from-green-400 to-teal-400 h-10 rounded-lg cursor-pointer border-2 border-transparent hover:border-white/50 transition-all"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20 text-lg">
+                            Generate Ambigram
+                        </button>
+                    </div>
+                    
+                    <div class="md:col-span-7">
+                        <div class="h-full flex flex-col">
+                            <div class="flex-1 bg-gray-900/50 rounded-xl p-6 flex flex-col items-center justify-center">
+                                <div id="ambigram-top" class="text-[clamp(2rem,6vw,4rem)] font-bold text-center mb-6 bg-gradient-to-r from-primary to-secondary gradient-text font-orbitron">
+                                    HEAVEN
+                                </div>
+                                <div class="w-16 h-1 bg-gray-700 mx-auto"></div>
+                                <div id="ambigram-bottom" class="text-[clamp(2rem,6vw,4rem)] font-bold text-center transform rotate-180 bg-gradient-to-r from-secondary to-primary gradient-text font-orbitron">
+                                    HELL
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-center gap-4 mt-8">
+                                <button class="bg-gray-800 hover:bg-gray-700 text-light px-4 py-2 rounded-lg transition-all flex items-center gap-2">
+                                    <i class="fa fa-download"></i> Download
+                                </button>
+                                <button class="bg-gray-800 hover:bg-gray-700 text-light px-4 py-2 rounded-lg transition-all flex items-center gap-2">
+                                    <i class="fa fa-share-alt"></i> Share
+                                </button>
+                                <button class="bg-gray-800 hover:bg-gray-700 text-light px-4 py-2 rounded-lg transition-all flex items-center gap-2">
+                                    <i class="fa fa-refresh"></i> Randomize
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -166,55 +245,25 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-dark/50">
+    <section id="features" class="py-20">
         <div class="container mx-auto px-4 md:px-6">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-6">
-                    Powerful Ambigram Creation Tools
+                    Powerful Features
                 </h2>
                 <p class="text-xl text-gray-300">
-                    Everything you need to create stunning ambigrams for any purpose
+                    Our ambigram generator comes with everything you need to create amazing designs
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group">
                     <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all">
-                        <i class="fa fa-font text-2xl text-primary"></i>
+                        <i class="fa fa-bolt text-2xl text-primary"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Multiple Font Styles</h3>
+                    <h3 class="text-xl font-bold mb-4">Instant Generation</h3>
                     <p class="text-gray-400">
-                        Choose from various professional fonts to match your unique style and vision for the perfect ambigram.
-                    </p>
-                </div>
-                
-                <div class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group">
-                    <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all">
-                        <i class="fa fa-tint text-2xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Custom Colors & Gradients</h3>
-                    <p class="text-gray-400">
-                        Apply stunning color combinations and gradients to make your ambigrams visually striking and unique.
-                    </p>
-                </div>
-                
-                <div class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group">
-                    <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all">
-                        <i class="fa fa-download text-2xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">High-Resolution Exports</h3>
-                    <p class="text-gray-400">
-                        Download your creations in high resolution suitable for print, digital use, or professional tattoo designs.
-                    </p>
-                </div>
-                
-                <div class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group">
-                    <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all">
-                        <i class="fa fa-mobile text-2xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Works Everywhere</h3>
-                    <p class="text-gray-400">
-                        Create ambigrams on any device with our fully responsive design - desktop, tablet, or mobile.
+                        Create beautiful ambigrams in seconds with our powerful algorithm that works right in your browser.
                     </p>
                 </div>
                 
@@ -222,110 +271,202 @@
                     <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all">
                         <i class="fa fa-paint-brush text-2xl text-primary"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Custom Designs</h3>
+                    <h3 class="text-xl font-bold mb-4">Customizable Designs</h3>
                     <p class="text-gray-400">
-                        Create both single-word and two-word ambigrams with our intuitive design tools and options.
+                        Adjust colors, sizes, and styles to create the perfect ambigram for tattoos, logos, or personal projects.
                     </p>
                 </div>
                 
                 <div class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group">
                     <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all">
-                        <i class="fa fa-unlock text-2xl text-primary"></i>
+                        <i class="fa fa-magic text-2xl text-primary"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Free to Use</h3>
+                    <h3 class="text-xl font-bold mb-4">One & Two Word Support</h3>
                     <p class="text-gray-400">
-                        Our basic generator is completely free to use with no hidden costs or limitations on creations.
+                        Create amazing single word ambigrams or combine two different words that transform into each other.
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group">
+                    <div class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all">
+                        <i class="fa fa-download text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">High-Resolution Output</h3>
+                    <p class="text-gray-400">
+                        Download your ambigrams in high quality formats suitable for printing, tattoos, or digital use.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Use Cases Section -->
+    <!-- Guide Section -->
+    <section class="py-20 bg-dark/50">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <h2 class="text-[clamp(2rem,4vw,3rem)] font-bold leading-tight mb-6">
+                        Master the Art of <span class="bg-gradient-to-r from-primary to-secondary gradient-text">Ambigrams</span>
+                    </h2>
+                    <p class="text-xl text-gray-300 mb-6">
+                        Learn everything you need to know about ambigram generators with our comprehensive guide. From choosing the right tool to creating stunning designs, our expert analysis covers it all.
+                    </p>
+                    <ul class="space-y-3 text-gray-300 mb-8">
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check text-primary mt-1"></i>
+                            <span>Detailed analysis of top ambigram generators</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check text-primary mt-1"></i>
+                            <span>Step-by-step tutorials for perfect results</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check text-primary mt-1"></i>
+                            <span>Expert tips for creating amazing tattoo ambigrams</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check text-primary mt-1"></i>
+                            <span>Comparison of free vs. paid ambigram makers</span>
+                        </li>
+                    </ul>
+                    <a href="ambigram-generator-guide.html" class="inline-block bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full text-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20">
+                        Read Complete Guide <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="bg-gradient-to-br from-dark to-gray-800 p-6 rounded-2xl border border-white/10 shadow-xl">
+                        <img src="https://picsum.photos/id/1070/800/600" alt="Ambigram guide preview" class="w-full h-auto rounded-xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tattoo Focus Section -->
     <section class="py-20">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <div class="ambigram-container bg-gradient-to-br from-dark to-gray-800 p-8 rounded-2xl border border-white/10 shadow-xl">
+                        <div class="text-center">
+                            <div class="text-[clamp(2.5rem,8vw,5rem)] font-bold mb-8 bg-gradient-to-r from-primary to-secondary gradient-text font-rajdhani">
+                                LIVE
+                            </div>
+                            <div class="w-16 h-1 bg-gray-700 mx-auto my-4"></div>
+                            <div class="text-[clamp(2.5rem,8vw,5rem)] font-bold transform rotate-180 bg-gradient-to-r from-secondary to-primary gradient-text font-rajdhani">
+                                EVIL
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 space-y-6">
+                    <h2 class="text-[clamp(2rem,4vw,3rem)] font-bold leading-tight">
+                        Perfect <span class="bg-gradient-to-r from-primary to-secondary gradient-text">Tattoo Ambigrams</span>
+                    </h2>
+                    <p class="text-xl text-gray-300 max-w-xl">
+                        Create unique tattoo designs that reveal different meanings when viewed from different angles. Our ambigram tattoo generator helps you craft one-of-a-kind body art that will impress everyone.
+                    </p>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check text-primary mt-1"></i>
+                            <span>Designs optimized for skin application and longevity</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check text-primary mt-1"></i>
+                            <span>Bold lines that work well with tattooing techniques</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa fa-check text-primary mt-1"></i>
+                            <span>Meaningful designs that tell a story from two perspectives</span>
+                        </li>
+                    </ul>
+                    <a href="tattoo-generator.html" class="inline-block bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full text-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20">
+                        Explore Tattoo Ideas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section id="examples" class="py-20 bg-dark/50">
         <div class="container mx-auto px-4 md:px-6">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-6">
-                    Perfect For Any Project
+                    Ambigram Examples
                 </h2>
                 <p class="text-xl text-gray-300">
-                    Ambigrams create visual interest and deeper meaning for all types of applications
+                    Explore our gallery of stunning ambigrams created with our free generator
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group text-center">
-                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all mx-auto">
-                        <i class="fa fa-tattoo text-3xl text-primary"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Example 1 -->
+                <div class="ambigram-container bg-gradient-to-br from-dark to-gray-800 rounded-xl overflow-hidden border border-white/10 group">
+                    <div class="p-6 text-center">
+                        <div class="text-[clamp(2rem,5vw,3rem)] font-bold mb-6 bg-gradient-to-r from-blue-400 to-cyan-500 gradient-text font-rajdhani">
+                            LIVE
+                        </div>
+                        <div class="w-12 h-1 bg-gray-700 mx-auto my-2"></div>
+                        <div class="text-[clamp(2rem,5vw,3rem)] font-bold transform rotate-180 bg-gradient-to-r from-cyan-500 to-blue-400 gradient-text font-rajdhani">
+                            EVIL
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Tattoo Designs</h3>
-                    <p class="text-gray-400">
-                        Create unique tattoo concepts that reveal different meanings from different angles.
-                    </p>
-                    <a href="tattoo-generator.html" class="inline-block mt-4 text-primary hover:text-primary/80 transition-colors">
-                        Explore Tattoo Ideas <i class="fa fa-arrow-right ml-1"></i>
-                    </a>
+                    <div class="p-4 bg-gray-900/70 border-t border-white/10">
+                        <h3 class="font-medium">Classic Contrast</h3>
+                        <p class="text-sm text-gray-400">A timeless good vs evil representation</p>
+                    </div>
                 </div>
                 
-                <div class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group text-center">
-                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all mx-auto">
-                        <i class="fa fa-briefcase text-3xl text-primary"></i>
+                <!-- Example 2 -->
+                <div class="ambigram-container bg-gradient-to-br from-dark to-gray-800 rounded-xl overflow-hidden border border-white/10 group">
+                    <div class="p-6 text-center">
+                        <div class="text-[clamp(2rem,5vw,3rem)] font-bold mb-6 bg-gradient-to-r from-green-400 to-emerald-500 gradient-text font-playfair">
+                            LIFE
+                        </div>
+                        <div class="w-12 h-1 bg-gray-700 mx-auto my-2"></div>
+                        <div class="text-[clamp(2rem,5vw,3rem)] font-bold transform rotate-180 bg-gradient-to-r from-emerald-500 to-green-400 gradient-text font-playfair">
+                            DEATH
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Logos & Branding</h3>
-                    <p class="text-gray-400">
-                        Design memorable logos with hidden meanings that engage your audience.
-                    </p>
-                    <a href="free-generator.html" class="inline-block mt-4 text-primary hover:text-primary/80 transition-colors">
-                        Create Logo Ideas <i class="fa fa-arrow-right ml-1"></i>
-                    </a>
+                    <div class="p-4 bg-gray-900/70 border-t border-white/10">
+                        <h3 class="font-medium">Cycle of Existence</h3>
+                        <p class="text-sm text-gray-400">Represents the circle of life and death</p>
+                    </div>
                 </div>
                 
-                <div class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group text-center">
-                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all mx-auto">
-                        <i class="fa fa-gift text-3xl text-primary"></i>
+                <!-- Example 3 -->
+                <div class="ambigram-container bg-gradient-to-br from-dark to-gray-800 rounded-xl overflow-hidden border border-white/10 group">
+                    <div class="p-6 text-center">
+                        <div class="text-[clamp(2rem,5vw,3rem)] font-bold mb-6 bg-gradient-to-r from-yellow-400 to-amber-500 gradient-text font-roboto">
+                            SUN
+                        </div>
+                        <div class="w-12 h-1 bg-gray-700 mx-auto my-2"></div>
+                        <div class="text-[clamp(2rem,5vw,3rem)] font-bold transform rotate-180 bg-gradient-to-r from-amber-500 to-yellow-400 gradient-text font-roboto">
+                            MOON
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Personal Gifts</h3>
-                    <p class="text-gray-400">
-                        Make personalized artwork for friends and family with special meanings.
-                    </p>
-                    <a href="free-generator.html" class="inline-block mt-4 text-primary hover:text-primary/80 transition-colors">
-                        Create Gift Ideas <i class="fa fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-                
-                <div class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group text-center">
-                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all mx-auto">
-                        <i class="fa fa-book text-3xl text-primary"></i>
+                    <div class="p-4 bg-gray-900/70 border-t border-white/10">
+                        <h3 class="font-medium">Celestial Pair</h3>
+                        <p class="text-sm text-gray-400">Day and night celestial bodies</p>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Creative Projects</h3>
-                    <p class="text-gray-400">
-                        Add unique visual elements to books, albums, posters, and creative works.
-                    </p>
-                    <a href="free-generator.html" class="inline-block mt-4 text-primary hover:text-primary/80 transition-colors">
-                        Start Creating <i class="fa fa-arrow-right ml-1"></i>
-                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-primary/20 to-secondary/20">
+    <!-- Free Generator Section -->
+    <section class="py-20">
         <div class="container mx-auto px-4 md:px-6 text-center">
-            <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-6 max-w-3xl mx-auto">
-                Ready to Create Amazing Ambigrams?
+            <h2 class="text-[clamp(2rem,4vw,3rem)] font-bold mb-6">
+                Free Ambigram Generator
             </h2>
-            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10">
-                Start designing your custom word art today with our free generator, no experience required.
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10">
+                Create professional-quality ambigrams at no cost. Our free generator offers all the features you need without any hidden fees or limitations.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="free-generator.html" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full text-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20">
-                    <i class="fa fa-magic mr-2"></i> Use Free Generator
-                </a>
-                <a href="tattoo-generator.html" class="bg-gray-800 hover:bg-gray-700 text-light px-8 py-4 rounded-full text-lg font-medium transition-all hover:shadow-lg">
-                    <i class="fa fa-tattoo mr-2"></i> Explore Tattoo Ideas
-                </a>
-            </div>
+            <a href="free-generator.html" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full text-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20 inline-flex items-center gap-2">
+                <i class="fa fa-magic"></i> Use Free Generator
+            </a>
         </div>
     </section>
 
@@ -347,26 +488,17 @@
                 navbar.classList.add('py-4');
             }
         });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId !== '#') {
-                    document.querySelector(targetId).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    const mobileMenu = document.getElementById('mobile-menu');
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                }
+        
+        // FAQ toggles
+        document.querySelectorAll('.faq-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
             });
         });
     </script>
 </body>
 </html>
-    
