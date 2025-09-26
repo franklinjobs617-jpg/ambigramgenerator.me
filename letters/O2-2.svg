@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="8.7229853mm"
+   height="10.809496mm"
+   viewBox="0 0 8.7229852 10.809496"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="O2-2.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4"
+     inkscape:cx="-97.821497"
+     inkscape:cy="28.635499"
+     inkscape:document-units="in"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1858"
+     inkscape:window-height="1057"
+     inkscape:window-x="54"
+     inkscape:window-y="1072"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+    transform="translate(-291.2934,-369.37305000000003)">
+    <path
+       inkscape:connector-curvature="0"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;line-height:125%;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+		d="m 302.78655000000003 396.3895 c 1.195025 -0.08825 2.335425 -0.34450000000000003 3.4158 -0.785475 1.3367 -0.5512 2.508025 -1.3986999999999998 3.514 -2.5424999999999995 0.9922 -1.14375 1.777675 -2.604475 2.3564499999999997 -4.38215 0.564975 -1.777675 0.8475 -3.89295 0.8475 -6.3458749999999995 0.0 -4.506175 -0.895725 -7.944375 -2.687175 -10.3146 -0.89335 -1.1751 -2.006325 -2.05675 -3.3383000000000003 -2.6458500000000003 h -9.11055 c -1.2945000000000002 0.551975 -2.425375 1.3744500000000002 -3.384825 2.480475 -1.0059500000000001 1.143775 -1.79145 2.6045249999999998 -2.3564499999999997 4.382175 -0.309425 0.9504250000000001 -0.5290750000000001 2.00495 -0.6730750000000001 3.1483749999999997 h 5.34205 c 0.041749999999999995 -0.3517 0.089 -0.6937749999999999 0.14725 -1.019325 0.20675 -1.143775 0.53055 -2.1084 0.971525 -2.8938750000000004 0.440975 -0.785475 1.01285 -1.3849 1.71565 -1.7983250000000002 0.689025 -0.399625 1.5227499999999998 -0.59945 2.50115 -0.59945 1.943025 0.0 3.348625 0.785475 4.2168 2.3564499999999997 0.854375 1.570975 1.2815750000000001 3.9549499999999997 1.2815750000000001 7.151999999999999 0.0 1.488275 -0.10325000000000001 2.8043 -0.310075 3.948075 -0.20675 1.157575 -0.530525 2.129075 -0.9715 2.91455 -0.45475 0.785525 -1.02665 1.37805 -1.715675 1.777675 -0.6890000000000001 0.4134 -1.522725 0.620125 -2.501125 0.620125 -0.11424999999999999 0.0 -0.22025 -0.0125 -0.330725 -0.0175 v 4.564325 z" 
+       id="path4558-6-2" />
+  </g>
+</svg>
