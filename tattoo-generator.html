@@ -110,48 +110,108 @@
 </head>
 <body class="font-inter bg-gradient-to-br from-dark to-gray-800 text-light min-h-screen">
     <!-- Navbar -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4">
-        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-2">
-                <span class="fa fa-refresh text-primary text-2xl rotate-45"></span>
-                <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary gradient-text">AmbigramGen</span>
-            </a>
-            
-            <div class="hidden md:flex items-center gap-8">
-                <a href="index.html" class="hover:text-primary transition-colors">Home</a>
-                <a href="index.html#features" class="hover:text-primary transition-colors">Features</a>
-                <a href="index.html#examples" class="hover:text-primary transition-colors">Examples</a>
-                <a href="index.html#fonts" class="hover:text-primary transition-colors">Fonts</a>
-                <a href="tattoo-generator.html" class="text-primary font-medium">Tattoo Ideas</a>
-                <a href="free-generator.html" class="hover:text-primary transition-colors">Free Generator</a>
-                <a href="faq.html" class="hover:text-primary transition-colors">FAQ</a>
-            </div>
-            
-            <div class="flex items-center gap-4">
-                <a href="free-generator.html" class="hidden md:block bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full transition-all hover:shadow-lg hover:shadow-primary/20">
-                    Generate Now
-                </a>
-                <button id="mobile-menu-btn" class="md:hidden text-2xl">
-                    <i class="fa fa-bars"></i>
-                </button>
-            </div>
+       <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4">
+      <div
+        class="container mx-auto px-4 md:px-6 flex justify-between items-center"
+      >
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="fa fa-refresh text-primary text-2xl rotate-45"></span>
+          <span
+            class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary gradient-text"
+            >AmbigramGen</span
+          >
+        </a>
+
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="hover:text-primary transition-colors"
+            >Home</a
+          >
+          <a href="#features" class="hover:text-primary transition-colors"
+            >Features</a
+          >
+          <a href="#examples" class="hover:text-primary transition-colors"
+            >Examples</a
+          >
+          <a href="#fonts" class="hover:text-primary transition-colors"
+            >Fonts</a
+          >
+          <a
+            href="tattoo-generator.html"
+            class="hover:text-primary transition-colors"
+            >Tattoo Ideas</a
+          >
+          <a
+            href="free-generator.html"
+            class="hover:text-primary transition-colors"
+            >Free Generator</a
+          >
+          <a href="faq.html" class="hover:text-primary transition-colors"
+            >FAQ</a
+          >
+          <a
+            href="ambigram-generator-guide.html"
+            class="text-primary font-medium"
+            >Guide</a
+          >
         </div>
-        
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-dark/95 glass-effect border-t border-gray-700">
-            <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
-                <a href="index.html" class="py-2 hover:text-primary transition-colors">Home</a>
-                <a href="index.html#features" class="py-2 hover:text-primary transition-colors">Features</a>
-                <a href="index.html#examples" class="py-2 hover:text-primary transition-colors">Examples</a>
-                <a href="index.html#fonts" class="py-2 hover:text-primary transition-colors">Fonts</a>
-                <a href="tattoo-generator.html" class="py-2 text-primary">Tattoo Ideas</a>
-                <a href="free-generator.html" class="py-2 hover:text-primary transition-colors">Free Generator</a>
-                <a href="faq.html" class="py-2 hover:text-primary transition-colors">FAQ</a>
-                <a href="free-generator.html" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-center transition-all">
-                    Generate Now
-                </a>
-            </div>
+
+        <div class="flex items-center gap-4">
+          <a
+            href="#generator"
+            class="hidden md:block bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full transition-all hover:shadow-lg hover:shadow-primary/20"
+          >
+            Generate Now
+          </a>
+          <button id="mobile-menu-btn" class="md:hidden text-2xl">
+            <i class="fa fa-bars"></i>
+          </button>
         </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden absolute top-full left-0 w-full bg-dark/95 glass-effect border-t border-gray-700"
+      >
+        <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
+          <a href="index.html" class="py-2 hover:text-primary transition-colors"
+            >Home</a
+          >
+          <a href="#features" class="py-2 hover:text-primary transition-colors"
+            >Features</a
+          >
+          <a href="#examples" class="py-2 hover:text-primary transition-colors"
+            >Examples</a
+          >
+          <a href="#fonts" class="py-2 hover:text-primary transition-colors"
+            >Fonts</a
+          >
+          <a
+            href="tattoo-generator.html"
+            class="py-2 hover:text-primary transition-colors"
+            >Tattoo Ideas</a
+          >
+          <a
+            href="free-generator.html"
+            class="py-2 hover:text-primary transition-colors"
+            >Free Generator</a
+          >
+          <a href="faq.html" class="py-2 hover:text-primary transition-colors"
+            >FAQ</a
+          >
+          <a
+            href="ambigram-generator-guide.html"
+            class="py-2 text-primary font-medium"
+            >Guide</a
+          >
+          <a
+            href="#generator"
+            class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-center transition-all"
+          >
+            Generate Now
+          </a>
+        </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
