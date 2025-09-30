@@ -3,22 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
-    <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <title>
-      3D Ambigram Generator | Create 3D Word Art for Tattoos & Designs
-    </title>
+    <title>Ambigram Generator | Create Free 2D & 3D Ambigram Designs</title>
     <meta
       name="description"
-      content="Free 3D ambigram generator to create stunning 3D word art, perfect for tattoos, 3D printing, and designs. Generate and download STL files with our easy-to-use tool."
+      content="The ultimate free ambigram generator for stunning 2D & 3D word art. Perfect for tattoos, 3D printing, and logos. Create and download your design in seconds."
     />
     <meta
       name="keywords"
-      content="3d ambigram generator, ambigram tattoo generator, free ambigram generator, create ambigram, stl generator, 3d printing, word art generator"
+      content="ambigram generator, 3d ambigram generator, ambigram tattoo generator, free ambigram generator, create ambigram, stl generator, 3d printing, two word ambigram generator"
     />
+    <meta name="google-adsense-account" content="ca-pub-3383070348689557" />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
 
-    <!-- STYLES AND FONTS FROM NEW DESIGN -->
+    <!-- Preconnect links for performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Stylesheets & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
@@ -26,23 +27,14 @@
       media="print"
       onload="this.media='all'; this.onload=null"
     />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
-      as="style"
-    />
-    <link
-      href="./css/font.css"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&display=swap"
       rel="stylesheet"
       media="print"
       onload="this.media='all'; this.onload=null"
     />
-    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-    <meta name="google-adsense-account" content="ca-pub-3383070348689557" />
-    <!-- SCRIPTS FROM ORIGINAL 3D GENERATOR -->
+
+    <!-- Scripts for 3D Generator Functionality (preloaded) -->
     <script src="./js/jqery.min.js" rel="preload"></script>
     <link rel="preload" href="./letterData.js" as="script" />
     <link
@@ -51,12 +43,13 @@
       as="script"
     />
     <link rel="preload" href="./three/build/three.module.js" as="script" />
+
+    <!-- Analytics and Ads -->
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557"
       crossorigin="anonymous"
     ></script>
-
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-N55FBP8DJ2"
@@ -67,7 +60,6 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-N55FBP8DJ2");
     </script>
     <script type="text/javascript">
@@ -84,818 +76,801 @@
         y.parentNode.insertBefore(t, y);
       })(window, document, "clarity", "script", "ti80pje0n3");
     </script>
-    <style>
-      @font-face {
-        font-family: "FontAwesome";
-        font-display: swap;
-        src: url("https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0")
-          format("woff2");
-      }
-    </style>
 
+    <!-- Tailwind Config for Light Theme -->
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              primary: "#6C5CE7",
-              secondary: "#FD79A8",
-              dark: "#2D3436",
-              light: "#F8F9FA",
+              primary: "#3B82F6",
+              secondary: "#10B981",
+              dark: "#1F2937",
+              light: "#F9FAFB",
             },
             fontFamily: {
-              inter: ["Inter", "sans-serif"],
-              poppins: ["Poppins", "sans-serif"],
-              montserrat: ["Montserrat", "sans-serif"],
-              roboto: ["Roboto", "sans-serif"],
-              playfair: ["Playfair Display", "serif"],
-              lobster: ["Lobster", "cursive"],
-              pacifico: ["Pacifico", "cursive"],
-              vibes: ["Great Vibes", "cursive"],
-              orbitron: ["Orbitron", "sans-serif"],
-              rajdhani: ["Rajdhani", "sans-serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              display: ["Montserrat", "sans-serif"],
             },
           },
         },
       };
     </script>
-
-    <style type="text/tailwindcss">
-      @layer utilities {
-        .content-auto {
-          content-visibility: auto;
-        }
-        .text-shadow {
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        .text-shadow-lg {
-          text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-        }
-        .rotate-180 {
-          transform: rotate(180deg);
-        }
-        .ambigram-container {
-          transition: transform 0.5s ease;
-        }
-        .ambigram-container:hover {
-          transform: scale(1.02);
-        }
-        .glass-effect {
-          backdrop-filter: blur(10px);
-          background-color: rgba(255, 255, 255, 0.1);
-        }
-        .gradient-text {
-          background-clip: text;
-          -webkit-background-clip: text;
-          color: transparent;
-        }
-      }
-    </style>
   </head>
-
-  <body
-    class="font-inter bg-gradient-to-br from-dark to-gray-800 text-light min-h-screen"
-  >
-    <!-- Navbar -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4">
-      <div
-        class="container mx-auto px-4 md:px-6 flex justify-between items-center"
-      >
-        <a href="index.html" class="flex items-center gap-2">
-          <span class="fa fa-refresh text-primary text-2xl rotate-45"></span>
-          <span
-            class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary gradient-text"
-            >AmbigramGen</span
-          >
-        </a>
-
-        <div class="hidden md:flex items-center gap-8">
-          <a href="index.html" class="hover:text-primary transition-colors"
-            >Home</a
-          >
-          <a href="/#features" class="hover:text-primary transition-colors"
-            >Features</a
-          >
-          <a href="/#examples" class="hover:text-primary transition-colors"
-            >Examples</a
-          >
-          <a href="/#fonts" class="hover:text-primary transition-colors"
-            >Fonts</a
-          >
-          <a
-            href="tattoo-generator"
-            class="hover:text-primary transition-colors"
-            >Tattoo Ideas</a
-          >
-          <a
-            href="free-generator"
-            class="hover:text-primary transition-colors"
-            >Free Generator</a
-          >
-          <a href="faq" class="hover:text-primary transition-colors"
-            >FAQ</a
-          >
-          <a
-            href="ambigram-generator-guide"
-            class="text-primary font-medium"
-            >Guide</a
-          >
+ <body class="bg-light text-dark font-sans">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/" class="text-xl font-bold text-dark hover:text-primary transition-colors">AmbigramGenerator.me</a>
+          <nav id="main-nav" class="hidden md:flex items-center space-x-6">
+    <a href="./generator.html" class="text-dark hover:text-primary font-medium transition-colors">2D Generator</a>
+    <a href="./3d-generator.html" class="text-dark hover:text-primary font-medium transition-colors">3D Generator</a>
+    <a href="/what-is-ambigram.html" class="text-dark hover:text-primary font-medium transition-colors">What is an Ambigram</a>
+    <a href="/tattoo-design.html" class="font-medium transition-colors">Design Guides</a>
+    <a href="#generator" class="bg-primary text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors">Start Creating</a>
+    <a href="./privacy.html" class="text-dark hover:text-primary font-medium transition-colors">Privacy Policy</a>
+    <a href="./terms.html" class="text-dark hover:text-primary font-medium transition-colors">Terms of Service</a>
+</nav>
+            <button id="mobile-menu-btn" class="md:hidden text-dark text-xl" aria-label="Toggle Navigation">
+                <i class="fa fa-bars"></i>
+            </button>
         </div>
+         <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="./generator.html" class="block py-2 px-4 text-dark hover:bg-gray-100">2D Generator</a>
+            <a href="./3d-generator.html" class="block py-2 px-4 text-dark hover:bg-gray-100">3D Generator</a>
+            <a href="/what-is-ambigram.html" class="block py-2 px-4 text-dark hover:bg-gray-100">What is an Ambigram</a>
+            <a href="/tattoo-design.html" class="block py-2 px-4 text-dark hover:bg-gray-100">Design Guides</a>
+            <a href="./privacy.html" class="block py-2 px-4 text-dark hover:bg-gray-100">Privacy Policy</a>
+            <a href="./terms.html" class="block py-2 px-4 text-dark hover:bg-gray-100">Terms of Service</a>
+            <div class="p-4">
+                <a href="#generator" class="block text-center bg-primary text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors w-full">Start Creating</a>
+            </div>
+        </div>
+    </header>
 
-        <div class="flex items-center gap-4">
-          <a
-            href="/#generator"
-            class="hidden md:block bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full transition-all hover:shadow-lg hover:shadow-primary/20"
-          >
-            Generate Now
+    <main>
+     <section class="bg-gradient-to-br from-blue-50 to-green-50 py-20 md:py-24">
+  <div class="container mx-auto px-4">
+    <!-- Use a grid for a two-column layout on medium screens and up -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      
+      <!-- Column 1: Text Content & Call-to-Action Buttons -->
+      <div class="text-center md:text-left">
+        <h1 class="text-5xl md:text-6xl font-display font-extrabold text-dark mb-6 leading-tight">
+          Create Visual Miracles with Our Ambigram Generator
+        </h1>
+        <p class="text-xl text-gray-600 max-w-xl mx-auto md:mx-0 mb-8">
+          Instantly generate rotational, <strong>two-name</strong>, and <strong>3D printable</strong>
+          ambigrams for free, giving your text a powerful dual identity.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+          <a href="#generator" class="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-600 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
+            <i class="fa fa-magic mr-2"></i> Launch 3D Tool
           </a>
-          <button id="mobile-menu-btn" class="md:hidden text-2xl">
-            <i class="fa fa-bars"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Mobile menu -->
-      <div
-        id="mobile-menu"
-        class="hidden md:hidden absolute top-full left-0 w-full bg-dark/95 glass-effect border-t border-gray-700"
-      >
-        <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
-          <a href="index.html" class="py-2 hover:text-primary transition-colors"
-            >Home</a
-          >
-          <a href="/#features" class="py-2 hover:text-primary transition-colors"
-            >Features</a
-          >
-          <a href="/#examples" class="py-2 hover:text-primary transition-colors"
-            >Examples</a
-          >
-          <a href="/#fonts" class="py-2 hover:text-primary transition-colors"
-            >Fonts</a
-          >
-          <a
-            href="tattoo-generator"
-            class="py-2 hover:text-primary transition-colors"
-            >Tattoo Ideas</a
-          >
-          <a
-            href="free-generator"
-            class="py-2 hover:text-primary transition-colors"
-            >Free Generator</a
-          >
-          <a href="faq" class="py-2 hover:text-primary transition-colors"
-            >FAQ</a
-          >
-          <a
-            href="ambigram-generator-guide"
-            class="py-2 text-primary font-medium"
-            >Guide</a
-          >
-          <a
-            href="/#generator"
-            class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-center transition-all"
-          >
-            Generate Now
+          <a href="#generator2d" class="bg-gray-800 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-dark hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
+            Start 2D Creation
           </a>
         </div>
       </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 md:pt-40 md:pb-32">
-      <div class="container mx-auto px-4 md:px-6">
-        <div class="flex flex-col md:flex-row items-center gap-12">
-          <div class="md:w-1/2 space-y-6">
-            <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight">
-              Create Stunning
-              <span
-                class="bg-gradient-to-r from-primary to-secondary gradient-text"
-                >Ambigrams</span
-              >
-              in Seconds
-            </h1>
-            <p class="text-xl text-gray-300 max-w-xl">
-              Our
-              <a href="free-generator.html" class="text-primary hover:underline"
-                >free ambigram generator</a
-              >
-              creates amazing word art that reads differently when rotated.
-              Perfect for
-              <a
-                href="tattoo-generator.html"
-                class="text-primary hover:underline"
-                >tattoos</a
-              >, logos, and creative projects.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 pt-4">
-              <a
-                href="#generator"
-                class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full text-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20 text-center"
-              >
-                <i class="fa fa-magic mr-2"></i> Generate Free Ambigram
-              </a>
-              <a
-                href="tattoo-generator.html"
-                class="bg-gray-800 hover:bg-gray-700 text-light px-8 py-4 rounded-full text-lg font-medium transition-all hover:shadow-lg text-center"
-              >
-                <i class="fa fa-paint-brush mr-2"></i> Tattoo Ideas
-              </a>
-            </div>
-          </div>
-          <div class="md:w-1/2">
-            <div
-              class="ambigram-container bg-gradient-to-br from-dark to-gray-800 p-8 rounded-2xl border border-white/10 shadow-xl"
-            >
-              <div class="text-center">
-                <div
-                  class="text-[clamp(2.5rem,8vw,5rem)] font-bold mb-8 bg-gradient-to-r from-primary to-secondary gradient-text font-orbitron"
-                >
-                  LOVE
-                </div>
-                <div class="w-16 h-1 bg-gray-700 mx-auto my-4"></div>
-                <div
-                  class="text-[clamp(2.5rem,8vw,5rem)] font-bold transform rotate-180 bg-gradient-to-r from-secondary to-primary gradient-text font-orbitron"
-                >
-                  HATE
-                </div>
-              </div>
-            </div>
-          </div>
+      <!-- Column 2: Image -->
+      <div>
+        <div class="bg-white p-3 sm:p-4 rounded-2xl shadow-2xl border border-gray-200/50">
+          <img 
+            src="./image/3D ambigram design example of a white marble sculpture that read.png" 
+            alt="3D ambigram design example of a white marble sculpture that reads 'ART' from the front and transforms into 'SCIENCE' when rotated 180 degrees."
+            class="rounded-xl w-full h-auto"
+          />
         </div>
       </div>
-    </section>
-    <!-- Generator Section (MODIFIED) -->
-    <section id="generator" class="py-20 bg-dark/50">
-      <div class="container mx-auto px-4 md:px-6">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-6">
-            Create Your 3D Ambigram
-          </h2>
-          <p class="text-xl text-gray-300">
-            Enter your text below, and our free generator will create an
-            interactive 3D model for you.
-          </p>
-        </div>
 
-        <div
-          class="max-w-6xl mx-auto bg-gradient-to-br from-dark to-gray-800 rounded-2xl border border-white/10 p-6 md:p-8 shadow-xl"
-        >
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <!-- LEFT SIDE: CONTROLS -->
-            <div class="lg:col-span-4 space-y-6">
-              <div>
-                <label for="first" class="block text-gray-300 mb-2 font-medium"
-                  >First Profile Text</label
-                >
-                <input
-                  type="text"
-                  id="first"
-                  name="first"
-                  placeholder="e.g. LOVE"
-                  pattern="^[A-Za-z ]*$"
-                  class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-light focus:outline-none focus:border-primary transition-colors"
-                />
-              </div>
-              <div>
-                <label for="last" class="block text-gray-300 mb-2 font-medium"
-                  >Second Profile Text</label
-                >
-                <input
-                  type="text"
-                  id="last"
-                  name="last"
-                  placeholder="e.g. HATE"
-                  pattern="^[A-Za-z ]*$"
-                  class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-light focus:outline-none focus:border-primary transition-colors"
-                />
-              </div>
+    </div>
+  </div>
+</section>
 
-              <div class="pt-4 border-t border-gray-700 space-y-3">
-                <h3 class="text-lg font-semibold text-gray-200 mb-2">
-                  Generation Options
-                </h3>
-                <label class="flex items-center gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    id="quality"
-                    name="quality"
-                    class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-primary focus:ring-primary focus:ring-offset-dark"
-                  />
-                  <span
-                    class="text-gray-300 group-hover:text-light transition-colors"
-                    >High quality generation (slower)</span
-                  >
-                </label>
-                <label class="flex items-center gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    id="base"
-                    name="base"
-                    class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-primary focus:ring-primary focus:ring-offset-dark"
-                  />
-                  <span
-                    class="text-gray-300 group-hover:text-light transition-colors"
-                    >Generate base</span
-                  >
-                </label>
-                <label class="flex items-center gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    id="union"
-                    name="union"
-                    class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-primary focus:ring-primary focus:ring-offset-dark"
-                  />
-                  <span
-                    class="text-gray-300 group-hover:text-light transition-colors"
-                    >Union for printing issues</span
-                  >
-                </label>
-                <label class="flex items-center gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    id="minimize"
-                    name="minimize"
-                    class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-primary focus:ring-primary focus:ring-offset-dark"
-                  />
-                  <span
-                    class="text-gray-300 group-hover:text-light transition-colors"
-                    >Minimize bodies</span
-                  >
-                </label>
-              </div>
-
-              <button
-                id="generate"
-                class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20 text-lg flex items-center justify-center gap-2"
-              >
-                <i class="fa fa-magic"></i> Generate 3D Ambigram
-              </button>
+        <!-- What can you create? -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-3xl font-display font-bold text-dark">What Can You Create?</h2>
+                    <p class="mt-4 text-gray-600">From personal gifts to professional branding, our tool brings your ideas to life.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-center transition-transform hover:-translate-y-2">
+                        <i class="fa fa-paint-brush text-4xl text-primary mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Tattoo Designs</h3>
+                        <p class="text-gray-600">Craft unique and meaningful tattoo stencils that tell a story from two perspectives.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-center transition-transform hover:-translate-y-2">
+                        <i class="fa fa-cube text-4xl text-secondary mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">3D Prints</h3>
+                        <p class="text-gray-600">Download STL files to create physical ambigrams, perfect for desks and gifts.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-center transition-transform hover:-translate-y-2">
+                        <i class="fa fa-gift text-4xl text-primary mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Personalized Gifts</h3>
+                        <p class="text-gray-600">Design a special gift for a loved one by merging two names into one beautiful object.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-center transition-transform hover:-translate-y-2">
+                        <i class="fa fa-lightbulb-o text-4xl text-secondary mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Logos & Branding</h3>
+                        <p class="text-gray-600">Create clever logos and brand assets that reward a second look.</p>
+                    </div>
+                </div>
             </div>
-
-            <!-- RIGHT SIDE: 3D CANVAS & VIEW CONTROLS -->
-            <div class="lg:col-span-8 flex flex-col">
-              <div
-                class="flex-1 bg-black rounded-xl min-h-[400px] md:min-h-[500px] relative overflow-hidden"
-              >
-                <canvas
-                  id="c"
-                  class="w-full h-full cursor-grab active:cursor-grabbing"
-                ></canvas>
-              </div>
-
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                <div class="bg-gray-900/50 p-4 rounded-lg">
-                  <p class="text-center mb-3 text-gray-300 font-medium">
-                    View Control
-                  </p>
-                  <div id="viewDiv" class="grid grid-cols-3 gap-2">
-                    <button
-                      id="firstCam"
-                      class="viewButton bg-gray-700 hover:bg-gray-600 text-light px-4 py-2 rounded-lg transition-all"
-                    >
-                      First
-                    </button>
-                    <button
-                      id="lastCam"
-                      class="viewButton bg-gray-700 hover:bg-gray-600 text-light px-4 py-2 rounded-lg transition-all"
-                    >
-                      Second
-                    </button>
-                    <button
-                      id="isoCam"
-                      class="viewButton bg-gray-700 hover:bg-gray-600 text-light px-4 py-2 rounded-lg transition-all"
-                    >
-                      Isometric
-                    </button>
+        </section>
+        
+        <!-- 3D GENERATOR SECTION (ENHANCED UI) -->
+        <section id="generator" class="py-20 bg-light">
+          <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+              <h2 class="text-4xl font-display font-bold text-dark mb-4">Free 3D Ambigram Generator</h2>
+              <p class="text-xl text-gray-600">Perfect for 3D Prints & Physical Gifts</p>
+            </div>
+            <div class="max-w-6xl mx-auto bg-white rounded-2xl border border-gray-200 p-6 md:p-8 shadow-2xl">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-4 space-y-6">
+                  <!-- Step 1 -->
+                  <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-dark flex items-center gap-2"><span class="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span> Enter Your Words</h3>
+                    <div>
+                      <label for="first" class="block text-gray-700 mb-2 font-medium">First Profile Text</label>
+                      <input type="text" id="first" name="first" placeholder="e.g. LOVE" pattern="^[A-Za-z ]*$" class="w-full bg-gray-100 border border-gray-300 rounded-lg px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors"/>
+                    </div>
+                    <div>
+                      <label for="last" class="block text-gray-700 mb-2 font-medium">Second Profile Text</label>
+                      <input type="text" id="last" name="last" placeholder="e.g. HATE" pattern="^[A-Za-z ]*$" class="w-full bg-gray-100 border border-gray-300 rounded-lg px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors"/>
+                    </div>
                   </div>
-                  <div class="mt-3 text-center">
-                    <label
-                      class="flex items-center justify-center gap-3 cursor-pointer group"
-                    >
-                      <input
-                        type="checkbox"
-                        id="rotate"
-                        name="rotate"
-                        class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-primary focus:ring-primary focus:ring-offset-dark"
-                      />
-                      <span
-                        class="text-gray-300 group-hover:text-light transition-colors"
-                        >Auto-rotate</span
-                      >
+                  <!-- Step 2 -->
+                  <div class="pt-4 border-t border-gray-200 space-y-3">
+                    <h3 class="text-lg font-semibold text-dark mb-2 flex items-center gap-2"><span class="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span> Choose Options</h3>
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                      <input type="checkbox" id="quality" name="quality" class="h-5 w-5 rounded border-gray-400 text-primary focus:ring-primary"/>
+                      <span class="text-gray-600 group-hover:text-dark transition-colors">High quality (slower)</span>
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                      <input type="checkbox" id="base" name="base" class="h-5 w-5 rounded border-gray-400 text-primary focus:ring-primary"/>
+                      <span class="text-gray-600 group-hover:text-dark transition-colors">Generate base</span>
                     </label>
                   </div>
+                  <!-- Step 3 -->
+                  <div class="pt-4 border-t border-gray-200">
+                     <h3 class="text-lg font-semibold text-dark mb-4 flex items-center gap-2"><span class="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">3</span> Generate Model</h3>
+                    <button id="generate" class="w-full bg-primary hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-blue-500/20 text-lg flex items-center justify-center gap-2">
+                      <i class="fa fa-magic"></i> Generate 3D Ambigram
+                    </button>
+                  </div>
                 </div>
-                <div
-                  class="bg-gray-900/50 p-4 rounded-lg flex flex-col justify-center gap-3"
-                >
-                  <p
-                    id="gifText"
-                    class="text-center text-secondary font-medium"
-                    hidden="true"
-                  >
-                    Recording GIF...
-                  </p>
-                  <button
-                    id="gif"
-                    class="bg-secondary/80 hover:bg-secondary/100 text-white w-full px-4 py-2 rounded-lg transition-all flex items-center justify-center gap-2"
-                  >
-                    <i class="fa fa-file-movie-o"></i> Render GIF
-                  </button>
-                  <button
-                    id="download"
-                    class="bg-primary/80 hover:bg-primary/100 text-white w-full px-4 py-2 rounded-lg transition-all flex items-center justify-center gap-2"
-                  >
-                    <i class="fa fa-download"></i> Download STL file
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="py-20">
-      <div class="container mx-auto px-4 md:px-6">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-6">
-            Powerful Features
-          </h2>
-          <p class="text-xl text-gray-300">
-            Our ambigram generator comes with everything you need to create
-            amazing designs
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div
-            class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group"
-          >
-            <div
-              class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all"
-            >
-              <i class="fa fa-bolt text-2xl text-primary"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-4">Instant Generation</h3>
-            <p class="text-gray-400">
-              Create beautiful ambigrams in seconds with our powerful algorithm
-              that works right in your browser.
-            </p>
-          </div>
-
-          <div
-            class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group"
-          >
-            <div
-              class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all"
-            >
-              <i class="fa fa-paint-brush text-2xl text-primary"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-4">Customizable Designs</h3>
-            <p class="text-gray-400">
-              Adjust colors, sizes, and styles to create the perfect ambigram
-              for tattoos, logos, or personal projects.
-            </p>
-          </div>
-
-          <div
-            class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group"
-          >
-            <div
-              class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all"
-            >
-              <i class="fa fa-magic text-2xl text-primary"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-4">One & Two Word Support</h3>
-            <p class="text-gray-400">
-              Create amazing single word ambigrams or combine two different
-              words that transform into each other.
-            </p>
-          </div>
-
-          <div
-            class="bg-gradient-to-br from-dark to-gray-800 p-8 rounded-xl border border-white/10 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/10 group"
-          >
-            <div
-              class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-all"
-            >
-              <i class="fa fa-download text-2xl text-primary"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-4">High-Resolution Output</h3>
-            <p class="text-gray-400">
-              Download your ambigrams in high quality formats suitable for
-              printing, tattoos, or digital use.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Guide Section -->
-    <section class="py-20 bg-dark/50">
-      <div class="container mx-auto px-4 md:px-6">
-        <div class="flex flex-col md:flex-row items-center gap-12">
-          <div class="md:w-1/2">
-            <h2
-              class="text-[clamp(2rem,4vw,3rem)] font-bold leading-tight mb-6"
-            >
-              Master the Art of
-              <span
-                class="bg-gradient-to-r from-primary to-secondary gradient-text"
-                >Ambigrams</span
-              >
-            </h2>
-            <p class="text-xl text-gray-300 mb-6">
-              Learn everything you need to know about ambigram generators with
-              our comprehensive guide. From choosing the right tool to creating
-              stunning designs, our expert analysis covers it all.
-            </p>
-            <ul class="space-y-3 text-gray-300 mb-8">
-              <li class="flex items-start gap-3">
-                <i class="fa fa-check text-primary mt-1"></i>
-                <span>Detailed analysis of top ambigram generators</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <i class="fa fa-check text-primary mt-1"></i>
-                <span>Step-by-step tutorials for perfect results</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <i class="fa fa-check text-primary mt-1"></i>
-                <span>Expert tips for creating amazing tattoo ambigrams</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <i class="fa fa-check text-primary mt-1"></i>
-                <span>Comparison of free vs. paid ambigram makers</span>
-              </li>
-            </ul>
-            <a
-              href="ambigram-generator-guide.html"
-              class="inline-block bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full text-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20"
-            >
-              Read Complete Guide <i class="fa fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-          <div class="md:w-1/2">
-            <div
-              class="bg-gradient-to-br from-dark to-gray-800 p-6 rounded-2xl border border-white/10 shadow-xl"
-            >
-              <img
-                src="https://picsum.photos/id/1070/800/600"
-                alt="Ambigram guide preview"
-                class="w-full h-auto rounded-xl"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Tattoo Focus Section -->
-    <section class="py-20">
-      <div class="container mx-auto px-4 md:px-6">
-        <div class="flex flex-col md:flex-row items-center gap-12">
-          <div class="md:w-1/2">
-            <div
-              class="ambigram-container bg-gradient-to-br from-dark to-gray-800 p-8 rounded-2xl border border-white/10 shadow-xl"
-            >
-              <div class="text-center">
-                <div
-                  class="text-[clamp(2.5rem,8vw,5rem)] font-bold mb-8 bg-gradient-to-r from-primary to-secondary gradient-text font-rajdhani"
-                >
-                  LIVE
-                </div>
-                <div class="w-16 h-1 bg-gray-700 mx-auto my-4"></div>
-                <div
-                  class="text-[clamp(2.5rem,8vw,5rem)] font-bold transform rotate-180 bg-gradient-to-r from-secondary to-primary gradient-text font-rajdhani"
-                >
-                  EVIL
+                <div class="lg:col-span-8 flex flex-col">
+                  <div class="flex-1 bg-dark rounded-xl min-h-[200px] md:min-h-[500px] relative overflow-hidden border border-gray-200">
+                    <canvas id="c" class="w-full h-full cursor-grab active:cursor-grabbing"></canvas>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                      <p class="text-center mb-3 text-gray-700 font-medium">View Control</p>
+                      <div id="viewDiv" class="grid grid-cols-3 gap-2">
+                        <button id="firstCam" class="viewButton bg-gray-200 hover:bg-gray-300 text-dark px-4 py-2 rounded-lg transition-all">First</button>
+                        <button id="lastCam" class="viewButton bg-gray-200 hover:bg-gray-300 text-dark px-4 py-2 rounded-lg transition-all">Second</button>
+                        <button id="isoCam" class="viewButton bg-gray-200 hover:bg-gray-300 text-dark px-4 py-2 rounded-lg transition-all">Isometric</button>
+                      </div>
+                      <div class="mt-3 text-center">
+                        <label class="flex items-center justify-center gap-3 cursor-pointer group">
+                          <input type="checkbox" id="rotate" name="rotate" class="h-5 w-5 rounded border-gray-400 text-primary focus:ring-primary"/>
+                          <span class="text-gray-600 group-hover:text-dark transition-colors">Auto-rotate</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-lg flex flex-col justify-center gap-3">
+                      <p id="gifText" class="text-center text-red-500 font-medium" hidden="true">Recording GIF...</p>
+                      <button id="gif" class="bg-secondary hover:bg-green-600 text-white w-full px-4 py-2 rounded-lg transition-all flex items-center justify-center gap-2">
+                        <i class="fa fa-file-movie-o"></i> Render GIF
+                      </button>
+                      <button id="download" class="bg-primary hover:bg-blue-600 text-white w-full px-4 py-2 rounded-lg transition-all flex items-center justify-center gap-2">
+                        <i class="fa fa-download"></i> Download STL file
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="md:w-1/2 space-y-6">
-            <h2 class="text-[clamp(2rem,4vw,3rem)] font-bold leading-tight">
-              Perfect
-              <span
-                class="bg-gradient-to-r from-primary to-secondary gradient-text"
-                >Tattoo Ambigrams</span
-              >
-            </h2>
-            <p class="text-xl text-gray-300 max-w-xl">
-              Create unique tattoo designs that reveal different meanings when
-              viewed from different angles. Our ambigram tattoo generator helps
-              you craft one-of-a-kind body art that will impress everyone.
-            </p>
-            <ul class="space-y-3 text-gray-300">
-              <li class="flex items-start gap-3">
-                <i class="fa fa-check text-primary mt-1"></i>
-                <span
-                  >Designs optimized for skin application and longevity</span
-                >
-              </li>
-              <li class="flex items-start gap-3">
-                <i class="fa fa-check text-primary mt-1"></i>
-                <span>Bold lines that work well with tattooing techniques</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <i class="fa fa-check text-primary mt-1"></i>
-                <span
-                  >Meaningful designs that tell a story from two
-                  perspectives</span
-                >
-              </li>
-            </ul>
-            <a
-              href="tattoo-generator.html"
-              class="inline-block bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full text-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20"
-            >
-              Explore Tattoo Ideas
-            </a>
+        </section>
+
+        <!-- 2D AMBIGRAM GENERATOR SECTION (ENHANCED UI) -->
+        <section id="generator2d" class="py-20 bg-white">
+          <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+              <h2 class="text-4xl font-display font-bold text-dark mb-4">Free 2D Ambigram Generator</h2>
+              <p class="text-xl text-gray-600">Ideal for Tattoos, Logos & Digital Art</p>
+            </div>
+            <div class="max-w-4xl mx-auto bg-light rounded-2xl border border-gray-200 p-6 md:p-8 shadow-xl">
+              <!-- Input Controls -->
+              <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+                <div class="md:col-span-3">
+                  <label for="ambigenerator_input" class="block text-gray-700 mb-2 font-medium">One or Two Words</label>
+                  <input type="text" id="ambigenerator_input" placeholder="e.g., family / forever" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors" value="Hello"/>
+                </div>
+                <div>
+                  <label for="style_dropdown" class="block text-gray-700 mb-2 font-medium">Style</label>
+                  <select id="style_dropdown" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
+                    <option value="new">Blocky</option>
+                    <option value="calligraphy">Calligraphy</option>
+                    <option value="old">Original</option>
+                    <option value="pixel">Pixel Art</option>
+                    <option value="outline">Outline</option>
+                  </select>
+                </div>
+                <button onclick="generateAmbigrams()" class="w-full bg-secondary hover:bg-green-600 text-white py-3 rounded-lg font-medium transition-all hover:shadow-lg text-lg">
+                  Generate
+                </button>
+              </div>
+
+              <!-- Results Area -->
+              <div class="mt-8 pt-6 border-t border-gray-200">
+                <p class="text-center text-gray-500 mb-4">(Click an ambigram to rotate it)</p>
+                <p id="loading_text" class="text-center text-gray-600 font-medium"></p>
+                <div id="ambigrams" class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <!-- Generated ambigrams will appear here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="py-20 bg-light">
+            <div class="container mx-auto px-4">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl font-display font-bold text-dark">Simple Process, Incredible Results</h2>
+                    <p class="mt-4 text-gray-600">Creating your custom ambigram takes just a few clicks.</p>
+                </div>
+                <div class="relative max-w-4xl mx-auto">
+                    <div class="grid md:grid-cols-3 gap-12">
+                        <div class="text-center">
+                            <div class="bg-primary/10 w-24 h-24 rounded-full flex items-center justify-center mb-4 mx-auto ring-8 ring-white">
+                                <span class="text-3xl font-bold text-primary">1</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Enter Text</h3>
+                            <p class="text-gray-600">Input one or two words. The tool handles the complex geometry for you.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-secondary/10 w-24 h-24 rounded-full flex items-center justify-center mb-4 mx-auto ring-8 ring-white">
+                                <span class="text-3xl font-bold text-secondary">2</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Preview & Customize</h3>
+                            <p class="text-gray-600">Rotate and inspect your design in the live 3D viewer. Adjust options as needed.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-primary/10 w-24 h-24 rounded-full flex items-center justify-center mb-4 mx-auto ring-8 ring-white">
+                                <span class="text-3xl font-bold text-primary">3</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Download</h3>
+                            <p class="text-gray-600">Get a print-ready STL file or a shareable GIF. It’s that easy!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-16 bg-white">
+          <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-display font-bold text-dark">Key Features: Beyond Simple Text</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div class="text-center p-6 bg-white rounded-xl shadow-md"><i class="fa fa-users text-4xl text-primary mb-4"></i><h3 class="text-xl font-semibold mb-2">Two-Name Creator</h3><p class="text-gray-600">Merge two names or words into a single, beautiful rotating design.</p></div>
+              <div class="text-center p-6 bg-white rounded-xl shadow-md"><i class="fa fa-cube text-4xl text-secondary mb-4"></i><h3 class="text-xl font-semibold mb-2">3D Printable Files</h3><p class="text-gray-600">Download high-quality STL files ready for your 3D printer.</p></div>
+              <div class="text-center p-6 bg-white rounded-xl shadow-md"><i class="fa fa-paint-brush text-4xl text-primary mb-4"></i><h3 class="text-xl font-semibold mb-2">Tattoo-Ready Styles</h3><p class="text-gray-600">Designs are optimized for clean lines, ensuring legible tattoos.</p></div>
+              <div class="text-center p-6 bg-white rounded-xl shadow-md"><i class="fa fa-check-circle text-4xl text-secondary mb-4"></i><h3 class="text-xl font-semibold mb-2">Free & No Watermarks</h3><p class="text-gray-600">Download high-res files instantly with no hidden fees or watermarks.</p></div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Examples Section -->
+        <section id="examples" class="py-16 bg-light">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-display font-bold text-center text-dark mb-10">Popular Ambigram Designs</h2>
+                <div class="relative">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory space-x-6 p-4" style="scrollbar-width: none; -ms-overflow-style: none;">
+                        <div class="snap-center flex-shrink-0 w-80 bg-white rounded-xl shadow-xl p-4 text-center border"><img src="./image/Two-name ambigram showing Sarah upright and John when rotated 180 degrees.png" alt="Two-Name Ambigram: Sarah/John" class="w-full h-auto rounded-lg mb-3 border"/><p class="font-semibold">SARAH / JOHN (Two-Name)</p></div>
+                        <div class="snap-center flex-shrink-0 w-80 bg-white rounded-xl shadow-xl p-4 text-center border"><img src="./image/Tattoo-style TRUST ambigram with thick, smooth strokes suitable for permanent ink.png" alt="Tattoo Ambigram: TRUST" class="w-full h-auto rounded-lg mb-3 border"/><p class="font-semibold">TRUST (Tattoo Style)</p></div>
+                        <div class="snap-center flex-shrink-0 w-80 bg-white rounded-xl shadow-xl p-4 text-center border-2 border-secondary"><img src="./image/3D printed ambigram object on turntable showing rotational word transformation.png" alt="3D Printed Ambigram" class="w-full h-auto rounded-lg mb-3 border"/><p class="font-semibold text-secondary">3D PRINT (Physical Object)</p></div>
+                        <div class="snap-center flex-shrink-0 w-80 bg-white rounded-xl shadow-xl p-4 text-center border"><img src="./image/Animated GIF of ILLUSION rotating 180 degrees while maintaining readability.png" alt="Animated GIF: ILLUSION" class="w-full h-auto rounded-lg mb-3 border"/><p class="font-semibold">ILLUSION (Animated GIF)</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 bg-white">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-3xl font-display font-bold text-dark">Frequently Asked Questions</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-white p-2 rounded-lg shadow-sm border">
+                        <button class="faq-toggle w-full text-left p-4 font-semibold text-gray-800 flex justify-between items-center">Is this ambigram generator really free?<i class="fa fa-chevron-down transition-transform"></i></button>
+                        <div class="faq-answer hidden p-4 border-t text-gray-600">Yes, absolutely! All features are 100% free to use. There are no hidden costs, subscriptions, or watermarks on your downloads.</div>
+                    </div>
+                    <div class="bg-white p-2 rounded-lg shadow-sm border">
+                        <button class="faq-toggle w-full text-left p-4 font-semibold text-gray-800 flex justify-between items-center">What file formats can I download?<i class="fa fa-chevron-down transition-transform"></i></button>
+                        <div class="faq-answer hidden p-4 border-t text-gray-600">The 3D generator provides a <strong>.STL file</strong> for 3D printing and an animated <strong>.GIF file</strong> for sharing. Our 2D generator provides high-resolution PNG and SVG files.</div>
+                    </div>
+                    <div class="bg-white p-2 rounded-lg shadow-sm border">
+                        <button class="faq-toggle w-full text-left p-4 font-semibold text-gray-800 flex justify-between items-center">Can I create a two-name ambigram?<i class="fa fa-chevron-down transition-transform"></i></button>
+                        <div class="faq-answer hidden p-4 border-t text-gray-600">Yes! Our generator excels at creating two-name ambigrams. Simply enter a different word in each of the text input fields to see them merge into one design.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="py-20 bg-light">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-display font-bold text-dark mb-4">Ready to Create Your Masterpiece?</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">Unleash your creativity and design a unique ambigram in seconds. It’s free, fast, and fun.</p>
+                <a href="#generator" class="bg-secondary text-white px-10 py-4 rounded-full text-xl font-semibold hover:bg-green-600 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-3">
+                    <i class="fa fa-magic"></i> Generate for Free
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center border-b border-gray-700 pb-8">
+          <div><h3 class="text-2xl font-bold font-display mb-2">AmbigramGenerator.me</h3><p class="text-gray-400">The next-generation ambigram creator.</p></div>
+          <div class="flex space-x-4 mt-4 md:mt-0">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Examples Section -->
-    <section id="examples" class="py-20 bg-dark/50">
-      <div class="container mx-auto px-4 md:px-6">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-6">
-            Ambigram Examples
-          </h2>
-          <p class="text-xl text-gray-300">
-            Explore our gallery of stunning ambigrams created with our free
-            generator
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Example 1 -->
-          <div
-            class="ambigram-container bg-gradient-to-br from-dark to-gray-800 rounded-xl overflow-hidden border border-white/10 group"
-          >
-            <div class="p-6 text-center">
-              <div
-                class="text-[clamp(2rem,5vw,3rem)] font-bold mb-6 bg-gradient-to-r from-blue-400 to-cyan-500 gradient-text font-rajdhani"
-              >
-                LIVE
-              </div>
-              <div class="w-12 h-1 bg-gray-700 mx-auto my-2"></div>
-              <div
-                class="text-[clamp(2rem,5vw,3rem)] font-bold transform rotate-180 bg-gradient-to-r from-cyan-500 to-blue-400 gradient-text font-rajdhani"
-              >
-                EVIL
-              </div>
-            </div>
-            <div class="p-4 bg-gray-900/70 border-t border-white/10">
-              <h3 class="font-medium">Classic Contrast</h3>
-              <p class="text-sm text-gray-400">
-                A timeless good vs evil representation
-              </p>
-            </div>
-          </div>
-
-          <!-- Example 2 -->
-          <div
-            class="ambigram-container bg-gradient-to-br from-dark to-gray-800 rounded-xl overflow-hidden border border-white/10 group"
-          >
-            <div class="p-6 text-center">
-              <div
-                class="text-[clamp(2rem,5vw,3rem)] font-bold mb-6 bg-gradient-to-r from-green-400 to-emerald-500 gradient-text font-playfair"
-              >
-                LIFE
-              </div>
-              <div class="w-12 h-1 bg-gray-700 mx-auto my-2"></div>
-              <div
-                class="text-[clamp(2rem,5vw,3rem)] font-bold transform rotate-180 bg-gradient-to-r from-emerald-500 to-green-400 gradient-text font-playfair"
-              >
-                DEATH
-              </div>
-            </div>
-            <div class="p-4 bg-gray-900/70 border-t border-white/10">
-              <h3 class="font-medium">Cycle of Existence</h3>
-              <p class="text-sm text-gray-400">
-                Represents the circle of life and death
-              </p>
-            </div>
-          </div>
-
-          <!-- Example 3 -->
-          <div
-            class="ambigram-container bg-gradient-to-br from-dark to-gray-800 rounded-xl overflow-hidden border border-white/10 group"
-          >
-            <div class="p-6 text-center">
-              <div
-                class="text-[clamp(2rem,5vw,3rem)] font-bold mb-6 bg-gradient-to-r from-yellow-400 to-amber-500 gradient-text font-roboto"
-              >
-                SUN
-              </div>
-              <div class="w-12 h-1 bg-gray-700 mx-auto my-2"></div>
-              <div
-                class="text-[clamp(2rem,5vw,3rem)] font-bold transform rotate-180 bg-gradient-to-r from-amber-500 to-yellow-400 gradient-text font-roboto"
-              >
-                MOON
-              </div>
-            </div>
-            <div class="p-4 bg-gray-900/70 border-t border-white/10">
-              <h3 class="font-medium">Celestial Pair</h3>
-              <p class="text-sm text-gray-400">
-                Day and night celestial bodies
-              </p>
-            </div>
-          </div>
+        <div class="mt-8 text-center text-gray-400 text-sm">
+          <p>&copy; 2024 AmbigramGenerator.me | <a href="/privacy.html" class="hover:text-white transition-colors">Privacy Policy</a> | <a href="/terms.html" class="hover:text-white transition-colors">Terms of Service</a></p>
         </div>
       </div>
-    </section>
+    </footer>
 
-    <!-- Free Generator Section -->
-    <section class="py-20">
-      <div class="container mx-auto px-4 md:px-6 text-center">
-        <h2 class="text-[clamp(2rem,4vw,3rem)] font-bold mb-6">
-          Free Ambigram Generator
-        </h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10">
-          Create professional-quality ambigrams at no cost. Our free generator
-          offers all the features you need without any hidden fees or
-          limitations.
-        </p>
-        <a
-          href="free-generator.html"
-          class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full text-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20 inline-flex items-center gap-2"
-        >
-          <i class="fa fa-magic"></i> Use Free Generator
-        </a>
-      </div>
-    </section>
+    <!-- Deferred scripts for 3D Generator functionality -->
+    <script src="./js/jquery.min.js" defer></script>
+    <script type="module" src="./libs/FileSaver.js" defer></script>
+    <script src="./libs/gif.js" defer></script>
+    <script type="module" src="main.js" defer></script>
 
+    <!-- SCRIPT FOR ALL PAGE-LEVEL INTERACTIONS (MENUS, FAQ, SCROLL) -->
     <script>
-      // Mobile menu toggle
-      document
-        .getElementById("mobile-menu-btn")
-        .addEventListener("click", function () {
-          const mobileMenu = document.getElementById("mobile-menu");
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenuBtn.addEventListener("click", () => {
           mobileMenu.classList.toggle("hidden");
         });
 
-      // Navbar scroll effect
-      window.addEventListener("scroll", function () {
-        const navbar = document.getElementById("navbar");
-        if (window.scrollY > 50) {
-          navbar.classList.add(
-            "bg-dark/90",
-            "glass-effect",
-            "py-2",
-            "shadow-lg"
-          );
-          navbar.classList.remove("py-4");
-        } else {
-          navbar.classList.remove(
-            "bg-dark/90",
-            "glass-effect",
-            "py-2",
-            "shadow-lg"
-          );
-          navbar.classList.add("py-4");
-        }
-      });
+        // FAQ Accordion
+        document.querySelectorAll(".faq-toggle").forEach((button) => {
+          button.addEventListener("click", () => {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector("i");
+            answer.classList.toggle("hidden");
+            icon.classList.toggle("rotate-180");
+          });
+        });
 
-      // FAQ toggles
-      document.querySelectorAll(".faq-toggle").forEach((toggle) => {
-        toggle.addEventListener("click", function () {
-          const content = this.nextElementSibling;
-          const icon = this.querySelector("i");
+        // Smooth Scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
 
-          content.classList.toggle("hidden");
-          icon.classList.toggle("rotate-180");
+            if (targetElement) {
+              // Hide mobile menu if open
+              if (!mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.add("hidden");
+              }
+
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          });
         });
       });
+    </script>
 
-      document.addEventListener("DOMContentLoaded", function () {
-        const lazyImages = document.querySelectorAll(".lazyload");
-        if ("IntersectionObserver" in window) {
-          const imageObserver = new IntersectionObserver(function (
-            entries,
-            observer
-          ) {
-            entries.forEach(function (entry) {
-              if (entry.isIntersecting) {
-                const image = entry.target;
-                image.src = image.dataset.src;
-                imageObserver.unobserve(image);
-              }
-            });
-          });
-          lazyImages.forEach(function (image) {
-            imageObserver.observe(image);
-          });
+    <!-- SCRIPT FOR 2D AMBIGRAM GENERATOR (ORIGINAL SCRIPT WITH MINOR ADAPTATIONS) -->
+    <script>
+      // start, middle, end, strokewidth, height
+      let glyphs_lookup = {
+        new: [
+          [
+            ["a1", "a2i"],
+            ["r2i"],
+            ["c2i", "c1"],
+            ["d2i"],
+            ["e2i", "e1"],
+            ["f1i"],
+            ["g2i"],
+            ["h2i", "h2"],
+            ["i1"],
+            ["j1", "j2"],
+            ["k2i"],
+            ["l1"],
+            ["m2i", "m3"],
+            ["n2i"],
+            ["o2"],
+            ["p1i"],
+            ["q2"],
+            ["r2i", "r1"],
+            ["s2i", "s1"],
+            ["t1i"],
+            ["u2"],
+            ["v1i", "v2"],
+            ["w2", "w3"],
+            ["x2"],
+            ["y1i"],
+            ["z1", "z2"],
+          ],
+          [
+            ["a2"],
+            ["h2"],
+            ["c2", "c1"],
+            ["d2"],
+            ["e2", "e1"],
+            ["f1"],
+            ["g2"],
+            ["h2"],
+            ["i1"],
+            ["j1", "j2"],
+            ["k2"],
+            ["l1"],
+            ["m3", "m2"],
+            ["n2"],
+            ["o2"],
+            ["p1"],
+            ["q2"],
+            ["r1", "r2"],
+            ["s1", "s2"],
+            ["t1"],
+            ["u2"],
+            ["v1", "v2"],
+            ["w2", "w3"],
+            ["x2"],
+            ["y1"],
+            ["z1", "z2"],
+          ],
+          [
+            ["a2", "a1i"],
+            ["h2"],
+            ["c2", "c1"],
+            ["d2"],
+            ["e2", "e1"],
+            ["f1"],
+            ["g2"],
+            ["h2"],
+            ["i1"],
+            ["j1", "j2"],
+            ["k2"],
+            ["l1"],
+            ["m3", "m2"],
+            ["n2"],
+            ["o2"],
+            ["p1"],
+            ["q2"],
+            ["r1", "r2"],
+            ["s1", "s2"],
+            ["t1"],
+            ["u2"],
+            ["v1", "v2"],
+            ["w2", "w3"],
+            ["x2"],
+            ["y1"],
+            ["z1", "z2"],
+          ],
+          100,
+          600,
+        ],
+
+        calligraphy: [
+          [
+            ["a2"],
+            ["b2"],
+            ["c2"],
+            ["d2"],
+            ["e2"],
+            ["f1"],
+            ["g2"],
+            ["h2"],
+            ["i1"],
+            ["j1"],
+            ["k2"],
+            ["l1"],
+            ["m3"],
+            ["n2"],
+            ["o2"],
+            ["p2"],
+            ["q2"],
+            ["r1"],
+            ["s1"],
+            ["t1"],
+            ["u2"],
+            ["v2"],
+            ["w2"],
+            ["x2"],
+            ["y1"],
+            ["z1"],
+          ],
+          [
+            ["a2"],
+            ["b2"],
+            ["c2"],
+            ["d2"],
+            ["e2"],
+            ["f1"],
+            ["g2"],
+            ["h2"],
+            ["i1"],
+            ["j1"],
+            ["k2"],
+            ["l1"],
+            ["m3"],
+            ["n2"],
+            ["o2"],
+            ["p2"],
+            ["q2"],
+            ["r1"],
+            ["s1"],
+            ["t1"],
+            ["u2"],
+            ["v2"],
+            ["w2"],
+            ["x2"],
+            ["y1"],
+            ["z1"],
+          ],
+          [
+            ["a2"],
+            ["b2"],
+            ["c2"],
+            ["d2"],
+            ["e2"],
+            ["f1"],
+            ["g2"],
+            ["h2"],
+            ["i1"],
+            ["j1"],
+            ["k2"],
+            ["l1"],
+            ["m3"],
+            ["n2"],
+            ["o2"],
+            ["p2"],
+            ["q2"],
+            ["r1"],
+            ["s1"],
+            ["t1"],
+            ["u2"],
+            ["v2"],
+            ["w2"],
+            ["x2"],
+            ["y1"],
+            ["z1"],
+          ],
+
+          100,
+          600,
+        ],
+      };
+
+      function clear_ambigrams() {
+        const ambigramsBox = document.getElementById("ambigrams");
+        if (ambigramsBox) ambigramsBox.innerHTML = "";
+      }
+
+      function spin(spin_img) {
+        let angle = parseInt(spin_img.dataset.angle || 0);
+        angle += 180;
+        spin_img.dataset.angle = angle;
+        spin_img.style.transform = `rotate(${angle}deg)`;
+      }
+
+      async function getGlyphImage(name, style) {
+        return new Promise((resolve) => {
+          const glyph = new Image();
+          let folder = "glyph images/" + style + "/";
+          glyph.src = folder + name + ".png";
+          glyph.onload = function () {
+            resolve(glyph);
+          };
+          glyph.onerror = function () {
+            const units = parseInt(name[1]) || 1;
+            const strokeWidth = glyphs_lookup[style][3];
+            const height = glyphs_lookup[style][4];
+            const canvas = document.createElement("canvas");
+            canvas.width = units * strokeWidth;
+            canvas.height = height;
+            resolve(canvas);
+          };
+        });
+      }
+
+      function letterIndex(letter) {
+        return letter.charCodeAt(0) - "a".charCodeAt(0);
+      }
+
+      function getPossibleGlyphs(words, style) {
+        let glyphs = [[], []];
+        let starters = glyphs_lookup[style][0];
+        let middlers = glyphs_lookup[style][1];
+        let enders = glyphs_lookup[style][2];
+
+        for (let wordIndex = 0; wordIndex < 2; wordIndex++) {
+          const glyphList = glyphs[wordIndex];
+          const word = words[wordIndex];
+          if (!word || word.length === 0) continue;
+          glyphList.push(starters[letterIndex(word[0])]);
+          for (let letterPos = 1; letterPos < word.length - 1; letterPos++) {
+            glyphList.push(middlers[letterIndex(word[letterPos])]);
+          }
+          if (word.length > 1) {
+            glyphList.push(enders[letterIndex(word[word.length - 1])]);
+          }
         }
-      });
+        return glyphs;
+      }
+
+      function cartesian(a) {
+        if (!a || a.length === 0) return [[]];
+        return a.reduce((a, b) =>
+          a.flatMap((d) => b.map((e) => [d, e].flat()))
+        );
+      }
+
+      function countStrokes(structure) {
+        if (!Array.isArray(structure)) return 0;
+        let strokes = 0;
+        for (const glyph of structure) {
+          strokes += parseInt(glyph[1]) || 0;
+        }
+        return strokes;
+      }
+
+      function say(choices) {
+        alert(choices[Math.floor(Math.random() * choices.length)]);
+      }
+
+      function spawnCanvas(width, height) {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        let ctx = canvas.getContext("2d");
+        // MODIFICATION: Changed random color to a neutral gray to match the site's aesthetic.
+        ctx.fillStyle = "#E5E7EB"; // Tailwind's gray-200
+        ctx.fillRect(0, 0, width, height);
+        return canvas;
+      }
+
+      async function generateAmbigrams() {
+        let words = document.getElementById("ambigenerator_input").value;
+        let style = document.getElementById("style_dropdown").value;
+        let doubleWords = true;
+
+        if (/[^a-zA-Z\s]/.test(words)) {
+          say([
+            "No special characters please.",
+            "Only letters and spaces are allowed.",
+          ]);
+          return;
+        }
+
+        words = words
+          .toLowerCase()
+          .trim()
+          .split(/\s+/)
+          .filter((w) => w);
+
+        if (words.length > 2) {
+          say([
+            `I can't make an ambigram of ${words.length} words.`,
+            "Please use one or two words.",
+          ]);
+          return;
+        } else if (words.length === 0) {
+          say(["You have to type something first!", "The input box is empty."]);
+          return;
+        } else if (words.length == 1) {
+          words = [words[0], words[0]];
+          doubleWords = false;
+        }
+
+        const glyphs = getPossibleGlyphs(words, style);
+        let permutsA = cartesian(glyphs[0]);
+        let permutsB = cartesian(glyphs[1]);
+        let matchingCombos = [];
+
+        if (doubleWords) {
+          for (let permutA of permutsA) {
+            for (let permutB of permutsB) {
+              permutA = Array.isArray(permutA) ? permutA : [permutA];
+              permutB = Array.isArray(permutB) ? permutB : [permutB];
+              if (countStrokes(permutA) == countStrokes(permutB)) {
+                matchingCombos.push([permutA, permutB]);
+              }
+            }
+          }
+        } else {
+          for (let i of permutsA) {
+            matchingCombos.push([i, i]);
+          }
+        }
+
+        if (matchingCombos.length == 0) {
+          say([
+            `Could not match "${words[0]}" with "${words[1]}".`,
+            "These words don't seem to fit together.",
+          ]);
+          return;
+        }
+
+        clear_ambigrams();
+        document.getElementById("loading_text").textContent = "generating...";
+
+        const ambigramsBox = document.getElementById("ambigrams");
+        for (const combo of matchingCombos.slice(0, 12)) {
+          let width = countStrokes(combo[0]);
+          const strokeWidth = glyphs_lookup[style][3];
+          width += 3;
+          width *= strokeWidth;
+          let canvas = spawnCanvas(width, glyphs_lookup[style][4]);
+          let ctx = canvas.getContext("2d");
+
+          let x = 0;
+          for (const glyph of combo[0]) {
+            const glyphImage = await getGlyphImage(glyph, style);
+            ctx.drawImage(glyphImage, x, 0);
+            x += strokeWidth * countStrokes([glyph]);
+          }
+          ctx.rotate(Math.PI);
+
+          x = 0;
+          for (const glyph of combo[1]) {
+            const glyphImage = await getGlyphImage(glyph, style);
+            ctx.drawImage(glyphImage, x - canvas.width, -canvas.height);
+            x += strokeWidth * countStrokes([glyph]);
+          }
+
+          let img = new Image();
+          img.src = canvas.toDataURL();
+          let img_element = img;
+
+          // MODIFICATION: Added Tailwind classes for styling to match the site's aesthetic.
+          img_element.className =
+            "ambigram w-full h-auto bg-gray-200 rounded-lg shadow-md cursor-pointer transition-transform duration-500 ease-in-out";
+
+          ambigramsBox.appendChild(img_element);
+          img_element.addEventListener("click", () => spin(img_element));
+
+          if (style == "pixel") {
+            img_element.style.imageRendering = "pixelated";
+          }
+        }
+
+        document.getElementById("loading_text").textContent = "";
+      }
+
+      document
+        .getElementById("ambigenerator_input")
+        ?.addEventListener("keydown", (event) => {
+          if (event.key == "Enter") {
+            event.preventDefault();
+            generateAmbigrams();
+          }
+        });
+
+
+        generateAmbigrams()
     </script>
   </body>
-  <script src="./js/jquery.min.js" defer></script>
-  <script type="module" src="./libs/FileSaver.js" defer></script>
-  <script src="./libs/gif.js" defer></script>
-  <script type="module" src="main.js" defer></script>
 </html>
