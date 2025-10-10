@@ -126,109 +126,35 @@
     class="font-inter bg-gradient-to-br from-dark to-gray-800 text-light min-h-screen"
   >
     <!-- Navbar -->
-     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4">
-      <div
-        class="container mx-auto px-4 md:px-6 flex justify-between items-center"
-      >
-        <a href="index.html" class="flex items-center gap-2">
-          <span class="fa fa-refresh text-primary text-2xl rotate-45"></span>
-          <span
-            class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary gradient-text"
-            >AmbigramGen</span
-          >
-        </a>
-
-        <div class="hidden md:flex items-center gap-8">
-          <a href="index.html" class="hover:text-primary transition-colors"
-            >Home</a
-          >
-          <a href="/#features" class="hover:text-primary transition-colors"
-            >Features</a
-          >
-          <a href="/#examples" class="hover:text-primary transition-colors"
-            >Examples</a
-          >
-          <a href="/#fonts" class="hover:text-primary transition-colors"
-            >Fonts</a
-          >
-          <a
-            href="tattoo-generator"
-            class="hover:text-primary transition-colors"
-            >Tattoo Ideas</a
-          >
-          <a
-            href="free-generator"
-            class="hover:text-primary transition-colors"
-            >Free Generator</a
-          >
-          <a href="faq" class="hover:text-primary transition-colors"
-            >FAQ</a
-          >
-          <a
-            href="ambigram-generator-guide"
-            class="text-primary font-medium"
-            >Guide</a
-          >
+     <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/" class="text-xl font-bold text-dark hover:text-primary transition-colors">AmbigramGenerator.me</a>
+          <nav id="main-nav" class="hidden md:flex items-center space-x-6">
+    <a href="/generator" class="text-dark hover:text-primary font-medium transition-colors">2D Generator</a>
+    <a href="/3d-generator" class="text-dark hover:text-primary font-medium transition-colors">3D Generator</a>
+    <a href="/what-is-ambigram.html" class="text-dark hover:text-primary font-medium transition-colors">What is an Ambigram</a>
+    <a href="/tattoo-design.html" class="font-medium transition-colors">Design Guides</a>
+    <a href="#generator" class="bg-primary text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors">Start Creating</a>
+    <a href="/privacy" class="text-dark hover:text-primary font-medium transition-colors">Privacy Policy</a>
+    <a href="/terms" class="text-dark hover:text-primary font-medium transition-colors">Terms of Service</a>
+</nav>
+            <button id="mobile-menu-btn" class="md:hidden text-dark text-xl" aria-label="Toggle Navigation">
+                <i class="fa fa-bars"></i>
+            </button>
         </div>
-
-        <div class="flex items-center gap-4">
-          <a
-            href="/#generator"
-            class="hidden md:block bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full transition-all hover:shadow-lg hover:shadow-primary/20"
-          >
-            Generate Now
-          </a>
-          <button id="mobile-menu-btn" class="md:hidden text-2xl">
-            <i class="fa fa-bars"></i>
-          </button>
+         <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="/generator" class="block py-2 px-4 text-dark hover:bg-gray-100">2D Generator</a>
+            <a href="/3d-generator" class="block py-2 px-4 text-dark hover:bg-gray-100">3D Generator</a>
+            <a href="/what-is-ambigram.html" class="block py-2 px-4 text-dark hover:bg-gray-100">What is an Ambigram</a>
+            <a href="/tattoo-design.html" class="block py-2 px-4 text-dark hover:bg-gray-100">Design Guides</a>
+            <a href="/privacy" class="block py-2 px-4 text-dark hover:bg-gray-100">Privacy Policy</a>
+            <a href="/terms" class="block py-2 px-4 text-dark hover:bg-gray-100">Terms of Service</a>
+            <div class="p-4">
+                <a href="#generator" class="block text-center bg-primary text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors w-full">Start Creating</a>
+            </div>
         </div>
-      </div>
-
-      <!-- Mobile menu -->
-      <div
-        id="mobile-menu"
-        class="hidden md:hidden absolute top-full left-0 w-full bg-dark/95 glass-effect border-t border-gray-700"
-      >
-        <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
-          <a href="index.html" class="py-2 hover:text-primary transition-colors"
-            >Home</a
-          >
-          <a href="/#features" class="py-2 hover:text-primary transition-colors"
-            >Features</a
-          >
-          <a href="/#examples" class="py-2 hover:text-primary transition-colors"
-            >Examples</a
-          >
-          <a href="/#fonts" class="py-2 hover:text-primary transition-colors"
-            >Fonts</a
-          >
-          <a
-            href="tattoo-generator"
-            class="py-2 hover:text-primary transition-colors"
-            >Tattoo Ideas</a
-          >
-          <a
-            href="free-generator"
-            class="py-2 hover:text-primary transition-colors"
-            >Free Generator</a
-          >
-          <a href="faq" class="py-2 hover:text-primary transition-colors"
-            >FAQ</a
-          >
-          <a
-            href="ambigram-generator-guide"
-            class="py-2 text-primary font-medium"
-            >Guide</a
-          >
-          <a
-            href="/#generator"
-            class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full text-center transition-all"
-          >
-            Generate Now
-          </a>
-        </div>
-      </div>
-    </nav>
+    </header>
 
     <!-- FAQ Section -->
     <section class="pt-32 pb-20">
