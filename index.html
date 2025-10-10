@@ -650,6 +650,7 @@
                   src="./image/Two-name ambigram showing Sarah upright and John when rotated 180 degrees.webp"
                   alt="Two-Name Ambigram: Sarah/John"
                   class="w-full h-auto rounded-lg mb-3 border"
+                  loading="lazy"
                 />
                 <p class="font-semibold">SARAH / JOHN (Two-Name)</p>
               </div>
@@ -660,6 +661,7 @@
                   src="./image/Tattoo-style TRUST ambigram with thick, smooth strokes suitable for permanent ink.webp"
                   alt="Tattoo Ambigram: TRUST"
                   class="w-full h-auto rounded-lg mb-3 border"
+                  loading="lazy"
                 />
                 <p class="font-semibold">TRUST (Tattoo Style)</p>
               </div>
@@ -670,6 +672,7 @@
                   src="./image/3D printed ambigram object on turntable showing rotational word transformation.webp"
                   alt="3D Printed Ambigram"
                   class="w-full h-auto rounded-lg mb-3 border"
+                  loading="lazy"
                 />
                 <p class="font-semibold text-secondary">
                   3D PRINT (Physical Object)
@@ -682,6 +685,7 @@
                   src="./image/Animated GIF of ILLUSION rotating 180 degrees while maintaining readability.webp"
                   alt="Animated GIF: ILLUSION"
                   class="w-full h-auto rounded-lg mb-3 border"
+                  loading="lazy"
                 />
                 <p class="font-semibold">ILLUSION (Animated GIF)</p>
               </div>
@@ -1225,6 +1229,7 @@
           // MODIFICATION: Added Tailwind classes for styling to match the site's aesthetic.
           img_element.className =
             "ambigram w-full h-auto bg-gray-200 rounded-lg shadow-md cursor-pointer transition-transform duration-500 ease-in-out";
+            img_element.loading = "lazy";
 
           ambigramsBox.appendChild(img_element);
           img_element.addEventListener("click", () => spin(img_element));
