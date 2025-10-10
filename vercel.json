@@ -21,8 +21,5 @@
       "destination": "https://ambigramgenerator.me/:path*",
       "permanent": true
     }
-  ],
-  "rewrites": [
-    { "source": "/", "destination": "/index.html" }
   ]
 }
