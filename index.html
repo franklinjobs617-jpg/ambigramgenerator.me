@@ -14,48 +14,39 @@
     />
     <meta name="google-adsense-account" content="ca-pub-3383070348689557" />
     <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="canonical" href="https://www.ambigramgenerator.me/" />
 
-    <!-- Preconnect links for performance -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <!-- ===== LOADING PERFORMANCE OPTIMIZATIONS START ===== -->
+
+    <!-- 1. Preconnect to essential third-party domains to speed up initial connection. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- 网址宣称 -->
-    <link rel="canonical" href="https://www.ambigramgenerator.me/" />
-    <!-- Stylesheets & Fonts -->
-    <link href="./dist/output.css" rel="stylesheet">
-    <link
-      rel="preload"
-      href="./font-awesome-4.7.0/css/font-awesome.min.css"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript
-      ><link
-        rel="stylesheet"
-        href="./font-awesome-4.7.0/css/font-awesome.min.css"
-    /></noscript>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
 
-    <!-- Scripts for 3D Generator Functionality (preloaded) -->
-    <script src="./js/jqery.min.js" rel="preload"></script>
-    <link rel="preload" href="./letterData.js" as="script" />
-    <link
-      rel="preload"
-      href="./three/examples/jsm/exporters/STLExporter.js"
-      as="script"
-    />
+    <!-- 2. Preload critical assets (fonts and scripts) so they start downloading earlier. -->
+    <link rel="preload" href="./font-awesome-4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./js/jqery.min.js" as="script" />
     <link rel="preload" href="./three/build/three.module.js" as="script" />
+    <link rel="preload" href="./three/examples/jsm/exporters/STLExporter.js" as="script" />
+
+    <!-- 3. Load CSS. Your main CSS is loaded directly. Others are loaded asynchronously to prevent render-blocking. -->
+    <link href="./dist/output.css" rel="stylesheet" />
+    
+    <!-- Google Fonts (Async Load) - Addresses font-display delay -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&display=swap" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&display=swap"></noscript>
+
+    <!-- Font Awesome CSS (Async Load) -->
+    <link rel="preload" href="./font-awesome-4.7.0/css/font-awesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css" /></noscript>
+
+    <!-- ===== LOADING PERFORMANCE OPTIMIZATIONS END ===== -->
 
     <!-- Analytics and Ads -->
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      defer
-      src="https://www.googletagmanager.com/gtag/js?id=G-N55FBP8DJ2"
-    ></script>
-    <script defer>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557" crossorigin="anonymous"></script>
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-N55FBP8DJ2"></script>
+    <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
@@ -76,13 +67,6 @@
         y = l.getElementsByTagName(r)[0];
         y.parentNode.insertBefore(t, y);
       })(window, document, "clarity", "script", "ti80pje0n3");
-    </script>
-
-    <!-- Tailwind Config for Light Theme -->
-    <script defer>
-      tailwind.config = {
-     
-      };
     </script>
   </head>
   <body class="bg-light text-dark font-sans">
@@ -828,7 +812,7 @@
     </footer>
 
     <!-- Deferred scripts for 3D Generator functionality -->
-    <script src="./js/jquery.min.js" defer></script>
+    <script src="./js/jqery.min.js" defer></script>
     <script type="module" src="./libs/FileSaver.js" defer></script>
     <script src="./libs/gif.js" defer></script>
     <script type="module" src="main.js" defer></script>
