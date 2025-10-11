@@ -27,15 +27,32 @@
     <!-- 2. Preload critical assets (fonts and scripts) so they start downloading earlier. -->
     <link rel="preload" href="./assets/fontawesome-webfont-B-jkhYfk.woff2" as="font" type="font/woff2" crossorigin />
     
-    <!-- Preload critical images for LCP optimization -->
-    <link rel="preload" href="./assets/3D%20ambigram%20design%20example%20of%20a%20white%20marble%20sculpture%20that%20read-DEeH2fDq.webp" as="image" type="image/webp">
+    <!-- Mobile-optimized resource loading -->
+    <script>
+      // Detect mobile device for resource prioritization
+      const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent);
+      const isLowEndDevice = /android 4\.|android 5\.|android 6\./i.test(navigator.userAgent);
+      
+      // Mobile-specific resource loading
+      if (isMobile && !isLowEndDevice) {
+        // Preload critical images for mobile LCP
+        document.write('<link rel="preload" href="./assets/3D%20ambigram%20design%20example%20of%20a%20white%20marble%20sculpture%20that%20read-DEeH2fDq.webp" as="image" type="image/webp">');
+        document.write('<link rel="preload" href="./assets/main-D62YCris.css" as="style" onload="this.rel=\'stylesheet\'">');
+        document.write('<noscript><link rel="stylesheet" href="./assets/main-D62YCris.css"></noscript>');
+      } else if (isLowEndDevice) {
+        // Minimal loading for low-end devices
+        document.write('<link rel="preload" href="./assets/main-D62YCris.css" as="style" onload="this.rel=\'stylesheet\'">');
+        document.write('<noscript><link rel="stylesheet" href="./assets/main-D62YCris.css"></noscript>');
+      } else {
+        // Desktop loading
+        document.write('<link rel="preload" href="./assets/3D%20ambigram%20design%20example%20of%20a%20white%20marble%20sculpture%20that%20read-DEeH2fDq.webp" as="image" type="image/webp">');
+        document.write('<link rel="preload" href="./assets/main-D62YCris.css" as="style" onload="this.rel=\'stylesheet\'">');
+        document.write('<noscript><link rel="stylesheet" href="./assets/main-D62YCris.css"></noscript>');
+      }
+    </script>
     
     <!-- Only preload essential scripts, not Three.js -->
     <link rel="preload" href="./assets/jqery.min-hYMwZ4vv.js" as="script" />
-    
-    <!-- Preload critical CSS for faster LCP -->
-    <link rel="preload" href="./assets/main-D62YCris.css" as="style" onload="this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./assets/main-D62YCris.css"></noscript>
     
 
     <!-- 3. Load CSS. Your main CSS is loaded directly. Others are loaded asynchronously to prevent render-blocking. -->
@@ -71,7 +88,7 @@
       .hover\:text-primary:hover { color: #3B82F6; }
       .transition-colors { transition-property: color, background-color, border-color; transition-duration: 150ms; }
       
-      /* Layout stability fixes */
+      /* Layout stability fixes - Aggressive CLS prevention */
       .grid { display: grid; }
       .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
       .gap-12 { gap: 3rem; }
@@ -79,11 +96,62 @@
       .gap-6 { gap: 1.5rem; }
       .gap-4 { gap: 1rem; }
       
-      /* Prevent layout shift for images */
+      /* Aggressive layout shift prevention */
       img { 
         max-width: 100%; 
         height: auto;
         display: block;
+        contain: layout style paint;
+      }
+      
+      /* Mobile-specific optimizations */
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem !important;
+          line-height: 1.1 !important;
+          margin-bottom: 1rem !important;
+        }
+        .hero-subtitle {
+          font-size: 1.1rem !important;
+          line-height: 1.4 !important;
+          margin-bottom: 1.5rem !important;
+        }
+        .btn-primary {
+          min-height: 2.5rem !important;
+          min-width: 10rem !important;
+          font-size: 0.9rem !important;
+        }
+        #c {
+          height: 300px !important;
+        }
+      }
+      
+      /* Prevent font loading layout shift */
+      .font-display {
+        font-family: system-ui, -apple-system, sans-serif;
+        font-display: swap;
+      }
+      
+      /* Critical layout containers with fixed dimensions */
+      .hero-section {
+        min-height: 80vh;
+        contain: layout;
+      }
+      
+      .container {
+        contain: layout;
+      }
+      
+      /* Prevent layout shift during loading */
+      .loading-placeholder {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+      }
+      
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
       }
       
       /* Fixed dimensions for critical elements */
@@ -224,18 +292,86 @@
     <!-- Non-critical JavaScript loaded asynchronously -->
     <script src="../js/jqery.min.js" defer></script>
     
-    <!-- Three.js and 3D functionality - Load only when needed -->
+    <!-- Three.js and 3D functionality - Smart loading based on device performance -->
     <script>
-      // 3D Generator - Lazy load Three.js and related modules
+      // Device performance detection
+      let devicePerformance = 'high';
+      let threeJsSupported = true;
       let threeJsLoaded = false;
       let threeJsPromise = null;
+      
+      // Detect device performance and capabilities
+      function detectDevicePerformance() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+        const isLowEndDevice = /android 4\.|android 5\.|android 6\./i.test(userAgent);
+        const memory = navigator.deviceMemory || 4; // Default to 4GB if not available
+        const cores = navigator.hardwareConcurrency || 4; // Default to 4 cores if not available
+        
+        // Performance scoring
+        let performanceScore = 100;
+        
+        if (isMobile) {
+          performanceScore -= 20; // Mobile penalty
+        }
+        
+        if (isLowEndDevice) {
+          performanceScore -= 30; // Old Android penalty
+        }
+        
+        if (memory < 2) {
+          performanceScore -= 25; // Low memory penalty
+        }
+        
+        if (cores < 4) {
+          performanceScore -= 15; // Low core count penalty
+        }
+        
+        // Check WebGL support
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (!gl) {
+          threeJsSupported = false;
+          performanceScore -= 50;
+        }
+        
+        // Determine performance tier
+        if (performanceScore >= 70) {
+          devicePerformance = 'high';
+        } else if (performanceScore >= 40) {
+          devicePerformance = 'medium';
+        } else {
+          devicePerformance = 'low';
+        }
+        
+        console.log(`Device Performance: ${devicePerformance} (Score: ${performanceScore})`);
+        console.log(`Three.js Supported: ${threeJsSupported}`);
+        
+        return { devicePerformance, threeJsSupported, performanceScore };
+      }
+      
+      // Initialize device detection
+      const deviceInfo = detectDevicePerformance();
       
       async function loadThreeJS() {
         if (threeJsLoaded) return;
         if (threeJsPromise) return threeJsPromise;
         
+        // Check if device can handle Three.js
+        if (!threeJsSupported || devicePerformance === 'low') {
+          console.log('Three.js disabled for this device');
+          return Promise.reject(new Error('Three.js not supported on this device'));
+        }
+        
         threeJsPromise = (async () => {
           try {
+            // Show loading indicator
+            const generateBtn = document.getElementById('generate');
+            if (generateBtn) {
+              generateBtn.textContent = 'Loading 3D Engine...';
+              generateBtn.disabled = true;
+            }
+            
             // Dynamically import main module which handles all Three.js loading
             const mainModule = await import('./assets/main-zDHBVADl.js');
             
@@ -246,9 +382,25 @@
             
             threeJsLoaded = true;
             console.log('Three.js and 3D generator loaded successfully');
+            
+            // Restore button
+            if (generateBtn) {
+              generateBtn.textContent = 'Generate 3D Ambigram';
+              generateBtn.disabled = false;
+            }
+            
             return { mainModule };
           } catch (error) {
             console.error('Failed to load Three.js:', error);
+            
+            // Show fallback message
+            const generateBtn = document.getElementById('generate');
+            if (generateBtn) {
+              generateBtn.textContent = '3D Not Available';
+              generateBtn.disabled = true;
+              generateBtn.style.opacity = '0.5';
+            }
+            
             throw error;
           }
         })();
@@ -256,16 +408,31 @@
         return threeJsPromise;
       }
       
-      // Load Three.js when user interacts with 3D generator
+      // Mobile-optimized Three.js loading
       document.addEventListener('DOMContentLoaded', function() {
         const generateBtn = document.getElementById('generate');
         const firstInput = document.getElementById('first');
         const lastInput = document.getElementById('last');
         
+        // Mobile-specific optimizations
+        if (deviceInfo.devicePerformance === 'low') {
+          // Hide 3D generator for low-end devices
+          const threeDSection = document.querySelector('#generator');
+          if (threeDSection) {
+            threeDSection.style.display = 'none';
+          }
+          return;
+        }
+        
         if (generateBtn) {
           generateBtn.addEventListener('click', async function() {
             if (!threeJsLoaded) {
-              generateBtn.textContent = 'Loading 3D Engine...';
+              // Show device-appropriate loading message
+              if (deviceInfo.devicePerformance === 'medium') {
+                generateBtn.textContent = 'Loading 3D (Mobile)...';
+              } else {
+                generateBtn.textContent = 'Loading 3D Engine...';
+              }
               generateBtn.disabled = true;
               
               try {
@@ -273,28 +440,73 @@
                 generateBtn.textContent = 'Generate 3D Ambigram';
                 generateBtn.disabled = false;
               } catch (error) {
-                generateBtn.textContent = 'Error Loading 3D Engine';
+                generateBtn.textContent = '3D Not Available';
+                generateBtn.disabled = true;
+                generateBtn.style.opacity = '0.5';
                 console.error('Three.js loading failed:', error);
               }
             }
-          });
+          }, { passive: true });
         }
         
-        // Also load when user starts typing in 3D inputs
+        // Optimized input handling for mobile
         if (firstInput) {
+          let inputTimeout;
           firstInput.addEventListener('input', () => {
-            if (!threeJsLoaded) {
-              loadThreeJS();
-            }
-          });
+            clearTimeout(inputTimeout);
+            inputTimeout = setTimeout(() => {
+              if (!threeJsLoaded && deviceInfo.devicePerformance !== 'low') {
+                loadThreeJS();
+              }
+            }, 1000); // Delay loading on mobile
+          }, { passive: true });
         }
         
         if (lastInput) {
+          let inputTimeout;
           lastInput.addEventListener('input', () => {
-            if (!threeJsLoaded) {
-              loadThreeJS();
+            clearTimeout(inputTimeout);
+            inputTimeout = setTimeout(() => {
+              if (!threeJsLoaded && deviceInfo.devicePerformance !== 'low') {
+                loadThreeJS();
+              }
+            }, 1000); // Delay loading on mobile
+          }, { passive: true });
+        }
+        
+        // Mobile-specific performance monitoring
+        if (deviceInfo.devicePerformance === 'medium' || deviceInfo.devicePerformance === 'low') {
+          // Monitor performance and adjust accordingly
+          let frameCount = 0;
+          let lastTime = performance.now();
+          
+          function monitorPerformance() {
+            frameCount++;
+            const currentTime = performance.now();
+            
+            if (currentTime - lastTime >= 1000) {
+              const fps = frameCount;
+              frameCount = 0;
+              lastTime = currentTime;
+              
+              // If FPS is too low, disable 3D features
+              if (fps < 30 && threeJsLoaded) {
+                console.log('Low FPS detected, disabling 3D features');
+                const canvas = document.querySelector('#c');
+                if (canvas) {
+                  canvas.style.display = 'none';
+                }
+              }
             }
-          });
+            
+            if (deviceInfo.devicePerformance === 'medium') {
+              requestAnimationFrame(monitorPerformance);
+            }
+          }
+          
+          if (deviceInfo.devicePerformance === 'medium') {
+            requestAnimationFrame(monitorPerformance);
+          }
         }
       });
     </script>
@@ -745,7 +957,7 @@
                 </select>
               </div>
               <button
-                onclick="generateAmbigrams()"
+                id="generate-2d-btn"
                 class="w-full bg-secondary hover:bg-green-600 text-white py-3 rounded-lg font-medium transition-all hover:shadow-lg text-lg"
               >
                 Generate
@@ -1564,6 +1776,12 @@
             }
           });
         
+        // Add click event listener for the generate button
+        const generateBtn = document.getElementById('generate-2d-btn');
+        if (generateBtn) {
+          generateBtn.addEventListener('click', generateAmbigrams, { passive: true });
+        }
+        
         // Auto-generate on load
         generateAmbigrams();
       }
@@ -1571,7 +1789,7 @@
       // Load 2D generator when user interacts with it
       document.addEventListener('DOMContentLoaded', function() {
         const input = document.getElementById('ambigenerator_input');
-        const generateBtn = document.querySelector('[onclick="generateAmbigrams()"]');
+        const generateBtn = document.getElementById('generate-2d-btn');
         
         if (input) {
           input.addEventListener('focus', loadTwoDGenerator);
