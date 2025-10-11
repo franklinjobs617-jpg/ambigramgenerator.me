@@ -1,30 +1,56 @@
-import * as THREE from './three/build/three.module.js'
-import { STLExporter } from './three/examples/jsm/exporters/STLExporter.js'
-import { OrbitControls } from './three/examples/jsm/controls/OrbitControls.js'
-import { letterData } from "./letterData.js"
+// Dynamic imports for better performance
+let THREE, STLExporter, OrbitControls, letterData;
+let camera, controls, scene, renderer;
+let gifRenderer, gifData;
+let construction = {};
+let loader;
+let worker;
 
-var camera, controls, scene, renderer
-
-var gifRenderer, gifData
-
-var construction = {}
-
-const loader = new THREE.ObjectLoader()
-
-var worker
+// Initialize modules dynamically
+async function initializeModules() {
+    if (THREE) return; // Already loaded
+    
+    try {
+        THREE = (await import('./three/build/three.module.js')).default;
+        STLExporter = (await import('./three/examples/jsm/exporters/STLExporter.js')).STLExporter;
+        OrbitControls = (await import('./three/examples/jsm/controls/OrbitControls.js')).OrbitControls;
+        letterData = (await import('./letterData.js')).letterData;
+        
+        loader = new THREE.ObjectLoader();
+        console.log('3D modules loaded successfully');
+    } catch (error) {
+        console.error('Failed to load 3D modules:', error);
+        throw error;
+    }
+}
 
 //Loads on page ready
 async function main() {
-    //Set up renderer
+    // Initialize modules first
+    await initializeModules();
+    
+    //Set up renderer with performance optimizations
     const canvas = document.querySelector('#c')
-    const style = getComputedStyle(document.querySelector('body'))
-    canvas.width = parseInt(style.getPropertyValue('width'))
-    canvas.height = parseInt(style.getPropertyValue('height'))
-    renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-        logarithmicDepthBuffer: true
+    if (!canvas) {
+        console.error('Canvas element not found');
+        return;
+    }
+    
+    // Use requestAnimationFrame for better performance
+    requestAnimationFrame(() => {
+        const style = getComputedStyle(document.querySelector('body'))
+        canvas.width = parseInt(style.getPropertyValue('width'))
+        canvas.height = parseInt(style.getPropertyValue('height'))
+        
+        renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            logarithmicDepthBuffer: true,
+            antialias: false, // Disable antialiasing for better performance
+            powerPreference: "high-performance"
+        })
+        renderer.setClearColor(0x121212)
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)) // Limit pixel ratio for performance
     })
-    renderer.setClearColor(0x121212)
 
     //Set up camera
     var size = new THREE.Vector2()
@@ -62,6 +88,9 @@ async function main() {
     //Initial generation
     doGenerate()
 }
+
+// Export main function for dynamic loading
+window.initialize3DGenerator = main;
 
 //Initialize array for construction
 function setWord(key, word) {

@@ -26,53 +26,199 @@
 
     <!-- 2. Preload critical assets (fonts and scripts) so they start downloading earlier. -->
     <link rel="preload" href="./assets/fontawesome-webfont-B-jkhYfk.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="./assets/jqery.min-hYMwZ4vv.js" as="script" />
-    <link rel="preload" href="./assets/three.module-D2JWP47v.js" as="script" />
-    <link rel="preload" href="./assets/STLExporter-DrQckgtj.js" as="script" />
+    
+    <!-- Only preload essential scripts, not Three.js -->
     <link rel="preload" href="./assets/jqery.min-hYMwZ4vv.js" as="script" />
     
 
     <!-- 3. Load CSS. Your main CSS is loaded directly. Others are loaded asynchronously to prevent render-blocking. -->
-
+    
+    <!-- Critical CSS loaded inline for above-the-fold content -->
+    <style>
+      /* Critical styles for above-the-fold content */
+      body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+      .bg-light { background-color: #F9FAFB; }
+      .text-dark { color: #1F2937; }
+      .font-sans { font-family: system-ui, -apple-system, sans-serif; }
+      .bg-white { background-color: #ffffff; }
+      .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+      .sticky { position: sticky; }
+      .top-0 { top: 0; }
+      .z-50 { z-index: 50; }
+      .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+      .mx-auto { margin-left: auto; margin-right: auto; }
+      .px-4 { padding-left: 1rem; padding-right: 1rem; }
+      .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+      .flex { display: flex; }
+      .justify-between { justify-content: space-between; }
+      .items-center { align-items: center; }
+      .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+      .font-bold { font-weight: 700; }
+      .text-primary { color: #3B82F6; }
+      .hover\:text-primary:hover { color: #3B82F6; }
+      .transition-colors { transition-property: color, background-color, border-color; transition-duration: 150ms; }
+    </style>
     
     <!-- Google Fonts (Async Load) - Addresses font-display delay -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&display=swap" as="style" onload="this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&display=swap"></noscript>
 
     <!-- Font Awesome CSS (Async Load) -->
-
-    <noscript></noscript>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"></noscript>
 
     <!-- ===== LOADING PERFORMANCE OPTIMIZATIONS END ===== -->
 
-    <!-- Analytics and Ads -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557" crossorigin="anonymous"></script>
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-N55FBP8DJ2"></script>
+    <!-- Analytics and Ads - Load after page interaction -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-N55FBP8DJ2");
-    </script>
-    <script type="text/javascript" defer>
-      (function (c, l, a, r, i, t, y) {
-        c[a] =
-          c[a] ||
-          function () {
+      // Load analytics after user interaction or 3 seconds
+      function loadAnalytics() {
+        // Google Analytics
+        const gtagScript = document.createElement('script');
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-N55FBP8DJ2';
+        gtagScript.async = true;
+        document.head.appendChild(gtagScript);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", "G-N55FBP8DJ2");
+        
+        // Clarity
+        (function (c, l, a, r, i, t, y) {
+          c[a] = c[a] || function () {
             (c[a].q = c[a].q || []).push(arguments);
           };
-        t = l.createElement(r);
-        t.async = 1;
-        t.src = "https://www.clarity.ms/tag/" + i;
-        y = l.getElementsByTagName(r)[0];
-        y.parentNode.insertBefore(t, y);
-      })(window, document, "clarity", "script", "ti80pje0n3");
+          t = l.createElement(r);
+          t.async = 1;
+          t.src = "https://www.clarity.ms/tag/" + i;
+          y = l.getElementsByTagName(r)[0];
+          y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "ti80pje0n3");
+      }
+      
+      // Load analytics after user interaction
+      let analyticsLoaded = false;
+      function loadAnalyticsOnInteraction() {
+        if (!analyticsLoaded) {
+          analyticsLoaded = true;
+          loadAnalytics();
+        }
+      }
+      
+      // Load analytics on first user interaction
+      ['click', 'scroll', 'keydown', 'touchstart'].forEach(event => {
+        document.addEventListener(event, loadAnalyticsOnInteraction, { once: true, passive: true });
+      });
+      
+      // Fallback: load after 3 seconds
+      setTimeout(loadAnalyticsOnInteraction, 3000);
     </script>
-    <script type="module" crossorigin src="./assets/main-zDHBVADl.js"></script>
-   <script src="../js/jqery.min.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/main-D62YCris.css">
+    
+    <!-- Ads - Load only when needed -->
+    <script>
+      function loadAds() {
+        const adScript = document.createElement('script');
+        adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557';
+        adScript.async = true;
+        adScript.crossOrigin = 'anonymous';
+        document.head.appendChild(adScript);
+      }
+      
+      // Load ads when user scrolls to 50% of page
+      let adsLoaded = false;
+      function loadAdsOnScroll() {
+        if (!adsLoaded && window.scrollY > window.innerHeight * 0.5) {
+          adsLoaded = true;
+          loadAds();
+        }
+      }
+      
+      window.addEventListener('scroll', loadAdsOnScroll, { passive: true });
+    </script>
+    <!-- Non-critical JavaScript loaded asynchronously -->
+    <script src="../js/jqery.min.js" defer></script>
+    
+    <!-- Three.js and 3D functionality - Load only when needed -->
+    <script>
+      // 3D Generator - Lazy load Three.js and related modules
+      let threeJsLoaded = false;
+      let threeJsPromise = null;
+      
+      async function loadThreeJS() {
+        if (threeJsLoaded) return;
+        if (threeJsPromise) return threeJsPromise;
+        
+        threeJsPromise = (async () => {
+          try {
+            // Dynamically import main module which handles all Three.js loading
+            const mainModule = await import('./assets/main-zDHBVADl.js');
+            
+            // Initialize the 3D generator
+            if (window.initialize3DGenerator) {
+              await window.initialize3DGenerator();
+            }
+            
+            threeJsLoaded = true;
+            console.log('Three.js and 3D generator loaded successfully');
+            return { mainModule };
+          } catch (error) {
+            console.error('Failed to load Three.js:', error);
+            throw error;
+          }
+        })();
+        
+        return threeJsPromise;
+      }
+      
+      // Load Three.js when user interacts with 3D generator
+      document.addEventListener('DOMContentLoaded', function() {
+        const generateBtn = document.getElementById('generate');
+        const firstInput = document.getElementById('first');
+        const lastInput = document.getElementById('last');
+        
+        if (generateBtn) {
+          generateBtn.addEventListener('click', async function() {
+            if (!threeJsLoaded) {
+              generateBtn.textContent = 'Loading 3D Engine...';
+              generateBtn.disabled = true;
+              
+              try {
+                await loadThreeJS();
+                generateBtn.textContent = 'Generate 3D Ambigram';
+                generateBtn.disabled = false;
+              } catch (error) {
+                generateBtn.textContent = 'Error Loading 3D Engine';
+                console.error('Three.js loading failed:', error);
+              }
+            }
+          });
+        }
+        
+        // Also load when user starts typing in 3D inputs
+        if (firstInput) {
+          firstInput.addEventListener('input', () => {
+            if (!threeJsLoaded) {
+              loadThreeJS();
+            }
+          });
+        }
+        
+        if (lastInput) {
+          lastInput.addEventListener('input', () => {
+            if (!threeJsLoaded) {
+              loadThreeJS();
+            }
+          });
+        }
+      });
+    </script>
+    
+    <!-- Non-critical CSS loaded asynchronously -->
+    <link rel="preload" href="./assets/main-D62YCris.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" crossorigin href="./assets/main-D62YCris.css"></noscript>
   </head>
   <body class="bg-light text-dark font-sans">
     <header class="bg-white shadow-md sticky top-0 z-50">
@@ -210,6 +356,10 @@
                   src="./assets/3D%20ambigram%20design%20example%20of%20a%20white%20marble%20sculpture%20that%20read-DEeH2fDq.webp"
                   alt="3D ambigram design example of a white marble sculpture that reads 'ART' from the front and transforms into 'SCIENCE' when rotated 180 degrees."
                   class="rounded-xl w-full h-auto"
+                  loading="lazy"
+                  width="600"
+                  height="400"
+                  style="aspect-ratio: 3/2;"
                 />
               </div>
             </div>
@@ -828,25 +978,28 @@
 
     <!-- SCRIPT FOR ALL PAGE-LEVEL INTERACTIONS (MENUS, FAQ, SCROLL) -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
+      // Use requestIdleCallback for non-critical initialization
+      function initializePage() {
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById("mobile-menu-btn");
         const mobileMenu = document.getElementById("mobile-menu");
-        mobileMenuBtn.addEventListener("click", () => {
-          mobileMenu.classList.toggle("hidden");
-        });
+        if (mobileMenuBtn && mobileMenu) {
+          mobileMenuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+          });
+        }
 
-        // FAQ Accordion
+        // FAQ Accordion - Use passive listeners for better performance
         document.querySelectorAll(".faq-toggle").forEach((button) => {
           button.addEventListener("click", () => {
             const answer = button.nextElementSibling;
             const icon = button.querySelector("i");
             answer.classList.toggle("hidden");
             icon.classList.toggle("rotate-180");
-          });
+          }, { passive: true });
         });
 
-        // Smooth Scroll for anchor links
+        // Smooth Scroll for anchor links - Use passive listeners
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
           anchor.addEventListener("click", function (e) {
             e.preventDefault();
@@ -855,21 +1008,43 @@
 
             if (targetElement) {
               // Hide mobile menu if open
-              if (!mobileMenu.classList.contains("hidden")) {
+              if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
                 mobileMenu.classList.add("hidden");
               }
 
               targetElement.scrollIntoView({ behavior: "smooth" });
             }
-          });
+          }, { passive: true });
         });
-      });
+      }
+
+      // Initialize immediately for critical functionality
+      document.addEventListener("DOMContentLoaded", initializePage);
+      
+      // Use requestIdleCallback for non-critical initialization
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(initializePage);
+      } else {
+        setTimeout(initializePage, 0);
+      }
     </script>
 
-    <!-- SCRIPT FOR 2D AMBIGRAM GENERATOR (ORIGINAL SCRIPT WITH MINOR ADAPTATIONS) -->
+    <!-- SCRIPT FOR 2D AMBIGRAM GENERATOR (OPTIMIZED FOR PERFORMANCE) -->
     <script>
-      // start, middle, end, strokewidth, height
-      let glyphs_lookup = {
+      // Defer 2D generator initialization until user interaction
+      let twoDGeneratorLoaded = false;
+      
+      function loadTwoDGenerator() {
+        if (twoDGeneratorLoaded) return;
+        twoDGeneratorLoaded = true;
+        
+        // Load glyph data and initialize 2D generator
+        initializeTwoDGenerator();
+      }
+      
+      function initializeTwoDGenerator() {
+        // start, middle, end, strokewidth, height
+        let glyphs_lookup = {
         new: [
           [
             ["a1", "a2i"],
@@ -1138,6 +1313,7 @@
         return canvas;
       }
 
+      // Break down the generation process into smaller chunks
       async function generateAmbigrams() {
         let words = document.getElementById("ambigenerator_input").value;
         let style = document.getElementById("style_dropdown").value;
@@ -1176,6 +1352,7 @@
         let permutsB = cartesian(glyphs[1]);
         let matchingCombos = [];
 
+        // Use requestIdleCallback to break up heavy computation
         if (doubleWords) {
           for (let permutA of permutsA) {
             for (let permutB of permutsB) {
@@ -1204,58 +1381,98 @@
         document.getElementById("loading_text").textContent = "generating...";
 
         const ambigramsBox = document.getElementById("ambigrams");
-        for (const combo of matchingCombos.slice(0, 12)) {
-          let width = countStrokes(combo[0]);
-          const strokeWidth = glyphs_lookup[style][3];
-          width += 3;
-          width *= strokeWidth;
-          let canvas = spawnCanvas(width, glyphs_lookup[style][4]);
-          let ctx = canvas.getContext("2d");
+        
+        // Process ambigrams in chunks to avoid blocking the main thread
+        const processChunk = async (combos, startIndex) => {
+          const chunkSize = 3; // Process 3 ambigrams at a time
+          const endIndex = Math.min(startIndex + chunkSize, combos.length);
+          
+          for (let i = startIndex; i < endIndex; i++) {
+            const combo = combos[i];
+            let width = countStrokes(combo[0]);
+            const strokeWidth = glyphs_lookup[style][3];
+            width += 3;
+            width *= strokeWidth;
+            let canvas = spawnCanvas(width, glyphs_lookup[style][4]);
+            let ctx = canvas.getContext("2d");
 
-          let x = 0;
-          for (const glyph of combo[0]) {
-            const glyphImage = await getGlyphImage(glyph, style);
-            ctx.drawImage(glyphImage, x, 0);
-            x += strokeWidth * countStrokes([glyph]);
-          }
-          ctx.rotate(Math.PI);
+            let x = 0;
+            for (const glyph of combo[0]) {
+              const glyphImage = await getGlyphImage(glyph, style);
+              ctx.drawImage(glyphImage, x, 0);
+              x += strokeWidth * countStrokes([glyph]);
+            }
+            ctx.rotate(Math.PI);
 
-          x = 0;
-          for (const glyph of combo[1]) {
-            const glyphImage = await getGlyphImage(glyph, style);
-            ctx.drawImage(glyphImage, x - canvas.width, -canvas.height);
-            x += strokeWidth * countStrokes([glyph]);
-          }
+            x = 0;
+            for (const glyph of combo[1]) {
+              const glyphImage = await getGlyphImage(glyph, style);
+              ctx.drawImage(glyphImage, x - canvas.width, -canvas.height);
+              x += strokeWidth * countStrokes([glyph]);
+            }
 
-          let img = new Image();
-          img.src = canvas.toDataURL();
-          let img_element = img;
+            let img = new Image();
+            img.src = canvas.toDataURL();
+            let img_element = img;
 
-          // MODIFICATION: Added Tailwind classes for styling to match the site's aesthetic.
-          img_element.className =
-            "ambigram w-full h-auto bg-gray-200 rounded-lg shadow-md cursor-pointer transition-transform duration-500 ease-in-out";
+            // MODIFICATION: Added Tailwind classes for styling to match the site's aesthetic.
+            img_element.className =
+              "ambigram w-full h-auto bg-gray-200 rounded-lg shadow-md cursor-pointer transition-transform duration-500 ease-in-out";
             img_element.loading = "lazy";
 
-          ambigramsBox.appendChild(img_element);
-          img_element.addEventListener("click", () => spin(img_element));
+            ambigramsBox.appendChild(img_element);
+            img_element.addEventListener("click", () => spin(img_element), { passive: true });
 
-          if (style == "pixel") {
-            img_element.style.imageRendering = "pixelated";
+            if (style == "pixel") {
+              img_element.style.imageRendering = "pixelated";
+            }
           }
-        }
+          
+          // Yield control back to the browser
+          if (endIndex < combos.length) {
+            await new Promise(resolve => setTimeout(resolve, 0));
+            return processChunk(combos, endIndex);
+          }
+        };
 
+        // Start processing in chunks
+        await processChunk(matchingCombos.slice(0, 12), 0);
         document.getElementById("loading_text").textContent = "";
       }
 
-      document
-        .getElementById("ambigenerator_input")
-        ?.addEventListener("keydown", (event) => {
-          if (event.key == "Enter") {
-            event.preventDefault();
-            generateAmbigrams();
-          }
-        });
-      generateAmbigrams();
+        // Initialize event listeners
+        document
+          .getElementById("ambigenerator_input")
+          ?.addEventListener("keydown", (event) => {
+            if (event.key == "Enter") {
+              event.preventDefault();
+              generateAmbigrams();
+            }
+          });
+        
+        // Auto-generate on load
+        generateAmbigrams();
+      }
+      
+      // Load 2D generator when user interacts with it
+      document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('ambigenerator_input');
+        const generateBtn = document.querySelector('[onclick="generateAmbigrams()"]');
+        
+        if (input) {
+          input.addEventListener('focus', loadTwoDGenerator);
+          input.addEventListener('input', loadTwoDGenerator);
+        }
+        
+        if (generateBtn) {
+          generateBtn.addEventListener('click', loadTwoDGenerator);
+        }
+        
+        // Load immediately if there's already content
+        if (input && input.value) {
+          loadTwoDGenerator();
+        }
+      });
     </script>
   </body>
 </html>

@@ -15,16 +15,20 @@
       name="keywords"
       content="ambigram generator, ambigram creator, ambigram maker, free ambigram generator, ambigram tattoo generator, two word ambigram generator, online free"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
-     <link rel="canonical" href="https://www.ambigramgenerator.me/generator" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="canonical" href="https://www.ambigramgenerator.me/generator" />
+    
+    <!-- Load CSS asynchronously -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"></noscript>
+    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&display=swap" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&display=swap"></noscript>
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557"
@@ -210,6 +214,10 @@
                 src="./image/Two-name ambigram showing Sarah upright and John when rotated 180 degrees.webp"
                 alt="Two-Name Ambigram: Sarah/John"
                 class="w-full h-auto rounded-lg mb-4 border"
+                loading="lazy"
+                width="400"
+                height="300"
+                style="aspect-ratio: 4/3;"
               />
               <h3 class="text-lg font-semibold">Couple's Names</h3>
               <p class="text-sm text-gray-500">e.g., Sarah / John</p>
@@ -221,6 +229,10 @@
                 src="./image/Tattoo-style TRUST ambigram with thick, smooth strokes suitable for permanent ink.webp"
                 alt="Tattoo Ambigram: TRUST"
                 class="w-full h-auto rounded-lg mb-4 border"
+                loading="lazy"
+                width="400"
+                height="300"
+                style="aspect-ratio: 4/3;"
               />
               <h3 class="text-lg font-semibold">Single Meaningful Word</h3>
               <p class="text-sm text-gray-500">e.g., Trust</p>
@@ -232,6 +244,10 @@
                 src="./image/Animated GIF of ILLUSION rotating 180 degrees while maintaining readability.webp"
                 alt="Opposing Concepts Ambigram"
                 class="w-full h-auto rounded-lg mb-4 border"
+                loading="lazy"
+                width="400"
+                height="300"
+                style="aspect-ratio: 4/3;"
               />
               <h3 class="text-lg font-semibold">Opposing Concepts</h3>
               <p class="text-sm text-gray-500">e.g., Life / Death</p>
@@ -415,7 +431,7 @@
     if (mobileMenuBtn && mobileMenu) {
       mobileMenuBtn.addEventListener("click", () => {
         mobileMenu.classList.toggle("hidden");
-      });
+      }, { passive: true });
     }
     
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -428,24 +444,29 @@
         if (targetElement) {
             targetElement.scrollIntoView({ behavior: "smooth" });
         }
-      });
+      }, { passive: true });
     });
 
     // 页面加载后自动生成一次 "Hello" 的示例
-    generateAmbigrams();
+    // Use requestIdleCallback for non-critical initialization
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => generateAmbigrams());
+    } else {
+      setTimeout(() => generateAmbigrams(), 0);
+    }
   });
 
   const generateBtn = document.getElementById("generate-btn");
   const resultsContainer = document.getElementById("ambigrams-grid");
   const initialMessage = document.getElementById("initial-message");
 
-  generateBtn.addEventListener("click", generateAmbigrams);
+  generateBtn.addEventListener("click", generateAmbigrams, { passive: true });
   document.getElementById("text-input").addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         event.preventDefault();
         generateAmbigrams();
     }
-  });
+  }, { passive: true });
   
   // 字谜字母部件的数据
   let glyphs_lookup = {
