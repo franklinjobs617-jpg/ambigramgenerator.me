@@ -5,28 +5,39 @@
 <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico)$">
     ExpiresActive On
     ExpiresDefault "access plus 1 year"
-    Header set Cache-Control "public, immutable"
+    Header set Cache-Control "public, immutable, max-age=31536000"
+    Header set Vary "Accept-Encoding"
 </FilesMatch>
 
 # CSS和JS文件缓存1个月
 <FilesMatch "\.(css|js)$">
     ExpiresActive On
     ExpiresDefault "access plus 1 month"
-    Header set Cache-Control "public"
+    Header set Cache-Control "public, max-age=2592000"
+    Header set Vary "Accept-Encoding"
 </FilesMatch>
 
 # 字体文件缓存1年
 <FilesMatch "\.(woff|woff2|ttf|eot)$">
     ExpiresActive On
     ExpiresDefault "access plus 1 year"
-    Header set Cache-Control "public, immutable"
+    Header set Cache-Control "public, immutable, max-age=31536000"
+    Header set Vary "Accept-Encoding"
 </FilesMatch>
 
 # HTML文件缓存1小时
 <FilesMatch "\.(html|htm)$">
     ExpiresActive On
     ExpiresDefault "access plus 1 hour"
-    Header set Cache-Control "public"
+    Header set Cache-Control "public, max-age=3600"
+    Header set Vary "Accept-Encoding"
+</FilesMatch>
+
+# 优化资源提示
+<FilesMatch "\.(html|htm)$">
+    Header add Link "</assets/main-D62YCris.css>; rel=preload; as=style"
+    Header add Link "</assets/main-zDHBVADl.js>; rel=preload; as=script"
+    Header add Link "</assets/fontawesome-webfont-B-jkhYfk.woff2>; rel=preload; as=font; type=font/woff2; crossorigin"
 </FilesMatch>
 
 # 启用Gzip压缩

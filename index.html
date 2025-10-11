@@ -27,16 +27,29 @@
     <!-- 2. Preload critical assets (fonts and scripts) so they start downloading earlier. -->
     <link rel="preload" href="./assets/fontawesome-webfont-B-jkhYfk.woff2" as="font" type="font/woff2" crossorigin />
     
+    <!-- Preload critical images for LCP optimization -->
+    <link rel="preload" href="./assets/3D%20ambigram%20design%20example%20of%20a%20white%20marble%20sculpture%20that%20read-DEeH2fDq.webp" as="image" type="image/webp">
+    
     <!-- Only preload essential scripts, not Three.js -->
     <link rel="preload" href="./assets/jqery.min-hYMwZ4vv.js" as="script" />
+    
+    <!-- Preload critical CSS for faster LCP -->
+    <link rel="preload" href="./assets/main-D62YCris.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./assets/main-D62YCris.css"></noscript>
     
 
     <!-- 3. Load CSS. Your main CSS is loaded directly. Others are loaded asynchronously to prevent render-blocking. -->
     
     <!-- Critical CSS loaded inline for above-the-fold content -->
     <style>
-      /* Critical styles for above-the-fold content */
-      body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+      /* Critical styles for above-the-fold content with layout stability */
+      * { box-sizing: border-box; }
+      body { 
+        margin: 0; 
+        font-family: system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
       .bg-light { background-color: #F9FAFB; }
       .text-dark { color: #1F2937; }
       .font-sans { font-family: system-ui, -apple-system, sans-serif; }
@@ -57,9 +70,79 @@
       .text-primary { color: #3B82F6; }
       .hover\:text-primary:hover { color: #3B82F6; }
       .transition-colors { transition-property: color, background-color, border-color; transition-duration: 150ms; }
+      
+      /* Layout stability fixes */
+      .grid { display: grid; }
+      .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+      .gap-12 { gap: 3rem; }
+      .gap-8 { gap: 2rem; }
+      .gap-6 { gap: 1.5rem; }
+      .gap-4 { gap: 1rem; }
+      
+      /* Prevent layout shift for images */
+      img { 
+        max-width: 100%; 
+        height: auto;
+        display: block;
+      }
+      
+      /* Fixed dimensions for critical elements */
+      .hero-section { min-height: 80vh; }
+      .hero-title { 
+        font-size: 3rem; 
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+      }
+      .hero-subtitle {
+        font-size: 1.25rem;
+        line-height: 1.5;
+        margin-bottom: 2rem;
+      }
+      
+      /* Button dimensions to prevent shift */
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.75rem 2rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        text-decoration: none;
+        min-height: 3rem;
+        min-width: 12rem;
+      }
+      
+      /* Canvas container fixed dimensions */
+      #c {
+        width: 100%;
+        height: 500px;
+        display: block;
+        background-color: #121212;
+      }
+      
+      /* Prevent font loading layout shift */
+      @font-face {
+        font-family: 'Inter';
+        font-display: swap;
+        src: url('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2') format('woff2');
+        font-weight: 400 700;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+21A9, U+21B3, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      
+      @font-face {
+        font-family: 'Montserrat';
+        font-display: swap;
+        src: url('https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXpsog.woff2') format('woff2');
+        font-weight: 700 800;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+21A9, U+21B3, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
     </style>
     
-    <!-- Google Fonts (Async Load) - Addresses font-display delay -->
+    <!-- Optimized font loading with preload and font-display: swap -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXpsog.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Fallback font loading -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&display=swap" as="style" onload="this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&display=swap"></noscript>
 
@@ -322,7 +405,7 @@
             <!-- Column 1: Text Content & Call-to-Action Buttons -->
             <div class="text-center md:text-left">
               <h1
-                class="text-5xl md:text-6xl font-display font-extrabold text-dark mb-6 leading-tight"
+                class="hero-title text-5xl md:text-6xl font-display font-extrabold text-dark mb-6 leading-tight"
               >
                 Create Visual Miracles with Our Ambigram Generator
               </h1>
@@ -806,6 +889,9 @@
                   alt="Two-Name Ambigram: Sarah/John"
                   class="w-full h-auto rounded-lg mb-3 border"
                   loading="lazy"
+                  width="320"
+                  height="240"
+                  style="aspect-ratio: 4/3;"
                 />
                 <p class="font-semibold">SARAH / JOHN (Two-Name)</p>
               </div>
@@ -817,6 +903,9 @@
                   alt="Tattoo Ambigram: TRUST"
                   class="w-full h-auto rounded-lg mb-3 border"
                   loading="lazy"
+                  width="320"
+                  height="240"
+                  style="aspect-ratio: 4/3;"
                 />
                 <p class="font-semibold">TRUST (Tattoo Style)</p>
               </div>
@@ -980,42 +1069,67 @@
     <script>
       // Use requestIdleCallback for non-critical initialization
       function initializePage() {
-        // Mobile Menu Toggle
+        // Mobile Menu Toggle - Optimized to prevent reflows
         const mobileMenuBtn = document.getElementById("mobile-menu-btn");
         const mobileMenu = document.getElementById("mobile-menu");
         if (mobileMenuBtn && mobileMenu) {
           mobileMenuBtn.addEventListener("click", () => {
-            mobileMenu.classList.toggle("hidden");
+            // Use requestAnimationFrame to prevent forced reflows
+            requestAnimationFrame(() => {
+              mobileMenu.classList.toggle("hidden");
+            });
+          }, { passive: true });
+        }
+
+        // FAQ Accordion - Use passive listeners and batch DOM updates
+        const faqButtons = document.querySelectorAll(".faq-toggle");
+        if (faqButtons.length > 0) {
+          // Batch DOM reads to prevent reflows
+          const faqElements = Array.from(faqButtons).map(button => ({
+            button,
+            answer: button.nextElementSibling,
+            icon: button.querySelector("i")
+          }));
+          
+          faqElements.forEach(({ button, answer, icon }) => {
+            button.addEventListener("click", () => {
+              // Batch DOM writes to prevent reflows
+              requestAnimationFrame(() => {
+                answer.classList.toggle("hidden");
+                icon.classList.toggle("rotate-180");
+              });
+            }, { passive: true });
           });
         }
 
-        // FAQ Accordion - Use passive listeners for better performance
-        document.querySelectorAll(".faq-toggle").forEach((button) => {
-          button.addEventListener("click", () => {
-            const answer = button.nextElementSibling;
-            const icon = button.querySelector("i");
-            answer.classList.toggle("hidden");
-            icon.classList.toggle("rotate-180");
-          }, { passive: true });
-        });
+        // Smooth Scroll for anchor links - Optimized scroll behavior
+        const anchorLinks = document.querySelectorAll('a[href^="#"]');
+        if (anchorLinks.length > 0) {
+          anchorLinks.forEach((anchor) => {
+            anchor.addEventListener("click", function (e) {
+              e.preventDefault();
+              const targetId = this.getAttribute("href");
+              const targetElement = document.querySelector(targetId);
 
-        // Smooth Scroll for anchor links - Use passive listeners
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-          anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute("href");
-            const targetElement = document.querySelector(targetId);
+              if (targetElement) {
+                // Hide mobile menu if open - batch DOM operations
+                if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+                  requestAnimationFrame(() => {
+                    mobileMenu.classList.add("hidden");
+                  });
+                }
 
-            if (targetElement) {
-              // Hide mobile menu if open
-              if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
-                mobileMenu.classList.add("hidden");
+                // Use smooth scroll with performance optimization
+                requestAnimationFrame(() => {
+                  targetElement.scrollIntoView({ 
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                });
               }
-
-              targetElement.scrollIntoView({ behavior: "smooth" });
-            }
-          }, { passive: true });
-        });
+            }, { passive: true });
+          });
+        }
       }
 
       // Initialize immediately for critical functionality
