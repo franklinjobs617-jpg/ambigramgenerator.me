@@ -56,7 +56,7 @@
     
 
     <!-- 3. Load CSS. Your main CSS is loaded directly. Others are loaded asynchronously to prevent render-blocking. -->
-    
+
     <!-- Critical CSS loaded inline for above-the-fold content -->
     <style>
       /* Critical styles for above-the-fold content with layout stability */
@@ -230,24 +230,24 @@
         gtagScript.async = true;
         document.head.appendChild(gtagScript);
         
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        gtag("js", new Date());
-        gtag("config", "G-N55FBP8DJ2");
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-N55FBP8DJ2");
         
         // Clarity
-        (function (c, l, a, r, i, t, y) {
+      (function (c, l, a, r, i, t, y) {
           c[a] = c[a] || function () {
             (c[a].q = c[a].q || []).push(arguments);
           };
-          t = l.createElement(r);
-          t.async = 1;
-          t.src = "https://www.clarity.ms/tag/" + i;
-          y = l.getElementsByTagName(r)[0];
-          y.parentNode.insertBefore(t, y);
-        })(window, document, "clarity", "script", "ti80pje0n3");
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "ti80pje0n3");
       }
       
       // Load analytics after user interaction
@@ -1285,11 +1285,11 @@
         const mobileMenuBtn = document.getElementById("mobile-menu-btn");
         const mobileMenu = document.getElementById("mobile-menu");
         if (mobileMenuBtn && mobileMenu) {
-          mobileMenuBtn.addEventListener("click", () => {
+        mobileMenuBtn.addEventListener("click", () => {
             // Use requestAnimationFrame to prevent forced reflows
             requestAnimationFrame(() => {
-              mobileMenu.classList.toggle("hidden");
-            });
+          mobileMenu.classList.toggle("hidden");
+        });
           }, { passive: true });
         }
 
@@ -1304,12 +1304,12 @@
           }));
           
           faqElements.forEach(({ button, answer, icon }) => {
-            button.addEventListener("click", () => {
+          button.addEventListener("click", () => {
               // Batch DOM writes to prevent reflows
               requestAnimationFrame(() => {
-                answer.classList.toggle("hidden");
-                icon.classList.toggle("rotate-180");
-              });
+            answer.classList.toggle("hidden");
+            icon.classList.toggle("rotate-180");
+          });
             }, { passive: true });
           });
         }
@@ -1318,16 +1318,16 @@
         const anchorLinks = document.querySelectorAll('a[href^="#"]');
         if (anchorLinks.length > 0) {
           anchorLinks.forEach((anchor) => {
-            anchor.addEventListener("click", function (e) {
-              e.preventDefault();
-              const targetId = this.getAttribute("href");
-              const targetElement = document.querySelector(targetId);
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
 
-              if (targetElement) {
+            if (targetElement) {
                 // Hide mobile menu if open - batch DOM operations
                 if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
                   requestAnimationFrame(() => {
-                    mobileMenu.classList.add("hidden");
+                mobileMenu.classList.add("hidden");
                   });
                 }
 
@@ -1336,8 +1336,8 @@
                   targetElement.scrollIntoView({ 
                     behavior: "smooth",
                     block: "start"
-                  });
-                });
+          });
+        });
               }
             }, { passive: true });
           });
@@ -1369,8 +1369,8 @@
       }
       
       function initializeTwoDGenerator() {
-        // start, middle, end, strokewidth, height
-        let glyphs_lookup = {
+      // start, middle, end, strokewidth, height
+      let glyphs_lookup = {
         new: [
           [
             ["a1", "a2i"],
@@ -1715,45 +1715,49 @@
           
           for (let i = startIndex; i < endIndex; i++) {
             const combo = combos[i];
-            let width = countStrokes(combo[0]);
-            const strokeWidth = glyphs_lookup[style][3];
-            width += 3;
-            width *= strokeWidth;
-            let canvas = spawnCanvas(width, glyphs_lookup[style][4]);
-            let ctx = canvas.getContext("2d");
+          let width = countStrokes(combo[0]);
+          const strokeWidth = glyphs_lookup[style][3];
+          width += 3;
+          width *= strokeWidth;
+          let canvas = spawnCanvas(width, glyphs_lookup[style][4]);
+          let ctx = canvas.getContext("2d");
 
-            let x = 0;
-            for (const glyph of combo[0]) {
-              const glyphImage = await getGlyphImage(glyph, style);
-              ctx.drawImage(glyphImage, x, 0);
-              x += strokeWidth * countStrokes([glyph]);
-            }
-            ctx.rotate(Math.PI);
+          let x = 0;
+          for (const glyph of combo[0]) {
+            const glyphImage = await getGlyphImage(glyph, style);
+            ctx.drawImage(glyphImage, x, 0);
+            x += strokeWidth * countStrokes([glyph]);
+          }
+          ctx.rotate(Math.PI);
 
-            x = 0;
-            for (const glyph of combo[1]) {
-              const glyphImage = await getGlyphImage(glyph, style);
-              ctx.drawImage(glyphImage, x - canvas.width, -canvas.height);
-              x += strokeWidth * countStrokes([glyph]);
-            }
+          x = 0;
+          for (const glyph of combo[1]) {
+            const glyphImage = await getGlyphImage(glyph, style);
+            ctx.drawImage(glyphImage, x - canvas.width, -canvas.height);
+            x += strokeWidth * countStrokes([glyph]);
+          }
 
-            let img = new Image();
-            img.src = canvas.toDataURL();
-            let img_element = img;
+          let img = new Image();
+          img.src = canvas.toDataURL();
+          let img_element = img;
 
-            // MODIFICATION: Added Tailwind classes for styling to match the site's aesthetic.
-            img_element.className =
-              "ambigram w-full h-auto bg-gray-200 rounded-lg shadow-md cursor-pointer transition-transform duration-500 ease-in-out";
+          // MODIFICATION: Added Tailwind classes for styling to match the site's aesthetic.
+          img_element.className =
+            "ambigram w-full h-auto bg-gray-200 rounded-lg shadow-md cursor-pointer transition-transform duration-500 ease-in-out";
             img_element.loading = "lazy";
+            img_element.alt = `Ambigram: ${words[0]} / ${words[1]}`;
+            img_element.width = 320;
+            img_element.height = 240;
+            img_element.style.aspectRatio = "4/3";
 
-            ambigramsBox.appendChild(img_element);
+          ambigramsBox.appendChild(img_element);
             img_element.addEventListener("click", () => spin(img_element), { passive: true });
 
-            if (style == "pixel") {
-              img_element.style.imageRendering = "pixelated";
-            }
+          if (style == "pixel") {
+            img_element.style.imageRendering = "pixelated";
           }
-          
+        }
+
           // Yield control back to the browser
           if (endIndex < combos.length) {
             await new Promise(resolve => setTimeout(resolve, 0));
@@ -1765,25 +1769,28 @@
         await processChunk(matchingCombos.slice(0, 12), 0);
         document.getElementById("loading_text").textContent = "";
       }
+      
+      // Make generateAmbigrams function globally accessible
+      window.generateAmbigrams = generateAmbigrams;
 
-        // Initialize event listeners
-        document
-          .getElementById("ambigenerator_input")
-          ?.addEventListener("keydown", (event) => {
-            if (event.key == "Enter") {
-              event.preventDefault();
-              generateAmbigrams();
-            }
-          });
+      // Initialize event listeners
+      document
+        .getElementById("ambigenerator_input")
+        ?.addEventListener("keydown", (event) => {
+          if (event.key == "Enter") {
+            event.preventDefault();
+            generateAmbigrams();
+          }
+        });
         
-        // Add click event listener for the generate button
-        const generateBtn = document.getElementById('generate-2d-btn');
-        if (generateBtn) {
-          generateBtn.addEventListener('click', generateAmbigrams, { passive: true });
-        }
-        
-        // Auto-generate on load
-        generateAmbigrams();
+      // Add click event listener for the generate button
+      const generateBtn = document.getElementById('generate-2d-btn');
+      if (generateBtn) {
+        generateBtn.addEventListener('click', generateAmbigrams, { passive: true });
+      }
+      
+      // Auto-generate on load
+      generateAmbigrams();
       }
       
       // Load 2D generator when user interacts with it
