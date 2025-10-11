@@ -25,21 +25,23 @@
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
 
     <!-- 2. Preload critical assets (fonts and scripts) so they start downloading earlier. -->
-    <link rel="preload" href="./font-awesome-4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="./js/jqery.min.js" as="script" />
-    <link rel="preload" href="./three/build/three.module.js" as="script" />
-    <link rel="preload" href="./three/examples/jsm/exporters/STLExporter.js" as="script" />
+    <link rel="preload" href="./assets/fontawesome-webfont-B-jkhYfk.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./assets/jqery.min-hYMwZ4vv.js" as="script" />
+    <link rel="preload" href="./assets/three.module-D2JWP47v.js" as="script" />
+    <link rel="preload" href="./assets/STLExporter-DrQckgtj.js" as="script" />
+    <link rel="preload" href="./assets/jqery.min-hYMwZ4vv.js" as="script" />
+    
 
     <!-- 3. Load CSS. Your main CSS is loaded directly. Others are loaded asynchronously to prevent render-blocking. -->
-    <link href="./dist/output.css" rel="stylesheet" />
+
     
     <!-- Google Fonts (Async Load) - Addresses font-display delay -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&display=swap" as="style" onload="this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&display=swap"></noscript>
 
     <!-- Font Awesome CSS (Async Load) -->
-    <link rel="preload" href="./font-awesome-4.7.0/css/font-awesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css" /></noscript>
+
+    <noscript></noscript>
 
     <!-- ===== LOADING PERFORMANCE OPTIMIZATIONS END ===== -->
 
@@ -68,6 +70,9 @@
         y.parentNode.insertBefore(t, y);
       })(window, document, "clarity", "script", "ti80pje0n3");
     </script>
+    <script type="module" crossorigin src="./assets/main-zDHBVADl.js"></script>
+   <script src="../js/jqery.min.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/main-D62YCris.css">
   </head>
   <body class="bg-light text-dark font-sans">
     <header class="bg-white shadow-md sticky top-0 z-50">
@@ -202,7 +207,7 @@
                 class="bg-white p-3 sm:p-4 rounded-2xl shadow-2xl border border-gray-200/50"
               >
                 <img
-                  src="./image/3D ambigram design example of a white marble sculpture that read.webp"
+                  src="./assets/3D%20ambigram%20design%20example%20of%20a%20white%20marble%20sculpture%20that%20read-DEeH2fDq.webp"
                   alt="3D ambigram design example of a white marble sculpture that reads 'ART' from the front and transforms into 'SCIENCE' when rotated 180 degrees."
                   class="rounded-xl w-full h-auto"
                 />
@@ -647,7 +652,7 @@
                 class="snap-center flex-shrink-0 w-80 bg-white rounded-xl shadow-xl p-4 text-center border"
               >
                 <img
-                  src="./image/Two-name ambigram showing Sarah upright and John when rotated 180 degrees.webp"
+                  src="data:image/webp;base64,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"
                   alt="Two-Name Ambigram: Sarah/John"
                   class="w-full h-auto rounded-lg mb-3 border"
                   loading="lazy"
@@ -658,7 +663,7 @@
                 class="snap-center flex-shrink-0 w-80 bg-white rounded-xl shadow-xl p-4 text-center border"
               >
                 <img
-                  src="./image/Tattoo-style TRUST ambigram with thick, smooth strokes suitable for permanent ink.webp"
+                  src="./assets/Tattoo-style%20TRUST%20ambigram%20with%20thick_%20smooth%20strokes%20suitable%20for%20permanent%20ink-Cb1hObRw.webp"
                   alt="Tattoo Ambigram: TRUST"
                   class="w-full h-auto rounded-lg mb-3 border"
                   loading="lazy"
@@ -669,7 +674,7 @@
                 class="snap-center flex-shrink-0 w-80 bg-white rounded-xl shadow-xl p-4 text-center border-2 border-secondary"
               >
                 <img
-                  src="./image/3D printed ambigram object on turntable showing rotational word transformation.webp"
+                  src="data:image/webp;base64,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"
                   alt="3D Printed Ambigram"
                   class="w-full h-auto rounded-lg mb-3 border"
                   loading="lazy"
@@ -682,7 +687,7 @@
                 class="snap-center flex-shrink-0 w-80 bg-white rounded-xl shadow-xl p-4 text-center border"
               >
                 <img
-                  src="./image/Animated GIF of ILLUSION rotating 180 degrees while maintaining readability.webp"
+                  src="./assets/Animated%20GIF%20of%20ILLUSION%20rotating%20180%20degrees%20while%20maintaining%20readability-BzmTJfTv.webp"
                   alt="Animated GIF: ILLUSION"
                   class="w-full h-auto rounded-lg mb-3 border"
                   loading="lazy"
@@ -816,10 +821,10 @@
     </footer>
 
     <!-- Deferred scripts for 3D Generator functionality -->
-    <script src="./js/jqery.min.js" defer></script>
-    <script type="module" src="./libs/FileSaver.js" defer></script>
-    <script src="./libs/gif.js" defer></script>
-    <script type="module" src="main.js" defer></script>
+
+
+
+
 
     <!-- SCRIPT FOR ALL PAGE-LEVEL INTERACTIONS (MENUS, FAQ, SCROLL) -->
     <script>
