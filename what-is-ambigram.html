@@ -361,7 +361,7 @@
             </li>
             <li><a href="/terms" class="text-gray-400 hover:text-white transition-colors text-sm">Terms of Service</a>
             </li>
-            <li><a href="/about.html" class="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
+            <li><a href="/about" class="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
           </ul>
         </div>
       </div>
@@ -378,15 +378,6 @@
   </footer>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // Mobile menu toggle
-      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const mobileMenu = document.getElementById("mobile-menu");
-      if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener("click", () => {
-          mobileMenu.classList.toggle("hidden");
-        });
-      }
-
       // Smooth scrolling for anchor links
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {

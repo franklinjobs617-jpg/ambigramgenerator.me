@@ -557,35 +557,6 @@
   </section>
 
   <script>
-    // Mobile menu toggle
-    document
-      .getElementById("mobile-menu-btn")
-      .addEventListener("click", function () {
-        const mobileMenu = document.getElementById("mobile-menu");
-        mobileMenu.classList.toggle("hidden");
-      });
-
-    // Navbar scroll effect
-    window.addEventListener("scroll", function () {
-      const navbar = document.getElementById("navbar");
-      if (window.scrollY > 50) {
-        navbar.classList.add(
-          "bg-dark/90",
-          "glass-effect",
-          "py-2",
-          "shadow-lg"
-        );
-        navbar.classList.remove("py-4");
-      } else {
-        navbar.classList.remove(
-          "bg-dark/90",
-          "glass-effect",
-          "py-2",
-          "shadow-lg"
-        );
-        navbar.classList.add("py-4");
-      }
-    });
 
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {

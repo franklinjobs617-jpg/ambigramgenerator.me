@@ -466,43 +466,8 @@
   </footer>
 
   <script>
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
 
-    mobileMenuBtn.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-      const icon = mobileMenuBtn.querySelector("i");
-      if (mobileMenu.classList.contains("hidden")) {
-        icon.classList.remove("fa-times");
-        icon.classList.add("fa-bars");
-      } else {
-        icon.classList.remove("fa-bars");
-        icon.classList.add("fa-times");
-      }
-    });
 
-    // Navbar scroll effect
-    const navbar = document.getElementById("navbar");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add(
-          "bg-dark/90",
-          "glass-effect",
-          "py-2",
-          "shadow-lg"
-        );
-        navbar.classList.remove("py-4");
-      } else {
-        navbar.classList.remove(
-          "bg-dark/90",
-          "glass-effect",
-          "py-2",
-          "shadow-lg"
-        );
-        navbar.classList.add("py-4");
-      }
-    });
 
     // FAQ toggles
     const faqToggles = document.querySelectorAll(".faq-toggle");
