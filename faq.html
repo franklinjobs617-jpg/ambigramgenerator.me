@@ -12,7 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <meta name="google-adsense-account" content="ca-pub-3383070348689557" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="./css/font.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557"
     crossorigin="anonymous"></script>
 
@@ -148,7 +149,7 @@
 
         <a href="/tattoo-design" class="font-medium transition-colors">Design Guides</a>
         <!-- Check this href as well, if it's meant to be a scroll-to link -->
-        <a href="#generator"
+        <a href="/generator"
           class="bg-primary text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors">Start Creating</a>
         <a href="/privacy" class="text-dark hover:text-primary font-medium transition-colors">Privacy Policy</a>
         <a href="/terms" class="text-dark hover:text-primary font-medium transition-colors">Terms of Service</a>
@@ -393,100 +394,75 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-dark/80 border-t border-gray-800 py-12">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+  <footer class="bg-gray-900 text-white pt-16 pb-8">
+    <div class="container mx-auto px-4">
+      <div class="mx-auto pb-4">
+        <h3 class="text-2xl font-bold font-display text-white mb-2">
+          AmbigramGenerator.me
+        </h3>
+        <p class="text-gray-400 text-sm">
+          The essential toolkit for ambigram creation, built for speed and reliability.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-gray-700">
         <div>
-          <div class="flex items-center gap-2 mb-4">
-            <span class="fa fa-refresh text-primary text-2xl rotate-45"></span>
-            <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary gradient-text">AmbigramGen</span>
-          </div>
-          <p class="text-gray-400 mb-4">
-            Create stunning ambigrams for tattoos, logos, and art projects
-            with our free online generator.
-          </p>
-          <div class="flex gap-4">
-            <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl">
-              <i class="fa fa-facebook"></i>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl">
-              <i class="fa fa-twitter"></i>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl">
-              <i class="fa fa-instagram"></i>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl">
-              <i class="fa fa-pinterest"></i>
-            </a>
-          </div>
-        </div>
+          <h4 class="text-lg font-semibold mb-4 text-white">Product </h4>
+          <ul class="space-y-3">
+            <li><a href="/" class="text-gray-400 hover:text-white transition-colors text-sm">Home</a></li>
+            <li><a href="/generator" class="text-gray-400 hover:text-white transition-colors text-sm">2D Generator</a>
+            </li>
+            <li><a href="/3d-generator" class="text-gray-400 hover:text-white transition-colors text-sm">3D
+                Generator</a></li>
 
-        <div>
-          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-          <ul class="space-y-2">
-            <li>
-              <a href="index.html" class="text-gray-400 hover:text-primary transition-colors">Home</a>
-            </li>
-            <li>
-              <a href="index.html#generator" class="text-gray-400 hover:text-primary transition-colors">Generator</a>
-            </li>
-            <li>
-              <a href="index.html#examples" class="text-gray-400 hover:text-primary transition-colors">Examples</a>
-            </li>
-            <li>
-              <a href="index.html#fonts" class="text-gray-400 hover:text-primary transition-colors">Fonts</a>
-            </li>
-            <li>
-              <a href="faq.html" class="text-gray-400 hover:text-primary transition-colors">FAQ</a>
-            </li>
           </ul>
         </div>
 
         <div>
-          <h4 class="text-lg font-semibold mb-4">Resources</h4>
-          <ul class="space-y-2">
-            <li>
-              <a href="#" class="text-gray-400 hover:text-primary transition-colors">Ambigram Ideas</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-400 hover:text-primary transition-colors">Tattoo Tips</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-400 hover:text-primary transition-colors">Design Blog</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-400 hover:text-primary transition-colors">Font Guide</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-400 hover:text-primary transition-colors">User Gallery</a>
-            </li>
+          <h4 class="text-lg font-semibold mb-4 text-white">Guides </h4>
+          <ul class="space-y-3">
+            <li><a href="/what-is-ambigram" class="text-gray-400 hover:text-white transition-colors text-sm">What
+                is an Ambigram</a></li>
+
+            <li><a href="/tattoo-design" class="text-gray-400 hover:text-white transition-colors text-sm"> Design
+                Guide</a></li>
+
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-white">Tutorial </h4>
+          <ul class="space-y-3">
+            <li><a href="/tutorial/multi-word-guide"
+                class="text-gray-400 hover:text-white transition-colors text-sm">Multi-Word Ambigram</a></li>
+            <li><a href="/tutorial/tattoo-design"
+                class="text-gray-400 hover:text-white transition-colors text-sm">Tattoo Design Guide</a></li>
+            <li><a href="/tutorial/two-name-ambigram"
+                class="text-gray-400 hover:text-white transition-colors text-sm">Two-Name Ambigram</a></li>
+
           </ul>
         </div>
 
         <div>
-          <h4 class="text-lg font-semibold mb-4">Legal</h4>
-          <ul class="space-y-2">
-            <li>
-              <a href="terms.html" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a>
+          <h4 class="text-lg font-semibold mb-4 text-white">Support</h4>
+          <ul class="space-y-3">
+            <li><a href="/faq" class="text-gray-400 hover:text-white transition-colors text-sm">FAQ</a></li>
+            <li><a href="/privacy" class="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</a>
             </li>
-            <li>
-              <a href="privacy.html" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a>
+            <li><a href="/terms" class="text-gray-400 hover:text-white transition-colors text-sm">Terms of Service</a>
             </li>
-            <li>
-              <a href="#" class="text-gray-400 hover:text-primary transition-colors">Cookie Policy</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-400 hover:text-primary transition-colors">DMCA Notice</a>
-            </li>
+            <li><a href="/about" class="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-        <p>&copy; 2023 AmbigramGen. All rights reserved.</p>
+      <div class="mt-8 text-center text-gray-400 text-xs">
+        <p>
+          &copy; <span id="current-year">2024</span> AmbigramGenerator.me Technologies. All Rights Reserved. Not
+          affiliated with any other generator site.
+        </p>
+        <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
       </div>
     </div>
+
   </footer>
 
   <script>
