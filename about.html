@@ -227,29 +227,89 @@
         </section>
     </main>
 
-    <footer class="bg-dark text-white py-12">
+
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center border-b border-gray-700 pb-8">
+            <div class="mx-auto pb-4">
+                <h3 class="text-2xl font-bold font-display text-white mb-2">
+                    AmbigramGenerator.me
+                </h3>
+                <p class="text-gray-400 text-sm">
+                    The essential toolkit for ambigram creation, built for speed and reliability.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-gray-700">
                 <div>
-                    <h3 class="text-2xl font-bold font-display mb-2">AmbigramGenerator.me</h3>
-                    <p class="text-gray-400">The next-generation ambigram creator.</p>
+                    <h4 class="text-lg font-semibold mb-4 text-white">Product </h4>
+                    <ul class="space-y-3">
+                        <li><a href="/" class="text-gray-400 hover:text-white transition-colors text-sm">Home</a></li>
+                        <li><a href="/generator" class="text-gray-400 hover:text-white transition-colors text-sm">2D
+                                Generator</a>
+                        </li>
+                        <li><a href="/3d-generator" class="text-gray-400 hover:text-white transition-colors text-sm">3D
+                                Generator</a></li>
+                        <li><a href="/pricing"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">Pricing</a></li>
+
+                    </ul>
                 </div>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Facebook"><i
-                            class="fa fa-facebook"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Instagram"><i
-                            class="fa fa-instagram"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Twitter"><i
-                            class="fa fa-twitter"></i></a>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-white">Guides </h4>
+                    <ul class="space-y-3">
+                        <li><a href="/what-is-ambigram.html"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">What
+                                is an Ambigram</a></li>
+
+                        <li><a href="/tattoo-design.html"
+                                class="text-gray-400 hover:text-white transition-colors text-sm"> Design
+                                Guide</a></li>
+
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-white">Tutorial </h4>
+                    <ul class="space-y-3">
+                        <li><a href="/tutorial/multi-word-guide.html"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">Multi-Word Ambigram</a>
+                        </li>
+                        <li><a href="/tutorial/tattoo-design.html"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">Tattoo Design Guide</a>
+                        </li>
+                        <li><a href="/tutorial/two-name-ambigram.html"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">Two-Name Ambigram</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-white">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/#faq" class="text-gray-400 hover:text-white transition-colors text-sm">FAQ</a>
+                        </li>
+                        <li><a href="/privacy" class="text-gray-400 hover:text-white transition-colors text-sm">Privacy
+                                Policy</a>
+                        </li>
+                        <li><a href="/terms" class="text-gray-400 hover:text-white transition-colors text-sm">Terms of
+                                Service</a>
+                        </li>
+                        <li><a href="/about.html" class="text-gray-400 hover:text-white transition-colors text-sm">About
+                                Us</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="mt-8 text-center text-gray-400 text-sm">
-                <p>&copy; 2024 AmbigramGenerator.me | <a href="privacy.html"
-                        class="hover:text-white transition-colors">Privacy
-                        Policy</a> | <a href="terms.html" class="hover:text-white transition-colors">Terms of
-                        Service</a></p>
+
+            <div class="mt-8 text-center text-gray-400 text-xs">
+                <p>
+                    &copy; <span id="current-year">2024</span> AmbigramGenerator.me Technologies. All Rights Reserved.
+                    Not
+                    affiliated with any other generator site.
+                </p>
+                <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
             </div>
         </div>
+
     </footer>
 
     <script>
