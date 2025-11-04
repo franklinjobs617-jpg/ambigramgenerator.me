@@ -1252,76 +1252,47 @@
   <!-- Deferred scripts for 3D Generator functionality -->
 
 
-
-
-
-  <!-- SCRIPT FOR ALL PAGE-LEVEL INTERACTIONS (MENUS, FAQ, SCROLL) -->
   <script>
-    // Use requestIdleCallback for non-critical initialization
-    function initializePage() {
-      // FAQ Accordion - Use passive listeners and batch DOM updates
+    document.addEventListener('DOMContentLoaded', function () {
+
       const faqButtons = document.querySelectorAll(".faq-toggle");
-      if (faqButtons.length > 0) {
-        // Batch DOM reads to prevent reflows
-        const faqElements = Array.from(faqButtons).map(button => ({
-          button,
-          answer: button.nextElementSibling,
-          icon: button.querySelector("i")
-        }));
 
-        faqElements.forEach(({ button, answer, icon }) => {
-          button.addEventListener("click", () => {
-            // Batch DOM writes to prevent reflows
-            requestAnimationFrame(() => {
-              answer.classList.toggle("hidden");
-              icon.classList.toggle("rotate-180");
-            });
-          }, { passive: true });
+      faqButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          const answer = button.nextElementSibling;
+          const icon = button.querySelector("i");
+
+          if (answer && icon) {
+            answer.classList.toggle("hidden");
+            icon.classList.toggle("rotate-180");
+          }
         });
-      }
+      });
 
-      // Smooth Scroll for anchor links - Optimized scroll behavior
       const anchorLinks = document.querySelectorAll('a[href^="#"]');
-      if (anchorLinks.length > 0) {
-        anchorLinks.forEach((anchor) => {
-          anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute("href");
-            const targetElement = document.querySelector(targetId);
+      const mobileMenu = document.getElementById('mobile-menu');
 
-            if (targetElement) {
-              // Hide mobile menu if open - batch DOM operations
-              if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
-                requestAnimationFrame(() => {
-                  mobileMenu.classList.add("hidden");
-                });
-              }
+      anchorLinks.forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href");
+          const targetElement = document.querySelector(targetId);
 
-              // Use smooth scroll with performance optimization
-              requestAnimationFrame(() => {
-                targetElement.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start"
-                });
-              });
+          if (targetElement) {
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+              mobileMenu.classList.add('hidden');
             }
-          }, { passive: true });
+            targetElement.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          }
         });
-      }
-    }
-
-    // Initialize immediately for critical functionality
-    document.addEventListener("DOMContentLoaded", initializePage);
-
-    // Use requestIdleCallback for non-critical initialization
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(initializePage);
-    } else {
-      setTimeout(initializePage, 0);
-    }
+      });
+    });
   </script>
 
-  <!-- SCRIPT FOR 2D AMBIGRAM GENERATOR (OPTIMIZED FOR PERFORMANCE) -->
+
   <script>
     // Defer 2D generator initialization until user interaction
     let twoDGeneratorLoaded = false;
