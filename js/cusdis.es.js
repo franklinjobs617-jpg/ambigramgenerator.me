@@ -345,7 +345,6 @@ function initial() {
     );
     target = document.querySelector("#cusdis");
   }
-  debugger
   if (window.CUSDIS_PREVENT_INITIAL_RENDER === true);
   else {
     if (target) {

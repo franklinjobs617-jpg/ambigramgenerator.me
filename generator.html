@@ -13,7 +13,10 @@
   <meta name="keywords"
     content="ambigram generator, ambigram creator, ambigram maker, free ambigram generator, ambigram tattoo generator, two word ambigram generator, online free" />
   <!-- Preload critical resources -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preload" href="/assets/main-D62YCris.css" as="style" onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" crossorigin href="/assets/main-D62YCris.css">
+  </noscript>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,39 +63,7 @@
       y.parentNode.insertBefore(t, y);
     })(window, document, "clarity", "script", "ti80pje0n3");
   </script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: "#3B82F6",
-            secondary: "#10B981",
-            dark: "#1F2937",
-            light: "#F9FAFB",
-          },
-          fontFamily: {
-            sans: ["Inter", "system-ui", "sans-serif"],
-            display: ["Montserrat", "sans-serif"],
-          },
-          keyframes: {
-            rotateAmbigram: {
-              from: {
-                transform:
-                  "rotate(0deg) scale(var(--tw-scale-x, 1), var(--tw-scale-y, 1))",
-              },
-              to: {
-                transform:
-                  "rotate(180deg) scale(var(--tw-scale-x, 1), var(--tw-scale-y, 1))",
-              },
-            },
-          },
-          animation: {
-            "rotate-ambigram": "rotateAmbigram 3s linear infinite alternate",
-          },
-        },
-      },
-    };
-  </script>
+
 </head>
 
 <body class="bg-light text-dark font-sans">
