@@ -60,9 +60,9 @@
 
 <body class="bg-light text-dark font-sans">
   <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center flex-wrap">
+    <div class="container mx-auto px-4 py-2 md:py-4 flex justify-between items-center flex-wrap">
       <a href="/" class="flex items-center text-xl font-bold text-dark hover:text-primary transition-colors">
-        <img src="/logo.png" alt="">
+        <img src="/logo.png" alt="ambigramgenerator logo" class="h-10 md:h-12">
       </a>
       <nav id="main-nav" class="hidden md:flex items-center space-x-6">
         <a href="/generator" class="text-dark hover:text-primary font-medium transition-colors">2D Generator</a>
@@ -94,6 +94,14 @@
               Principles</a>
             <a href="/guide/ambigram-history-art" class="block px-4 py-2 text-dark hover:bg-gray-100">Ambigram History
               and Art</a>
+            <a href="/guide/ultimate-free-generator" class="block px-4 py-2 text-dark hover:bg-gray-100">
+              Ultimate Free Generator</a>
+            <a href="/guide/best-online-tools" class="block px-4 py-2 text-dark hover:bg-gray-100">
+              Best Online Tools</a>
+            <a href="/guide/name-generator-secrets" class="block px-4 py-2 text-dark hover:bg-gray-100">
+              Name Generator Secrets</a>
+            <a href="/guide/advanced-3d-controls" class="block px-4 py-2 text-dark hover:bg-gray-100">
+              Advanced 3D Controls</a>
           </div>
         </div>
 
@@ -111,13 +119,13 @@
     </div>
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
-      <a href="/generator" class="block py-2 px-4 text-dark hover:bg-gray-100">2D Generator</a>
-      <a href="/3d-generator" class="block py-2 px-4 text-dark hover:bg-gray-100">3D Generator</a>
-      <a href="/what-is-ambigram" class="block py-2 px-4 text-dark hover:bg-gray-100">What is an Ambigram</a>
+      <a href="/generator" class="block py-1 px-4 text-dark hover:bg-gray-100">2D Generator</a>
+      <a href="/3d-generator" class="block py-1 px-4 text-dark hover:bg-gray-100">3D Generator</a>
+      <a href="/what-is-ambigram" class="block py-1 px-4 text-dark hover:bg-gray-100">What is an Ambigram</a>
 
       <!-- Mobile Tutorial Accordion/Dropdown -->
       <div class="border-b border-gray-200">
-        <button class="flex justify-between items-center w-full py-2 px-4 text-dark hover:bg-gray-100"
+        <button class="flex justify-between items-center w-full py-1 px-4 text-dark hover:bg-gray-100"
           onclick="toggleMobileTutorial()">
           Tutorial
           <svg class="ml-2 w-4 h-4 transform transition-transform duration-300" id="mobile-tutorial-arrow" fill="none"
@@ -126,29 +134,36 @@
           </svg>
         </button>
         <div id="mobile-tutorial-links">
-          <a href="/tutorial/multi-word-guide" class="block px-8 py-2 text-dark hover:bg-gray-100">Multi-Word
+          <a href="/tutorial/multi-word-guide" class="block px-8 py-1 text-dark hover:bg-gray-100">Multi-Word
             Guide</a>
-          <a href="/tutorial/tattoo-design" class="block px-8 py-2 text-dark hover:bg-gray-100">Tattoo Design
+          <a href="/tutorial/tattoo-design" class="block px-8 py-1 text-dark hover:bg-gray-100">Tattoo Design
             Guide</a>
-          <a href="/tutorial/two-name-ambigram" class="block px-8 py-2 text-dark hover:bg-gray-100">Two-Name
+          <a href="/tutorial/two-name-ambigram" class="block px-8 py-1 text-dark hover:bg-gray-100">Two-Name
             Ambigram</a>
-          <a href="/guide/2d-vs-3d-design" class="block px-8 py-2 text-dark hover:bg-gray-100">2D vs 3D
-            Design</a>
+          <a href="/guide/2d-vs-3d-design" class="block px-8 py-1 text-dark hover:bg-gray-100">2D vs 3D Design</a>
 
-          <a href="/guide/flipscript-principles" class="block px-8 py-2 text-dark hover:bg-gray-100">Flipscript
+          <a href="/guide/flipscript-principles" class="block px-8 py-1 text-dark hover:bg-gray-100">Flipscript
             Principles</a>
-          <a href="/guide/ambigram-history-art" class="block px-8 py-2 text-dark hover:bg-gray-100">Ambigram
-            History
+          <a href="/guide/ambigram-history-art" class="block px-8 py-1 text-dark hover:bg-gray-100">Ambigram History
             and Art</a>
+          <a href="/guide/ultimate-free-generator" class="block px-8 py-1 text-dark hover:bg-gray-100">
+            Ultimate Free Generator</a>
+          <a href="/guide/best-online-tools" class="block px-8 py-1 text-dark hover:bg-gray-100">
+            Best Online Tools</a>
+          <a href="/guide/name-generator-secrets" class="block px-8 py-1 text-dark hover:bg-gray-100">
+            Name Generator Secrets</a>
+          <a href="/guide/advanced-3d-controls" class="block px-8 py-1 text-dark hover:bg-gray-100">
+            Advanced 3D Controls</a>
+
         </div>
       </div>
 
-      <a href="/tattoo-design" class="block py-2 px-4 text-dark hover:bg-gray-100">Design Guides</a>
-      <a href="/privacy" class="block py-2 px-4 text-dark hover:bg-gray-100">Privacy Policy</a>
-      <a href="/terms" class="block py-2 px-4 text-dark hover:bg-gray-100">Terms of Service</a>
-      <div class="p-4">
+      <a href="/tattoo-design" class="block py-1 px-4 text-dark hover:bg-gray-100">Design Guides</a>
+      <a href="/privacy" class="block py-1 px-4 text-dark hover:bg-gray-100">Privacy Policy</a>
+      <a href="/terms" class="block py-1 px-4 text-dark hover:bg-gray-100">Terms of Service</a>
+      <div class="p-2">
         <a href="#generator"
-          class="block text-center bg-primary text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors w-full">Start
+          class="block text-center bg-primary text-white px-4 py-1 rounded-full hover:bg-blue-600 transition-colors w-full">Start
           Creating</a>
       </div>
     </div>
@@ -432,7 +447,6 @@
             </li>
             <li><a href="/3d-generator" class="text-gray-400 hover:text-white transition-colors text-sm">3D
                 Generator</a></li>
-            <li><a href="/pricing" class="text-gray-400 hover:text-white transition-colors text-sm">Pricing</a></li>
 
           </ul>
         </div>
@@ -440,10 +454,10 @@
         <div>
           <h4 class="text-lg font-semibold mb-4 text-white">Guides </h4>
           <ul class="space-y-3">
-            <li><a href="/what-is-ambigram.html" class="text-gray-400 hover:text-white transition-colors text-sm">What
+            <li><a href="/what-is-ambigram" class="text-gray-400 hover:text-white transition-colors text-sm">What
                 is an Ambigram</a></li>
 
-            <li><a href="/tattoo-design.html" class="text-gray-400 hover:text-white transition-colors text-sm"> Design
+            <li><a href="/tattoo-design" class="text-gray-400 hover:text-white transition-colors text-sm"> Design
                 Guide</a></li>
 
           </ul>
@@ -451,11 +465,11 @@
         <div>
           <h4 class="text-lg font-semibold mb-4 text-white">Tutorial </h4>
           <ul class="space-y-3">
-            <li><a href="/tutorial/multi-word-guide.html"
+            <li><a href="/tutorial/multi-word-guide"
                 class="text-gray-400 hover:text-white transition-colors text-sm">Multi-Word Ambigram</a></li>
-            <li><a href="/tutorial/tattoo-design.html"
+            <li><a href="/tutorial/tattoo-design"
                 class="text-gray-400 hover:text-white transition-colors text-sm">Tattoo Design Guide</a></li>
-            <li><a href="/tutorial/two-name-ambigram.html"
+            <li><a href="/tutorial/two-name-ambigram"
                 class="text-gray-400 hover:text-white transition-colors text-sm">Two-Name Ambigram</a></li>
             <li><a href="/guide/2d-vs-3d-design" class="text-gray-400 hover:text-white transition-colors text-sm">2D vs
                 3D Design</a></li>
@@ -463,6 +477,18 @@
                 class="text-gray-400 hover:text-white transition-colors text-sm">Flipscript Principles</a></li>
             <li><a href="/guide/ambigram-history-art"
                 class="text-gray-400 hover:text-white transition-colors text-sm">Ambigram History and Art</a></li>
+            <li><a href="/guide/ultimate-free-generator"
+                class="text-gray-400 hover:text-white transition-colors text-sm">Ultimate Free Generator</a></li>
+            <li><a href="/guide/best-online-tools" class="text-gray-400 hover:text-white transition-colors text-sm">Best
+                Online Tools</a></li>
+            <li><a href="/guide/name-generator-secrets"
+                class="text-gray-400 hover:text-white transition-colors text-sm">Name
+                Generator Secrets</a></li>
+            <li><a href="/guide/advanced-3d-controls"
+                class="text-gray-400 hover:text-white transition-colors text-sm">Advanced
+                3D Controls</a></li>
+          </ul>
+
 
           </ul>
         </div>
