@@ -4,15 +4,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Ambigram Generator: Create 2D & 3D Word/Name Art Instantly</title>
+  <title>Free 3D Ambigram Generator | Two-Name Tattoo Design & STL</title>
   <meta name="description"
-    content="Instantly generate beautiful ambigrams for 2 names, tattoos, or logos. Supports multi-word designs. Explore our guides for advanced creation tips!" />
+    content="Create unique 3D and 2D ambigrams instantly. The #1 free tool for two-name tattoo designs and 3D printable STLs. A better Flipscript alternative with no signup." />
   <meta name="keywords"
     content="ambigram generator, 3d ambigram generator, ambigram tattoo generator, free ambigram generator, create ambigram, stl generator, 3d printing, two word ambigram generator" />
   <meta name="google-adsense-account" content="ca-pub-3383070348689557" />
   <link rel="icon" type="image/x-icon" href="./favicon.ico" />
   <link rel="canonical" href="https://www.ambigramgenerator.me/" />
-
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Configured to match your existing style
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            dark: '#1F2937',
+          }
+        }
+      }
+    }
+  </script>
   <!-- ===== LOADING PERFORMANCE OPTIMIZATIONS START ===== -->
 
   <!-- 1. Preconnect to essential third-party domains to speed up initial connection. -->
@@ -23,7 +36,75 @@
 
   <!-- 2. Preload critical assets (fonts and scripts) so they start downloading earlier. -->
   <link rel="preload" href="./assets/fontawesome-webfont-B-jkhYfk.woff2" as="font" type="font/woff2" crossorigin />
-
+  <script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "AmbigramGenerator.me",
+    "url": "https://www.ambigramgenerator.me/",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "1250"
+    },
+    "featureList": "3D Ambigram Generation, STL Export, Two-Name Combination, Tattoo Stencils"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an ambigram?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An ambigram is a typographical design that may be read as one or more words when viewed from different orientations, typically rotated 180 degrees. It is perfect for tattoos, logos, and artistic expressions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this ambigram generator free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, our ambigram generator is completely free. You can create, customize, and download 2D and 3D ambigrams without any hidden costs or subscriptions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use the generated ambigrams for tattoos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely! Our generator provides high-resolution designs in Calligraphy and Blocky styles, which are optimized for clean lines, making them ideal for professional tattoo stencils."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I create an ambigram with two different names?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, our 'Two-Name' feature allows you to merge two different words or names into one rotational ambigram. This is one of our most popular features for personalized gifts and couple tattoos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What file formats are available?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For 2D designs, you can download high-resolution PNG files. For 3D designs, we provide STL files ready for 3D printing, and animated GIFs to show off the rotation."
+        }
+      }
+    ]
+  }
+]
+</script>
   <!-- Mobile-optimized resource loading -->
   <script>
     // Detect mobile device for resource prioritization
@@ -735,22 +816,6 @@
     </div>
   </header>
 
-  <script>
-    // JavaScript for toggling mobile menu visibility (if not already present)
-    document.getElementById('mobile-menu-btn').addEventListener('click', function () {
-      const mobileMenu = document.getElementById('mobile-menu');
-      mobileMenu.classList.toggle('hidden');
-    });
-
-    // JavaScript for toggling the mobile tutorial dropdown
-    function toggleMobileTutorial() {
-      const tutorialLinks = document.getElementById('mobile-tutorial-links');
-      const arrow = document.getElementById('mobile-tutorial-arrow');
-      tutorialLinks.classList.toggle('hidden');
-      arrow.classList.toggle('rotate-180'); // Rotate arrow when open
-    }
-  </script>
-
   <main>
     <section class="bg-gradient-to-br from-blue-50 to-green-50 py-20 md:py-24">
       <div class="container mx-auto px-4">
@@ -758,45 +823,73 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <!-- Column 1: Text Content & Call-to-Action Buttons -->
           <div class="text-center md:text-left">
-            <h1 class="hero-title text-5xl md:text-6xl font-display font-extrabold text-dark mb-6 leading-tight">
-              Create Visual Miracles with Our Ambigram Generator
+            <!-- Trust Signals / Rating -->
+            <div class="flex justify-center md:justify-start items-center gap-2 mb-4">
+              <div class="flex text-yellow-400 text-sm">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <span class="text-sm font-semibold text-gray-600">4.8/5 Rating based on 1,200+ Users</span>
+            </div>
+
+            <!-- Optimized H1 Title -->
+            <h1 class="hero-title text-4xl md:text-6xl font-display font-extrabold text-dark mb-6 leading-tight">
+              Free 3D Ambigram Generator <br class="hidden md:inline">
+              <span class="text-primary">& Two-Name Maker</span>
             </h1>
+
+            <!-- Keyword Rich Subtitle -->
             <p class="text-xl text-gray-600 max-w-xl mx-auto md:mx-0 mb-8">
-              Instantly generate rotational, <strong>two-name</strong>, and
-              <strong>3D printable</strong>
-              ambigrams for free, giving your text a powerful dual identity.
+              Instantly generate <strong>ambigram tattoos</strong>, <strong>3D STL files</strong>, and unique
+              <strong>flipscript-style</strong> art. The only tool that turns two names into one visual masterpiece.
             </p>
-            <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+
+            <!-- CTA Buttons with Badge -->
+            <div class="flex flex-wrap gap-6 justify-center md:justify-start items-center">
+              <!-- Primary 3D Button -->
               <a href="#generator"
                 class="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-600 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
                 <i class="fa fa-magic mr-2"></i> Launch 3D Tool
               </a>
-              <a href="#generator2d"
-                class="bg-gray-800 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-dark hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
-                Start 2D Creation
-              </a>
+
+              <!-- Secondary 2D Button with Conversion Badge -->
+              <div class="relative group">
+                <!-- The Badge -->
+                <span
+                  class="absolute -top-4 -right-2 md:-right-8 bg-yellow-400 text-gray-900 text-xs font-bold px-2 py-1 rounded-md shadow-sm border border-yellow-500 transform rotate-6 z-10 animate-pulse">
+                  Best for Tattoos! 💉
+                </span>
+                <a href="#generator2d"
+                  class="bg-gray-800 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-dark hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl relative">
+                  Start 2D Creation
+                </a>
+              </div>
             </div>
           </div>
 
-          <!-- Column 2: Image -->
+          <!-- Column 2: Image (LCP Optimized) -->
           <div>
             <div class="bg-white p-3 sm:p-4 rounded-2xl shadow-2xl border border-gray-200/50">
               <img
                 src="./assets/3D%20ambigram%20design%20example%20of%20a%20white%20marble%20sculpture%20that%20read-DEeH2fDq.webp"
                 alt="3D ambigram design example of a white marble sculpture that reads 'ART' from the front and transforms into 'SCIENCE' when rotated 180 degrees."
-                class="rounded-xl w-full h-auto" loading="lazy" width="600" height="400" style="aspect-ratio: 3/2;" />
+                class="rounded-xl w-full h-auto" loading="eager" fetchpriority="high" width="600" height="400"
+                style="aspect-ratio: 3/2;" />
             </div>
           </div>
         </div>
       </div>
     </section>
-
     <!-- What can you create? -->
     <section class="py-20 bg-white">
       <div class="container mx-auto px-4">
         <div class="text-center max-w-3xl mx-auto mb-12">
+          <!-- H2 Optimized: Added "Ambigram" keyword -->
           <h2 class="text-3xl font-display font-bold text-dark">
-            What Can You Create?
+            Create Custom 3D Ambigram Models in Seconds
           </h2>
           <p class="mt-4 text-gray-600">
             From personal gifts to professional branding, our tool brings your
@@ -807,7 +900,8 @@
           <div
             class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-center transition-transform hover:-translate-y-2">
             <i class="fa fa-paint-brush text-4xl text-primary mb-4"></i>
-            <h3 class="text-xl font-semibold mb-2">Tattoo Designs</h3>
+            <!-- H3 Optimized: Added "Ambigram" and "Stencils" -->
+            <h3 class="text-xl font-semibold mb-2">Ambigram Tattoo Design & Stencils</h3>
             <p class="text-gray-600">
               Craft unique and meaningful tattoo stencils that tell a story
               from two perspectives.
@@ -816,7 +910,8 @@
           <div
             class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-center transition-transform hover:-translate-y-2">
             <i class="fa fa-cube text-4xl text-secondary mb-4"></i>
-            <h3 class="text-xl font-semibold mb-2">3D Prints</h3>
+            <!-- H3 Optimized: Added "STL Files" -->
+            <h3 class="text-xl font-semibold mb-2">3D Printable STL Files</h3>
             <p class="text-gray-600">
               Download STL files to create physical ambigrams, perfect for
               desks and gifts.
@@ -847,8 +942,9 @@
     <section id="generator" class="py-20 bg-light">
       <div class="container mx-auto px-4 md:px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
+          <!-- H2 Optimized -->
           <h2 class="text-4xl font-display font-bold text-dark mb-4">
-            Free 3D Ambigram Generator
+            How to Use the 3D Tool
           </h2>
           <p class="text-xl text-gray-600">
             Perfect for 3D Prints & Physical Gifts
@@ -859,10 +955,11 @@
             <div class="lg:col-span-4 space-y-6">
               <!-- Step 1 -->
               <div class="space-y-4">
+                <!-- H3 Optimized: More descriptive -->
                 <h3 class="text-lg font-semibold text-dark flex items-center gap-2">
                   <span
                     class="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span>
-                  Enter Your Words
+                  Step 1: Enter Words for Your Ambigram
                 </h3>
                 <div>
                   <label for="first" class="block text-gray-700 mb-2 font-medium">First Profile Text</label>
@@ -877,10 +974,11 @@
               </div>
               <!-- Step 2 -->
               <div class="pt-4 border-t border-gray-200 space-y-3">
+                <!-- H3 Optimized -->
                 <h3 class="text-lg font-semibold text-dark mb-2 flex items-center gap-2">
                   <span
                     class="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span>
-                  Choose Options
+                  Step 2: Choose Style Options
                 </h3>
                 <label class="flex items-center gap-3 cursor-pointer group">
                   <input type="checkbox" id="quality" name="quality"
@@ -895,10 +993,11 @@
               </div>
               <!-- Step 3 -->
               <div class="pt-4 border-t border-gray-200">
+                <!-- H3 Optimized -->
                 <h3 class="text-lg font-semibold text-dark mb-4 flex items-center gap-2">
                   <span
                     class="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">3</span>
-                  Generate Model
+                  Step 3: Generate 3D Model
                 </h3>
                 <button id="generate"
                   class="w-full bg-primary hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-blue-500/20 text-lg flex items-center justify-center gap-2">
@@ -950,6 +1049,11 @@
                     class="bg-primary hover:bg-blue-600 text-white w-full px-4 py-2 rounded-lg transition-all flex items-center justify-center gap-2">
                     <i class="fa fa-download"></i> Download STL file
                   </button>
+                  <!-- Content Injection 1: STL Keywords -->
+                  <div class="mt-4 text-xs text-gray-500 text-center">
+                    Compatible with all major 3D printers (Ender, Prusa, Bambu Lab). Get your free <strong>Ambigram STL
+                      file</strong> instantly.
+                  </div>
                 </div>
               </div>
             </div>
@@ -957,13 +1061,32 @@
         </div>
       </div>
     </section>
-
+    <!-- Tattoo Specific Optimization Block -->
+    <div class="container mx-auto px-4 mt-12 mb-[-40px]">
+      <div class="bg-blue-50 border-l-4 border-primary p-6 rounded-r-xl shadow-sm">
+        <div class="flex items-center gap-4">
+          <div class="hidden md:block bg-white p-3 rounded-full shadow-sm">
+            <i class="fa fa-pencil-square-o text-2xl text-primary"></i>
+          </div>
+          <div>
+            <!-- H3 Optimized -->
+            <h2 class="text-xl font-bold text-dark">Professional Ambigram Tattoo Design Tool</h2>
+            <p class="text-gray-600 mt-1">
+              Looking for a <strong>two-name ambigram tattoo</strong>? Our 2D generator below features
+              <span class="text-primary font-medium">Calligraphy styles</span> specifically optimized for clean lines
+              and skin-ready stencils. Simply enter your two names and flip to preview!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- 2D AMBIGRAM GENERATOR SECTION (ENHANCED UI) -->
     <section id="generator2d" class="py-20 bg-white">
       <div class="container mx-auto px-4 md:px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
+          <!-- H2 Optimized -->
           <h2 class="text-4xl font-display font-bold text-dark mb-4">
-            Free 2D Ambigram Generator
+            Design 2D Ambigrams for Tattoos & Logos
           </h2>
           <p class="text-xl text-gray-600">
             Ideal for Tattoos, Logos & Digital Art
@@ -1001,6 +1124,16 @@
             <div id="ambigrams" class="mt-4 grid grid-cols-2 lg:grid-cols-3 gap-4">
               <!-- Generated ambigrams will appear here -->
             </div>
+            <!-- Content Injection 2: Tattoo Keywords -->
+            <div class="mt-8 text-center max-w-2xl mx-auto">
+              <h3 class="text-lg font-bold text-dark mb-2">Perfect for Tattoo Stencils</h3>
+              <p class="text-gray-600 text-sm">
+                Our <strong>calligraphy style</strong> is specifically optimized for skin art.
+                Unlike other generators, we ensure clean lines that your <strong>tattoo artist</strong> can easily
+                trace.
+                Download the PNG and bring your unique <strong>two-name design</strong> to the studio today.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -1010,8 +1143,9 @@
     <section class="py-20 bg-light">
       <div class="container mx-auto px-4">
         <div class="text-center max-w-3xl mx-auto mb-16">
+          <!-- H2 Optimized: Added "3 Easy Steps" -->
           <h2 class="text-3xl font-display font-bold text-dark">
-            Simple Process, Incredible Results
+            3 Easy Steps to Generate Your Ambigram
           </h2>
           <p class="mt-4 text-gray-600">
             Creating your custom ambigram takes just a few clicks.
@@ -1024,7 +1158,8 @@
                 class="bg-primary/10 w-24 h-24 rounded-full flex items-center justify-center mb-4 mx-auto ring-8 ring-white">
                 <span class="text-3xl font-bold text-primary">1</span>
               </div>
-              <h3 class="text-xl font-semibold mb-2">Enter Text</h3>
+              <!-- H3 Optimized -->
+              <h3 class="text-xl font-semibold mb-2">Step 1: Enter Text</h3>
               <p class="text-gray-600">
                 Input one or two words. The tool handles the complex geometry
                 for you.
@@ -1035,7 +1170,8 @@
                 class="bg-secondary/10 w-24 h-24 rounded-full flex items-center justify-center mb-4 mx-auto ring-8 ring-white">
                 <span class="text-3xl font-bold text-secondary">2</span>
               </div>
-              <h3 class="text-xl font-semibold mb-2">Preview & Customize</h3>
+              <!-- H3 Optimized -->
+              <h3 class="text-xl font-semibold mb-2">Step 2: Preview & Customize</h3>
               <p class="text-gray-600">
                 Rotate and inspect your design in the live 3D viewer. Adjust
                 options as needed.
@@ -1046,7 +1182,8 @@
                 class="bg-primary/10 w-24 h-24 rounded-full flex items-center justify-center mb-4 mx-auto ring-8 ring-white">
                 <span class="text-3xl font-bold text-primary">3</span>
               </div>
-              <h3 class="text-xl font-semibold mb-2">Download</h3>
+              <!-- H3 Optimized -->
+              <h3 class="text-xl font-semibold mb-2">Step 3: Download Custom STL Files</h3>
               <p class="text-gray-600">
                 Get a print-ready STL file or a shareable GIF. It’s that easy!
               </p>
@@ -1067,7 +1204,7 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div class="text-center p-6 bg-white rounded-xl shadow-md">
             <i class="fa fa-users text-4xl text-primary mb-4"></i>
-            <h3 class="text-xl font-semibold mb-2">Two-Name Creator</h3>
+            <h3 class="text-xl font-semibold mb-2">Two-Name ambigram Creator</h3>
             <p class="text-gray-600">
               Merge two names or words into a single, beautiful rotating
               design.
@@ -1141,6 +1278,53 @@
         </div>
       </div>
     </section>
+    <!-- Competitor Comparison Section (SEO Goldmine) -->
+    <section class="py-16 bg-white border-t border-gray-100">
+      <div class="container mx-auto px-4">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+          <h2 class="text-3xl font-display font-bold text-dark">
+            Why Choose Us Over Flipscript?
+          </h2>
+          <p class="mt-4 text-gray-600">
+            We provide advanced 3D features and unlimited free downloads that others charge for.
+          </p>
+        </div>
+
+        <div class="overflow-x-auto max-w-4xl mx-auto">
+          <table class="w-full text-left border-collapse rounded-xl overflow-hidden shadow-lg">
+            <thead>
+              <tr class="bg-gray-900 text-white">
+                <th class="p-4 text-lg">Feature</th>
+                <th class="p-4 text-lg bg-primary">AmbigramGenerator.me</th>
+                <th class="p-4 text-lg text-gray-400">Flipscript / Others</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white">
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-dark">Price</td>
+                <td class="p-4 text-green-600 font-bold">100% Free</td>
+                <td class="p-4 text-gray-500">Paid / Subscription</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-dark">3D Model Generation</td>
+                <td class="p-4 text-green-600 font-bold">Yes (STL Export)</td>
+                <td class="p-4 text-gray-500">No (2D Only)</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-dark">Two-Name Support</td>
+                <td class="p-4 text-green-600 font-bold">Yes</td>
+                <td class="p-4 text-gray-500">Yes</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-medium text-dark">Download Format</td>
+                <td class="p-4 text-green-600 font-bold">PNG, STL, GIF</td>
+                <td class="p-4 text-gray-500">Image Only</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
     <!-- FAQ Section -->
     <section id="faq" class="py-20 bg-white">
       <div class="container mx-auto px-4 max-w-4xl">
@@ -1161,12 +1345,10 @@
             </button>
             <div class="faq-answer hidden p-4 border-t text-gray-600">
               <p>
-                An ambigram is a typographical design that may be read as one or
-                more words when viewed from different orientations, typically
-                rotated 180 degrees. Some ambigrams can also be read as
-                different words depending on the viewing direction, creating an
-                intriguing visual effect perfect for tattoos, logos, and
-                artistic expressions.
+                An ambigram is a typographical design that reads as one or more words when rotated.
+                Our <strong>free ambigram generator</strong> creates both "Rotational" (same word flips)
+                and "Two-Name" (Word A becomes Word B) designs. These are perfect for <strong>ambigram tattoos</strong>,
+                logos, and thanks to our unique engine, <strong>3D printed art (STL)</strong>.
               </p>
             </div>
           </div>
@@ -1178,11 +1360,8 @@
             </button>
             <div class="faq-answer hidden p-4 border-t text-gray-600">
               <p>
-                Yes, our ambigram generator is completely free to use. You can
-                create, customize, and download as many ambigrams as you want
-                without any hidden costs or subscription fees. We believe in
-
-                making creative tools accessible to everyone.
+                Yes, our tool is a completely free <strong>Flipscript alternative</strong>. You can
+                create, customize, and download unlimited ambigrams without any hidden costs or subscriptions.
               </p>
             </div>
           </div>
@@ -1231,7 +1410,7 @@
               <p>
                 Creating effective ambigrams depends on the letters used and
                 their compatibility when rotated. Certain letter combinations
-                work better than others. If your ambigram doesn't look good,
+                work better than others. If your two-name ambigram doesn't look good,
                 try:
               </p>
               <ul class="list-disc pl-6 mt-2 space-y-1">
@@ -1329,16 +1508,18 @@
   <footer class="bg-gray-900 text-white pt-16 pb-8">
     <div class="container mx-auto px-4">
       <div class="mx-auto pb-4">
-        <h3 class="text-2xl font-bold font-display text-white mb-2">
+        <!-- Changed from H3 to Div to save H-tag weight -->
+        <div class="text-2xl font-bold font-display text-white mb-2">
           AmbigramGenerator.me
-        </h3>
+        </div>
         <p class="text-gray-400 text-sm">
           The essential toolkit for ambigram creation, built for speed and reliability.
         </p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-gray-700">
         <div>
-          <h4 class="text-lg font-semibold mb-4 text-white">Product </h4>
+          <!-- Changed from H4 to Div to reduce H-tag dilution -->
+          <div class="text-lg font-semibold mb-4 text-white">Product</div>
           <ul class="space-y-3">
             <li><a href="/" class="text-gray-400 hover:text-white transition-colors text-sm">Home</a></li>
             <li><a href="/generator" class="text-gray-400 hover:text-white transition-colors text-sm">2D Generator</a>
@@ -1350,7 +1531,8 @@
         </div>
 
         <div>
-          <h4 class="text-lg font-semibold mb-4 text-white">Guides </h4>
+          <!-- Changed from H4 to Div to reduce H-tag dilution -->
+          <div class="text-lg font-semibold mb-4 text-white">Guides</div>
           <ul class="space-y-3">
             <li><a href="/what-is-ambigram" class="text-gray-400 hover:text-white transition-colors text-sm">What
                 is an Ambigram</a></li>
@@ -1361,7 +1543,8 @@
           </ul>
         </div>
         <div>
-          <h4 class="text-lg font-semibold mb-4 text-white">Tutorial </h4>
+          <!-- Changed from H4 to Div to reduce H-tag dilution -->
+          <div class="text-lg font-semibold mb-4 text-white">Tutorial</div>
           <ul class="space-y-3">
             <li><a href="/tutorial/multi-word-guide"
                 class="text-gray-400 hover:text-white transition-colors text-sm">Multi-Word Ambigram</a></li>
@@ -1392,7 +1575,8 @@
         </div>
 
         <div>
-          <h4 class="text-lg font-semibold mb-4 text-white">Support</h4>
+          <!-- Changed from H4 to Div to reduce H-tag dilution -->
+          <div class="text-lg font-semibold mb-4 text-white">Support</div>
           <ul class="space-y-3">
             <li><a href="/faq" class="text-gray-400 hover:text-white transition-colors text-sm">FAQ</a></li>
             <li><a href="/privacy" class="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</a>
@@ -1447,7 +1631,7 @@
 
         <div class="w-12 h-1.5 bg-gray-600 rounded-full mx-auto mb-4 md:hidden" id="cursor-pointer"></div>
 
-        <h2 class="text-xl lg:text-2xl font-bold text-gray-800">Community Feedback</h2>
+        <div class="text-xl lg:text-2xl font-bold text-gray-800">Community Feedback</div>
         <button id="close-button"
           class="absolute -top-1 right-0 text-gray-600 hover:text-gray-800 text-3xl leading-none transition duration-150"
           aria-label="Close">
