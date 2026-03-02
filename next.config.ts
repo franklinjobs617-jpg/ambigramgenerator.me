@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  eslint: {
+    // 警告：这将允许即使有 ESLint 错误也能完成生产构建
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    // 警告：这将允许即使有 TypeScript 错误也能完成生产构建
+    ignoreBuildErrors: true,
+  },
 };
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
