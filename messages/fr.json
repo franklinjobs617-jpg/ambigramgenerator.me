@@ -1,0 +1,254 @@
+{ 
+  "Header": {
+    "logo": "AmbigramGenerator",
+    "nav": {
+      "generators": {
+        "title": "Générateurs",
+        "items": {
+          "2d": "Créateur 2D",
+          "3d": "Générateur 3D",
+          "twoName": "2 Prénoms",
+          "tattoo": "Modèle Tatouage"
+        }
+      },
+      "guides": {
+        "title": "Apprendre",
+        "items": {
+          "whatIs": "Qu'est-ce qu'un Ambigramme",
+          "history": "Histoire & Art",
+          "principles": "Principes de Design",
+          "bestTools": "Meilleurs Outils"
+        }
+      },
+      "tutorials": {
+        "title": "Tutoriels",
+        "items": {
+          "multiWord": "Guide Multi-Mots",
+          "tattooDesign": "Design de Tatouage",
+          "advanced3d": "3D Avancé",
+          "secrets": "Secrets Personnalisés"
+        }
+      },
+      "support": {
+        "title": "Support",
+        "items": {
+          "faq": "FAQ",
+          "about": "À propos de nous",
+          "privacy": "Politique de confidentialité",
+          "terms": "Conditions d'utilisation"
+        }
+      }
+    },
+    "button": "Créer maintenant"
+  } ,
+  "HomePage": {
+    "Navigation": {
+      "logoText": "Ambigram",
+      "logoSpan": "Studio",
+      "generator3d": "Générateur 3D",
+      "tattooDesign": "Créer en 2D",
+      "inspiration": "Inspiration",
+      "faq": "FAQ",
+      "logIn": "Connexion",
+      "pricing": "Tarifs"
+    },
+    "Hero": {
+      "ratingBadge": "Note 4.8/5 par 1,200+ utilisateurs",
+      "titleP1": "Générateur d'Ambigramme 3D Gratuit",
+      "titleP2": "& Créateur 2 Prénoms",
+      "subtitle": "Générez instantanément des <bold>tatouages ambigrammes</bold>, des <bold>fichiers STL 3D</bold>, et des designs uniques de style <bold>Flipscript</bold>. Le seul outil qui transforme deux prénoms en un chef-d'œuvre visuel."
+    },
+    "Inspiration": {
+      "title": "Besoin d'inspiration ? Essayez ces combinaisons populaires"
+    },
+    "Workspace": {
+      "tab3d": "Générateur 3D",
+      "tab2d": "Design de Tatouage",
+      "tattooToolTitle": "Outil Professionnel de Design de Tatouage Ambigramme",
+      "tattooToolDesc": "Vous cherchez un <bold>tatouage ambigramme avec deux prénoms</bold> ? Notre générateur 2D ci-dessous propose des <spanClass>styles calligraphiques</spanClass> optimisés pour des lignes nettes et des pochoirs prêts pour la peau. Simplement entrer vos deux noms et retourner pour prévisualiser !",
+      "loading2dText": "Chargement de l'interface du générateur 2D..."
+    },
+    "HowItWorks": {
+      "title": "Générez votre Ambigramme en 3 Étapes Simples",
+      "subtitle": "La création de votre ambigramme personnalisé ne prend que quelques clics.",
+      "step1Title": "Étape 1 : Entrez le Texte",
+      "step1Desc": "Saisissez un ou deux mots. L'outil gère la géométrie complexe pour vous.",
+      "step2Title": "Étape 2 : Prévisualisez & Personnalisez",
+      "step2Desc": "Faites pivoter et inspectez votre design dans la visionneuse 3D en direct.",
+      "step3Title": "Étape 3 : Téléchargez les Fichiers",
+      "step3Desc": "Obtenez un fichier STL prêt pour l'impression ou un GIF partageable. C'est aussi simple que ça !"
+    },
+    "Features": {
+      "title": "Créez des Modèles d'Ambigrammes 3D en Secondes",
+      "subtitle": "Des cadeaux personnels au branding professionnel, notre outil donne vie à vos idées.",
+      "f1Title": "Designs de Tatouage & Pochoirs",
+      "f1Desc": "Créez des pochoirs de tatouage uniques et significatifs qui racontent une histoire sous deux perspectives.",
+      "f2Title": "Impressions 3D (Fichiers STL)",
+      "f2Desc": "Téléchargez des fichiers STL pour créer des ambigrammes physiques, parfaits pour les bureaux et les cadeaux.",
+      "f3Title": "Cadeaux Personnalisés",
+      "f3Desc": "Concevez un cadeau spécial pour un être cher en fusionnant deux prénoms en un seul bel objet.",
+      "f4Title": "Logos & Branding",
+      "f4Desc": "Créez des logos intelligents et des éléments de marque qui méritent un second regard."
+    },
+    "CoreFeatures": {
+      "mainTitle": "Fonctionnalités Clés : Au-delà du Simple Texte",
+      "item1": {
+        "title": "Créateur Deux-Prénoms",
+        "desc": "Fusionnez deux prénoms ou mots en un seul design rotatif magnifique."
+      },
+      "item2": {
+        "title": "Fichiers Imprimables 3D",
+        "desc": "Téléchargez des fichiers STL de haute qualité prêts pour votre imprimante 3D."
+      },
+      "item3": {
+        "title": "Styles pour Tatouage",
+        "desc": "Les designs sont optimisés pour des lignes nettes, assurant des tatouages lisibles."
+      },
+      "item4": {
+        "title": "Gratuit & Sans Filigrane",
+        "desc": "Téléchargez instantanément des fichiers haute résolution sans frais cachés ni filigranes."
+      }
+    },
+    "Examples": {
+      "title": "Designs d'Ambigrammes Populaires",
+      "subtitle": "Découvrez ce que les autres ont créé.",
+      "ex1Title": "SARAH / JOHN",
+      "ex1Desc": "Deux Prénoms",
+      "ex2Title": "CONFIANCE",
+      "ex2Desc": "Style Tatouage",
+      "ex3Badge": "IMPRESSION 3D",
+      "ex3Title": "OBJET PHYSIQUE",
+      "ex3Desc": "Export STL",
+      "ex4Badge": "IMPRESSION 3D",
+      "ex4Title": "OBJET PHYSIQUE",
+      "ex4Desc": "Export STL"
+    },
+    "Comparison": {
+      "title": "Pourquoi nous choisir plutôt que Flipscript ?",
+      "subtitle": "Nous offrons des fonctionnalités 3D avancées et des téléchargements gratuits illimités que d'autres facturent.",
+      "headerFeature": "Fonctionnalité",
+      "headerUs": "AmbigramGenerator.me",
+      "headerOthers": "Flipscript / Autres",
+      "priceLabel": "Prix",
+      "priceUs": "100% Gratuit",
+      "priceOthers": "Payant / Abonnement",
+      "modelLabel": "Génération 3D",
+      "modelUs": "Oui (Export STL)",
+      "modelOthers": "Non (2D seulement)",
+      "twoNameLabel": "Support Deux-Prénoms",
+      "twoNameUs": "Oui",
+      "twoNameOthers": "Oui",
+      "formatLabel": "Format de Téléchargement",
+      "formatUs": "PNG, STL, GIF",
+      "formatOthers": "Image seulement"
+    },
+    "FAQ": {
+      "title": "Questions Fréquemment Posées",
+      "subtitle": "Tout ce que vous devez savoir sur notre générateur d'ambigrammes",
+      "q1": "Qu'est-ce qu'un ambigramme ?",
+      "a1": "Un ambigramme est un design typographique qui peut être lu comme un ou plusieurs mots lorsqu'il est vu sous différentes orientations. Notre <bold>générateur d'ambigramme gratuit</bold> crée des designs pour <bold>tatouages</bold>, logos, et même des <bold>fichiers STL</bold> pour l'impression 3D.",
+      "q2": "Est-ce une meilleure alternative à Flipscript ?",
+      "a2": "Oui, beaucoup de nos utilisateurs nous considèrent comme la meilleure <bold>alternative à Flipscript</bold>. Contrairement à Flipscript, notre outil est 100% gratuit et offre des fonctionnalités uniques comme la génération d'<bold>ambigrammes 3D</bold> et l'export de <bold>fichiers STL</bold>.",
+      "q3": "Puis-je l'utiliser pour un tatouage à deux prénoms ?",
+      "a3": "Absolument ! C'est le meilleur générateur de tatouage ambigramme pour les couples. Vous pouvez combiner deux prénoms en un seul design élégant, parfait pour un tatouage partagé.",
+      "q4": "What file formats can I download my ambigram in?",
+      "a4": "Our generator allows you to download your ambigrams in high-resolution PNG format, which is ideal for most uses including digital displays and printing. PNG format preserves transparency and provides excellent image quality. For professional design work, you can also download STL files.",
+      "q5": "Why doesn't my ambigram look good when rotated?",
+      "a5": "Creating effective ambigrams depends on the letters used and their compatibility when rotated. Certain letter combinations work better than others. Try:",
+      "a5Li1": "Using shorter words (3-6 letters work best)",
+      "a5Li2": "Choosing different fonts - some fonts are better suited",
+      "a5Li3": "Experimenting with similar-looking words",
+      "q6": "How can I create the best possible ambigram?",
+      "a6": "For the best results, choose words with similar letter shapes when rotated (e.g., b/q, d/p, m/w). Try one-word ambigrams that read the same when rotated. Experiment with different fonts, keep words relatively short (2-8 letters), and use the 3D preview to check readability.",
+      "q7": "Do you store the ambigrams I create?",
+      "a7": "No, we do not store any of the ambigrams you create using our generator. All processing happens locally in your browser, and your creations are not sent to our servers or stored anywhere. This ensures your privacy and means you have full control over your designs.",
+      "q8": "Can I request new fonts or features?",
+      "a8": "Absolutely! We're always looking to improve our generator. If you have suggestions for new fonts, features, or improvements, please feel free to contact us through our feedback form."
+    },
+    "CTA": {
+      "title": "Prêt à Créer Votre Chef-d'œuvre ?",
+      "subtitle": "Libérez votre créativité et concevez un ambigramme unique en quelques secondes. C'est gratuit, rapide et amusant.",
+      "button": "Générer Gratuitement"
+    },
+    "Footer": {
+      "logoText": "AmbigramStudio",
+      "link1": "Fichiers STL 3D",
+      "link2": "Pochoirs de Tatouage",
+      "link3": "Alternative à Flipscript",
+      "link4": "Conditions d'utilisation",
+      "copyright": "© {year} AMBIGRAMGENERATOR.ME. TOUS DROITS RÉSERVÉS."
+    },
+     "Generator3D": {
+      "title": "Comment Utiliser l'Outil 3D",
+      "subtitle": "Configurez votre texte et la qualité du rendu.",
+      "settingsTitle": "Paramètres du Modèle",
+      "firstWordLabel": "Premier mot",
+      "firstWordPlaceholder": "ex. AMOUR",
+      "secondWordLabel": "Deuxième mot",
+      "secondWordPlaceholder": "ex. HAINE",
+      "highQualityLabel": "Maillage Haute Qualité",
+      "generateBaseLabel": "Générer un Socle",
+      "btnGenerating": "Génération...",
+      "btnGenerate": "Générer Modèle 3D",
+      "viewFirst": "Premier",
+      "viewSecond": "Second",
+      "viewIso": "Isométrique",
+      "autoRotate": "Rotation Auto",
+      "btnRecordingGif": "Enregistrement...",
+      "btnRenderGif": "Rendu GIF",
+      "btnDownloadStl": "Télécharger STL",
+      "alertInputBoth": "Veuillez entrer les deux mots !",
+      "alertGenerateFirst": "Veuillez d'abord générer le modèle 3D !"
+    },
+    "HeroSection": {
+      "ratingText": "Note 4.8/5 par 1,200+ utilisateurs",
+      "titleP1": "Générateur d'Ambigramme 3D Gratuit",
+      "titleP2": "& Créateur 2 Prénoms",
+      "subtitle": "Générez instantanément des <bold>tatouages ambigrammes</bold>, des <bold>fichiers STL 3D</bold>, et des designs uniques de style <bold>Flipscript</bold>. Le seul outil qui transforme deux prénoms en un chef-d'œuvre visuel.",
+      "step1Label": "Étape 1 : Entrez vos mots",
+      "inputWordAPlaceholder": "Mot A",
+      "inputWordBPlaceholder": "Mot B",
+      "step2Label": "Étape 2 : Choisissez votre style",
+      "btnGenerate3D": "Générer Modèle 3D",
+      "btnGenerate2D": "Design Tatouage 2D",
+      "badgeTattoo": "IDÉAL TATOUAGE",
+      "tagTattoos": "Tatouages",
+      "tag3DPrints": "Impressions 3D",
+      "tagGifts": "Cadeaux",
+      "scarcityText": "Seulement 1% du monde possède un ambigramme personnalisé. Maintenant vous aussi.",
+      "slide3DTitle": "Générateur STL 3D",
+      "slide3DDesc": "Créez des ambigrammes 3D professionnels pour l'impression STL et les cadeaux physiques. Parfait pour l'art de bureau.",
+      "slide3DLiveLabel": "Rendu 3D en direct",
+      "slide3DReadyLabel": "Prêt pour STL",
+      "slide2DTitle": "Créateur de Tatouage 2D",
+      "slide2DDesc": "Calligraphie élégante optimisée pour les tatouages. Lignes épurées et symétrie parfaite sous tous les angles.",
+      "slide2DLiveLabel": "Aperçu de l'Art du Tatouage",
+      "slide2DReadyLabel": "Vecteur"
+    }
+  },
+  "Generator2D": {
+    "title": "Générez des Ambigrammes 2D pour Tatouages & Logos",
+    "subtitle": "Idéal pour les Tatouages, Logos & Art Numérique",
+    "inputLabel": "Un ou Deux Mots",
+    "inputPlaceholder": "ex: famille / toujours",
+    "styleLabel": "Style",
+    "styleBlocky": "Bloc",
+    "styleCalligraphy": "Calligraphie",
+    "buttonGenerate": "Générer",
+    "emptyStateText": "Entrez des mots ci-dessus pour générer votre design",
+    "rotationHint": "(Cliquez sur un ambigramme pour le retourner)",
+    "altTextResult": "Résultat ambigramme {index}",
+    "tattooStencilsDesc": "Parfait pour les Pochoirs de Tatouage. Notre style calligraphique est spécialement optimisé pour l'art corporel. Contrairement à d'autres générateurs, nous assurons des lignes nettes que votre artiste tatoueur peut facilement décalquer. Téléchargez le PNG et apportez votre design unique à deux prénoms au studio dès aujourd'hui."
+  },
+  "Footer": {
+    "description": "Le moteur professionnel pour les ambigrammes imprimables en 3D et les pochoirs de tatouage à deux prénoms. Concevez, visualisez et imprimez vos propres illusions d'optique.",
+    "col1Title": "Générateurs",
+    "col2Title": "Apprendre & Explorer",
+    "col3Title": "Tutoriels",
+    "col4Title": "Société",
+    "rights": "© {year}Ambigram Generator. Tous droits réservés.",
+    "builtFor": "Conçu pour les Créateurs & Tatoueurs.",
+    "selectLanguage": "Langue",
+    "legal": "Légal"
+  }
+}

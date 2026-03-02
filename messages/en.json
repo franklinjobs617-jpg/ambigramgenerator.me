@@ -1,0 +1,260 @@
+{
+ 
+  "Header": {
+    "logo": "AmbigramGenerator",
+    "nav": {
+      "generators": {
+        "title": "Generators",
+        "items": {
+          "2d": "2D Maker",
+          "3d": "3D Generator",
+          "twoName": "Two-Name",
+          "tattoo": "Tattoo Engine"
+        }
+      },
+      "guides": {
+        "title": "Learn",
+        "items": {
+          "whatIs": "What is Ambigram",
+          "history": "History & Art",
+          "principles": "Design Principles",
+          "bestTools": "Best Tools"
+        }
+      },
+      "tutorials": {
+        "title": "Tutorials",
+        "items": {
+          "multiWord": "Multi-Word Guide",
+          "tattooDesign": "Tattoo Design",
+          "advanced3d": "Advanced 3D",
+          "secrets": "Personalized Secrets"
+        }
+      },
+       "support": {
+        "title": "Support",
+        "items": {
+          "faq": "FAQ",
+          "about": "About Us",
+          "privacy": "Privacy Policy",
+          "terms": "Terms of Service"
+        }
+      }
+    },
+    "button": "Start Creating"
+  }
+,
+
+  "HomePage": {
+    "Navigation": {
+      "logoText": "Ambigram",
+      "logoSpan": "Studio",
+      "generator3d": "3D Generator",
+      "tattooDesign": "Tattoo Design",
+      "inspiration": "Inspiration",
+      "faq": "FAQ",
+      "logIn": "Log In",
+      "pricing": "Pricing"
+    },
+    "Hero": {
+      "ratingBadge": "4.8/5 Rating • 1,200+ Users",
+      "titleP1": "Free 3D Ambigram",
+      "titleP2": "& Two-Name Maker",
+      "subtitle": "The only tool that turns two names into one visual masterpiece. Instantly generate <bold>ambigram tattoos</bold> and <bold>3D STL files</bold>."
+    },
+    "Inspiration": {
+      "title": "Need Inspiration? Try Popular Combinations"
+    },
+    "Workspace": {
+      "tab3d": "3D Generator",
+      "tab2d": "Tattoo Design",
+      "tattooToolTitle": "Professional Ambigram Tattoo Design Tool",
+      "tattooToolDesc": "Looking for a <bold>two-name ambigram tattoo</bold>? Our 2D generator features <spanClass>Calligraphy styles</spanClass> optimized for clean lines and skin-ready stencils.",
+      "loading2dText": "2D Stencil Generator UI Loading..."
+    },
+    "HowItWorks": {
+      "title": "3 Easy Steps to Generate Your Ambigram",
+      "subtitle": "Creating your custom ambigram takes just a few clicks.",
+      "step1Title": "Step 1: Enter Text",
+      "step1Desc": "Input one or two words. The tool handles the complex geometry for you.",
+      "step2Title": "Step 2: Preview & Customize",
+      "step2Desc": "Rotate and inspect your design in the live 3D viewer. Adjust options as needed.",
+      "step3Title": "Step 3: Download STL Files",
+      "step3Desc": "Get a print-ready STL file or a shareable GIF. It’s that easy!"
+    },
+    "Features": {
+      "title": "Create Custom 3D Ambigram Models in Seconds",
+      "subtitle": "From personal gifts to professional branding, our tool brings your ideas to life.",
+      "f1Title": "Ambigram Tattoo Design & Stencils",
+      "f1Desc": "Craft unique and meaningful tattoo stencils that tell a story from two perspectives.",
+      "f2Title": "3D Printable STL Files",
+      "f2Desc": "Download STL files to create physical ambigrams, perfect for desks and gifts.",
+      "f3Title": "Personalized Gifts",
+      "f3Desc": "Design a special gift for a loved one by merging two names into one beautiful object.",
+      "f4Title": "Logos & Branding",
+      "f4Desc": "Create clever logos and brand assets that reward a second look."
+    },
+    "CoreFeatures": {
+      "mainTitle": "Key Features: Beyond Simple Text",
+      "item1": {
+        "title": "Two-Name Ambigram Creator",
+        "desc": "Merge two names or words into a single, beautiful rotating design."
+      },
+      "item2": {
+        "title": "3D Printable Files",
+        "desc": "Download high-quality STL files ready for your 3D printer."
+      },
+      "item3": {
+        "title": "Tattoo-Ready Styles",
+        "desc": "Designs are optimized for clean lines, ensuring legible tattoos."
+      },
+      "item4": {
+        "title": "Free & No Watermarks",
+        "desc": "Download high-res files instantly with no hidden fees or watermarks."
+      }
+    },
+    "Examples": {
+      "title": "Popular Ambigram Designs",
+      "subtitle": "See what others have created.",
+      "ex1Title": "SARAH / JOHN",
+      "ex1Desc": "Two-Name Tattoo",
+      "ex2Title": "TRUST",
+      "ex2Desc": "Tattoo Style",
+      "ex3Badge": "3D PRINT",
+      "ex3Title": "PHYSICAL OBJECT",
+      "ex3Desc": "STL Export",
+      "ex4Badge": "3D PRINT",
+      "ex4Title": "PHYSICAL OBJECT",
+      "ex4Desc": "STL Export"
+    },
+    "Comparison": {
+      "title": "Why Choose Us Over Flipscript?",
+      "subtitle": "We provide advanced 3D features and unlimited free downloads that others charge for.",
+      "headerFeature": "Feature",
+      "headerUs": "AmbigramStudio",
+      "headerOthers": "Others",
+      "priceLabel": "Price",
+      "priceUs": "100% Free",
+      "priceOthers": "Paid / Sub",
+      "modelLabel": "3D Model Generation",
+      "modelUs": "Yes (STL Export)",
+      "modelOthers": "No (2D Only)",
+      "twoNameLabel": "Two-Name Support",
+      "twoNameUs": "Yes",
+      "twoNameOthers": "Yes",
+      "formatLabel": "Download Format",
+      "formatUs": "PNG, STL, GIF",
+      "formatOthers": "Image Only"
+    },
+    "FAQ": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Everything you need to know about our ambigram generator.",
+      "q1": "What is an ambigram?",
+      "a1": "An ambigram is a typographical design that reads as one or more words when rotated. Our <bold>free ambigram generator</bold> creates both \"Rotational\" (same word flips) and \"Two-Name\" (Word A becomes Word B) designs. These are perfect for <bold>ambigram tattoos</bold>, logos, and thanks to our unique engine, <bold>3D printed art (STL)</bold>.",
+      "q2": "Is your ambigram generator free to use?",
+      "a2": "Yes, our tool is a completely free <bold>Flipscript alternative</bold>. You can create, customize, and download unlimited ambigrams without any hidden costs or subscriptions.",
+      "q3": "Can I use the generated ambigrams commercially?",
+      "a3": "Yes, you can use the ambigrams created with our generator for both personal and commercial purposes, including but not limited to tattoos, logos, merchandise, and marketing materials. However, you may not claim the generator itself or its underlying technology as your own.",
+      "q4": "What file formats can I download my ambigram in?",
+      "a4": "Our generator allows you to download your ambigrams in high-resolution PNG format, which is ideal for most uses including digital displays and printing. PNG format preserves transparency and provides excellent image quality. For professional design work, you can also download STL files.",
+      "q5": "Why doesn't my ambigram look good when rotated?",
+      "a5": "Creating effective ambigrams depends on the letters used and their compatibility when rotated. Certain letter combinations work better than others. Try:",
+      "a5Li1": "Using shorter words (3-6 letters work best)",
+      "a5Li2": "Choosing different fonts - some fonts are better suited",
+      "a5Li3": "Experimenting with similar-looking words",
+      "q6": "How can I create the best possible ambigram?",
+      "a6": "For the best results, choose words with similar letter shapes when rotated (e.g., b/q, d/p, m/w). Try one-word ambigrams that read the same when rotated. Experiment with different fonts, keep words relatively short (2-8 letters), and use the 3D preview to check readability.",
+      "q7": "Do you store the ambigrams I create?",
+      "a7": "No, we do not store any of the ambigrams you create using our generator. All processing happens locally in your browser, and your creations are not sent to our servers or stored anywhere. This ensures your privacy and means you have full control over your designs.",
+      "q8": "Can I request new fonts or features?",
+      "a8": "Absolutely! We're always looking to improve our generator. If you have suggestions for new fonts, features, or improvements, please feel free to contact us through our feedback form."
+    },
+    "CTA": {
+      "title": "Ready to Create Your Masterpiece?",
+      "subtitle": "Unleash your creativity and design a unique ambigram in seconds. It’s free, fast, and fun.",
+      "button": "Generate for Free"
+    },
+    "Footer": {
+      "logoText": "AmbigramStudio",
+      "link1": "3D STL Files",
+      "link2": "Tattoo Design Stencils",
+      "link3": "Flipscript Alternative",
+      "link4": "Terms of Service",
+      "copyright": "© {year} AMBIGRAMGENERATOR.ME. ALL RIGHTS RESERVED."
+    },
+    "Generator3D": {
+      "title": "How to Use the 3D Tool",
+      "subtitle": "Configure your text and render quality.",
+      "settingsTitle": "Model Settings",
+      "firstWordLabel": "First Word",
+      "firstWordPlaceholder": "e.g. LOVE",
+      "secondWordLabel": "Second Word",
+      "secondWordPlaceholder": "e.g. HATE",
+      "highQualityLabel": "High Quality Mesh",
+      "generateBaseLabel": "Generate Base Stand",
+      "btnGenerating": "Generating...",
+      "btnGenerate": "Generate 3D Model",
+      "viewFirst": "First",
+      "viewSecond": "Second",
+      "viewIso": "Isometric",
+      "autoRotate": "Auto Rotate",
+      "btnRecordingGif": "Recording...",
+      "btnRenderGif": "Render GIF",
+      "btnDownloadStl": "Download STL",
+      "alertInputBoth": "Please enter both words!",
+      "alertGenerateFirst": "Please generate the 3D model first!"
+    },
+    
+  "HeroSection": {
+      "ratingText": "4.8/5 Rating • 1,200+ Users",
+      "titleP1": "Free 3D Ambigram Generator",
+      "titleP2": "& Two-Name Maker",
+      "subtitle": "Instantly generate <bold> ambigram tattoos, 3D STL files</bold>, and unique <bold>flipscript-style</bold> art. The only tool that turns two names into one visual masterpiece.",
+      "step1Label": "Step 1: Enter your names",
+      "inputWordAPlaceholder": "Word A",
+      "inputWordBPlaceholder": "Word B",
+      "step2Label": "Step 2: Choose your style",
+      "btnGenerate3D": "Generate 3D Model",
+      "btnGenerate2D": "2D Tattoo Design",
+      "badgeTattoo": "BEST FOR TATTOO",
+      "tagTattoos": "Tattoos",
+      "tag3DPrints": "3D Prints",
+      "tagGifts": "Gifts",
+      "scarcityText": "Only 1% of the world has a custom ambigram. Now you can too.",
+      "slide3DTitle": "3D STL Generator",
+      "slide3DDesc": "Create professional 3D ambigrams for STL printing and physical gifts. Perfect for desktop art.",
+      "slide3DLiveLabel": "Live 3D Render",
+      "slide3DReadyLabel": "STL Ready",
+      "slide2DTitle": "2D Tattoo Designer",
+      "slide2DDesc": "Elegant calligraphy optimized for tattoos. Clean lines and perfect symmetry from any angle.",
+      "slide2DLiveLabel": "Tattoo Art Preview",
+      "slide2DReadyLabel": "Vector"
+    }
+  },
+   "Generator2D": {
+    "title": "Design 2D Ambigrams for Tattoos & Logos",
+    "subtitle": "Ideal for Tattoos, Logos & Digital Art",
+    "inputLabel": "One or Two Words",
+    "inputPlaceholder": "e.g., family / forever",
+    "styleLabel": "Style",
+    "styleBlocky": "Blocky",
+    "styleCalligraphy": "Calligraphy",
+    "buttonGenerate": "Generate",
+    "emptyStateText": "Enter words above to generate your design",
+    "rotationHint": "(Click an ambigram to rotate it 180°)",
+    "altTextResult": "Ambigram result {index}",
+    "tattooStencilsDesc": "Perfect for Tattoo Stencils,Our calligraphy style is specifically optimized for skin art. Unlike other generators, we ensure clean lines that your tattoo artist can easily trace. Download the PNG and bring your unique two-name design to the studio today."
+  },
+  "Footer": {
+    "description": "The professional engine for 3D Printable Ambigrams & Two-Name Tattoo Stencils. Design, visualize, and print your own optical illusions.",
+    "col1Title": "Generators",
+    "col2Title": "Learn & Explore",
+    "col3Title": "Tutorials",
+    "col4Title": "Company",
+    "rights": "© {year}Ambigram Generator. All rights reserved.",
+    "builtFor": "Built for Makers & Tattoo Artists.",
+    "selectLanguage": "Language",
+    "legal": "Legal"
+  }
+  
+  
+}

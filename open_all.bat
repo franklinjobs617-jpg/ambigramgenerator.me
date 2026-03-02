@@ -1,1 +1,0 @@
-For /R .\letters\ %%G in (*.svg) do start %%G
