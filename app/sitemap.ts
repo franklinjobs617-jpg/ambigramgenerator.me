@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/guide/2d-vs-3d-design', '/guide/advanced-3d-controls', '/guide/ambigram-history-art',
         '/guide/best-online-tools', '/guide/flipscript-principles', '/guide/name-generator-secrets',
         '/guide/ultimate-free-generator', '/tutorial/multi-word-guide', '/tutorial/tattoo-design',
-        '/tutorial/two-name-ambigram',
+        '/tutorial/two-name-ambigram'
     ]
 
     return routes.flatMap((route) =>
