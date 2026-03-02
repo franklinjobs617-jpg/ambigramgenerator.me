@@ -8,7 +8,7 @@ const DOMAIN = "https://www.ambigramgenerator.me";
 const getUrl = (locale: string, path: string) => `${DOMAIN}${locale === 'en' ? '' : `/${locale}`}${path}`;
 
 type Props = {
-    params: { locale: string };
+    params: Promise<{ locale: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

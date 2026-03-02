@@ -3,7 +3,7 @@ import Link from "next/link";
 import { constructMetadata } from "@/lib/seo";
 
 type Props = {
-    params: { locale: string };
+    params: Promise<{ locale: string }>;
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;

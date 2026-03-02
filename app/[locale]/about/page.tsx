@@ -11,7 +11,7 @@ import {
 import { constructMetadata } from "@/lib/seo";
 
 type Props = {
-    params: { locale: string };
+    params: Promise<{ locale: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

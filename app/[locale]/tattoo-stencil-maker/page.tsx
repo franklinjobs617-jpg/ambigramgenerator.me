@@ -18,7 +18,7 @@ import {
 const DOMAIN = "https://www.ambigramgenerator.me";
 
 type Props = {
-    params: { locale: string };
+    params: Promise<{ locale: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

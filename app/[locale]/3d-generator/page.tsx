@@ -19,7 +19,7 @@ import {
 
 
 type Props = {
-    params: { locale: string };
+    params: Promise<{ locale: string }>
 };
 
 // 1. SEO Metadata
