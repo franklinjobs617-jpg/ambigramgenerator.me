@@ -1,17 +1,34 @@
+
+
+
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const domain = 'https://www.ambigramgenerator.me'
     const locales = ['en', 'fr', 'de']
 
+    // 路由列表：使用空字符串 '' 代表首页，确保路径以 / 开头
     const routes = [
         '', // 首页
-        '/3d-generator', '/about', '/faq', '/free-generator', '/generator',
-        '/privacy', '/tattoo-design', '/terms', '/what-is-ambigram',
-        '/guide/2d-vs-3d-design', '/guide/advanced-3d-controls', '/guide/ambigram-history-art',
-        '/guide/best-online-tools', '/guide/flipscript-principles', '/guide/name-generator-secrets',
-        '/guide/ultimate-free-generator', '/tutorial/multi-word-guide', '/tutorial/tattoo-design',
-        '/tutorial/two-name-ambigram'
+        '/3d-generator',
+        '/about',
+        '/faq',
+        '/free-generator',
+        '/generator',
+        '/privacy',
+        '/tattoo-design',
+        '/terms',
+        '/what-is-ambigram',
+        '/guide/2d-vs-3d-design',
+        '/guide/advanced-3d-controls',
+        '/guide/ambigram-history-art',
+        '/guide/best-online-tools',
+        '/guide/flipscript-principles',
+        '/guide/name-generator-secrets',
+        '/guide/ultimate-free-generator',
+        '/tutorial/multi-word-guide',
+        '/tutorial/tattoo-design',
+        '/tutorial/two-name-ambigram',
     ]
 
     return routes.flatMap((route) =>
@@ -19,10 +36,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
             const isDefaultEn = locale === 'en'
             const isHomepage = route === ''
 
+            // 🌟 核心逻辑：处理 URL
             let url: string
             if (isDefaultEn && isHomepage) {
+                // 只有英语首页带 /
                 url = `${domain}/`
             } else {
+                // 其他情况：默认 En 不带前缀，Fr/De 带前缀，且拼接 route 后不加 /
                 const langPrefix = isDefaultEn ? '' : `/${locale}`
                 url = `${domain}${langPrefix}${route}`
             }
@@ -30,8 +50,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
             return {
                 url: url,
                 lastModified: new Date(),
-                changeFrequency: 'monthly', // 修复类型问题
+                changeFrequency: 'monthly' as const,
                 priority: getPriority(route),
+                // 🌟 配置 SEO 语言互联标签 (hreflang)
+                // 这里的 alternates 也必须遵循同样的斜杠规则
                 alternates: {
                     languages: {
                         en: isHomepage ? `${domain}/` : `${domain}${route}`,
