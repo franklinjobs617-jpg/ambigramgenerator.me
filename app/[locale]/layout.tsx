@@ -38,7 +38,7 @@ export default async function LocaleLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                {/* <GoogleAnalytics gaId="G-N55FBP8DJ2" />
+                <GoogleAnalytics gaId="G-N55FBP8DJ2" />
 
                 <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3383070348689557"
                     crossOrigin="anonymous"></Script>
@@ -54,7 +54,7 @@ export default async function LocaleLayout({
                 })(window, document, "clarity", "script", "ti80pje0n3");
               `,
                     }}
-                /> */}
+                />
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <Header />
                     {children}
