@@ -7,6 +7,7 @@ const DOMAIN = "https://www.ambigramgenerator.me";
 // en -> https://.../path
 // fr -> https://.../fr/path
 export const getUrl = (locale: string, path: string) => {
+    if (path === '' && locale === 'en') return `${DOMAIN}/${path}`;
     const langPath = locale === 'en' ? '' : `/${locale}`;
     return `${DOMAIN}${langPath}${path}`;
 };
@@ -33,6 +34,7 @@ export function constructMetadata({ title, description, path, locale, image = "/
                 "en": getUrl("en", path),
                 "fr": getUrl("fr", path),
                 "de": getUrl("de", path),
+                "es": getUrl("es", path),
                 "x-default": getUrl("en", path), // x-default 指向默认英语版
             },
         },

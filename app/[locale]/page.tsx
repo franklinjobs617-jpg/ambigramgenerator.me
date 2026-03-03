@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import HomeContent from "@/components/HomeContent"; // 引入你的客户端组件
+import { constructMetadata } from "@/lib/seo";
 
 // 辅助函数：构建 URL
 const DOMAIN = "https://www.ambigramgenerator.me";
@@ -14,14 +15,10 @@ type Props = {
 // 1. 动态生成 SEO Metadata (服务端执行)
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
-    const canonicalUrl = getUrl(locale);
 
     // 默认英语 SEO
     // let title = "Free 3D Ambigram Generator | Two-Name Tattoo Design & STL";
     //  let description = "Create unique 3D and 2D ambigrams instantly. The #1 free tool for two-name tattoo designs and 3D printable STLs. A better Flipscript alternative with no signup.";
-
-    let title = "Ambigram Generator: Free 2D & 3D Two-Name Tattoo Maker & STL";
-    let description = "Create free 2D & 3D ambigrams online. The best tool for two-name tattoo designs and 3D printable STLs. Mobile-friendly Flipscript alternative with no signup.";
 
     // 法语 SEO 
     // if (locale === 'fr') {
@@ -29,56 +26,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     //     description = "Créez des ambigrammes 3D/2D gratuits. Idéal pour tatouages 2 prénoms et fichiers STL. Alternative à Flipscript sans inscription et optimisée pour mobile.";
     // }
 
-    if (locale === 'fr') {
-        title = "Générateur d'Ambigramme Gratuit: 2D/3D, Tatouage & STL";
-        description = "Créez des ambigrammes 3D/2D gratuits. Idéal pour tatouages 2 prénoms et fichiers STL. Alternative à Flipscript sans inscription et optimisée pour mobile.";
-    }
+    const seoData: Record<string, { title: string; description: string }> = {
 
-    // 德语 SEO
-    if (locale === 'de') {
-        title = "Ambigramm Generator: Kostenlos Ambigramm erstellen (2 Namen)";
-        description = "Ambigramm erstellen: Gratis 2D/3D Generator für Tattoo Vorlagen (2 Namen) & 3D Schriftzug. Ohne Anmeldung & die beste Flipscript Alternative. Mobil optimiert.";
+        en: {
+            title: "Ambigram Generator: Free 2D & 3D Two-Name Tattoo Maker & STL",
+            description: "Create free 2D & 3D ambigrams online. The best tool for two-name tattoo designs and 3D printable STLs. Mobile-friendly Flipscript alternative with no signup."
+        },
+        fr: {
+            title: "Générateur d'Ambigramme Gratuit: 2D/3D, Tatouage & STL",
+            description: "Créez des ambigrammes 3D/2D gratuits. Idéal pour tatouages 2 prénoms et fichiers STL. Alternative à Flipscript sans inscription et optimisée pour mobile."
+        },
+        de: {
+            title: "Ambigramm Generator: Kostenlos Ambigramm erstellen (2 Namen)",
+            description: "Ambigramm erstellen: Gratis 2D/3D Generator für Tattoo Vorlagen (2 Namen) & 3D Schriftzug. Ohne Anmeldung & die beste Flipscript Alternative. Mobil optimiert."
+        }
+        ,
+        es: {
+            title: "Generador de Ambigramas Gratis | Tatuajes de 2 Nombres y Letras 3D",
+            description: "Crea ambigramas 2D y 3D gratis. El mejor generador para tatuajes de dos nombres y letras 3D para imprimir (STL). Sin registro y la mejor alternativa a Flipscript."
+        }
     }
+    const current = seoData[locale] || seoData.en;
 
-    // 西语 SEO
-    if (locale === 'es') {
-        title = "Generador de Ambigramas Gratis | Tatuajes de 2 Nombres y Letras 3D";
-        description = "Crea ambigramas 2D y 3D gratis. El mejor generador para tatuajes de dos nombres y letras 3D para imprimir (STL). Sin registro y la mejor alternativa a Flipscript.";
-    }
-
-    return {
-        title,
-        description,
-        alternates: {
-            canonical: canonicalUrl,
-            languages: {
-                "en": `${DOMAIN}/`,
-                "fr": `${DOMAIN}/fr`,
-                "de": `${DOMAIN}/de`,
-            }
-        },
-        openGraph: {
-            title,
-            description,
-            url: canonicalUrl,
-            type: 'website',
-            siteName: 'AmbigramGenerator',
-            images: [
-                {
-                    url: '/logo.png', // 确保 public 目录下有这个图
-                    width: 1200,
-                    height: 630,
-                    alt: title,
-                },
-            ],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title,
-            description,
-            images: ['/logo.png'],
-        },
-    };
+    return constructMetadata({
+        title: current.title,
+        description: current.description,
+        path: '',
+        locale: locale
+    });
 }
 
 // 2. 页面主入口
