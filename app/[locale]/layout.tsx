@@ -9,7 +9,7 @@ import Script from "next/script";
 import Header from "@/components/header";
 type Props = {
     children: React.ReactNode;
-    params: { locale: string };
+    params: Promise<{ locale: string }>;
 };
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -55,6 +55,7 @@ export default async function LocaleLayout({
               `,
                     }}
                 />
+
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <Header />
                     {children}
