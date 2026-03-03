@@ -4,7 +4,7 @@ import { createNavigation } from 'next-intl/navigation';
 
 export const routing = defineRouting({
   // 必须与你的 middleware 保持一致
-  locales: ['en', 'fr', 'de'],
+  locales: ['en', 'fr', 'de', 'es'],
   defaultLocale: 'en',
   localePrefix: 'as-needed'
 });

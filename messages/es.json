@@ -1,0 +1,248 @@
+{
+  "Header": {
+    "logo": "AmbigramGenerator",
+    "nav": {
+      "generators": {
+        "title": "Generadores",
+        "items": {
+          "2d": "Creador 2D",
+          "3d": "Generador 3D",
+          "twoName": "Dos Nombres",
+          "tattoo": "Motor de Tatuajes"
+        }
+      },
+      "guides": {
+        "title": "Aprender",
+        "items": {
+          "whatIs": "¿Qué es un Ambigrama?",
+          "history": "Historia y Arte",
+          "principles": "Principios de Diseño",
+          "bestTools": "Mejores Herramientas"
+        }
+      },
+      "tutorials": {
+        "title": "Tutoriales",
+        "items": {
+          "multiWord": "Guía Multi-palabra",
+          "tattooDesign": "Diseño de Tatuajes",
+          "advanced3d": "3D Avanzado",
+          "secrets": "Secretos Personalizados"
+        }
+      },
+      "support": {
+        "title": "Soporte",
+        "items": {
+          "faq": "Preguntas Frecuentes",
+          "about": "Nosotros",
+          "privacy": "Privacidad",
+          "terms": "Condiciones"
+        }
+      }
+    },
+    "button": "Empezar a Crear"
+  },
+  "HomePage": {
+    "Navigation": {
+      "logoText": "Ambigram",
+      "logoSpan": "Studio",
+      "generator3d": "Generador 3D",
+      "tattooDesign": "Diseño de Tatuajes",
+      "inspiration": "Inspiración",
+      "faq": "FAQ",
+      "logIn": "Iniciar Sesión",
+      "pricing": "Precios"
+    },
+    "Hero": {
+      "ratingBadge": "4.8/5 Calificación • +1,200 Usuarios",
+      "titleP1": "Generador de Ambigramas Gratis",
+      "titleP2": "y Creador de Dos Nombres",
+      "subtitle": "La única herramienta que une dos nombres en una obra maestra visual. Genera al instante tatuajes de ambigramas y archivos STL 3D."
+    },
+    "Inspiration": {
+      "title": "¿Buscas inspiración? Prueba combinaciones populares"
+    },
+    "Workspace": {
+      "tab3d": "Generador 3D",
+      "tab2d": "Diseño de Tatuajes",
+      "tattooToolTitle": "Herramienta Profesional de Diseño de Tatuajes de Ambigramas",
+      "tattooToolDesc": "¿Buscas un tatuaje de ambigrama con dos nombres? Nuestro generador 2D ofrece estilos de caligrafía optimizados para líneas limpias y plantillas listas para la piel."
+    },
+    "HowItWorks": {
+      "title": "3 Pasos Sencillos para Crear tu Ambigrama",
+      "subtitle": "Crear tu ambigrama personalizado solo toma unos clics.",
+      "step1Title": "Paso 1: Introduce el Texto",
+      "step1Desc": "Ingresa una o dos palabras. La herramienta se encarga de la geometría compleja por ti.",
+      "step2Title": "Paso 2: Vista Previa y Personalización",
+      "step2Desc": "Rota e inspecciona tu diseño en el visor 3D en vivo. Ajusta las opciones según necesites.",
+      "step3Title": "Paso 3: Descarga Archivos STL",
+      "step3Desc": "Obtén un archivo STL listo para imprimir o un GIF para compartir. ¡Así de fácil!"
+    },
+    "Features": {
+      "title": "Crea Modelos de Ambigramas 3D en Segundos",
+      "subtitle": "Desde regalos personales hasta branding profesional, nuestra herramienta da vida a tus ideas.",
+      "f1Title": "Diseño de Tatuajes y Plantillas",
+      "f1Desc": "Crea plantillas de tatuajes únicas y significativas que cuentan una historia desde dos perspectivas.",
+      "f2Title": "Letras 3D para Imprimir (STL)",
+      "f2Desc": "Descarga archivos STL para crear ambigramas físicos, perfectos para escritorios y regalos.",
+      "f3Title": "Regalos Personalizados",
+      "f3Desc": "Diseña un regalo especial para un ser querido fusionando dos nombres en un objeto hermoso.",
+      "f4Title": "Logos y Branding",
+      "f4Desc": "Crea logotipos ingeniosos y activos de marca que sorprenden a segunda vista."
+    },
+    "CoreFeatures": {
+      "mainTitle": "Características Clave: Más que Simple Texto",
+      "item1": {
+        "title": "Creador de Ambigramas de Dos Nombres",
+        "desc": "Fusiona dos nombres o palabras en un único y hermoso diseño rotativo."
+      },
+      "item2": {
+        "title": "Archivos para Impresión 3D",
+        "desc": "Descarga archivos STL de alta calidad listos para tu impresora 3D."
+      },
+      "item3": {
+        "title": "Estilos Listos para Tatuajes",
+        "desc": "Diseños optimizados con líneas limpias para garantizar tatuajes legibles."
+      },
+      "item4": {
+        "title": "Gratis y Sin Marcas de Agua",
+        "desc": "Descarga archivos de alta resolución al instante, sin cargos ocultos ni registros obligatorios."
+      }
+    },
+    "Examples": {
+      "title": "Diseños de Ambigramas Populares",
+      "subtitle": "Mira lo que otros han creado.",
+      "ex1Title": "SARAH / JOHN",
+      "ex1Desc": "Tatuaje de Dos Nombres",
+      "ex2Title": "CONFIANZA (TRUST)",
+      "ex2Desc": "Estilo de Tatuaje",
+      "ex3Badge": "IMPRESIÓN 3D",
+      "ex3Title": "OBJETO FÍSICO",
+      "ex3Desc": "Exportación STL",
+      "ex4Badge": "IMPRESIÓN 3D",
+      "ex4Title": "OBJETO FÍSICO",
+      "ex4Desc": "Exportación STL"
+    },
+    "Comparison": {
+      "title": "¿Por qué elegirnos frente a Flipscript?",
+      "subtitle": "Ofrecemos funciones 3D avanzadas y descargas gratuitas ilimitadas por las que otros cobran.",
+      "headerFeature": "Característica",
+      "headerUs": "AmbigramStudio",
+      "headerOthers": "Otros",
+      "priceLabel": "Precio",
+      "priceUs": "100% Gratis (Sin registro)",
+      "priceOthers": "Pago / Suscripción",
+      "modelLabel": "Generación de Modelos 3D",
+      "modelUs": "Sí (Exportación STL)",
+      "modelOthers": "No (Solo 2D)",
+      "twoNameLabel": "Soporte para Dos Nombres",
+      "twoNameUs": "Sí",
+      "twoNameOthers": "Sí",
+      "formatLabel": "Formato de Descarga",
+      "formatUs": "PNG, STL, GIF",
+      "formatOthers": "Solo Imagen"
+    },
+    "FAQ": {
+      "title": "Preguntas Frecuentes",
+      "subtitle": "Todo lo que necesitas saber sobre nuestro generador de ambigramas.",
+      "q1": "¿Qué es un ambigrama?",
+      "a1": "Un ambigrama es un diseño tipográfico que se lee como una o más palabras al rotarlo. Nuestro generador gratuito crea diseños 'Rotacionales' (la misma palabra gira) y de 'Dos Nombres' (la Palabra A se convierte en la B). Son perfectos para tatuajes, logos y, gracias a nuestro motor único, arte impreso en 3D (STL).",
+      "q2": "¿Es el generador de uso gratuito?",
+      "a2": "Sí, nuestra herramienta es una alternativa a Flipscript completamente gratuita. Puedes crear, personalizar y descargar ambigramas ilimitados sin costos ocultos ni suscripciones.",
+      "q3": "¿Puedo usar los ambigramas generados comercialmente?",
+      "a3": "Sí, puedes usar los diseños para fines personales y comerciales, incluidos tatuajes, logotipos, merchandising y materiales de marketing.",
+      "q4": "¿En qué formatos puedo descargar mi ambigrama?",
+      "a4": "Puedes descargar tus diseños en formato PNG de alta resolución, ideal para uso digital y tatuajes. Para impresión 3D profesional, también puedes descargar archivos STL.",
+      "q5": "¿Por qué mi ambigrama no se ve bien al rotarlo?",
+      "a5": "La efectividad depende de las letras usadas y su compatibilidad al girar. Prueba usando palabras cortas (3-6 letras), diferentes fuentes o palabras con formas similares.",
+      "q6": "¿Cómo puedo crear el mejor ambigrama posible?",
+      "a6": "Elige palabras con formas de letras similares al rotar (ej. b/q, d/p, m/w). Experimenta con diferentes fuentes, mantén las palabras cortas (2-8 letras) y usa la vista previa 3D.",
+      "q7": "¿Guardan los ambigramas que creo?",
+      "a7": "No, no almacenamos ninguno de tus diseños. Todo el procesamiento ocurre localmente en tu navegador para garantizar tu privacidad total.",
+      "q8": "¿Puedo solicitar nuevas fuentes o funciones?",
+      "a8": "¡Por supuesto! Siempre buscamos mejorar. Si tienes sugerencias, contáctanos a través de nuestro formulario de comentarios."
+    },
+    "CTA": {
+      "title": "¿Listo para crear tu obra maestra?",
+      "subtitle": "Libera tu creatividad y diseña un ambigrama único en segundos. Es gratis, rápido y divertido.",
+      "button": "Generar Gratis"
+    },
+    "Footer": {
+      "logoText": "AmbigramStudio",
+      "description": "El motor profesional para ambigramas impresos en 3D y plantillas de tatuajes de dos nombres. Diseña, visualiza e imprime tus propias ilusiones ópticas.",
+      "link1": "Archivos STL 3D",
+      "link2": "Plantillas de Tatuajes",
+      "link3": "Alternativa a Flipscript",
+      "link4": "Términos de Servicio",
+      "col1Title": "Generadores",
+      "col2Title": "Aprender",
+      "col3Title": "Tutoriales",
+      "col4Title": "Compañía",
+      "rights": "© {year} Ambigram Generator. Todos los derechos reservados.",
+      "builtFor": "Creado para Makers y Tatuadores.",
+      "selectLanguage": "Idioma",
+      "legal": "Legal",
+      "copyright": "© {year} AMBIGRAMGENERATOR.ME. TODOS LOS DERECHOS RESERVADOS."
+    },
+    "Generator3D": {
+      "title": "Cómo usar la Herramienta 3D",
+      "subtitle": "Configura tu texto y la calidad del renderizado.",
+      "settingsTitle": "Ajustes del Modelo",
+      "firstWordLabel": "Primera Palabra",
+      "firstWordPlaceholder": "ej. AMOR",
+      "secondWordLabel": "Segunda Palabra",
+      "secondWordPlaceholder": "ej. PAZ",
+      "highQualityLabel": "Malla de Alta Calidad",
+      "generateBaseLabel": "Generar Base de Soporte",
+      "btnGenerating": "Generando...",
+      "btnGenerate": "Generar Modelo 3D",
+      "viewFirst": "Primero",
+      "viewSecond": "Segundo",
+      "viewIso": "Isométrico",
+      "autoRotate": "Auto Rotación",
+      "btnRecordingGif": "Grabando...",
+      "btnRenderGif": "Renderizar GIF",
+      "btnDownloadStl": "Descargar STL",
+      "alertInputBoth": "¡Por favor, ingresa ambas palabras!",
+      "alertGenerateFirst": "¡Por favor, genera el modelo 3D primero!"
+    },
+    "HeroSection": {
+      "ratingText": "4.8/5 Calificación • +1,200 Usuarios",
+      "titleP1": "Generador de Ambigramas Gratis",
+      "titleP2": "y Creador de Dos Nombres",
+      "subtitle": "Genera al instante tatuajes de ambigramas, archivos STL 3D y arte estilo flipscript. La única herramienta que une dos nombres en una obra maestra visual.",
+      "step1Label": "Paso 1: Ingresa tus nombres",
+      "inputWordAPlaceholder": "Palabra A",
+      "inputWordBPlaceholder": "Palabra B",
+      "step2Label": "Paso 2: Elige tu estilo",
+      "btnGenerate3D": "Generar Modelo 3D",
+      "btnGenerate2D": "Diseño de Tatuaje 2D",
+      "badgeTattoo": "IDEAL PARA TATUAJES",
+      "tagTattoos": "Tatuajes",
+      "tag3DPrints": "Impresiones 3D",
+      "tagGifts": "Regalos",
+      "scarcityText": "Solo el 1% del mundo tiene un ambigrama personalizado. Ahora tú también puedes.",
+      "slide3DTitle": "Generador de STL 3D",
+      "slide3DDesc": "Crea ambigramas 3D profesionales para impresión STL y regalos físicos. Perfecto para arte de escritorio.",
+      "slide3DLiveLabel": "Render 3D en Vivo",
+      "slide3DReadyLabel": "Listo para STL",
+      "slide2DTitle": "Diseñador de Tatuajes 2D",
+      "slide2DDesc": "Caligrafía elegante optimizada para tatuajes. Líneas limpias y simetría perfecta desde cualquier ángulo.",
+      "slide2DLiveLabel": "Vista Previa de Tatuaje",
+      "slide2DReadyLabel": "Vectorial"
+    },
+    "Generator2D": {
+      "title": "Diseña Ambigramas 2D para Tatuajes y Logos",
+      "subtitle": "Ideal para Tatuajes, Logos y Arte Digital",
+      "inputLabel": "Una o Dos Palabras",
+      "inputPlaceholder": "ej., familia / siempre",
+      "styleLabel": "Estilo",
+      "styleBlocky": "Bloque",
+      "styleCalligraphy": "Caligrafía",
+      "buttonGenerate": "Generar",
+      "emptyStateText": "Ingresa palabras arriba para generar tu diseño",
+      "rotationHint": "(Haz clic en un ambigrama para rotarlo 180°)",
+      "altTextResult": "Resultado de ambigrama {index}",
+      "tattooStencilsDesc": "Perfecto para plantillas de tatuajes. Nuestro estilo de caligrafía está específicamente optimizado para el arte en la piel. A diferencia de otros generadores, aseguramos líneas limpias que tu tatuador puede calcar fácilmente. Descarga el PNG y lleva tu diseño único de dos nombres al estudio hoy mismo."
+    }
+  }
+}
