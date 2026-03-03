@@ -3,21 +3,40 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
   images: {
-    // 暂时注释掉这里，看看是否是图片配置导致的问题
-    /*
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'example.com', // 先写死一个测试
+        hostname: '**', // 允许所有 HTTPS 域名的图片
+      },
+      {
+        protocol: 'http',
+        hostname: '**', // 允许所有 HTTP 域名的图片（如果需要）
       },
     ],
-    */
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
+  async redirects() {
+    return [
+      {
+        source: '/generator',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/free-generator',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|fr|de)/generator',
+        destination: '/:locale',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|fr|de)/free-generator',
+        destination: '/:locale',
+        permanent: true,
+      },
+    ];
   },
 };
 
