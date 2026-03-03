@@ -426,7 +426,7 @@ export default async function ThreeDGeneratorPage({ params }: Props) {
             <section className="py-40 bg-slate-950 text-center px-6 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 pointer-events-none" />
                 <h2 className="text-5xl md:text-7xl font-black text-white mb-10 tracking-tighter italic">Ready to Print?</h2>
-                <Link href="/generator" className="inline-flex items-center gap-3 bg-white text-slate-900 px-12 py-5 rounded-full text-xl font-bold hover:bg-indigo-600 hover:text-white transition-all duration-300 shadow-2xl active:scale-95">
+                <Link href="/" className="inline-flex items-center gap-3 bg-white text-slate-900 px-12 py-5 rounded-full text-xl font-bold hover:bg-indigo-600 hover:text-white transition-all duration-300 shadow-2xl active:scale-95">
                     <PlayCircle size={24} /> Create Your 3D Art Now
                 </Link>
             </section>

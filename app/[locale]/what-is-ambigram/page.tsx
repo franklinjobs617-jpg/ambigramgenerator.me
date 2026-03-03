@@ -117,7 +117,7 @@ export default async function WhatIsAmbigramPage({ params }: Props) {
                             <div className="text-center mt-24 p-12 bg-gradient-to-br from-slate-900 to-[#1A1A1B] rounded-[4rem] shadow-2xl border border-slate-800 text-white not-prose">
                                 <h3 className="text-4xl font-black mb-6 tracking-tight italic">Prêt à créer le vôtre ?</h3>
                                 <p className="text-slate-400 mb-10 font-medium text-lg">Utilisez notre créateur pour appliquer ces principes instantanément. C&apos;est gratuit et facile !</p>
-                                <Link href="/generator" className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl active:scale-95">
+                                <Link href="/" className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl active:scale-95">
                                     <Sparkles size={20} /> Lancer le Générateur
                                 </Link>
                             </div>
@@ -237,7 +237,7 @@ export default async function WhatIsAmbigramPage({ params }: Props) {
                                 <p className="text-slate-400 mb-12 font-medium max-w-xl mx-auto text-lg leading-relaxed text-indigo-50/60">
                                     Nutzen Sie den weltweit vielseitigsten Ambigramm-Generator, um diese Prinzipien sofort anzuwenden. Es ist kostenlos, schnell und professionell.
                                 </p>
-                                <Link href="/de/generator" className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl shadow-indigo-900/40 active:scale-95">
+                                <Link href="/" className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl shadow-indigo-900/40 active:scale-95">
                                     <Sparkles className="fill-current" size={20} />
                                     Kostenlosen Generator starten
                                 </Link>

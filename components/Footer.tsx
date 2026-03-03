@@ -46,9 +46,11 @@ export default function Footer() {
         };
     }, [isLangOpen]);
     const languages = [
-        { code: "en", name: "English", flag: "🇺🇸" },
-        { code: "fr", name: "Français", flag: "🇫🇷" },
-        { code: "de", name: "Deutsch", flag: "🇩🇪" },
+        { code: "en", name: "English", flag: "US" },
+        { code: "fr", name: "Français", flag: "FR" },
+        { code: "de", name: "Deutsch", flag: "DE" },
+        { code: "es", name: "Español", flag: "ES" },
+
     ];
 
     const currentLang = languages.find((l) => l.code === currentLocale) || languages[0];
@@ -65,7 +67,6 @@ export default function Footer() {
         {
             title: t("col1Title"),
             links: [
-                { label: tNav("generators.items.2d"), href: "/generator" },
                 { label: tNav("generators.items.3d"), href: "/3d-generator" },
                 { label: tNav("generators.items.twoName"), href: "/tutorial/two-name-ambigram" },
                 { label: tNav("generators.items.tattoo"), href: "/tutorial/tattoo-design" },

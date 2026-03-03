@@ -13,8 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/3d-generator',
         '/about',
         '/faq',
-        '/free-generator',
-        '/generator',
         '/privacy',
         '/tattoo-design',
         '/terms',

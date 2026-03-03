@@ -17,19 +17,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const canonicalUrl = getUrl(locale);
 
     // 默认英语 SEO
-    let title = "Free 3D Ambigram Generator | Two-Name Tattoo Design & STL";
-    let description = "Create unique 3D and 2D ambigrams instantly. The #1 free tool for two-name tattoo designs and 3D printable STLs. A better Flipscript alternative with no signup.";
+    // let title = "Free 3D Ambigram Generator | Two-Name Tattoo Design & STL";
+    //  let description = "Create unique 3D and 2D ambigrams instantly. The #1 free tool for two-name tattoo designs and 3D printable STLs. A better Flipscript alternative with no signup.";
 
-    // 法语 SEO
+    let title = "Ambigram Generator: Free 2D & 3D Two-Name Tattoo Maker & STL";
+    let description = "Create free 2D & 3D ambigrams online. The best tool for two-name tattoo designs and 3D printable STLs. Mobile-friendly Flipscript alternative with no signup.";
+
+    // 法语 SEO 
+    // if (locale === 'fr') {
+    //     title = "Générateur d'Ambigramme Gratuit: 2D/3D, Tatouage & STL";
+    //     description = "Créez des ambigrammes 3D/2D gratuits. Idéal pour tatouages 2 prénoms et fichiers STL. Alternative à Flipscript sans inscription et optimisée pour mobile.";
+    // }
+
     if (locale === 'fr') {
-        title = "Générateur d'Ambigramme 3D Gratuit | Tatouage 2 Prénoms & STL";
-        description = "Créez des ambigrammes 3D et 2D uniques instantanément. Le meilleur outil gratuit pour les tatouages à deux prénoms et l'impression 3D (STL). Une meilleure alternative à Flipscript sans inscription.";
+        title = "Générateur d'Ambigramme Gratuit: 2D/3D, Tatouage & STL";
+        description = "Créez des ambigrammes 3D/2D gratuits. Idéal pour tatouages 2 prénoms et fichiers STL. Alternative à Flipscript sans inscription et optimisée pour mobile.";
     }
 
     // 德语 SEO
     if (locale === 'de') {
-        title = "Kostenloser Ambigramm Generator | 2 Namen & 3D Schriftzug erstellen";
-        description = "Kostenlos 3D & 2D Ambigramme erstellen. Das beste Tool für Tattoo Vorlagen (2 Namen) und 3D-Druck (STL). 100% kostenlos & ohne Anmeldung. Die Flipscript Alternative.";
+        title = "Ambigramm Generator: Kostenlos Ambigramm erstellen (2 Namen)";
+        description = "Ambigramm erstellen: Gratis 2D/3D Generator für Tattoo Vorlagen (2 Namen) & 3D Schriftzug. Ohne Anmeldung & die beste Flipscript Alternative. Mobil optimiert.";
+    }
+
+    // 西语 SEO
+    if (locale === 'es') {
+        title = "Generador de Ambigramas Gratis | Tatuajes de 2 Nombres y Letras 3D";
+        description = "Crea ambigramas 2D y 3D gratis. El mejor generador para tatuajes de dos nombres y letras 3D para imprimir (STL). Sin registro y la mejor alternativa a Flipscript.";
     }
 
     return {

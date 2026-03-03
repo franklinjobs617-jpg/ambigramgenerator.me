@@ -154,6 +154,9 @@
       "a4": "Puedes descargar tus diseños en formato PNG de alta resolución, ideal para uso digital y tatuajes. Para impresión 3D profesional, también puedes descargar archivos STL.",
       "q5": "¿Por qué mi ambigrama no se ve bien al rotarlo?",
       "a5": "La efectividad depende de las letras usadas y su compatibilidad al girar. Prueba usando palabras cortas (3-6 letras), diferentes fuentes o palabras con formas similares.",
+       "a5Li1": "Usando palabras más cortas (3-6 letras funcionan mejor)",
+      "a5Li2": "Elegir fuentes diferentes - algunas fuentes son mejores adaptadas",
+      "a5Li3": "Experimentar con palabras de apariencia similar",
       "q6": "¿Cómo puedo crear el mejor ambigrama posible?",
       "a6": "Elige palabras con formas de letras similares al rotar (ej. b/q, d/p, m/w). Experimenta con diferentes fuentes, mantén las palabras cortas (2-8 letras) y usa la vista previa 3D.",
       "q7": "¿Guardan los ambigramas que creo?",
@@ -244,5 +247,16 @@
       "altTextResult": "Resultado de ambigrama {index}",
       "tattooStencilsDesc": "Perfecto para plantillas de tatuajes. Nuestro estilo de caligrafía está específicamente optimizado para el arte en la piel. A diferencia de otros generadores, aseguramos líneas limpias que tu tatuador puede calcar fácilmente. Descarga el PNG y lleva tu diseño único de dos nombres al estudio hoy mismo."
     }
+  },
+   "Footer": {
+    "description": "El motor profesional para ambigramas imprimibles en 3D y plantillas de tatuajes de dos nombres. Diseña, visualiza e imprime tus propias ilusiones ópticas.",
+  "col1Title": "Generadores",
+  "col2Title": "Aprende y Explora",
+  "col3Title": "Tutoriales",
+  "col4Title": "Empresa",
+  "rights": "© {year}Ambigram Generator. Todos los derechos reservados.",
+  "builtFor": "Creado para creadores y artistas del tatuaje.",
+  "selectLanguage": "Idioma",
+  "legal": "Legal"
   }
 }

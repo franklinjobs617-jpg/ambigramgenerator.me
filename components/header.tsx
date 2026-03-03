@@ -29,9 +29,10 @@ export default function Header() {
     const langRef = useRef<HTMLDivElement>(null);
 
     const languages = [
-        { code: "en", name: "English", flag: "🇺🇸" },
-        { code: "fr", name: "Français", flag: "🇫🇷" },
-        { code: "de", name: "Deutsch", flag: "🇩🇪" },
+        { code: "en", name: "English", flag: "US" },
+        { code: "fr", name: "Français", flag: "FR" },
+        { code: "de", name: "Deutsch", flag: "DE" },
+        { code: "es", name: "Español", flag: "ES" },
     ];
 
     const currentLang = languages.find(l => l.code === locale) || languages[0];
@@ -61,7 +62,6 @@ export default function Header() {
             id: "generators",
             icon: <Box size={18} className="text-blue-600" />,
             links: [
-                { label: t("nav.generators.items.2d"), href: "/generator", badge: "hot" },
                 { label: t("nav.generators.items.3d"), href: "/3d-generator", badge: "hot" },
                 { label: t("nav.generators.items.twoName"), href: "/tutorial/two-name-ambigram" },
                 { label: t("nav.generators.items.tattoo"), href: "/tutorial/tattoo-design" },

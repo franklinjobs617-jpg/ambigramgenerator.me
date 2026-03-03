@@ -151,7 +151,7 @@ export default async function TattooDesignPage({ params }: Props) {
                             <div className="text-center mt-24 p-12 bg-gradient-to-br from-slate-900 to-[#1A1A1B] rounded-[3.5rem] shadow-2xl border border-slate-800 text-white not-prose">
                                 <h3 className="text-3xl font-black mb-4 tracking-tight">Prêt à créer votre tatouage ?</h3>
                                 <p className="text-slate-400 mb-10 font-medium">Utilisez notre générateur gratuit pour obtenir un fichier haute résolution prêt pour votre tatoueur.</p>
-                                <Link href="/generator" className="inline-block bg-indigo-600 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl shadow-indigo-900/40">
+                                <Link href="/" className="inline-block bg-indigo-600 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl shadow-indigo-900/40">
                                     Lancer le Générateur
                                 </Link>
                             </div>
@@ -214,7 +214,7 @@ export default async function TattooDesignPage({ params }: Props) {
 
                             <div className="text-center mt-20 p-10 bg-gradient-to-br from-slate-900 to-[#1A1A1B] rounded-[3rem] shadow-2xl text-white not-prose border border-slate-800">
                                 <h3 className="text-3xl font-black mb-6">Bereit für Ihr Meisterwerk?</h3>
-                                <Link href="/generator" className="inline-block bg-indigo-600 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-indigo-500 hover:scale-105 transition-all shadow-lg">
+                                <Link href="/" className="inline-block bg-indigo-600 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-indigo-500 hover:scale-105 transition-all shadow-lg">
                                     Tattoo Generator starten
                                 </Link>
                             </div>
@@ -331,7 +331,7 @@ export default async function TattooDesignPage({ params }: Props) {
                             <p className="text-slate-400 mb-12 font-medium max-w-xl mx-auto text-lg leading-relaxed text-indigo-100/60">
                                 Design your unique two-name ambigram in seconds. High-resolution files optimized for your tattoo artist.
                             </p>
-                            <Link href="/generator" className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl shadow-indigo-900/40 active:scale-95">
+                            <Link href="/" className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl shadow-indigo-900/40 active:scale-95">
                                 <Zap className="fill-current" size={20} />
                                 Launch Tattoo Generator
                             </Link>
