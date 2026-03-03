@@ -6,7 +6,7 @@ import { constructMetadata } from "@/lib/seo";
 // 辅助函数
 const DOMAIN = "https://www.ambigramgenerator.me";
 type Props = {
-    params: Promise<{ locale: string }>;
+    params: { locale: string };
 };
 
 

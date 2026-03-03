@@ -16,7 +16,7 @@ const getUrl = (locale: string, path: string) => {
 };
 
 type Props = {
-    params: Promise<{ locale: string }>;
+    params: { locale: string };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

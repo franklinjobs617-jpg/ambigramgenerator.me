@@ -171,7 +171,7 @@ export default function HomeContent() {
                                     />
                                 </motion.div>
                             ) : (
-                                <motion.div key="2d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white p-8">
+                                <motion.div key="2d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white">
                                     <Generator2d />
 
                                 </motion.div>

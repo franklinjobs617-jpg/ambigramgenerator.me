@@ -9,7 +9,7 @@ import Script from "next/script";
 import Header from "@/components/header";
 type Props = {
     children: React.ReactNode;
-    params: Promise<{ locale: string }>;
+    params: { locale: string };
 };
 const geistSans = Geist({
     variable: "--font-geist-sans",

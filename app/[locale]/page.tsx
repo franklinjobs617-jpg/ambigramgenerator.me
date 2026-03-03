@@ -8,7 +8,7 @@ const getUrl = (locale: string) => {
 };
 
 type Props = {
-    params: Promise<{ locale: string }>;
+    params: { locale: string };
 };
 
 // 1. 动态生成 SEO Metadata (服务端执行)

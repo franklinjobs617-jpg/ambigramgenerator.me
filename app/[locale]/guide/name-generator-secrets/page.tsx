@@ -5,7 +5,7 @@ import { constructMetadata } from "@/lib/seo";
 
 const DOMAIN = "https://www.ambigramgenerator.me";
 type Props = {
-    params: Promise<{ locale: string }>;
+    params: { locale: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
