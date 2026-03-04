@@ -33,6 +33,7 @@ export default function Header() {
         { code: "fr", name: "Français", flag: "FR" },
         { code: "de", name: "Deutsch", flag: "DE" },
         { code: "es", name: "Español", flag: "ES" },
+        { code: "it", name: "Italiano", flag: "IT" },
     ];
 
     const currentLang = languages.find(l => l.code === locale) || languages[0];

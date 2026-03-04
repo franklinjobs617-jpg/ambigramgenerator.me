@@ -1,0 +1,254 @@
+{
+  "Header": {
+    "logo": "AmbigramGenerator",
+    "nav": {
+      "generators": {
+        "title": "Generatori",
+        "items": {
+          "2d": "Generatore 2D",
+          "3d": "Ambigramma 3D",
+          "twoName": "Ambigramma 2 Nomi",
+          "tattoo": "Design Tatuaggi"
+        }
+      },
+      "guides": {
+        "title": "Risorse",
+        "items": {
+          "whatIs": "Cos'è un Ambigramma",
+          "history": "Storia & Arte",
+          "principles": "Principi di Design",
+          "bestTools": "Migliori Strumenti"
+        }
+      },
+      "tutorials": {
+        "title": "Tutorial",
+        "items": {
+          "multiWord": "Guida a Più Parole",
+          "tattooDesign": "Idee Tatuaggio Ambigramma",
+          "advanced3d": "3D Avanzato",
+          "secrets": "Segreti del Design"
+        }
+      },
+      "support": {
+        "title": "Supporto",
+        "items": {
+          "faq": "Domande Frequenti",
+          "about": "Chi Siamo",
+          "privacy": "Privacy Policy",
+          "terms": "Termini di Servizio"
+        }
+      }
+    },
+    "button": "Crea Ora"
+  },
+  "HomePage": {
+    "Navigation": {
+      "logoText": "Ambigram",
+      "logoSpan": "Studio",
+      "generator3d": "Generatore 3D",
+      "tattooDesign": "Tatuaggio Ambigramma",
+      "inspiration": "Ispirazione",
+      "faq": "FAQ",
+      "logIn": "Accedi",
+      "pricing": "Prezzi"
+    },
+    "Hero": {
+      "ratingBadge": "Valutazione 4.8/5 • 1.200+ Utenti",
+      "titleP1": "Generatore di Ambigrammi: ",
+      "titleP2": "Crea un Ambigramma con Due Nomi e 3D",
+      "subtitle": "L'unico strumento che unisce due nomi in un capolavoro visivo. Genera istantaneamente un <bold>tatuaggio ambigramma</bold> e <bold>lettere 3D da stampare</bold>."
+    },
+    "Inspiration": {
+      "title": "Idee Tatuaggio: Prova le Combinazioni Più Popolari"
+    },
+    "Workspace": {
+      "tab3d": "Ambigramma 3D",
+      "tab2d": "Design Tatuaggio",
+      "tattooToolTitle": "Strumento Professionale per Tatuaggio Ambigramma",
+      "tattooToolDesc": "Cerchi idee per un <bold>ambigramma con due nomi</bold> da tatuare? Il nostro generatore 2D offre stili in <spanClass>Corsivo Elegante</spanClass> e Stampatello, ottimizzati per linee pulite e stencil perfetti per la pelle.",
+      "loading2dText": "Caricamento dell'interfaccia 2D in corso..."
+    },
+    "HowItWorks": {
+      "title": "Come Usare il Generatore in 3 Semplici Passi",
+      "subtitle": "Creare il tuo ambigramma 2 nomi o l'effetto flip richiede solo pochi clic.",
+      "step1Title": "Passo 1: Inserisci il Testo",
+      "step1Desc": "Inserisci una o due parole diverse. L'algoritmo gestirà la geometria complessa per te.",
+      "step2Title": "Passo 2: Anteprima e Personalizzazione",
+      "step2Desc": "Ruota e controlla il tuo design nel visualizzatore 3D. Modifica i font dal corsivo allo stampatello.",
+      "step3Title": "Passo 3: Scarica i File STL e PNG",
+      "step3Desc": "Ottieni lettere 3D da stampare (STL) o un'immagine per il tuo tatuatore. È facilissimo!"
+    },
+    "Features": {
+      "title": "Crea Ambigramma 3D e Modelli Personalizzati",
+      "subtitle": "Dai regali unici alle scritte per tatuaggi nomi, diamo vita alle tue idee.",
+      "f1Title": "Tatuaggio Ambigramma e Stencil",
+      "f1Desc": "Progetta scritte per tatuaggi con due nomi uniche e ricche di significato, leggibili da due prospettive.",
+      "f2Title": "Lettere 3D da Stampare (STL)",
+      "f2Desc": "Scarica file STL per la stampa 3D del tuo ambigramma. Perfetto per la community maker o come gadget.",
+      "f3Title": "Regali Personalizzati",
+      "f3Desc": "Un'idea regalo originale: unisci i vostri nomi in un ambigramma 3D da esposizione.",
+      "f4Title": "Loghi e Branding",
+      "f4Desc": "Crea un'arte cinetica e loghi aziendali che sorprendono al primo sguardo."
+    },
+    "CoreFeatures": {
+      "mainTitle": "Caratteristiche Principali del Software",
+      "item1": {
+        "title": "Ambigramma 2 Nomi",
+        "desc": "Unisci due parole diverse in un unico design reversibile e fluido."
+      },
+      "item2": {
+        "title": "Lettere 3D da Stampare (File STL)",
+        "desc": "Esporta modelli di alta qualità, pronti per trasformarsi in lettere 3D da stampare."
+      },
+      "item3": {
+        "title": "Stili per Tatuaggi",
+        "desc": "Design ottimizzati per i tatuatori italiani, con corsivo fine-line e linee nitide."
+      },
+      "item4": {
+        "title": "Generatore Ambigrammi Gratis",
+        "desc": "Scarica file ad alta risoluzione senza costi nascosti o filigrane."
+      }
+    },
+    "Examples": {
+      "title": "Esempi di Ambigrammi Popolari",
+      "subtitle": "Scopri cosa hanno creato altri utenti.",
+      "ex1Title": "MARCO / GIULIA",
+      "ex1Desc": "Ambigramma con due nomi",
+      "ex2Title": "FAMIGLIA",
+      "ex2Desc": "Stile Tatuaggio Corsivo",
+      "ex3Badge": "STAMPA 3D",
+      "ex3Title": "OGGETTO FISICO",
+      "ex3Desc": "Export file STL",
+      "ex4Badge": "STAMPA 3D",
+      "ex4Title": "EFFETTO FLIP",
+      "ex4Desc": "Design Lettere 3D"
+    },
+    "Comparison": {
+      "title": "Perché Scegliere Noi rispetto ad Altri?",
+      "subtitle": "Offriamo funzioni 3D avanzate e download gratuiti che altri fanno pagare.",
+      "headerFeature": "Funzionalità",
+      "headerUs": "AmbigramStudio",
+      "headerOthers": "Altri Generatori",
+      "priceLabel": "Prezzo",
+      "priceUs": "100% Gratis",
+      "priceOthers": "A Pagamento",
+      "modelLabel": "Generatore Ambigramma 3D",
+      "modelUs": "Sì (Export STL)",
+      "modelOthers": "No (Solo 2D)",
+      "twoNameLabel": "Supporto Ambigramma 2 Nomi",
+      "twoNameUs": "Sì",
+      "twoNameOthers": "Spesso limitato",
+      "formatLabel": "Formati Download",
+      "formatUs": "PNG, STL, GIF",
+      "formatOthers": "Solo Immagini Base"
+    },
+    "FAQ": {
+      "title": "Domande Frequenti sull'Ambigramma",
+      "subtitle": "Tutto quello che devi sapere per usare il nostro generatore di ambigrammi.",
+      "q1": "Cos'è un ambigramma?",
+      "a1": "Un ambigramma (spesso noto sui social come 'effetto flip') è un design tipografico che può essere letto da diverse angolazioni. Il nostro <bold>generatore di ambigrammi gratis</bold> crea sia scritte singole che l'ambito <bold>ambigramma con due nomi</bold> (es. il tuo nome diventa un altro se capovolto). Sono perfetti come base per un <bold>tatuaggio ambigramma</bold> o per creare <bold>ambigramma 3D</bold>.",
+      "q2": "Il vostro generatore di ambigrammi online è gratis?",
+      "a2": "Sì, il nostro strumento è un <bold>generatore ambigrammi gratis</bold>. Puoi creare, personalizzare e scaricare i tuoi design senza registrazioni o costi nascosti.",
+      "q3": "Posso usare i design per scopi commerciali?",
+      "a3": "Certamente. Puoi usare le scritte generate per tatuaggi, loghi aziendali o per vendere stampe 3D, mantenendo tutti i diritti sul design finale esportato.",
+      "q4": "In quali formati posso scaricare il mio file?",
+      "a4": "Puoi scaricare immagini in formato PNG ad alta risoluzione (ideali per lo stencil del tatuatore) e file STL per generare le tue <bold>lettere 3D da stampare</bold>.",
+      "q5": "Perché l'ambigramma non è perfettamente leggibile?",
+      "a5": "Creare scritte doppie perfette dipende dalla compatibilità delle lettere. Per migliorare la leggibilità, prova a:",
+      "a5Li1": "Usare parole brevi (3-6 lettere sono l'ideale)",
+      "a5Li2": "Cambiare stile: il corsivo o lo stampatello si incastrano in modo diverso",
+      "a5Li3": "Usare la modalità 1 Nome se due parole diverse risultano troppo complesse",
+      "q6": "Come creare un ambigramma con due nomi diversi?",
+      "a6": "Seleziona la modalità '2 Nomi' nel nostro generatore. Inserisci la prima parola in alto e la seconda in basso. L'algoritmo incrocerà le forme. Consigliamo di usare parole con una lunghezza simile per un <bold>tatuaggio ambigramma</bold> perfetto.",
+      "q7": "Memorizzate le parole o i nomi che inserisco?",
+      "a7": "Assolutamente no. Il generatore elabora tutto localmente nel tuo browser. Non salviamo le tue <bold>scritte per tatuaggi nomi</bold> sui nostri server, garantendo la totale privacy.",
+      "q8": "Aggiungerete nuovi font in futuro?",
+      "a8": "Sì! Aggiorniamo costantemente il nostro strumento. Presto introduiremo nuovi stili di calligrafia italiana e font dedicati per la stampa 3D."
+    },
+    "CTA": {
+      "title": "Pronto a Creare il Tuo Effetto Flip?",
+      "subtitle": "Scatena la tua creatività. Unisci due nomi o crea un modello 3D in pochi secondi. È gratis, veloce e unico.",
+      "button": "Genera Gratis Ora"
+    },
+    "Footer": {
+      "logoText": "AmbigramStudio",
+      "link1": "Modelli STL 3D",
+      "link2": "Idee Tatuaggio Stencil",
+      "link3": "Generatore Gratis",
+      "link4": "Termini di Servizio",
+      "copyright": "© {year} AMBIGRAMGENERATOR.ME. TUTTI I DIRITTI RISERVATI."
+    },
+    "Generator3D": {
+      "title": "Come Funziona lo Strumento 3D",
+      "subtitle": "Configura le tue parole e la qualità per la stampa.",
+      "settingsTitle": "Impostazioni Modello",
+      "firstWordLabel": "Prima Parola / Nome",
+      "firstWordPlaceholder": "es. AMORE",
+      "secondWordLabel": "Seconda Parola / Nome",
+      "secondWordPlaceholder": "es. VITA",
+      "highQualityLabel": "Mesh in Alta Qualità",
+      "generateBaseLabel": "Genera Base d'Appoggio",
+      "btnGenerating": "Generazione in corso...",
+      "btnGenerate": "Crea Ambigramma 3D",
+      "viewFirst": "Vista 1",
+      "viewSecond": "Vista 2",
+      "viewIso": "Prospettiva",
+      "autoRotate": "Rotazione Automatica",
+      "btnRecordingGif": "Registrazione...",
+      "btnRenderGif": "Esporta GIF",
+      "btnDownloadStl": "Scarica File STL",
+      "alertInputBoth": "Per favore, inserisci entrambe le parole!",
+      "alertGenerateFirst": "Genera prima il modello 3D!"
+    },
+    "HeroSection": {
+      "ratingText": "Valutazione 4.8/5 • 1.200+ Utenti in Italia",
+      "titleP1": "Generatore di Ambigrammi",
+      "titleP2": " 3D e Ambigramma con Due Nomi",
+      "subtitle": "Genera istantaneamente il tuo <bold>tatuaggio ambigramma</bold> o <bold>lettere 3D da stampare</bold>. L'unico strumento online che trasforma due nomi in un'illusione ottica (effetto flip).",
+      "step1Label": "Passo 1: Inserisci i Nomi",
+      "inputWordAPlaceholder": "Nome A",
+      "inputWordBPlaceholder": "Nome B",
+      "step2Label": "Passo 2: Scegli lo Stile",
+      "btnGenerate3D": "Genera Modello 3D",
+      "btnGenerate2D": "Design per Tatuaggio 2D",
+      "badgeTattoo": "SCELTA PER TATUAGGI",
+      "tagTattoos": "Idee Tatuaggi",
+      "tag3DPrints": "Stampa 3D",
+      "tagGifts": "Idee Regalo",
+      "scarcityText": "Meno dell'1% delle persone ha un ambigramma personalizzato. Crealo oggi.",
+      "slide3DTitle": "Generatore STL 3D",
+      "slide3DDesc": "Crea fantastici ambigrammi 3D per la stampa STL. Perfetto per accessori da scrivania e regali.",
+      "slide3DLiveLabel": "Render 3D in Diretta",
+      "slide3DReadyLabel": "Pronto per STL",
+      "slide2DTitle": "Tatuaggio Ambigramma",
+      "slide2DDesc": "Corsivo elegante ottimizzato per i tatuatori. Linee pulite e simmetria perfetta da ogni angolazione.",
+      "slide2DLiveLabel": "Anteprima Tatuaggio",
+      "slide2DReadyLabel": "Vettoriale"
+    }
+  },
+  "Generator2D": {
+    "title": "Progetta Ambigrammi 2D per Tatuaggi e Loghi",
+    "subtitle": "Ideale per scoprire nuove scritte per tatuaggi nomi",
+    "inputLabel": "Una o Due Parole",
+    "inputPlaceholder": "es. famiglia / per sempre",
+    "styleLabel": "Stile",
+    "styleBlocky": "Stampatello (Minimal)",
+    "styleCalligraphy": "Corsivo (Handwriting)",
+    "buttonGenerate": "Genera Scritta",
+    "emptyStateText": "Inserisci le parole in alto per generare il tuo design",
+    "rotationHint": "(Clicca sull'ambigramma per capovolgerlo di 180°)",
+    "altTextResult": "Risultato ambigramma {index}",
+    "tattooStencilsDesc": "Perfetto per gli Stencil da Tatuaggio. Il nostro stile in Corsivo è specificamente studiato per il 'fine-line' sulla pelle. A differenza di altri generatori, garantiamo linee pulite che il tuo tatuatore potrà ricalcare facilmente. Scarica il file PNG e porta oggi stesso il tuo ambigramma con due nomi in studio."
+  },
+  "Footer": {
+    "description": "Il motore professionale per creare Lettere 3D da Stampare e un Tatuaggio Ambigramma con Due Nomi. Progetta, visualizza e scarica la tua illusione ottica.",
+    "col1Title": "Generatori",
+    "col2Title": "Risorse & Scoperta",
+    "col3Title": "Tutorial",
+    "col4Title": "Azienda",
+    "rights": "© {year} Generatore di Ambigrammi. Tutti i diritti riservati.",
+    "builtFor": "Creato per la Community Maker e gli Artisti del Tatuaggio.",
+    "selectLanguage": "Lingua",
+    "legal": "Note Legali"
+  }
+}

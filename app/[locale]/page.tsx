@@ -44,6 +44,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         es: {
             title: "Generador de Ambigramas Gratis | Tatuajes de 2 Nombres y Letras 3D",
             description: "Crea ambigramas 2D y 3D gratis. El mejor generador para tatuajes de dos nombres y letras 3D para imprimir (STL). Sin registro y la mejor alternativa a Flipscript."
+        },
+        it: {
+            title: "Generatore di Ambigrammi Gratis: Ambigramma con Due Nomi",
+            description: "Crea un ambigramma con due nomi gratis. Il miglior generatore online per idee tatuaggio ambigramma e lettere 3D da stampare (file STL). Provalo subito!"
         }
     }
     const current = seoData[locale] || seoData.en;

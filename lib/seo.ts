@@ -35,6 +35,7 @@ export function constructMetadata({ title, description, path, locale, image = "/
                 "fr": getUrl("fr", path),
                 "de": getUrl("de", path),
                 "es": getUrl("es", path),
+                "it": getUrl("it", path),
                 "x-default": getUrl("en", path), // x-default 指向默认英语版
             },
         },

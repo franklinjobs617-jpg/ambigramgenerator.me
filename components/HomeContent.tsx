@@ -300,7 +300,7 @@ export default function HomeContent() {
                                 />
                             </div>
                             <div className="px-2 pb-2">
-                                <h3 className="font-black text-lg text-[#1A1A1B] mb-1">{t('Examples.ex1Title')}</h3>
+                                <div className="font-black text-lg text-[#1A1A1B] mb-1">{t('Examples.ex1Title')}</div>
                                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t('Examples.ex1Desc')}</p>
                             </div>
                         </div>
@@ -317,7 +317,7 @@ export default function HomeContent() {
                                 />
                             </div>
                             <div className="px-2 pb-2">
-                                <h3 className="font-black text-lg text-[#1A1A1B] mb-1">{t('Examples.ex2Title')}</h3>
+                                <div className="font-black text-lg text-[#1A1A1B] mb-1">{t('Examples.ex2Title')}</div>
                                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t('Examples.ex2Desc')}</p>
                             </div>
                         </div>
@@ -338,7 +338,7 @@ export default function HomeContent() {
                                 </div>
                             </div>
                             <div className="px-2 pb-2">
-                                <h3 className="font-black text-lg text-indigo-600 mb-1">{t('Examples.ex3Title')}</h3>
+                                <div className="font-black text-lg text-indigo-600 mb-1">{t('Examples.ex3Title')}</div>
                                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t('Examples.ex3Desc')}</p>
                             </div>
                         </div>
@@ -358,7 +358,7 @@ export default function HomeContent() {
                                 </div>
                             </div>
                             <div className="px-2 pb-2">
-                                <h3 className="font-black text-lg text-indigo-600 mb-1">{t('Examples.ex4Title')}</h3>
+                                <div className="font-black text-lg text-indigo-600 mb-1">{t('Examples.ex4Title')}</div>
                                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t('Examples.ex4Desc')}</p>
                             </div>
                         </div>
