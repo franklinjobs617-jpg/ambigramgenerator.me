@@ -8,7 +8,9 @@
           "2d": "2D Tattoo Vorlagen",
           "3d": "3D Generator",
           "twoName": "2 Namen",
-          "tattoo": "Tattoo Schriftzug"
+          "tattoo": "Tattoo Schriftzug",
+          "tattooStencil": "Tattoo Stencil Maker"
+
         }
       },
       "guides": {
@@ -41,7 +43,6 @@
     },
     "button": "Jetzt erstellen"
   },
-
   "HomePage": {
     "Navigation": {
       "logoText": "Ambigram",
@@ -55,9 +56,9 @@
     },
     "Hero": {
       "ratingBadge": "4.8/5 Bewertung • 1.200+ Nutzer",
-      "titleP1": "Kostenlos Ambigramm erstellen ",
-      "titleP2": "& 3D Schriftzug Generator",
-      "subtitle": "Das einzige Tool, das zwei Namen in ein visuelles Meisterwerk verwandelt. Erstelle sofort <bold>Ambigramm Tattoo Vorlagen</bold> und <bold>3D-Druck STL-Dateien</bold>. 100% kostenlos, ohne Anmeldung."
+      "titleP1": "Ambigramm Generator: ",
+      "titleP2": "Erstellen (2 Namen & Tattoos)",
+      "subtitle": "Der professionelle <bold>Tattoo Schriftzug Generator</bold>. Erstelle individuelle Designs aus 2 Namen, perfekt als Tattoo Vorlage oder 3D-Druck STL. 100% kostenlos, ohne Anmeldung."
     },
     "Inspiration": {
       "title": "Brauchst du Inspiration? Beliebte Kombinationen"
@@ -65,123 +66,105 @@
     "Workspace": {
       "tab3d": "3D Generator",
       "tab2d": "Tattoo Vorlagen",
-      "tattooToolTitle": "Professionelle Tattoo Vorlagen & Ambigramm Schriftzüge",
-      "tattooToolDesc": "Suchst du nach einem <bold>Ambigramm Tattoo für 2 Namen</bold>? Unser 2D-Generator bietet <spanClass>Kalligrafie-Stile</spanClass>, die für klare Linien und perfekte Tattoo-Vorlagen (Stencils) optimiert sind.",
-      "loading2dText": "2D Tattoo-Vorlage wird geladen..."
+      "tattooToolTitle": "Tattoo Schriftzug Generator für Namen",
+      "tattooToolDesc": "Suchst du nach <bold>Tattoo Schriftarten für Namen</bold>? Unser Generator erstellt symmetrische Designs, optimiert als klare Vorlage für dein Tattoo.",
+      "loading2dText": "Tattoo-Vorlage wird generiert..."
     },
     "HowItWorks": {
-      "title": "In 3 Schritten zum eigenen Ambigramm",
-      "subtitle": "Dein individuelles Ambigramm zu erstellen dauert nur wenige Sekunden.",
+      "title": "In 3 Schritten dein Ambigramm erstellen",
+      "subtitle": "Dein individuelles Design in wenigen Sekunden.",
       "step1Title": "Schritt 1: Text eingeben",
-      "step1Desc": "Gib ein oder zwei Wörter (Namen) ein. Unser Tool übernimmt die komplexe Geometrie für dich.",
+      "step1Desc": "Gib zwei Namen ein. Unser Tool berechnet die perfekte Symmetrie.",
       "step2Title": "Schritt 2: Vorschau & Anpassen",
-      "step2Desc": "Rotiere und betrachte dein Design im Live-3D-Viewer. Passe den Stil nach Belieben an.",
-      "step3Title": "Schritt 3: STL oder Bild herunterladen",
-      "step3Desc": "Lade eine druckfertige STL-Datei oder ein teilbares GIF herunter. So einfach ist das!"
+      "step2Desc": "Prüfe dein Design im Live-3D-Viewer und wähle den passenden Stil.",
+      "step3Title": "Schritt 3: Tattoo-Vorlage oder STL-Datei herunterladen",
+      "step3Desc": "Speichere dein Design als STL-Datei für den 3D-Druck oder als Bild für dein Tattoo."
     },
     "Features": {
-      "title": "Erstelle individuelle 3D Ambigramme in Sekunden",
-      "subtitle": "Von persönlichen Geschenken bis hin zu professionellen Logos – unser Tool erweckt deine Ideen zum Leben.",
+      "title": "Individuelle 3D Ambigramme & STL-Dateien",
+      "subtitle": "Von professionellen Tattoo Vorlagen bis hin zu einzigartigen 3D-Objekten.",
       "f1Title": "Tattoo Vorlagen & Schriftzüge",
-      "f1Desc": "Entwirf einzigartige und bedeutungsvolle Tattoo-Vorlagen, die aus zwei Perspektiven eine Geschichte erzählen.",
+      "f1Desc": "Entwirf einzigartige Tattoo Schriftarten für Namen, die aus zwei Perspektiven eine Geschichte erzählen.",
       "f2Title": "3D-Druck STL-Dateien",
-      "f2Desc": "Lade STL-Dateien herunter, um physische Ambigramme für deinen Schreibtisch oder als Geschenk in 3D zu drucken.",
+      "f2Desc": "Lade STL-Dateien herunter, um physische Ambigramme in 3D zu drucken.",
       "f3Title": "Personalisierte Geschenke",
-      "f3Desc": "Gestalte ein besonderes Geschenk für deine Liebsten, indem du zwei Namen zu einem faszinierenden Objekt verschmilzt.",
+      "f3Desc": "Gestalte ein besonderes Geschenk, indem du zwei Namen zu einem Objekt verschmilzt.",
       "f4Title": "Logos & Branding",
       "f4Desc": "Erstelle clevere Logos und Marken-Assets, die einen zweiten Blick garantieren."
     },
     "CoreFeatures": {
-      "mainTitle": "Hauptfunktionen: Mehr als nur Text",
-      "item1": {
-        "title": "Ambigramm für 2 Namen",
-        "desc": "Verbinde zwei Namen oder Wörter zu einem einzigen, wunderschön rotierenden Design."
-      },
-      "item2": {
-        "title": "Bereit für den 3D-Druck",
-        "desc": "Erstelle 3D Schriftzüge und lade hochwertige STL-Dateien direkt für deinen 3D-Drucker herunter."
-      },
-      "item3": {
-        "title": "Optimiert für Tattoos",
-        "desc": "Die Designs sind für klare Linien optimiert und garantieren gut lesbare Tattoo-Vorlagen."
-      },
-      "item4": {
-        "title": "Kostenlos & Keine Wasserzeichen",
-        "desc": "Lade hochauflösende Dateien sofort herunter – ohne versteckte Gebühren, Abos oder Wasserzeichen."
-      }
+      "mainTitle": "Hauptfunktionen des Generators",
+      "item1": { "title": "Ambigramm für 2 Namen", "desc": "Verbinde zwei Namen zu einem rotierenden Design." },
+      "item2": { "title": "3D-Druck (STL-Dateien)", "desc": "Hochwertige STL-Daten für deinen 3D-Drucker." },
+      "item3": { "title": "Professionelle Tattoo Vorlagen", "desc": "Optimierte Schriftzüge für deinen Tätowierer." },
+      "item4": { "title": "Kostenlos & Keine Wasserzeichen", "desc": "Sofortiger Download ohne Anmeldung." }
     },
     "Examples": {
       "title": "Beliebte Ambigramm Designs",
-      "subtitle": "Schau dir an, was andere erstellt haben.",
-      "ex1Title": "SARAH / JOHN",
-      "ex1Desc": "Tattoo für 2 Namen",
-      "ex2Title": "TRUST",
-      "ex2Desc": "Tattoo Schriftzug",
-      "ex3Badge": "3D-DRUCK",
-      "ex3Title": "PHYSISCHES OBJEKT",
-      "ex3Desc": "STL Export",
-      "ex4Badge": "3D-DRUCK",
-      "ex4Title": "PHYSISCHES OBJEKT",
-      "ex4Desc": "STL Export"
+      "subtitle": "Was andere erstellt haben.",
+      "ex1Title": "SARAH / JOHN", "ex1Desc": "Tattoo für 2 Namen",
+      "ex2Title": "TRUST", "ex2Desc": "Tattoo Schriftzug",
+      "ex3Badge": "3D-DRUCK", "ex3Title": "PHYSISCHES OBJEKT", "ex3Desc": "STL Export",
+      "ex4Badge": "3D-DRUCK", "ex4Title": "PHYSISCHES OBJEKT", "ex4Desc": "3D-Modell"
     },
     "Comparison": {
-      "title": "Die beste kostenlose Flipscript Alternative",
-      "subtitle": "Wir bieten erweiterte 3D-Funktionen und unbegrenzte, kostenlose Downloads, für die andere Geld verlangen.",
+      "title": "Warum unser Generator?",
+      "subtitle": "Besser als Standard-Tools: Kostenloses 3D-Design.",
       "headerFeature": "Funktion",
       "headerUs": "AmbigramStudio",
       "headerOthers": "Andere",
       "priceLabel": "Preis",
       "priceUs": "100% Kostenlos",
-      "priceOthers": "Kostenpflichtig / Abo",
-      "modelLabel": "3D-Modell generieren",
-      "modelUs": "Ja (STL Export)",
-      "modelOthers": "Nein (Nur 2D)",
-      "twoNameLabel": "Unterstützt 2 Namen",
+      "priceOthers": "Kostenpflichtig",
+      "modelLabel": "3D-Export",
+      "modelUs": "STL Inklusive",
+      "modelOthers": "Nein",
+      "twoNameLabel": "2 Namen Support",
       "twoNameUs": "Ja",
       "twoNameOthers": "Ja",
-      "formatLabel": "Download-Format",
-      "formatUs": "PNG, STL, GIF",
-      "formatOthers": "Nur Bilder"
+      "formatLabel": "Format",
+      "formatUs": "PNG, STL",
+      "formatOthers": "Nur Bild"
     },
     "FAQ": {
       "title": "Häufig gestellte Fragen (FAQ)",
-      "subtitle": "Alles, was du über unseren Ambigramm Generator wissen musst.",
+      "subtitle": "Alles rund um den Ambigramm Generator.",
       "q1": "Was ist ein Ambigramm?",
-      "a1": "Ein Ambigramm ist ein typografisches Design, das so gestaltet ist, dass es aus verschiedenen Blickwinkeln (meist um 180 Grad gedreht) gelesen werden kann. Unser <bold>kostenloser Ambigramm Generator</bold> erstellt sowohl symmetrische (gleiches Wort) als auch asymmetrische Designs (Wort A wird zu Wort B, perfekt für <bold>2 Namen</bold>). Ideal für <bold>Tattoo Vorlagen</bold> und durch unsere Engine auch als <bold>3D-Druck (STL)</bold>.",
-      "q2": "Ist es wirklich kostenlos, ein Ambigramm zu erstellen?",
-      "a2": "Ja, unser Tool ist zu 100% kostenlos, erfordert <bold>keine Anmeldung</bold> und ist die beste <bold>Alternative zu Flipscript</bold>. Du kannst unbegrenzt Ambigramme erstellen, anpassen und herunterladen – ohne versteckte Kosten.",
+      "a1": "Ein Ambigramm ist ein Wortdesign, das gedreht lesbar bleibt. Unser <bold>Ambigramm Generator</bold> ist ideal für <bold>Tattoo Vorlagen</bold> und <bold>3D-Druck</bold>.",
+      "q2": "Wie kann ich ein Ambigramm erstellen?",
+      "a2": "Gib einfach deine Namen in unseren <bold>Ambigramm Generator</bold> ein und wähle zwischen Tattoo-Stil oder 3D-Modell.",
       "q3": "Darf ich die erstellten Ambigramme kommerziell nutzen?",
-      "a3": "Ja, du darfst die mit unserem Generator erstellten Ambigramme sowohl für private als auch kommerzielle Zwecke nutzen, z.B. für Tattoos, Logos, Merchandising und Marketingmaterial. Das Tool selbst darf jedoch nicht kopiert werden.",
+      "a3": "Ja, du darfst die Designs sowohl für private als auch kommerzielle Zwecke nutzen, z.B. für Tattoos oder Logos.",
       "q4": "In welchen Dateiformaten kann ich mein Design herunterladen?",
-      "a4": "Du kannst deine Designs als hochauflösendes PNG (ideal für digitale Displays, Drucke und Tattoo-Stencils) herunterladen. Für den 3D-Druck und professionelle CAD-Arbeiten bieten wir zudem den direkten Export als STL-Datei an.",
+      "a4": "Du kannst PNG für Tattoo-Stencils und STL-Dateien für den 3D-Druck herunterladen.",
       "q5": "Warum sieht mein Ambigramm beim Drehen nicht gut aus?",
-      "a5": "Ein gutes Ambigramm hängt stark von den verwendeten Buchstaben ab. Manche Kombinationen funktionieren besser als andere. Unsere Tipps:",
+      "a5": "Ein gutes Ambigramm hängt von der Buchstaben-Kompatibilität ab. Versuche kürzere Wörter (3-6 Buchstaben).",
       "a5Li1": "Verwende kürzere Wörter (3-6 Buchstaben funktionieren am besten).",
-      "a5Li2": "Wähle einen anderen Stil (z.B. Blockschrift vs. Kalligrafie).",
+      "a5Li2": "Wähle einen anderen Stil (verschiedene Schriftarten sind besser geeignet).",
       "a5Li3": "Experimentiere mit visuell ähnlichen Buchstaben-Kombinationen.",
-      "q6": "Wie erstelle ich das bestmögliche Ambigramm für ein Tattoo?",
-      "a6": "Für das beste Ergebnis nutze unseren 2D-Kalligrafie-Stil. Halte die Wörter relativ kurz (2-8 Buchstaben). Nutze die 3D/2D-Vorschau, um die Lesbarkeit aus beiden Richtungen zu prüfen. Zeige das hochauflösende PNG deinem Tätowierer, damit er daraus einen sauberen Stencil anfertigen kann.",
-      "q7": "Speichert ihr meine eingegebenen Namen oder Designs?",
-      "a7": "Nein. Wir nehmen <bold>Datenschutz</bold> sehr ernst. Alle Berechnungen finden lokal in deinem Browser statt. Deine eingegebenen Namen und erstellten Ambigramme werden niemals an unsere Server gesendet oder gespeichert. Du hast die volle Kontrolle.",
-      "q8": "Kann ich neue Funktionen oder Stile vorschlagen?",
-      "a8": "Absolut! Wir arbeiten ständig daran, unseren Generator zu verbessern. Wenn du Ideen für neue Stile oder 3D-Funktionen hast, kontaktiere uns gerne."
+      "q6": "Beste Tattoo Schriftarten für Namen?",
+      "a6": "Für <bold>Tattoo Schriftarten für Namen</bold> empfehlen wir unsere Kalligrafie-Option, die klare Stencils ermöglicht.",
+      "q7": "Speichert ihr Daten?",
+      "a7": "Nein. Alles passiert lokal in deinem Browser. Deine Designs werden nicht gespeichert.",
+      "q8": "Kann ich neue Funktionen vorschlagen?",
+      "a8": "Absolut! Kontaktiere uns gerne über das Feedback-Formular."
     },
     "CTA": {
-      "title": "Bereit für dein eigenes Meisterwerk?",
-      "subtitle": "Lass deiner Kreativität freien Lauf und erstelle in wenigen Sekunden ein einzigartiges Ambigramm. Es ist kostenlos, schnell und ohne Anmeldung.",
+      "title": "Bereit für dein Meisterwerk?",
+      "subtitle": "Lass deiner Kreativität freien Lauf. Es ist kostenlos und schnell.",
       "button": "Jetzt kostenlos erstellen"
     },
     "Footer": {
       "logoText": "AmbigramStudio",
       "link1": "3D STL Dateien",
       "link2": "Tattoo Vorlagen",
-      "link3": "Flipscript Alternative",
-      "link4": "Nutzungsbedingungen",
+      "link3": "Ambigramm Generator",
+      "link4": "Rechtliches",
       "copyright": "© {year} AMBIGRAMGENERATOR.ME. ALLE RECHTE VORBEHALTEN."
     },
     "Generator3D": {
-      "title": "So funktioniert der 3D Generator",
-      "subtitle": "Konfiguriere deinen Text und die Render-Qualität.",
+      "title": "So funktioniert der Generator",
+      "subtitle": "Konfiguration",
       "settingsTitle": "Modell-Einstellungen",
       "firstWordLabel": "Erstes Wort",
       "firstWordPlaceholder": "z.B. LIEBE",
@@ -203,9 +186,9 @@
     },
     "HeroSection": {
       "ratingText": "4.8/5 Bewertung • 1.200+ Nutzer",
-      "titleP1": "Kostenlos Ambigramm erstellen ",
-      "titleP2": "& 3D Schriftzug Generator",
-      "subtitle": "Das einzige Tool, das zwei Namen in ein visuelles Meisterwerk verwandelt. Erstelle sofort <bold>Ambigramm Tattoo Vorlagen</bold>, <bold>3D-Druck STL-Dateien</bold> und einzigartige <bold>Flipscript-Alternativen</bold>.",
+      "titleP1": "Ambigramm Generator: ",
+      "titleP2": "Ambigramm erstellen (2 Namen & Tattoos)",
+      "subtitle": "Der <bold>Tattoo Schriftzug Generator</bold> für individuelle Designs.",
       "step1Label": "Schritt 1: Gib deine Wörter ein",
       "inputWordAPlaceholder": "Wort A",
       "inputWordBPlaceholder": "Wort B",
@@ -218,18 +201,18 @@
       "tagGifts": "Geschenke",
       "scarcityText": "Nur 1% der Menschen hat ein eigenes Ambigramm. Jetzt gehörst du dazu.",
       "slide3DTitle": "3D STL Generator",
-      "slide3DDesc": "Erstelle professionelle 3D Ambigramme (3D Schriftzüge) für den STL-Druck und physische Geschenke.",
+      "slide3DDesc": "Erstelle 3D Ambigramme für den STL-Druck.",
       "slide3DLiveLabel": "Live 3D-Vorschau",
       "slide3DReadyLabel": "STL Bereit",
       "slide2DTitle": "2D Tattoo Designer",
-      "slide2DDesc": "Elegante Kalligrafie, optimiert für Tattoos. Klare Linien und perfekte Symmetrie aus jedem Winkel.",
+      "slide2DDesc": "Elegante Kalligrafie, optimiert für Tattoos.",
       "slide2DLiveLabel": "Tattoo Vorschau",
       "slide2DReadyLabel": "Vektor"
     }
-},
+  },
   "Generator2D": {
-    "title": "2D-Ambigramme für Tattoos & Logos entwerfen",
-    "subtitle": "Ideal für Tattoos, Logos & digitale Kunst",
+    "title": "Tattoo Vorlagen & Ambigramme",
+    "subtitle": "Das Tool für Tattoo Schriftarten",
     "inputLabel": "Ein oder zwei Wörter",
     "inputPlaceholder": "z. B. Familie / Für immer",
     "styleLabel": "Stil",
@@ -239,14 +222,14 @@
     "emptyStateText": "Geben Sie oben Wörter ein, um Ihr Design zu generieren",
     "rotationHint": "(Klicken zum Drehen um 180°)",
     "altTextResult": "Ambigramm-Ergebnis {index}",
-    "tattooStencilsDesc": "Perfekt für Tattoo-Vorlagen. Unser Kalligraphie-Stil ist speziell für Körperkunst optimiert. Im Gegensatz zu anderen Generatoren sorgen wir für klare Linien, die Ihr Tätowierer leicht übertragen kann. Laden Sie das PNG herunter und bringen Sie Ihr einzigartiges Zwei-Namen-Design noch heute ins Studio."
+    "tattooStencilsDesc": "Perfekt für Tattoo-Vorlagen. Unser Stil ist speziell für Haut-Kunst optimiert. Wir sorgen für klare Linien, die dein Tätowierer leicht übertragen kann."
   },
   "Footer": {
-    "description": "Die professionelle Engine für 3D-druckbare Ambigramme & Zwei-Namen-Tattoo-Vorlagen. Entwerfen, visualisieren und drucken Sie Ihre eigenen optischen Täuschungen.",
+    "description": "Dein Tool für Ambigramm Tattoo Vorlagen & 3D STL.",
     "col1Title": "Generatoren",
-    "col2Title": "Lernen & Entdecken",
+    "col2Title": "Lernen",
     "col3Title": "Tutorials",
-    "col4Title": "Unternehmen",
+    "col4Title": "Rechtliches",
     "rights": "© {year}Ambigram Generator. Alle Rechte vorbehalten.",
     "builtFor": "Entwickelt für Maker & Tätowierer.",
     "selectLanguage": "Sprache",

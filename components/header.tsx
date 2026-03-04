@@ -66,6 +66,7 @@ export default function Header() {
                 { label: t("nav.generators.items.3d"), href: "/3d-generator", badge: "hot" },
                 { label: t("nav.generators.items.twoName"), href: "/tutorial/two-name-ambigram" },
                 { label: t("nav.generators.items.tattoo"), href: "/tutorial/tattoo-design" },
+                { label: t("nav.generators.items.tattooStencil"), href: "/tattoo-stencil-maker" },
             ]
         },
         {

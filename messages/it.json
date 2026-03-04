@@ -8,7 +8,8 @@
           "2d": "Generatore 2D",
           "3d": "Ambigramma 3D",
           "twoName": "Ambigramma 2 Nomi",
-          "tattoo": "Design Tatuaggi"
+          "tattoo": "Design Tatuaggi",
+          "tattooStencil": "Stencil per Tatuaggi"
         }
       },
       "guides": {

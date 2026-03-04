@@ -433,7 +433,7 @@ export default function Generator3d({ incomingWordA, incomingWordB, triggerRende
     return (
         <>
             <div className="text-3xl font-black text-white tracking-tight w-full text-center py-4">
-                {t('title')}
+                <h2> {t('title')}</h2>
                 <p className="text-slate-400 text-sm mt-1">{t('subtitle')}</p>
             </div>
 

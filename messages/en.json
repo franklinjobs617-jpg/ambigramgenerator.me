@@ -9,7 +9,8 @@
           "2d": "2D Maker",
           "3d": "3D Generator",
           "twoName": "Two-Name",
-          "tattoo": "Tattoo Engine"
+          "tattoo": "Tattoo Engine",
+          "tattooStencil": "Tattoo Stencil Maker"
         }
       },
       "guides": {
@@ -182,7 +183,7 @@
       "copyright": "© {year} AMBIGRAMGENERATOR.ME. ALL RIGHTS RESERVED."
     },
     "Generator3D": {
-      "title": "How to Use the 3D Tool",
+      "title": "How to Use the 3D Generator Tool",
       "subtitle": "Configure your text and render quality.",
       "settingsTitle": "Model Settings",
       "firstWordLabel": "First Word",

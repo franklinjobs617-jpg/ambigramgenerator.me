@@ -37,8 +37,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description: "Créez des ambigrammes 3D/2D gratuits. Idéal pour tatouages 2 prénoms et fichiers STL. Alternative à Flipscript sans inscription et optimisée pour mobile."
         },
         de: {
-            title: "Ambigramm Generator: Kostenlos Ambigramm erstellen (2 Namen)",
-            description: "Ambigramm erstellen: Gratis 2D/3D Generator für Tattoo Vorlagen (2 Namen) & 3D Schriftzug. Ohne Anmeldung & die beste Flipscript Alternative. Mobil optimiert."
+            title: "Ambigramm Generator: Ambigramm erstellen (2 Namen & Tattoo)",
+            description: "Ambigramm erstellen: Gratis 2D/3D Tattoo Schriftzug Generator. Perfekt für Namen-Tattoos (2 Namen) & 3D-Druck (STL). Ohne Anmeldung!"
         }
         ,
         es: {

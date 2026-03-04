@@ -8,7 +8,8 @@
           "2d": "Créateur 2D",
           "3d": "Générateur 3D",
           "twoName": "2 Prénoms",
-          "tattoo": "Modèle Tatouage"
+          "tattoo": "Modèle Tatouage",
+          "tattooStencil": "Créateur de Pochoirs"
         }
       },
       "guides": {
