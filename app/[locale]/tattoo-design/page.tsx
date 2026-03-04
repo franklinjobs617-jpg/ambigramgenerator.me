@@ -111,7 +111,7 @@ export default async function TattooDesignPage({ params }: Props) {
                                 </div>
                             </div>
 
-                            <Image src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/tattoo-font-selection-impact.png" alt="Comparaison de polices pour tatouage" width={800} height={500} className="rounded-[2rem] shadow-2xl border border-slate-100" />
+                            <Image src="/images/tattoo-font-selection-impact.png" alt="Comparaison de polices pour tatouage" width={800} height={500} className="rounded-[2rem] shadow-2xl border border-slate-100" />
 
                             <h2 className="text-3xl font-black text-[#1A1A1B] mt-20 mb-6 border-b border-slate-200 pb-4">2. Préparation et Emplacement</h2>
                             <p>Un tatouage à deux prénoms est profondément personnel. Suivez cette liste pour garantir des résultats optimaux.</p>
@@ -196,7 +196,7 @@ export default async function TattooDesignPage({ params }: Props) {
                                 </div>
                             </div>
 
-                            <Image src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/tattoo-font-selection-impact.png" alt="Schriftartenvergleich Tattoos" width={800} height={500} className="rounded-[2rem] shadow-xl border border-slate-200" />
+                            <Image src="/images/tattoo-font-selection-impact.png" alt="Schriftartenvergleich Tattoos" width={800} height={500} className="rounded-[2rem] shadow-xl border border-slate-200" />
 
                             <h2 className="text-3xl font-black text-[#1A1A1B] mt-20 mb-6 border-b border-slate-200 pb-4">2. Vorbereitung & Platzierung</h2>
                             <ul className="space-y-4 not-prose mb-10">
@@ -274,9 +274,9 @@ export default async function TattooDesignPage({ params }: Props) {
 
                         <figure className="my-12 text-center">
                             <Image
-                                src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/tattoo-font-selection-impact.png"
+                                src="/images/tattoo-font-selection-impact.png"
                                 alt="Side-by-side comparison of thick-stroke ambigram vs thin strokes"
-                                width={800} height={500}
+                                width={800} height={500} unoptimized
                                 className="w-full h-auto rounded-[2.5rem] shadow-2xl border border-slate-100"
                             />
                             <figcaption className="text-sm text-slate-400 mt-4 font-medium italic">Comparison showing clarity and ink bleeding effects over time.</figcaption>
@@ -307,8 +307,8 @@ export default async function TattooDesignPage({ params }: Props) {
                             <div className="grid md:grid-cols-3 gap-8">
                                 {[
                                     { icon: Heart, col: "text-rose-500", t: "Couples & Love", l: ["Love / Hate", "Faith / Trust", "Mom / Dad"], img: "https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/early-ambigram-style-calligraphy.webp" },
-                                    { icon: Star, col: "text-amber-500", t: "Personal Values", l: ["Life / Death", "Destiny / Choice", "Sinner / Saint"], img: "https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/4-step infographic for ambigram tattoo preparation.webp" },
-                                    { icon: Zap, col: "text-blue-500", t: "Inspirational", l: ["Believe / Achieve", "Warrior / Healer", "Dream / Reality"], img: "https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/3-panel collage of ambigram tattoos.webp" }
+                                    { icon: Star, col: "text-amber-500", t: "Personal Values", l: ["Life / Death", "Destiny / Choice", "Sinner / Saint"], img: "/images/4-step infographic for ambigram tattoo preparation.webp" },
+                                    { icon: Zap, col: "text-blue-500", t: "Inspirational", l: ["Believe / Achieve", "Warrior / Healer", "Dream / Reality"], img: "/images/3-panel collage of ambigram tattoos.webp" }
                                 ].map((card, i) => (
                                     <div key={i} className="bg-white p-6 rounded-[3rem] border border-slate-100 shadow-lg text-center group hover:-translate-y-2 transition-all duration-500">
                                         <card.icon className={`mx-auto mb-4 ${card.col} transition-transform group-hover:scale-110`} size={32} />
