@@ -11,7 +11,8 @@
           "twoName": "Two-Name",
           "tattoo": "Tattoo Engine",
           "tattooStencil": "Tattoo Stencil Maker",
-          "upsideDown": "Upside Down Text Generator"
+          "upsideDown": "Upside Down Text Generator",
+          "mirrorGenerator": "Mirror Text Generator"
         }
       },
       "guides": {

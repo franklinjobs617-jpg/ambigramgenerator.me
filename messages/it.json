@@ -10,7 +10,8 @@
           "twoName": "Ambigramma 2 Nomi",
           "tattoo": "Design Tatuaggi",
           "tattooStencil": "Stencil per Tatuaggi",
-          "upsideDown": "Generatore di testo sottosopra"
+          "upsideDown": "Generatore di testo sottosopra",
+          "mirrorGenerator": "Generatore di Testo Speculare"
 
         }
       },

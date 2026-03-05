@@ -10,7 +10,8 @@
           "twoName": "2 Prénoms",
           "tattoo": "Modèle Tatouage",
           "tattooStencil": "Créateur de Pochoirs",
-          "upsideDown": "Générateur de texte à l'envers"
+          "upsideDown": "Générateur de texte à l'envers",
+          "mirrorGenerator": "Générateur de Texte Miroir"
 
         }
       },

@@ -10,7 +10,8 @@
           "twoName": "2 Namen",
           "tattoo": "Tattoo Schriftzug",
           "tattooStencil": "Tattoo Stencil Maker",
-          "upsideDown": "Überkopf-Text-Generator"
+          "upsideDown": "Überkopf-Text-Generator",
+          "mirrorGenerator": "Spiegeltext-Generator"
 
 
         }

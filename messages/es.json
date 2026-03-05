@@ -10,7 +10,8 @@
           "twoName": "Dos Nombres",
           "tattoo": "Motor de Tatuajes",
           "tattooStencil": "Creador de Plantillas de Tatuajes",
-          "upsideDown": "Generador de texto al revés"
+          "upsideDown": "Generador de texto al revés",
+          "mirrorGenerator": "Generador de Texto Espejo"
 
         }
       },

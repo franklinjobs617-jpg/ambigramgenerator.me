@@ -66,6 +66,7 @@ export default function Header() {
                 { label: t("nav.generators.items.3d"), href: "/3d-generator", badge: "hot" },
                 { label: t("nav.generators.items.tattooStencil"), href: "/tattoo-stencil-maker", badge: "hot" },
                 { label: t("nav.generators.items.upsideDown"), href: "/upside-down-text-generator", },
+                { label: t("nav.generators.items.mirrorGenerator"), href: "/mirror-text-generator", },
             ]
         },
         {
@@ -126,7 +127,7 @@ export default function Header() {
                                             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 mt-2 w-72 bg-white rounded-[2rem] shadow-2xl border border-slate-100 p-4 overflow-hidden text-slate-900">
                                                 <div className="flex items-center gap-3 px-4 py-3 border-b border-slate-50 mb-2">
                                                     <div className="p-2 bg-indigo-50 rounded-lg">{menu.icon}</div>
-                                                    <span className="font-black text-indigo-600 text-sm uppercase tracking-widest">{t(`nav.${menu.id}.title`)}</span>
+                                                    <span className="font-black text-indigo-600 text-sm tracking-widest">{t(`nav.${menu.id}.title`)}</span>
                                                 </div>
                                                 {menu.links.map((link) => (
                                                     <Link key={link.href} href={link.href} className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-indigo-50 transition-colors group">
@@ -193,7 +194,7 @@ export default function Header() {
                         <div className="flex-1 overflow-y-auto p-6 space-y-6">
                             {/* 🌐 Mobile Language Switcher */}
                             <div className="bg-slate-50 p-4 rounded-[2rem] border border-slate-100">
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 ml-2">Select Language</p>
+                                <p className="text-[10px] font-black text-slate-400 tracking-widest mb-4 ml-2">Select Language</p>
                                 <div className="grid grid-cols-3 gap-2">
                                     {languages.map(lang => (
                                         <button key={lang.code} onClick={() => handleLocaleChange(lang.code)} className={`flex flex-col items-center justify-center gap-2 p-3 rounded-2xl border-2 transition-all ${locale === lang.code ? "bg-white border-indigo-600 shadow-sm" : "bg-transparent border-transparent text-slate-500"}`}>
@@ -216,7 +217,7 @@ export default function Header() {
                                                 {menu.links.map((link) => (
                                                     <Link key={link.href} href={link.href} onClick={() => setIsMobileOpen(false)} className="flex items-center justify-between p-4 font-semibold text-slate-600 active:bg-indigo-100 transition-colors">
                                                         {link.label}
-                                                        {link.badge && <span className="bg-orange-500 text-white text-[8px] px-2 py-0.5 rounded-full font-black uppercase tracking-wider italic">Hot</span>}
+                                                        {link.badge && <span className="bg-orange-500 text-white text-[8px] px-2 py-0.5 rounded-full font-black tracking-wider italic">Hot</span>}
                                                     </Link>
                                                 ))}
                                             </motion.div>

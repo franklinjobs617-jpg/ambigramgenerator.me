@@ -213,7 +213,49 @@ export default async function UpsideDownTextGeneratorPage() {
                     </div>
                 </div>
             </section>
+            <section className="py-20 bg-slate-50 border-y border-slate-100">
+                <div className="container mx-auto px-4 max-w-5xl">
+                    <h2 className="text-3xl font-black text-slate-900 text-center mb-12 flex items-center justify-center gap-3">
+                        <Sparkles size={32} className="text-indigo-500" /> Need a Different Text Effect?
+                    </h2>
 
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {/* 推荐 Mirror Text 生成器 */}
+                        <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition-all group hover:border-emerald-300">
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl font-black">⇄</div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-slate-900 mb-1">Mirror Text Generator</h3>
+                                    <p className="text-sm text-emerald-600 font-bold uppercase tracking-wider">Flip Horizontally</p>
+                                </div>
+                            </div>
+                            <p className="text-slate-600 mb-8 leading-relaxed">
+                                If you are looking for a <strong className="text-slate-800">mirror text generator</strong> that flips your letters horizontally (like a reflection in a mirror), our dedicated tool is ready for you. It's the perfect way to create mysterious, code-like messages for escape rooms or unique design layouts.
+                            </p>
+                            <Link href="/mirror-text-generator" className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-emerald-700 transition-colors w-full justify-center">
+                                Go to Mirror Text Generator <ArrowRight size={18} />
+                            </Link>
+                        </div>
+
+                        {/* 推荐 Ambigram Generator (核心转化) */}
+                        <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition-all group hover:border-indigo-300">
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl font-black">∞</div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-slate-900 mb-1">Ambigram Generator</h3>
+                                    <p className="text-sm text-indigo-600 font-bold uppercase tracking-wider">Professional Text Art</p>
+                                </div>
+                            </div>
+                            <p className="text-slate-600 mb-8 leading-relaxed">
+                                Simple flips are fun, but Ambigrams are art. Use our core generator to create professional, symmetrical designs that are readable from both directions. A must-have for <strong className="text-slate-800">custom tattoo designs</strong> and logos.
+                            </p>
+                            <Link href="/" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-indigo-700 transition-colors w-full justify-center">
+                                Try Professional Generator <ArrowRight size={18} />
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
             {/* ==========================================
                 6. THE UPSELL BRIDGE (转化至核心业务 Ambigram)
             ========================================== */}
