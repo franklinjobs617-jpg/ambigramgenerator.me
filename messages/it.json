@@ -9,7 +9,9 @@
           "3d": "Ambigramma 3D",
           "twoName": "Ambigramma 2 Nomi",
           "tattoo": "Design Tatuaggi",
-          "tattooStencil": "Stencil per Tatuaggi"
+          "tattooStencil": "Stencil per Tatuaggi",
+          "upsideDown": "Generatore di testo sottosopra"
+
         }
       },
       "guides": {

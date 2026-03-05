@@ -64,9 +64,8 @@ export default function Header() {
             icon: <Box size={18} className="text-blue-600" />,
             links: [
                 { label: t("nav.generators.items.3d"), href: "/3d-generator", badge: "hot" },
-                { label: t("nav.generators.items.twoName"), href: "/tutorial/two-name-ambigram" },
-                { label: t("nav.generators.items.tattoo"), href: "/tutorial/tattoo-design" },
-                { label: t("nav.generators.items.tattooStencil"), href: "/tattoo-stencil-maker" },
+                { label: t("nav.generators.items.tattooStencil"), href: "/tattoo-stencil-maker", badge: "hot" },
+                { label: t("nav.generators.items.upsideDown"), href: "/upside-down-text-generator", },
             ]
         },
         {
@@ -77,6 +76,8 @@ export default function Header() {
                 { label: t("nav.guides.items.history"), href: "/guide/ambigram-history-art" },
                 { label: t("nav.guides.items.principles"), href: "/guide/flipscript-principles" },
                 { label: t("nav.guides.items.bestTools"), href: "/guide/best-online-tools" },
+                { label: t("nav.generators.items.twoName"), href: "/tutorial/two-name-ambigram" },
+                { label: t("nav.generators.items.tattoo"), href: "/tutorial/tattoo-design" },
             ]
         },
         {

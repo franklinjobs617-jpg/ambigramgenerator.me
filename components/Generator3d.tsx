@@ -432,10 +432,7 @@ export default function Generator3d({ incomingWordA, incomingWordB, triggerRende
 
     return (
         <>
-            <div className="text-3xl font-black text-white tracking-tight w-full text-center py-4">
-                <h2> {t('title')}</h2>
-                <p className="text-slate-400 text-sm mt-1">{t('subtitle')}</p>
-            </div>
+
 
             <section className="w-full h-full flex flex-col lg:flex-row gap-8 p-6 md:p-10">
 

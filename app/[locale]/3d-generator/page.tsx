@@ -123,238 +123,828 @@ export default async function ThreeDGeneratorPage({ params }: Props) {
     // ========================================================================
     // 🇫🇷 法语版本 (French Version)
     // ========================================================================
+    // ========================================================================
+    // 🇫🇷 法语版本 (French / Français)
+    // SEO Focus: STL gratuit, Porte-clés 3D, Plaque de bureau, Ambigramme
+    // ========================================================================
     if (locale === 'fr') {
         return (
             <main className="bg-[#FDFDFF]">
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-                {/* Header Section (FR) */}
-                <section className="bg-[#1A1A1B] text-white py-24 lg:py-36 px-6 overflow-hidden relative">
-                    <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-600/15 via-transparent to-transparent -z-10" />
+                {/* Section 1: Hero */}
+                <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6 text-center">
+                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-600/10 via-transparent to-transparent -z-10" />
                     <div className="container mx-auto text-center max-w-5xl space-y-10">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-black text-indigo-400 uppercase tracking-widest">
-                            <Zap size={14} className="fill-current" /> Ingénierie Avancée
+                            <Printer size={14} className="fill-current" /> Outil d&apos;impression 3D Gratuit
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[0.95] text-white">
-                            Donnez vie à vos mots <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-blue-500 to-purple-600">en relief 3D</span>
+                        <h1 className="text-3xl md:text-6xl font-black tracking-tight leading-[1.05]">
+                            Générateur Texte vers STL 3D <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-blue-500 to-purple-600">& Créateur d&apos;Ambigrammes</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-slate-400 font-medium max-w-3xl mx-auto leading-relaxed">
-                            Créez des ambigrammes 3D interactifs pour l&apos;impression 3D. Téléchargez instantanément des <strong>fichiers STL</strong> ou des <strong>GIFs</strong> animés gratuitement.
+                            Convertissez vos mots en modèles 3D prêts à imprimer. Créez des <strong>porte-clés</strong>, des <strong>plaques de bureau</strong> et des illusions d&apos;optique sans compétence en CAO.
                         </p>
                         <div className="pt-6">
                             <Link href="#generator-tool" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-2xl shadow-indigo-900/40 active:scale-95">
-                                Commencer à Générer <ChevronRight size={20} />
+                                Créer un fichier STL <ChevronRight size={20} />
                             </Link>
                         </div>
                     </div>
                 </section>
 
-                {/* What Can You Create? (FR) */}
+                {/* Section 2: Creative Ideas */}
                 <section className="py-12 px-6">
                     <div className="container mx-auto max-w-7xl">
                         <div className="text-center mb-24 space-y-4">
-                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Que pouvez-vous créer ?</h2>
-                            <p className="text-slate-500 text-lg font-medium">Transformez vos mots en objets tangibles et fascinants.</p>
+                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Idées Créatives : Que pouvez-vous imprimer ?</h2>
+                            <p className="text-slate-500 text-lg font-medium">De l&apos;utile à l&apos;art visuel époustouflant.</p>
                         </div>
                         <div className="grid md:grid-cols-3 gap-8">
                             <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
                                 <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-500">
-                                    <Box size={32} />
+                                    <Key size={32} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Art de Bureau Unique</h3>
-                                <p className="text-slate-500 leading-relaxed font-medium">Créez une pièce décorative qui révèle un secret lors de sa rotation à 180 degrés.</p>
+                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Porte-clés 3D Personnalisés</h3>
+                                <p className="text-slate-500 leading-relaxed font-medium">Activez le mode &quot;Anneau&quot; pour créer instantanément des porte-clés en PLA ou PETG avec des prénoms.</p>
                             </div>
                             <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
                                 <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-500">
-                                    <Gift size={32} />
+                                    <Box size={32} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Cadeaux Personnalisés</h3>
-                                <p className="text-slate-500 leading-relaxed font-medium">Fusionnez deux prénoms ou mots significatifs en un seul bel objet physique.</p>
+                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Plaques de Bureau Professionnelles</h3>
+                                <p className="text-slate-500 leading-relaxed font-medium">Générez des plaques nominatives à double perspective. L&apos;accessoire de bureau parfait.</p>
                             </div>
                             <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
                                 <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">
-                                    <GraduationCap size={32} />
+                                    <Gift size={32} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Modèles Éducatifs</h3>
-                                <p className="text-slate-500 leading-relaxed font-medium">Idéal pour les makerspaces afin de démontrer les principes de symétrie et de géométrie.</p>
+                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Cadeaux Ambigrammes Uniques</h3>
+                                <p className="text-slate-500 leading-relaxed font-medium">Créez une illusion à 90 degrés. Le cadeau ultime pour les makers et les geeks.</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* Generator Tool (FR) */}
+                {/* Section 3: Generator Tool */}
                 <section id="generator-tool" className="py-20 px-6 mt-24">
-                    <div className="container mx-auto max-w-7xl bg-white rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden">
-                        <div className="relative group w-full h-full  bg-slate-950">
-                            <Generator3d />
-                            <div className="absolute bottom-10 right-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity hidden md:block">
-                                <div className="bg-indigo-600/90 backdrop-blur-md px-4 py-2 rounded-xl text-white text-[10px] font-bold tracking-widest uppercase flex items-center gap-2">
-                                    <MousePointer2 size={12} /> Interaction Activée
-                                </div>
+                    <div className="container mx-auto max-w-7xl relative">
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-indigo-600 text-white px-6 py-2 rounded-t-xl font-bold text-sm tracking-widest uppercase z-10 shadow-lg">
+                            Nouveau : Mode Porte-clés
+                        </div>
+                        <div className="bg-white rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden">
+                            <div className="relative group w-full h-full bg-slate-950">
+                                <Generator3d />
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* Science Section (FR) */}
-                <section className="py-40 bg-white border-t border-slate-50 px-6">
+                {/* Section 4: Tutorial */}
+                <section className="py-24 px-6 bg-slate-50">
+                    <div className="container mx-auto max-w-5xl">
+                        <div className="text-center mb-16">
+                            <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm">Tutoriel</span>
+                            <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-2">Étapes : Comment utiliser le générateur STL</h2>
+                            <p className="text-slate-500 mt-4 max-w-2xl mx-auto">Du texte à l&apos;objet physique en quelques minutes.</p>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-12 relative">
+                            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 -translate-x-1/2" />
+                            <div className="relative md:text-right pr-0 md:pr-12">
+                                <div className="absolute top-0 right-0 md:-right-6 w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold z-10 md:translate-x-1/2">1</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Étape 1 : Saisir et Personnaliser</h3>
+                                <p className="text-slate-600">Entrez deux mots. Activez l&apos;option &quot;Porte-clés&quot; (Keychain Loop) pour les objets à suspendre.</p>
+                            </div>
+                            <div className="md:block hidden" />
+                            <div className="md:block hidden" />
+                            <div className="relative pl-12 md:pl-12">
+                                <div className="absolute top-0 left-0 md:-left-6 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold z-10 md:-translate-x-1/2">2</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Étape 2 : Télécharger le STL</h3>
+                                <p className="text-slate-600">Obtenez un fichier STL étanche. Notre algorithme assure que le maillage est parfait pour l&apos;impression.</p>
+                            </div>
+                            <div className="relative md:text-right pr-0 md:pr-12">
+                                <div className="absolute top-0 right-0 md:-right-6 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold z-10 md:translate-x-1/2">3</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Étape 3 : Slicer (Cura/Prusa)</h3>
+                                <p className="text-slate-600">Importez le STL dans <strong>Cura, PrusaSlicer ou Bambu Studio</strong>. Imprimez à plat pour une adhérence maximale.</p>
+                            </div>
+                            <div className="md:block hidden" />
+                            <div className="md:block hidden" />
+                            <div className="relative pl-12 md:pl-12">
+                                <div className="absolute top-0 left-0 md:-left-6 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold z-10 md:-translate-x-1/2">4</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Étape 4 : Imprimer et Admirer</h3>
+                                <p className="text-slate-600">Lancez l&apos;impression. Partagez votre texte 3D à double perspective sur les réseaux sociaux !</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Section 5: Pro Settings */}
+                <section className="py-24 px-6 bg-white">
                     <div className="container mx-auto max-w-6xl">
-                        <div className="grid lg:grid-cols-2 gap-24 items-center">
-                            <div className="space-y-10 text-left">
-                                <h2 className="text-5xl font-black text-slate-900 tracking-tight leading-tight">Fonctionnement du <br /><span className="text-indigo-600">Générateur STL</span></h2>
-                                <p className="text-slate-500 text-lg font-medium leading-relaxed">Notre générateur utilise un algorithme spécialisé qui calcule les trajectoires d&apos;extrusion optimales et la géométrie des ombres pour la lisibilité physique.</p>
-                                <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-200/50 shadow-inner">
-                                    <p className="text-slate-600 text-sm leading-relaxed m-0 font-medium italic underline decoration-indigo-200 decoration-4 underline-offset-8">
-                                        Le logiciel utilise une <strong>technique de section transversale</strong> pour générer le corps solide. Cela crée un fichier STL propre, optimisé pour les imprimantes FDM et SLA.
-                                    </p>
+                        <div className="grid lg:grid-cols-2 gap-16 items-start">
+                            <div>
+                                <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm">Conseils d&apos;Expert</span>
+                                <h2 className="text-3xl md:text-5xl font-black text-slate-900 mt-3 mb-6 leading-tight">
+                                    Paramètres pour une <br /> <span className="text-indigo-600">Impression Parfaite</span>
+                                </h2>
+                                <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                    <Settings size={20} /> Détails Techniques
+                                </h3>
+                                <div className="space-y-6">
+                                    <article className="flex gap-4">
+                                        <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 shrink-0"><Cpu size={24} /></div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900">Remplissage (Infill) : 15-20%</h4>
+                                            <p className="text-sm text-slate-500">Pour les ambigrammes décoratifs, 15% suffisent pour la solidité sans gaspiller de filament.</p>
+                                        </div>
+                                    </article>
+                                    <article className="flex gap-4">
+                                        <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 shrink-0"><Layers size={24} /></div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900">Parois (Walls) : 3 lignes</h4>
+                                            <p className="text-sm text-slate-500">Réglez les murs sur 3. Cela évite que les parties fines des lettres ne cassent.</p>
+                                        </div>
+                                    </article>
                                 </div>
                             </div>
-                            <div className="relative">
-                                <div className="absolute -inset-10 bg-indigo-600/5 rounded-full blur-[100px] -z-10" />
-                                <Image src="/images/3d-printed-object-demo.webp" alt="Ambigramme imprimé en 3D" width={600} height={400} className="rounded-[3rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.2)] border border-white w-full h-auto" />
+                            <div className="bg-slate-900 text-white p-10 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-32 bg-indigo-600 rounded-full blur-[100px] opacity-20"></div>
+                                <h3 className="text-2xl font-bold mb-8 border-b border-slate-700 pb-4 flex items-center gap-2">
+                                    <Zap size={24} className="text-yellow-400" /> ⚡ Fiche Express (Cheat Sheet)
+                                </h3>
+                                <div className="grid grid-cols-2 gap-y-6 gap-x-8">
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Matériau</p>
+                                        <p className="font-bold text-lg">PLA / PETG</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Buse (Nozzle)</p>
+                                        <p className="font-bold text-lg">0.4mm Standard</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Plateau</p>
+                                        <p className="font-bold text-lg">60°C</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Vitesse</p>
+                                        <p className="font-bold text-lg">50mm/s</p>
+                                    </div>
+                                    <div className="col-span-2">
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Supports</p>
+                                        <p className="font-bold text-lg text-green-400">Non Requis (Design Auto-portant)</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* FAQ Section (FR) */}
+                {/* Section 6: FAQ */}
                 <section className="py-32 bg-[#F8FAFC]">
-                    <div className="container mx-auto max-w-4xl px-6 text-center">
-                        <h2 className="text-4xl font-black mb-16 tracking-tight">FAQ du Générateur 3D</h2>
-                        <div className="space-y-6 text-left">
+                    <div className="container mx-auto max-w-4xl px-6">
+                        <h2 className="text-4xl font-black mb-16 text-center tracking-tight">FAQ Impression 3D (Dépannage)</h2>
+                        <div className="space-y-6">
                             <FaqBox
-                                q="Qu'est-ce qu'un fichier STL ?"
-                                a="Le STL est le format standard pour l'impression 3D. Utilisez un logiciel de 'slicing' comme Cura ou PrusaSlicer pour préparer votre modèle."
+                                q="Quelle taille de police pour l'impression 3D ?"
+                                a="Pour une buse standard de 0,4 mm, nous recommandons une épaisseur minimale de 3 mm. Notre outil gère l'échelle automatiquement."
                             />
                             <FaqBox
-                                q="Pourquoi créer un GIF d'abord ?"
-                                a="L'aperçu GIF animé vous permet de vérifier l'illusion visuelle sous les deux angles avant de lancer une impression physique de plusieurs heures."
+                                q="Comment empêcher les lettres de se décoller ?"
+                                a="L'adhérence est clé. Utilisez une 'Bordure' (Brim) dans votre slicer, ou utilisez notre fonction 'Base Stand' pour générer un socle solide."
                             />
                             <FaqBox
                                 q="Puis-je utiliser deux mots différents ?"
-                                a="Oui ! Notre générateur est conçu pour fusionner n'importe quels deux mots en un seul objet géométrique cohérent."
+                                a="Absolument. C'est un générateur 'Double Mot'. Entrez 'Amour' et 'Haine', et le modèle 3D changera selon l'angle de vue."
                             />
                         </div>
                     </div>
+                </section>
+
+                {/* Section 7: CTA */}
+                <section className="py-40 bg-slate-950 text-center px-6 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 pointer-events-none" />
+                    <h2 className="text-5xl md:text-7xl font-black text-white mb-10 tracking-tighter italic">Créez votre Texte 3D Maintenant</h2>
+                    <Link href="/" className="inline-flex items-center gap-3 bg-white text-slate-900 px-12 py-5 rounded-full text-xl font-bold hover:bg-indigo-600 hover:text-white transition-all duration-300 shadow-2xl active:scale-95">
+                        <PlayCircle size={24} /> Générer le Modèle 3D
+                    </Link>
                 </section>
             </main>
         );
     }
+
     // ========================================================================
-    // 德语版本 (German)
-    // ========================================================================
-    // ========================================================================
-    // 🇩🇪 德语版本 (German Version)
+    // 🇩🇪 德语版本 (German / Deutsch)
+    // SEO Focus: Text zu STL, 3D Druck Schlüsselanhänger, Namensschilder
     // ========================================================================
     if (locale === 'de') {
         return (
             <main className="bg-[#FDFDFF]">
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-                {/* Header Section (DE) */}
-                <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6 text-center px-6 overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-600/15 via-transparent to-transparent -z-10" />
-                    <div className="container mx-auto max-w-5xl space-y-10">
+
+                <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6 text-center">
+                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-600/10 via-transparent to-transparent -z-10" />
+                    <div className="container mx-auto text-center max-w-5xl space-y-10">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-black text-indigo-400 uppercase tracking-widest">
-                            <Zap size={14} className="fill-current" /> High-End-Technik
+                            <Printer size={14} className="fill-current" /> Kostenloses 3D-Druck-Tool
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[0.95]">
-                            Erlebe deine Worte <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-blue-500 to-purple-600">in echter 3D-Dimension</span>
+                        <h1 className="text-3xl md:text-6xl font-black tracking-tight leading-[1.05]">
+                            Kostenloser Text-zu-STL Generator <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-blue-500 to-purple-600">& Ambigramm Ersteller</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-slate-400 font-medium max-w-3xl mx-auto leading-relaxed">
-                            Erstellen Sie atemberaubende, interaktive 3D-Ambigramme für den 3D-Druck. Laden Sie druckfertige <strong>STL-Dateien</strong> oder animierte <strong>GIFs</strong> sofort kostenlos herunter.
+                            Wandeln Sie Wörter in druckfertige 3D-Modelle um. Erstellen Sie individuelle <strong>Schlüsselanhänger</strong>, <strong>Namensschilder</strong> und optische Täuschungen ohne CAD-Kenntnisse.
                         </p>
                         <div className="pt-6">
                             <Link href="#generator-tool" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-2xl shadow-indigo-900/40 active:scale-95">
-                                Jetzt Generator starten <ChevronRight size={20} />
+                                STL-Datei jetzt erstellen <ChevronRight size={20} />
                             </Link>
                         </div>
                     </div>
                 </section>
 
-                {/* What Can You Create? (DE) */}
                 <section className="py-12 px-6">
-                    <div className="container mx-auto max-w-7xl text-center">
-                        <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-20">Was kannst du erschaffen?</h2>
+                    <div className="container mx-auto max-w-7xl">
+                        <div className="text-center mb-24 space-y-4">
+                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Kreative Ideen: Was können Sie drucken?</h2>
+                            <p className="text-slate-500 text-lg font-medium">Von nützlichen Tags bis hin zu verblüffender Kunst.</p>
+                        </div>
                         <div className="grid md:grid-cols-3 gap-8">
                             <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
                                 <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-500">
-                                    <Box size={32} />
+                                    <Key size={32} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Einzigartige Schreibtischkunst</h3>
-                                <p className="text-slate-500 leading-relaxed font-medium">Ein faszinierendes Objekt für dein Büro, das erst beim Drehen sein Geheimnis preisgibt.</p>
+                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">3D Schlüsselanhänger & Tags</h3>
+                                <p className="text-slate-500 leading-relaxed font-medium">Aktivieren Sie den &quot;Ösen-Modus&quot;, um sofort personalisierte PLA- oder PETG-Anhänger zu erstellen.</p>
                             </div>
                             <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
                                 <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-500">
-                                    <Gift size={32} />
+                                    <Box size={32} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Persönliche Geschenke</h3>
-                                <p className="text-slate-500 leading-relaxed font-medium">Verschmelzen Sie zwei Namen oder bedeutungsvolle Worte zu einem wunderschönen 3D-Objekt.</p>
+                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Professionelle Namensschilder</h3>
+                                <p className="text-slate-500 leading-relaxed font-medium">Erzeugen Sie &quot;Dual-View&quot; Schreibtischschilder. Ein perfektes Accessoire, das Namen und Titel zeigt.</p>
                             </div>
                             <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
                                 <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">
-                                    <GraduationCap size={32} />
+                                    <Gift size={32} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Bildungsmodelle</h3>
-                                <p className="text-slate-500 leading-relaxed font-medium">Perfekt für Makerspaces, um Prinzipien der Geometrie und des 3D-Drucks spielerisch zu lehren.</p>
+                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Optische Täuschung als Geschenk</h3>
+                                <p className="text-slate-500 leading-relaxed font-medium">Erschaffen Sie eine 90-Grad-Illusion. Das ultimative, einzigartige Geschenk für Maker.</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* Generator Component Container (DE) */}
                 <section id="generator-tool" className="py-20 px-6 mt-24">
-                    <div className="container mx-auto max-w-7xl bg-white rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden w-full h-full  bg-slate-950">
-                        <Generator3d />
+                    <div className="container mx-auto max-w-7xl relative">
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-indigo-600 text-white px-6 py-2 rounded-t-xl font-bold text-sm tracking-widest uppercase z-10 shadow-lg">
+                            Neu: Schlüsselanhänger-Modus
+                        </div>
+                        <div className="bg-white rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden">
+                            <div className="relative group w-full h-full bg-slate-950">
+                                <Generator3d />
+                            </div>
+                        </div>
                     </div>
                 </section>
 
-                {/* Science Section (DE) */}
-                <section className="py-40 bg-white border-t border-slate-50 px-6">
+                <section className="py-24 px-6 bg-slate-50">
+                    <div className="container mx-auto max-w-5xl">
+                        <div className="text-center mb-16">
+                            <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm">Anleitung</span>
+                            <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-2">Schritt-für-Schritt: Text zum 3D-Druck</h2>
+                            <p className="text-slate-500 mt-4 max-w-2xl mx-auto">Vom Wort zum physischen Objekt in Minuten.</p>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-12 relative">
+                            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 -translate-x-1/2" />
+                            <div className="relative md:text-right pr-0 md:pr-12">
+                                <div className="absolute top-0 right-0 md:-right-6 w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold z-10 md:translate-x-1/2">1</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Schritt 1: Text eingeben</h3>
+                                <p className="text-slate-600">Geben Sie zwei Wörter ein. Aktivieren Sie die &quot;Schlaufe&quot; (Loop), wenn Sie es aufhängen möchten.</p>
+                            </div>
+                            <div className="md:block hidden" />
+                            <div className="md:block hidden" />
+                            <div className="relative pl-12 md:pl-12">
+                                <div className="absolute top-0 left-0 md:-left-6 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold z-10 md:-translate-x-1/2">2</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Schritt 2: STL herunterladen</h3>
+                                <p className="text-slate-600">Sie erhalten eine wasserdichte STL-Datei. Unser Algorithmus sorgt für eine druckbare Geometrie.</p>
+                            </div>
+                            <div className="relative md:text-right pr-0 md:pr-12">
+                                <div className="absolute top-0 right-0 md:-right-6 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold z-10 md:translate-x-1/2">3</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Schritt 3: Slicen (Cura/Prusa)</h3>
+                                <p className="text-slate-600">Import in <strong>Cura, PrusaSlicer oder Bambu Studio</strong>. Flach auf das Druckbett legen für beste Haftung.</p>
+                            </div>
+                            <div className="md:block hidden" />
+                            <div className="md:block hidden" />
+                            <div className="relative pl-12 md:pl-12">
+                                <div className="absolute top-0 left-0 md:-left-6 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold z-10 md:-translate-x-1/2">4</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Schritt 4: Drucken & Zeigen</h3>
+                                <p className="text-slate-600">Starten Sie den Druck. Teilen Sie Ihren 3D-Text mit Doppeleffekt auf Social Media!</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-24 px-6 bg-white">
                     <div className="container mx-auto max-w-6xl">
-                        <div className="grid lg:grid-cols-2 gap-24 items-center">
-                            <div className="space-y-10 text-left text-[#1A1A1B]">
-                                <h2 className="text-5xl font-black tracking-tight leading-tight">Wie der STL <br /><span className="text-indigo-600">Generator funktioniert</span></h2>
-                                <p className="text-slate-500 text-lg font-medium leading-relaxed">Unser Generator nutzt einen spezialisierten Algorithmus, der optimale Extrusionspfade und Schattengeometrien für physische Lesbarkeit berechnet.</p>
-                                <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-200/50 shadow-inner">
-                                    <p className="text-slate-600 text-sm leading-relaxed m-0 font-medium italic underline decoration-indigo-200 decoration-4 underline-offset-8">
-                                        Die Software nutzt eine <strong>Querschnittstechnik</strong>, um den soliden Körper zu erzeugen. Dies schafft eine saubere STL-Datei, optimiert für FDM- und SLA-Drucker.
-                                    </p>
+                        <div className="grid lg:grid-cols-2 gap-16 items-start">
+                            <div>
+                                <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm">Expertenrat</span>
+                                <h2 className="text-3xl md:text-5xl font-black text-slate-900 mt-3 mb-6 leading-tight">
+                                    Einstellungen für <br /> <span className="text-indigo-600">Perfekte Text-Drucke</span>
+                                </h2>
+                                <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                    <Settings size={20} /> Technische Parameter
+                                </h3>
+                                <div className="space-y-6">
+                                    <article className="flex gap-4">
+                                        <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 shrink-0"><Cpu size={24} /></div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900">Fülldichte (Infill): 15-20%</h4>
+                                            <p className="text-sm text-slate-500">Für dekorative Ambigramme reichen 15% für die Stabilität völlig aus.</p>
+                                        </div>
+                                    </article>
+                                    <article className="flex gap-4">
+                                        <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 shrink-0"><Layers size={24} /></div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900">Wandlinien (Walls): 3 Linien</h4>
+                                            <p className="text-sm text-slate-500">Setzen Sie Wände auf 3. Dies verhindert das Brechen dünner Buchstabenteile.</p>
+                                        </div>
+                                    </article>
                                 </div>
                             </div>
-                            <div className="relative">
-                                <Image src="/images/3d-printed-object-demo.webp" alt="Physisches Ambigramm Modell" width={600} height={400} className="rounded-[3rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.2)] border border-white w-full h-auto" />
+                            <div className="bg-slate-900 text-white p-10 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-32 bg-indigo-600 rounded-full blur-[100px] opacity-20"></div>
+                                <h3 className="text-2xl font-bold mb-8 border-b border-slate-700 pb-4 flex items-center gap-2">
+                                    <Zap size={24} className="text-yellow-400" /> ⚡ Druck-Spickzettel (Cheat Sheet)
+                                </h3>
+                                <div className="grid grid-cols-2 gap-y-6 gap-x-8">
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Material</p>
+                                        <p className="font-bold text-lg">PLA / PETG</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Düse (Nozzle)</p>
+                                        <p className="font-bold text-lg">0.4mm Standard</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Druckbett</p>
+                                        <p className="font-bold text-lg">60°C</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Geschw.</p>
+                                        <p className="font-bold text-lg">50mm/s</p>
+                                    </div>
+                                    <div className="col-span-2">
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Stützen (Supports)</p>
+                                        <p className="font-bold text-lg text-green-400">Nicht benötigt (Self-Supporting)</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* FAQ Section (DE) */}
                 <section className="py-32 bg-[#F8FAFC]">
-                    <div className="container mx-auto max-w-4xl px-6 text-center">
-                        <h2 className="text-4xl font-black mb-16 tracking-tight">Häufig gestellte Fragen (3D)</h2>
-                        <div className="space-y-6 text-left text-[#1A1A1B]">
+                    <div className="container mx-auto max-w-4xl px-6">
+                        <h2 className="text-4xl font-black mb-16 text-center tracking-tight">3D-Druck FAQ (Fehlerbehebung)</h2>
+                        <div className="space-y-6">
                             <FaqBox
-                                q="Was ist eine STL-Datei?"
-                                a="STL ist das Standardformat für den 3D-Druck. Nutzen Sie Slicer-Programme wie Cura, um das Modell für Ihren Drucker vorzubereiten."
+                                q="Welche Schriftgröße ist optimal?"
+                                a="Für eine 0,4mm Düse empfehlen wir eine Mindestdicke von 3mm. Unser Tool skaliert dies automatisch für die Druckbarkeit."
                             />
                             <FaqBox
-                                q="Warum erst ein GIF rendern?"
-                                a="Die GIF-Vorschau ermöglicht es Ihnen, die optische Täuschung aus beiden Winkeln zu prüfen, bevor Sie einen stundenlangen Druck starten."
+                                q="Wie verhindere ich, dass Buchstaben umfallen?"
+                                a="Haftung ist der Schlüssel. Nutzen Sie 'Brim' (Rand) im Slicer oder unsere 'Basis-Stand'-Funktion für ein festes Fundament."
+                            />
+                            <FaqBox
+                                q="Kann ich zwei verschiedene Wörter nutzen?"
+                                a="Absolut. Das ist ein 'Dual-Word' Generator. Geben Sie 'Liebe' und 'Hass' ein, und das Modell zeigt je nach Winkel ein anderes Wort."
                             />
                         </div>
                     </div>
+                </section>
+
+                <section className="py-40 bg-slate-950 text-center px-6 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 pointer-events-none" />
+                    <h2 className="text-5xl md:text-7xl font-black text-white mb-10 tracking-tighter italic">Starten Sie Ihren 3D-Druck jetzt</h2>
+                    <Link href="/" className="inline-flex items-center gap-3 bg-white text-slate-900 px-12 py-5 rounded-full text-xl font-bold hover:bg-indigo-600 hover:text-white transition-all duration-300 shadow-2xl active:scale-95">
+                        <PlayCircle size={24} /> 3D-Modell generieren
+                    </Link>
                 </section>
             </main>
         );
     }
 
     // ========================================================================
-    // 🇺🇸 英语版本 (Default / English) - 深度优化版
+    // 🇪🇸 西班牙语版本 (Spanish / Español)
+    // SEO Focus: Generador Texto a STL, Llaveros 3D, Placas de nombre
     // ========================================================================
+    if (locale === 'es') {
+        return (
+            <main className="bg-[#FDFDFF]">
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
+                <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6 text-center">
+                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-600/10 via-transparent to-transparent -z-10" />
+                    <div className="container mx-auto text-center max-w-5xl space-y-10">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-black text-indigo-400 uppercase tracking-widest">
+                            <Printer size={14} className="fill-current" /> Herramienta de Impresión 3D Gratis
+                        </div>
+                        <h1 className="text-3xl md:text-6xl font-black tracking-tight leading-[1.05]">
+                            Generador de Texto a STL 3D <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-blue-500 to-purple-600">& Creador de Ambigramas</span>
+                        </h1>
+                        <p className="text-xl md:text-2xl text-slate-400 font-medium max-w-3xl mx-auto leading-relaxed">
+                            Convierte palabras en modelos 3D listos para imprimir. Crea <strong>llaveros</strong>, <strong>placas de escritorio</strong> e ilusiones ópticas sin saber CAD.
+                        </p>
+                        <div className="pt-6">
+                            <Link href="#generator-tool" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-2xl shadow-indigo-900/40 active:scale-95">
+                                Crear Archivo STL <ChevronRight size={20} />
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-12 px-6">
+                    <div className="container mx-auto max-w-7xl">
+                        <div className="text-center mb-24 space-y-4">
+                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Ideas Creativas: ¿Qué puedes imprimir?</h2>
+                            <p className="text-slate-500 text-lg font-medium">Desde utilidad práctica hasta arte visual.</p>
+                        </div>
+                        <div className="grid md:grid-cols-3 gap-8">
+                            <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
+                                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-500">
+                                    <Key size={32} />
+                                </div>
+                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Llaveros 3D Personalizados</h3>
+                                <p className="text-slate-500 leading-relaxed font-medium">Activa el modo &quot;Anilla&quot; para crear llaveros con nombres en PLA o PETG al instante.</p>
+                            </div>
+                            <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
+                                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-500">
+                                    <Box size={32} />
+                                </div>
+                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Placas de Escritorio (Name Plates)</h3>
+                                <p className="text-slate-500 leading-relaxed font-medium">Genera identificadores de &quot;Doble Vista&quot;. El accesorio de oficina perfecto.</p>
+                            </div>
+                            <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
+                                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">
+                                    <Gift size={32} />
+                                </div>
+                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Regalos de Ilusión Óptica</h3>
+                                <p className="text-slate-500 leading-relaxed font-medium">Crea una ilusión de 90 grados. El regalo único definitivo para makers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="generator-tool" className="py-20 px-6 mt-24">
+                    <div className="container mx-auto max-w-7xl relative">
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-indigo-600 text-white px-6 py-2 rounded-t-xl font-bold text-sm tracking-widest uppercase z-10 shadow-lg">
+                            Nuevo: Modo Llavero
+                        </div>
+                        <div className="bg-white rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden">
+                            <div className="relative group w-full h-full bg-slate-950">
+                                <Generator3d />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-24 px-6 bg-slate-50">
+                    <div className="container mx-auto max-w-5xl">
+                        <div className="text-center mb-16">
+                            <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm">Tutorial</span>
+                            <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-2">Paso a Paso: De Texto a Impresión 3D</h2>
+                            <p className="text-slate-500 mt-4 max-w-2xl mx-auto">Obtén tu objeto físico en minutos.</p>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-12 relative">
+                            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 -translate-x-1/2" />
+                            <div className="relative md:text-right pr-0 md:pr-12">
+                                <div className="absolute top-0 right-0 md:-right-6 w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold z-10 md:translate-x-1/2">1</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Paso 1: Escribe y Personaliza</h3>
+                                <p className="text-slate-600">Introduce dos palabras. Activa &quot;Llavero&quot; (Loop) si deseas colgarlo.</p>
+                            </div>
+                            <div className="md:block hidden" />
+                            <div className="md:block hidden" />
+                            <div className="relative pl-12 md:pl-12">
+                                <div className="absolute top-0 left-0 md:-left-6 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold z-10 md:-translate-x-1/2">2</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Paso 2: Descargar STL</h3>
+                                <p className="text-slate-600">Obtén un archivo STL hermético (watertight). Nuestro algoritmo asegura que la malla sea imprimible.</p>
+                            </div>
+                            <div className="relative md:text-right pr-0 md:pr-12">
+                                <div className="absolute top-0 right-0 md:-right-6 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold z-10 md:translate-x-1/2">3</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Paso 3: Laminar (Cura/Prusa)</h3>
+                                <p className="text-slate-600">Importa en <strong>Cura, PrusaSlicer o Bambu Studio</strong>. Imprime plano para mejor adhesión.</p>
+                            </div>
+                            <div className="md:block hidden" />
+                            <div className="md:block hidden" />
+                            <div className="relative pl-12 md:pl-12">
+                                <div className="absolute top-0 left-0 md:-left-6 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold z-10 md:-translate-x-1/2">4</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Paso 4: Imprimir y Exhibir</h3>
+                                <p className="text-slate-600">Inicia la impresión. ¡Comparte tu texto 3D de doble perspectiva en redes sociales!</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-24 px-6 bg-white">
+                    <div className="container mx-auto max-w-6xl">
+                        <div className="grid lg:grid-cols-2 gap-16 items-start">
+                            <div>
+                                <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm">Consejo Experto</span>
+                                <h2 className="text-3xl md:text-5xl font-black text-slate-900 mt-3 mb-6 leading-tight">
+                                    Configuración para <br /> <span className="text-indigo-600">Impresión Perfecta</span>
+                                </h2>
+                                <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                    <Settings size={20} /> Parámetros Técnicos
+                                </h3>
+                                <div className="space-y-6">
+                                    <article className="flex gap-4">
+                                        <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 shrink-0"><Cpu size={24} /></div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900">Relleno (Infill): 15-20%</h4>
+                                            <p className="text-sm text-slate-500">Para ambigramas decorativos, 15% es suficiente para dar solidez sin gastar filamento.</p>
+                                        </div>
+                                    </article>
+                                    <article className="flex gap-4">
+                                        <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 shrink-0"><Layers size={24} /></div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900">Paredes (Walls): 3 líneas</h4>
+                                            <p className="text-sm text-slate-500">Configura perímetros en 3. Esto evita que las partes finas de las letras se rompan.</p>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                            <div className="bg-slate-900 text-white p-10 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-32 bg-indigo-600 rounded-full blur-[100px] opacity-20"></div>
+                                <h3 className="text-2xl font-bold mb-8 border-b border-slate-700 pb-4 flex items-center gap-2">
+                                    <Zap size={24} className="text-yellow-400" /> ⚡ Guía Rápida (Cheat Sheet)
+                                </h3>
+                                <div className="grid grid-cols-2 gap-y-6 gap-x-8">
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Material</p>
+                                        <p className="font-bold text-lg">PLA / PETG</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Boquilla</p>
+                                        <p className="font-bold text-lg">0.4mm Estándar</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Cama</p>
+                                        <p className="font-bold text-lg">60°C</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Velocidad</p>
+                                        <p className="font-bold text-lg">50mm/s</p>
+                                    </div>
+                                    <div className="col-span-2">
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Soportes</p>
+                                        <p className="font-bold text-lg text-green-400">No Requeridos (Diseño Auto-portante)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-32 bg-[#F8FAFC]">
+                    <div className="container mx-auto max-w-4xl px-6">
+                        <h2 className="text-4xl font-black mb-16 text-center tracking-tight">FAQ Impresión 3D (Solución de problemas)</h2>
+                        <div className="space-y-6">
+                            <FaqBox
+                                q="¿Qué tamaño de fuente es ideal?"
+                                a="Para una boquilla de 0.4 mm, recomendamos un grosor mínimo de 3 mm. Nuestra herramienta escala esto automáticamente."
+                            />
+                            <FaqBox
+                                q="¿Cómo evito que las letras se despeguen?"
+                                a="La adhesión es clave. Usa una 'Balsa' (Brim) en tu laminador, o usa nuestra función 'Base Stand' para generar una base sólida."
+                            />
+                            <FaqBox
+                                q="¿Puedo usar dos palabras diferentes?"
+                                a="Absolutamente. Este es un generador de 'Doble Palabra'. Escribe 'Amor' y 'Odio', y el modelo 3D cambiará según el ángulo."
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-40 bg-slate-950 text-center px-6 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 pointer-events-none" />
+                    <h2 className="text-5xl md:text-7xl font-black text-white mb-10 tracking-tighter italic">Comienza a Crear tu Texto 3D</h2>
+                    <Link href="/" className="inline-flex items-center gap-3 bg-white text-slate-900 px-12 py-5 rounded-full text-xl font-bold hover:bg-indigo-600 hover:text-white transition-all duration-300 shadow-2xl active:scale-95">
+                        <PlayCircle size={24} /> Generar Modelo 3D
+                    </Link>
+                </section>
+            </main>
+        );
+    }
+
+    // ========================================================================
+    // 🇮🇹 意大利语版本 (Italian / Italiano)
+    // SEO Focus: Da Testo a STL, Portachiavi 3D, Targhette
+    // ========================================================================
+    if (locale === 'it') {
+        return (
+            <main className="bg-[#FDFDFF]">
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
+                <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6 text-center">
+                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-600/10 via-transparent to-transparent -z-10" />
+                    <div className="container mx-auto text-center max-w-5xl space-y-10">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-black text-indigo-400 uppercase tracking-widest">
+                            <Printer size={14} className="fill-current" /> Tool di Stampa 3D Gratuito
+                        </div>
+                        <h1 className="text-3xl md:text-6xl font-black tracking-tight leading-[1.05]">
+                            Generatore Testo STL 3D <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-blue-500 to-purple-600">& Creatore di Ambigrammi</span>
+                        </h1>
+                        <p className="text-xl md:text-2xl text-slate-400 font-medium max-w-3xl mx-auto leading-relaxed">
+                            Converti parole in modelli 3D pronti per la stampa. Crea <strong>portachiavi</strong>, <strong>targhette da scrivania</strong> e illusioni ottiche senza esperienza CAD.
+                        </p>
+                        <div className="pt-6">
+                            <Link href="#generator-tool" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-2xl shadow-indigo-900/40 active:scale-95">
+                                Crea File STL <ChevronRight size={20} />
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-12 px-6">
+                    <div className="container mx-auto max-w-7xl">
+                        <div className="text-center mb-24 space-y-4">
+                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Idee Creative: Cosa puoi stampare?</h2>
+                            <p className="text-slate-500 text-lg font-medium">Dall&apos;utilità pratica all&apos;arte visiva.</p>
+                        </div>
+                        <div className="grid md:grid-cols-3 gap-8">
+                            <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
+                                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-500">
+                                    <Key size={32} />
+                                </div>
+                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Portachiavi 3D Personalizzati</h3>
+                                <p className="text-slate-500 leading-relaxed font-medium">Attiva la modalità &quot;Anello&quot; per creare istantaneamente portachiavi con nomi in PLA o PETG.</p>
+                            </div>
+                            <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
+                                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-500">
+                                    <Box size={32} />
+                                </div>
+                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Targhette da Scrivania (Name Plates)</h3>
+                                <p className="text-slate-500 leading-relaxed font-medium">Genera targhette a &quot;Doppia Vista&quot;. L&apos;accessorio da ufficio perfetto.</p>
+                            </div>
+                            <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
+                                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">
+                                    <Gift size={32} />
+                                </div>
+                                <h3 className="text-2xl font-bold text-[#1A1A1B] mb-4 tracking-tight">Regali Illusione Ottica</h3>
+                                <p className="text-slate-500 leading-relaxed font-medium">Crea un&apos;illusione a 90 gradi. Il regalo unico definitivo per i maker.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="generator-tool" className="py-20 px-6 mt-24">
+                    <div className="container mx-auto max-w-7xl relative">
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-indigo-600 text-white px-6 py-2 rounded-t-xl font-bold text-sm tracking-widest uppercase z-10 shadow-lg">
+                            Nuovo: Modo Portachiavi
+                        </div>
+                        <div className="bg-white rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden">
+                            <div className="relative group w-full h-full bg-slate-950">
+                                <Generator3d />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-24 px-6 bg-slate-50">
+                    <div className="container mx-auto max-w-5xl">
+                        <div className="text-center mb-16">
+                            <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm">Tutorial</span>
+                            <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-2">Passo dopo Passo: Da Testo a Stampa 3D</h2>
+                            <p className="text-slate-500 mt-4 max-w-2xl mx-auto">Ottieni il tuo oggetto fisico in pochi minuti.</p>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-12 relative">
+                            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 -translate-x-1/2" />
+                            <div className="relative md:text-right pr-0 md:pr-12">
+                                <div className="absolute top-0 right-0 md:-right-6 w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold z-10 md:translate-x-1/2">1</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Passo 1: Scrivi e Personalizza</h3>
+                                <p className="text-slate-600">Inserisci due parole. Attiva &quot;Anello&quot; (Loop) se desideri appenderlo.</p>
+                            </div>
+                            <div className="md:block hidden" />
+                            <div className="md:block hidden" />
+                            <div className="relative pl-12 md:pl-12">
+                                <div className="absolute top-0 left-0 md:-left-6 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold z-10 md:-translate-x-1/2">2</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Passo 2: Scarica STL</h3>
+                                <p className="text-slate-600">Ottieni un file STL a tenuta stagna (watertight). Il nostro algoritmo assicura che la mesh sia stampabile.</p>
+                            </div>
+                            <div className="relative md:text-right pr-0 md:pr-12">
+                                <div className="absolute top-0 right-0 md:-right-6 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold z-10 md:translate-x-1/2">3</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Passo 3: Slicing (Cura/Prusa)</h3>
+                                <p className="text-slate-600">Importa in <strong>Cura, PrusaSlicer o Bambu Studio</strong>. Stampa piatto per una migliore adesione.</p>
+                            </div>
+                            <div className="md:block hidden" />
+                            <div className="md:block hidden" />
+                            <div className="relative pl-12 md:pl-12">
+                                <div className="absolute top-0 left-0 md:-left-6 w-12 h-12 bg-white border-2 border-indigo-600 text-indigo-600 rounded-full flex items-center justify-center font-bold z-10 md:-translate-x-1/2">4</div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 mt-2">Passo 4: Stampa ed Esponi</h3>
+                                <p className="text-slate-600">Avvia la stampa. Condividi il tuo testo 3D a doppia prospettiva sui social media!</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-24 px-6 bg-white">
+                    <div className="container mx-auto max-w-6xl">
+                        <div className="grid lg:grid-cols-2 gap-16 items-start">
+                            <div>
+                                <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm">Consiglio Esperto</span>
+                                <h2 className="text-3xl md:text-5xl font-black text-slate-900 mt-3 mb-6 leading-tight">
+                                    Impostazioni per <br /> <span className="text-indigo-600">Stampa Perfetta</span>
+                                </h2>
+                                <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                    <Settings size={20} /> Parametri Tecnici
+                                </h3>
+                                <div className="space-y-6">
+                                    <article className="flex gap-4">
+                                        <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 shrink-0"><Cpu size={24} /></div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900">Riempimento (Infill): 15-20%</h4>
+                                            <p className="text-sm text-slate-500">Per ambigrammi decorativi, il 15% è sufficiente per dare solidità senza sprecare filamento.</p>
+                                        </div>
+                                    </article>
+                                    <article className="flex gap-4">
+                                        <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 shrink-0"><Layers size={24} /></div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900">Pareti (Walls): 3 linee</h4>
+                                            <p className="text-sm text-slate-500">Imposta i perimetri su 3. Questo evita che le parti sottili delle lettere si rompano.</p>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                            <div className="bg-slate-900 text-white p-10 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-32 bg-indigo-600 rounded-full blur-[100px] opacity-20"></div>
+                                <h3 className="text-2xl font-bold mb-8 border-b border-slate-700 pb-4 flex items-center gap-2">
+                                    <Zap size={24} className="text-yellow-400" /> ⚡ Scheda Rapida (Cheat Sheet)
+                                </h3>
+                                <div className="grid grid-cols-2 gap-y-6 gap-x-8">
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Materiale</p>
+                                        <p className="font-bold text-lg">PLA / PETG</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Ugello</p>
+                                        <p className="font-bold text-lg">0.4mm Standard</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Piatto</p>
+                                        <p className="font-bold text-lg">60°C</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Velocità</p>
+                                        <p className="font-bold text-lg">50mm/s</p>
+                                    </div>
+                                    <div className="col-span-2">
+                                        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">Supporti</p>
+                                        <p className="font-bold text-lg text-green-400">Non Richiesti (Design Auto-portante)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-32 bg-[#F8FAFC]">
+                    <div className="container mx-auto max-w-4xl px-6">
+                        <h2 className="text-4xl font-black mb-16 text-center tracking-tight">FAQ Stampa 3D (Risoluzione problemi)</h2>
+                        <div className="space-y-6">
+                            <FaqBox
+                                q="Che dimensione del carattere è ideale?"
+                                a="Per un ugello da 0.4 mm, raccomandiamo uno spessore minimo di 3 mm. Il nostro strumento scala tutto automaticamente."
+                            />
+                            <FaqBox
+                                q="Come evito che le lettere si stacchino?"
+                                a="L'adesione è fondamentale. Usa un 'Brim' (Bordo) nel tuo slicer, o usa la nostra funzione 'Base Stand' per generare una base solida."
+                            />
+                            <FaqBox
+                                q="Posso usare due parole diverse?"
+                                a="Assolutamente. Questo è un generatore 'Doppia Parola'. Scrivi 'Amore' e 'Odio', e il modello 3D cambierà in base all'angolo."
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-40 bg-slate-950 text-center px-6 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 pointer-events-none" />
+                    <h2 className="text-5xl md:text-7xl font-black text-white mb-10 tracking-tighter italic">Inizia a Creare il tuo Testo 3D</h2>
+                    <Link href="/" className="inline-flex items-center gap-3 bg-white text-slate-900 px-12 py-5 rounded-full text-xl font-bold hover:bg-indigo-600 hover:text-white transition-all duration-300 shadow-2xl active:scale-95">
+                        <PlayCircle size={24} /> Genera Modello 3D
+                    </Link>
+                </section>
+            </main>
+        );
+    }
     return (
         <main className="bg-[#FDFDFF]">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
@@ -428,6 +1018,9 @@ export default async function ThreeDGeneratorPage({ params }: Props) {
                     </div>
                     <div className="bg-white rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden">
                         <div className="relative group w-full h-full bg-slate-950">
+                            <div className="text-3xl font-black text-white tracking-tight w-full text-center py-4">
+                                <h2> 3D Ambigram Generator</h2>
+                            </div>
                             <Generator3d />
                         </div>
                     </div>
@@ -439,7 +1032,7 @@ export default async function ThreeDGeneratorPage({ params }: Props) {
                 <div className="container mx-auto max-w-5xl">
                     <div className="text-center mb-16">
                         <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm">Tutorial</span>
-                        <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-2">Step-by-Step: How to Use the Word to STL Generator</h2>
+                        <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-2">Step-by-Step: How to Use the Word to Ambigram STL Generator</h2>
                         <p className="text-slate-500 mt-4 max-w-2xl mx-auto">From text to physical object in minutes.</p>
                     </div>
 

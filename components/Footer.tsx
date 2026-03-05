@@ -70,7 +70,7 @@ export default function Footer() {
             links: [
                 { label: tNav("generators.items.3d"), href: "/3d-generator" },
                 { label: tNav("generators.items.twoName"), href: "/tutorial/two-name-ambigram" },
-                { label: tNav("generators.items.tattoo"), href: "/tutorial/tattoo-design" },
+                { label: tNav("generators.items.upsideDown"), href: "/upside-down-text-generator", },
             ],
         },
         {
@@ -80,6 +80,7 @@ export default function Footer() {
                 { label: tNav("guides.items.history"), href: "/guide/ambigram-history-art" },
                 { label: tNav("guides.items.principles"), href: "/guide/flipscript-principles" },
                 { label: tNav("guides.items.bestTools"), href: "/guide/best-online-tools" },
+                { label: tNav("generators.items.tattoo"), href: "/tutorial/tattoo-design" },
             ],
         },
         {

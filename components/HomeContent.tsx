@@ -164,6 +164,10 @@ export default function HomeContent() {
                         <AnimatePresence mode="wait">
                             {activeTab === '3d' ? (
                                 <motion.div key="3d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full h-full  bg-slate-950">
+                                    <div className="text-3xl font-black text-white tracking-tight w-full text-center py-4">
+                                        <h2> {t('Generator3D.title')}</h2>
+                                        <p className="text-slate-400 text-sm mt-1">{t('Generator3D.subtitle')}</p>
+                                    </div>
                                     <Generator3d
                                         incomingWordA={globalWordA}
                                         incomingWordB={globalWordB}

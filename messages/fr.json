@@ -9,7 +9,9 @@
           "3d": "Générateur 3D",
           "twoName": "2 Prénoms",
           "tattoo": "Modèle Tatouage",
-          "tattooStencil": "Créateur de Pochoirs"
+          "tattooStencil": "Créateur de Pochoirs",
+          "upsideDown": "Générateur de texte à l'envers"
+
         }
       },
       "guides": {

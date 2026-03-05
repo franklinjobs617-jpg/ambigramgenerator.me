@@ -9,7 +9,9 @@
           "3d": "Generador 3D",
           "twoName": "Dos Nombres",
           "tattoo": "Motor de Tatuajes",
-          "tattooStencil": "Creador de Plantillas de Tatuajes"
+          "tattooStencil": "Creador de Plantillas de Tatuajes",
+          "upsideDown": "Generador de texto al revés"
+
         }
       },
       "guides": {
