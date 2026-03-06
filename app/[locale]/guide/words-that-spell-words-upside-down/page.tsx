@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
         title: "Words That Spell Words Upside Down: The Ultimate List & Meanings",
         description: "Discover a curated list of words that are the same upside down and learn the secret behind ambigrams. Find out what words read the same when flipped!",
         alternates: {
-            canonical: `${DOMAIN}/words-that-spell-words-upside-down`,
+            canonical: `${DOMAIN}/guide/words-that-spell-words-upside-down`,
         }
     };
 }
