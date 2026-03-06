@@ -78,6 +78,7 @@ export default function Footer() {
             title: t("col2Title"),
             links: [
                 { label: tNav("guides.items.whatIs"), href: "/what-is-ambigram" },
+                { label: tNav("guides.items.examples"), href: "/ambigram-examples" },
                 { label: tNav("guides.items.history"), href: "/guide/ambigram-history-art" },
                 { label: tNav("guides.items.principles"), href: "/guide/flipscript-principles" },
                 { label: tNav("guides.items.bestTools"), href: "/guide/best-online-tools" },

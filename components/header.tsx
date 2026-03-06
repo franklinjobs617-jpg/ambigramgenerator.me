@@ -74,6 +74,7 @@ export default function Header() {
             icon: <Info size={18} className="text-purple-600" />,
             links: [
                 { label: t("nav.guides.items.whatIs"), href: "/what-is-ambigram" },
+                { label: t("nav.guides.items.examples"), href: "/ambigram-examples" },
                 { label: t("nav.guides.items.history"), href: "/guide/ambigram-history-art" },
                 { label: t("nav.guides.items.principles"), href: "/guide/flipscript-principles" },
                 { label: t("nav.guides.items.bestTools"), href: "/guide/best-online-tools" },
