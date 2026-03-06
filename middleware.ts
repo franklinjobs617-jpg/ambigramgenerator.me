@@ -1,3 +1,11 @@
+
+
+// middleware.ts
+import createMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
+
+export default createMiddleware(routing);
+
 export const config = {
   // 重点：在第一个括号内明确排除 sitemap.xml 和 robots.txt
   matcher: [
