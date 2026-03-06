@@ -12,8 +12,6 @@
           "tattooStencil": "Tattoo Stencil Maker",
           "upsideDown": "Überkopf-Text-Generator",
           "mirrorGenerator": "Spiegeltext-Generator"
-
-
         }
       },
       "guides": {
@@ -21,6 +19,9 @@
         "items": {
           "whatIs": "Was ist ein Ambigramm?",
           "examples": "Ambigramm Beispiele",
+        "wordTattoos": "Ambigramm Wort Tattoos",
+    "lovePain": "Love & Pain Ambigramm",
+    "upsideDownWords": "Wörter auf dem Kopf",
           "history": "Geschichte & Kunst",
           "principles": "Design-Prinzipien",
           "bestTools": "Die besten Tools"

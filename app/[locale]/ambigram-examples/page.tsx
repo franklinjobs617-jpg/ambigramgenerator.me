@@ -97,7 +97,7 @@ export default async function AmbigramExamplesPage() {
                     </section>
 
                     {/* BLOCK 2: Love/Pain Sniper (核心狙击) */}
-                    <section id="love-pain" className="scroll-mt-32 bg-slate-50 p-8 rounded-[2rem] border border-slate-200">
+                    <section id="love-pain" className="mt-8 bg-slate-50 p-8 rounded-[2rem] border border-slate-200">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="p-3 bg-pink-100 text-pink-600 rounded-xl"><Heart size={24} /></div>
                             <h2 className="text-3xl font-black text-slate-900">The "Love / Pain" Sniper Section</h2>
@@ -105,7 +105,11 @@ export default async function AmbigramExamplesPage() {
 
                         <div className="prose prose-lg text-slate-600 max-w-none">
                             <p>
-                                If you are looking for the most iconic dual-meaning design, you are looking for the <strong>ambigram love pain</strong> tattoo.
+                                If you are looking for the most iconic dual-meaning design, you are looking for the
+                                <Link href={'/love-pain-ambigram-tattoo'} className="text-indigo-600 hover:underline">
+                                    <strong> ambigram love pain</strong>
+                                </Link>
+                                tattoo.
                             </p>
 
 
@@ -120,14 +124,14 @@ export default async function AmbigramExamplesPage() {
                             />
 
 
-                            <p>
+                            <p className="py-4">
                                 This is a specific type of design called a "Symbiotogram." It reads "Love" one way, and when you rotate it 180 degrees, it reads "Pain." The <strong>ambigram love pain</strong> design is a masterpiece because it connects two opposing emotions in one single glyph. The vertical stroke of the 'L' becomes the 'P', and the 'V' transforms into the 'A'.
                             </p>
                         </div>
                     </section>
 
                     {/* BLOCK 3: Logo & ABBA (核心狙击) */}
-                    <section id="logos" className="scroll-mt-32">
+                    <section id="logos" className="mt-8">
                         <h2 className="text-3xl font-black text-slate-900 mb-6 flex items-center gap-3">
                             <LayoutGrid className="text-indigo-500" size={28} /> Brand Identity: Ambigram Logo Examples
                         </h2>
@@ -153,7 +157,7 @@ export default async function AmbigramExamplesPage() {
                     </section>
 
                     {/* BLOCK 4: Tattoos & Styles */}
-                    <section id="tattoos" className="scroll-mt-32">
+                    <section id="tattoos" className="mt-8">
                         <h2 className="text-3xl font-black text-slate-900 mb-6 flex items-center gap-3">
                             <PenTool className="text-indigo-500" size={28} /> Skin Art: Ambigram Tattoos Examples
                         </h2>

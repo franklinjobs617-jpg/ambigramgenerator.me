@@ -44,7 +44,7 @@ export default function HomeContent() {
     // 使用命名空间 HomePage
     const t = useTranslations('HomePage');
 
-    const [activeTab, setActiveTab] = useState<'3d' | '2d'>('3d');
+    const [activeTab, setActiveTab] = useState<'3d' | '2d'>('2d');
 
     // 🌟 1. 定义全局共享状态
     const [globalWordA, setGlobalWordA] = useState("");
@@ -162,7 +162,13 @@ export default function HomeContent() {
 
                     <div className="relative rounded-[2.5rem] overflow-hidden min-h-[650px]">
                         <AnimatePresence mode="wait">
-                            {activeTab === '3d' ? (
+                            {activeTab === '2d' ? (
+                                <motion.div key="2d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white">
+                                    <Generator2d />
+
+                                </motion.div>
+
+                            ) : (
                                 <motion.div key="3d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full h-full  bg-slate-950">
                                     <div className="text-3xl font-black text-white tracking-tight w-full text-center py-4">
                                         <h2> {t('Generator3D.title')}</h2>
@@ -173,11 +179,6 @@ export default function HomeContent() {
                                         incomingWordB={globalWordB}
                                         triggerRender={generateTrigger}
                                     />
-                                </motion.div>
-                            ) : (
-                                <motion.div key="2d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white">
-                                    <Generator2d />
-
                                 </motion.div>
                             )}
 

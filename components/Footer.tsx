@@ -79,6 +79,9 @@ export default function Footer() {
             links: [
                 { label: tNav("guides.items.whatIs"), href: "/what-is-ambigram" },
                 { label: tNav("guides.items.examples"), href: "/ambigram-examples" },
+                { label: tNav("guides.items.wordTattoos"), href: "/ambigram-word-tattoos" },
+                { label: tNav("guides.items.lovePain"), href: "/love-pain-ambigram" },
+                { label: tNav("guides.items.upsideDownWords"), href: "/guide/words-that-spell-words-upside-down" },
                 { label: tNav("guides.items.history"), href: "/guide/ambigram-history-art" },
                 { label: tNav("guides.items.principles"), href: "/guide/flipscript-principles" },
                 { label: tNav("guides.items.bestTools"), href: "/guide/best-online-tools" },
