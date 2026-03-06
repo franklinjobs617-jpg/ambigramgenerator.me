@@ -41,13 +41,27 @@ export default async function AmbigramExamplesPage() {
             "mainEntity": {
                 "@type": "Question",
                 "name": "What is the group whose logo is a mirror ambigram?",
+                "text": "Which famous music group uses a mirror ambigram as their official logo?",
+                "answerCount": 1,
+                "datePublished": "2024-03-20T08:00:00+08:00",
+                "author": {
+                    "@type": "Person",
+                    "name": "Ambigram Designer"
+                },
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The answer is the Swedish pop supergroup ABBA. Their iconic logo with the reversed 'B' creates a perfect mirror ambigram (ᗅᗺᗷᗅ)."
+                    "text": "The answer is the Swedish pop supergroup ABBA. Their iconic logo with the reversed 'B' creates a perfect mirror ambigram (ᗅᗺᗷᗅ).",
+                    "datePublished": "2024-03-20T09:00:00+08:00",
+                    "url": "https://www.ambigramgenerator.me/ambigram-examples#abba-answer",
+                    "upvoteCount": 10,
+                    "author": {
+                        "@type": "Person",
+                        "name": "Ambigram Specialist"
+                    }
                 }
             }
         }
-    ];
+    ]
 
     return (
         <main className="bg-[#F8FAFC] min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
