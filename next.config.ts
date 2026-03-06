@@ -14,6 +14,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  allowedDevOrigins: ['http://localhost:3000', 'http://localhost:3001'], // 允许在开发环境中使用这些来源的图片
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/sitemap.xml', // 明确指向静态资源，不经过页面路由
+      },
+    ];
+  },
   async redirects() {
     return [
       {
@@ -27,12 +36,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/:locale(en|fr|de)/generator',
+        source: '/:locale(en|fr|de|es|it|ja|ko|zh)/generator',
         destination: '/:locale',
         permanent: true,
       },
       {
-        source: '/:locale(en|fr|de)/free-generator',
+        source: '/:locale(en|fr|de|es|it|ja|ko|zh)/free-generator',
         destination: '/:locale',
         permanent: true,
       },
