@@ -85,6 +85,7 @@ export default function Footer() {
                 { label: tNav("guides.items.history"), href: "/guide/ambigram-history-art" },
                 { label: tNav("guides.items.principles"), href: "/guide/flipscript-principles" },
                 { label: tNav("guides.items.bestTools"), href: "/guide/best-online-tools" },
+                { label: tNav("guides.items.bestAiTattooGenerator"), href: "/best-ai-tattoo-generator" },
                 { label: tNav("generators.items.tattoo"), href: "/tutorial/tattoo-design" },
             ],
         },

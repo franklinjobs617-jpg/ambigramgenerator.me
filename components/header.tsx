@@ -83,6 +83,7 @@ export default function Header() {
                 { label: t("nav.guides.items.bestTools"), href: "/guide/best-online-tools" },
                 { label: t("nav.generators.items.twoName"), href: "/tutorial/two-name-ambigram" },
                 { label: t("nav.generators.items.tattoo"), href: "/tutorial/tattoo-design" },
+                   { label: t("nav.guides.items.bestAiTattooGenerator"), href: "/best-ai-tattoo-generator" },
             ]
         },
         {
