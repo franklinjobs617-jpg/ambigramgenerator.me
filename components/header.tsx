@@ -5,24 +5,35 @@ import { Link, useRouter, usePathname } from "@/i18n/routing"; // 确保从你�
 import { useTranslations, useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useAuth } from "@/components/providers/auth-provider";
+import LoginModal from "@/components/LoginModal";
 import {
     ChevronDown, Menu, X,
-    Box, PenTool, BookOpen,
+    Box, BookOpen,
     Info, ShieldCheck, Flame,
-    Globe, Check
+    Globe, Check, User, LogOut, Settings, CreditCard
 } from "lucide-react";
-import { label } from "framer-motion/client";
 
 export default function Header() {
     const t = useTranslations("Header");
+    const tNav = useTranslations("HomePage.Navigation");
     const locale = useLocale();
     const pathname = usePathname();
     const router = useRouter();
+    const { user, isLoading, login, logout } = useAuth();
 
+    const [mounted, setMounted] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
     const [activeMobileAccordion, setActiveMobileAccordion] = useState<string | null>(null);
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+    const userMenuRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     // 语言选择器状态
     const [isLangOpen, setIsLangOpen] = useState(false);
@@ -42,6 +53,7 @@ export default function Header() {
         const handleScroll = () => setScrolled(window.scrollY > 20);
         const handleClickOutside = (e: MouseEvent) => {
             if (langRef.current && !langRef.current.contains(e.target as Node)) setIsLangOpen(false);
+            if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) setIsUserMenuOpen(false);
         };
         window.addEventListener("scroll", handleScroll);
         document.addEventListener("mousedown", handleClickOutside);
@@ -52,7 +64,6 @@ export default function Header() {
     }, []);
 
     const handleLocaleChange = (newLocale: string) => {
-        // @ts-ignore
         router.replace(pathname, { locale: newLocale });
         setIsLangOpen(false);
     };
@@ -64,6 +75,7 @@ export default function Header() {
             icon: <Box size={18} className="text-blue-600" />,
             links: [
                 { label: t("nav.generators.items.3d"), href: "/3d-generator", badge: "hot" },
+                { label: "AI Tattoo Generator", href: "/ai-tattoo-generator", badge: "hot" },
                 { label: t("nav.generators.items.tattooStencil"), href: "/tattoo-stencil-maker", badge: "hot" },
                 { label: t("nav.generators.items.upsideDown"), href: "/upside-down-text-generator", },
                 { label: t("nav.generators.items.mirrorGenerator"), href: "/mirror-text-generator", },
@@ -83,7 +95,7 @@ export default function Header() {
                 { label: t("nav.guides.items.bestTools"), href: "/guide/best-online-tools" },
                 { label: t("nav.generators.items.twoName"), href: "/tutorial/two-name-ambigram" },
                 { label: t("nav.generators.items.tattoo"), href: "/tutorial/tattoo-design" },
-                   { label: t("nav.guides.items.bestAiTattooGenerator"), href: "/best-ai-tattoo-generator" },
+                { label: t("nav.guides.items.bestAiTattooGenerator"), href: "/best-ai-tattoo-generator" },
             ]
         },
         {
@@ -116,7 +128,7 @@ export default function Header() {
                     <div className="flex items-center gap-10">
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-2 group">
-                            <Image src="/logo.png" alt="Logo" width={200} height={36} className="rounded-lg" />
+                            <Image src="/logo.png" alt="Logo" width={200} height={36} className="rounded-lg"  />
                         </Link>
 
                         {/* Desktop Nav */}
@@ -153,7 +165,7 @@ export default function Header() {
                         <div className="hidden md:block relative" ref={langRef}>
                             <button
                                 onClick={() => setIsLangOpen(!isLangOpen)}
-                                className={`flex items-center gap-2 px-3 py-2 rounded-xl text-[14px] font-bold transition-all ${scrolled ? "hover:bg-slate-100 text-slate-600" : "hover:bg-white/10 "}`}
+                                className={`flex items-center gap-2 px-3 py-2 rounded-xl text-[14px] font-bold transition-all cursor-pointer ${scrolled ? "hover:bg-slate-100 text-slate-600" : "hover:bg-white/10 "}`}
                             >
                                 <Globe size={18} className={scrolled ? "text-indigo-600" : " "} />
                                 <span>{currentLang.flag}</span>
@@ -173,16 +185,82 @@ export default function Header() {
                             </AnimatePresence>
                         </div>
 
-                        <Link href={"/#workspace"} className="hidden sm:block bg-indigo-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-indigo-700 hover:shadow-xl hover:shadow-indigo-200 transition-all active:scale-95">
+                        {/* User Menu / Login Button */}
+                        {mounted && !isLoading && (
+                            <div className="hidden sm:block relative" ref={userMenuRef}>
+                                {user ? (
+                                    <>
+                                        <button
+                                            onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                                            className="flex items-center gap-2 px-2.5 py-1.5 rounded-full border border-gray-200 hover:border-gray-400 hover:bg-gray-50 transition-all cursor-pointer"
+                                        >
+                                            {user.avatarUrl || user.picture ? (
+                                                <Image
+                                                    src={user.avatarUrl || user.picture || ""}
+                                                    alt={user.name}
+                                                    width={28}
+                                                    height={28}
+                                                    className="rounded-full object-cover"
+                                                    unoptimized
+                                                />
+                                            ) : (
+                                                <div className="w-7 h-7 bg-gray-200 rounded-full flex items-center justify-center">
+                                                    <User size={14} className="text-gray-600" />
+                                                </div>
+                                            )}
+                                            <ChevronDown size={14} className={`text-gray-400 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
+                                        </button>
+                                        <AnimatePresence>
+                                            {isUserMenuOpen && (
+                                                <motion.div initial={{ opacity: 0, scale: 0.95, y: 8 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 8 }} className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-200 p-1.5 overflow-hidden">
+                                                    {/* User Info */}
+                                                    <div className="px-3 py-2.5 border-b border-gray-100 mb-1">
+                                                        <p className="font-medium text-sm text-gray-900 truncate">{user.name}</p>
+                                                        <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                                                        {user.credits !== undefined && (
+                                                            <div className="flex items-center gap-1 mt-1">
+                                                                <CreditCard size={12} className="text-gray-600" />
+                                                                <span className="text-xs font-medium text-gray-600">{user.credits} credits</span>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                    <Link href="/settings" onClick={() => setIsUserMenuOpen(false)} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors">
+                                                        <Settings size={15} />
+                                                        Settings
+                                                    </Link>
+                                                    <button onClick={() => { logout(); setIsUserMenuOpen(false); }} className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition-colors">
+                                                        <LogOut size={15} />
+                                                        Sign out
+                                                    </button>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </>
+                                ) : (
+                                    <button
+                                        onClick={() => setIsLoginModalOpen(true)}
+                                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all cursor-pointer"
+                                    >
+                                        <User size={16} />
+                                        <span>{tNav("logIn")}</span>
+                                    </button>
+                                )}
+                            </div>
+                        )}
+
+                        <Link href={"/#workspace"} className="hidden sm:block bg-indigo-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-indigo-700 hover:shadow-xl hover:shadow-indigo-200 transition-all active:scale-95 cursor-pointer">
                             {t("button")}
                         </Link>
 
-                        <button onClick={() => setIsMobileOpen(true)} className="xl:hidden w-10 h-10 flex items-center justify-center text-slate-900 bg-slate-100 rounded-xl hover:bg-slate-200 transition-all">
+                        <button onClick={() => setIsMobileOpen(true)} className="xl:hidden w-10 h-10 flex items-center justify-center text-slate-900 bg-slate-100 rounded-xl hover:bg-slate-200 transition-all cursor-pointer">
                             <Menu size={24} />
                         </button>
                     </div>
                 </div>
             </header>
+
+            {/* Login Modal */}
+            <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
 
             {/* 3. MOBILE MENU OVERLAY */}
             <AnimatePresence>
@@ -232,8 +310,35 @@ export default function Header() {
                             ))}
                         </div>
 
-                        <div className="p-6 border-t border-slate-100">
-                            <button className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold text-lg shadow-xl shadow-indigo-100 active:scale-95 transition-all">
+                        <div className="p-6 border-t border-slate-100 space-y-3">
+                            {user ? (
+                                <>
+                                    {/* User Info */}
+                                    <div className="flex items-center gap-3 p-3 bg-indigo-50 rounded-2xl mb-2">
+                                        {user.avatarUrl || user.picture ? (
+                                            <Image width={40} height={40} src={user.avatarUrl || user.picture || ""} alt={user.name} className="w-10 h-10 rounded-full object-cover" />
+                                        ) : (
+                                            <div className="w-10 h-10 bg-indigo-200 rounded-full flex items-center justify-center">
+                                                <User size={20} className="text-indigo-600" />
+                                            </div>
+                                        )}
+                                        <div className="flex-1 min-w-0">
+                                            <p className="font-bold text-sm text-slate-800 truncate">{user.name}</p>
+                                            <p className="text-xs text-slate-500 truncate">{user.email}</p>
+                                        </div>
+                                    </div>
+                                    <button onClick={() => { logout(); setIsMobileOpen(false); }} className="w-full flex items-center justify-center gap-2 border-2 border-red-100 text-red-600 py-3 rounded-2xl font-bold hover:bg-red-50 transition-all cursor-pointer">
+                                        <LogOut size={18} />
+                                        Sign Out
+                                    </button>
+                                </>
+                            ) : (
+                                <button onClick={() => { setIsMobileOpen(false); setIsLoginModalOpen(true); }} className="w-full flex items-center justify-center gap-2 bg-indigo-600 text-white py-3 rounded-2xl font-bold hover:bg-indigo-700 transition-all cursor-pointer">
+                                    <User size={18} />
+                                    {tNav("logIn")}
+                                </button>
+                            )}
+                            <button className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold text-lg shadow-xl shadow-indigo-100 active:scale-95 transition-all cursor-pointer">
                                 {t("button")}
                             </button>
                         </div>

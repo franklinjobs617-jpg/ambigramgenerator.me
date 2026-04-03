@@ -22,8 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const seoData: Record<string, { title: string; description: string }> = {
         en: {
-            title: "What is an Ambigram? Definition, Types, and Examples",
-            description: "Detailed guide on what an ambigram is. Learn the definition, explore key types like rotational, reflective, and two-name ambigrams, and discover their fascinating history."
+            title: "What is an Ambigram? 2026 Guide + 50 Unique Tattoo Designs",
+            description: "Learn what an ambigram is, explore rotational and reflective styles, and try a free no-sign-up ambigram tattoo generator with practical examples."
         },
         fr: {
             title: "Qu'est-ce qu'un ambigramme ? Définition, types et exemples",
@@ -46,6 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 export default async function WhatIsAmbigramPage({ params }: Props) {
     const { locale } = await params;
+    const localizedPath = (path: string) => (locale === "en" ? path : `/${locale}${path}`);
 
     // JSON-LD (Article Schema)
     const jsonLd = {
@@ -110,14 +111,14 @@ export default async function WhatIsAmbigramPage({ params }: Props) {
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-600/20 blur-[60px]" />
                                     <h3 className="text-2xl font-black mb-4 flex items-center gap-3"><Box className="text-indigo-400" /> Ambigrammes 3D (Imprimables)</h3>
                                     <p className="text-slate-400 font-medium leading-relaxed">Une variation technique moderne. Un objet physique conçu pour lire un mot d&apos;un côté et un autre du côté opposé.</p>
-                                    <Link href="/3d-generator" className="inline-flex items-center gap-2 text-indigo-400 font-bold mt-4 hover:text-white transition-colors">Explorer la technologie 3D <ArrowRight size={16} /></Link>
+                                    <Link href={localizedPath("/3d-generator")} className="inline-flex items-center gap-2 text-indigo-400 font-bold mt-4 hover:text-white transition-colors">Explorer la technologie 3D <ArrowRight size={16} /></Link>
                                 </div>
                             </div>
 
                             <div className="text-center mt-24 p-12 bg-gradient-to-br from-slate-900 to-[#1A1A1B] rounded-[4rem] shadow-2xl border border-slate-800 text-white not-prose">
                                 <h3 className="text-4xl font-black mb-6 tracking-tight italic">Prêt à créer le vôtre ?</h3>
                                 <p className="text-slate-400 mb-10 font-medium text-lg">Utilisez notre créateur pour appliquer ces principes instantanément. C&apos;est gratuit et facile !</p>
-                                <Link href="/" className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl active:scale-95">
+                                <Link href={localizedPath("/generator")} className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl active:scale-95">
                                     <Sparkles size={20} /> Lancer le Générateur
                                 </Link>
                             </div>
@@ -224,7 +225,7 @@ export default async function WhatIsAmbigramPage({ params }: Props) {
                                     <p className="text-slate-400 font-medium leading-relaxed mb-6">
                                         Eine hochtechnische Variante. Ein <strong>3D-Ambigramm</strong> ist ein physisches Objekt, das so konstruiert ist, dass es von vorne ein Wort und aus der 180-Grad-Gegenperspektive ein anderes Wort darstellt.
                                     </p>
-                                    <Link href="/de/3d-generator" className="inline-flex items-center gap-2 text-indigo-400 font-bold mt-4 hover:text-white transition-colors group">
+                                    <Link href={localizedPath("/3d-generator")} className="inline-flex items-center gap-2 text-indigo-400 font-bold mt-4 hover:text-white transition-colors group">
                                         3D-Technologie entdecken <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                     </Link>
                                 </div>
@@ -237,7 +238,7 @@ export default async function WhatIsAmbigramPage({ params }: Props) {
                                 <p className="text-slate-400 mb-12 font-medium max-w-xl mx-auto text-lg leading-relaxed text-indigo-50/60">
                                     Nutzen Sie den weltweit vielseitigsten Ambigramm-Generator, um diese Prinzipien sofort anzuwenden. Es ist kostenlos, schnell und professionell.
                                 </p>
-                                <Link href="/" className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl shadow-indigo-900/40 active:scale-95">
+                                <Link href={localizedPath("/generator")} className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl shadow-indigo-900/40 active:scale-95">
                                     <Sparkles className="fill-current" size={20} />
                                     Kostenlosen Generator starten
                                 </Link>
@@ -330,7 +331,7 @@ export default async function WhatIsAmbigramPage({ params }: Props) {
                                 <p className="text-slate-400 font-medium leading-relaxed mb-6">
                                     A highly technical physical object designed to read one word from the front and a different word from the 180-degree opposite view.
                                 </p>
-                                <Link href="/3d-generator" className="inline-flex items-center gap-2 text-indigo-400 font-bold hover:text-white transition-colors mb-6 group">
+                                <Link href={localizedPath("/3d-generator")} className="inline-flex items-center gap-2 text-indigo-400 font-bold hover:text-white transition-colors mb-6 group">
                                     Explore 3D Ambigram Technology <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                 </Link>
                                 <div className="overflow-hidden rounded-[2rem] border border-white/5 shadow-inner shadow-black">

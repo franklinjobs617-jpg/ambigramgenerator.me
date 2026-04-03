@@ -10,8 +10,6 @@ import {
     Github,
     Mail,
     Box,
-    Heart,
-    Languages,
     ChevronUp,
     Globe
 } from "lucide-react";
@@ -69,6 +67,7 @@ export default function Footer() {
             title: t("col1Title"),
             links: [
                 { label: tNav("generators.items.3d"), href: "/3d-generator" },
+                { label: "AI Tattoo Generator", href: "/ai-tattoo-generator" },
                 { label: tNav("generators.items.twoName"), href: "/tutorial/two-name-ambigram" },
                 { label: tNav("generators.items.upsideDown"), href: "/upside-down-text-generator", },
                 { label: tNav("generators.items.mirrorGenerator"), href: "/mirror-text-generator", },
