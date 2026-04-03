@@ -36,10 +36,10 @@ type AuthContextValue = {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 const AUTH_BASE_URL =
-  process.env.NEXT_PUBLIC_AUTH_BASE_URL || "http://localhost:3000";
+  process.env.NEXT_PUBLIC_AUTH_BASE_URL || "https://ambigramgenerator.me/";
 const GOOGLE_CLIENT_ID =
   process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
-  "310385587632-no4coue08773ds1l3qb4ofa8gt7njs6b.apps.googleusercontent.com";
+  "310385587632-0o2qh66h3m2boj5fa70cm0n71jvs5323.apps.googleusercontent.com";
 const BACKEND_REDIRECT_URI =
   process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI ||
   `${AUTH_BASE_URL}/prod-api/g/callback`;
