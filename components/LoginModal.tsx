@@ -1,7 +1,8 @@
 "use client";
 
 import { useAuth } from "@/components/providers/auth-provider";
-import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
+import { useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Loader2, AlertCircle } from "lucide-react";
 
@@ -11,8 +12,36 @@ interface LoginModalProps {
 }
 
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
-  const t = useTranslations("HomePage.Navigation");
-  const { login, isAuthenticating, authError, clearAuthError } = useAuth();
+  const { user, login, isAuthenticating, authError, clearAuthError } = useAuth();
+
+  const handleClose = useCallback(() => {
+    clearAuthError();
+    onClose();
+  }, [clearAuthError, onClose]);
+
+  useEffect(() => {
+    if (isOpen && user) {
+      handleClose();
+    }
+  }, [isOpen, user, handleClose]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !isAuthenticating) {
+        handleClose();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen, isAuthenticating, handleClose]);
 
   const handleGoogleLogin = async () => {
     clearAuthError();
@@ -28,7 +57,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
+            onClick={handleClose}
             className="fixed inset-0 bg-black/50 z-[300]"
           />
 
@@ -45,7 +74,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
                 <h2 className="text-lg font-semibold text-gray-900">Sign in</h2>
                 <button
-                  onClick={onClose}
+                  onClick={handleClose}
                   className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer"
                 >
                   <X size={20} />
@@ -119,16 +148,16 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 {/* Terms */}
                 <p className="text-center text-gray-500 text-xs mt-5">
                   By continuing, you agree to our{" "}
-                  <a href="/terms" className="underline hover:text-gray-700">Terms</a>
+                  <Link href="/terms" className="underline hover:text-gray-700">Terms</Link>
                   {" "}&{" "}
-                  <a href="/privacy" className="underline hover:text-gray-700">Privacy</a>
+                  <Link href="/privacy" className="underline hover:text-gray-700">Privacy</Link>
                 </p>
               </div>
 
               {/* Footer */}
               <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 text-center">
                 <p className="text-gray-600 text-sm">
-                  Don't have an account?{" "}
+                  Don&apos;t have an account?{" "}
                   <button className="font-medium text-gray-900 hover:underline">Sign up</button>
                 </p>
               </div>

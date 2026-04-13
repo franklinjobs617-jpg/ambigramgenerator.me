@@ -20,7 +20,7 @@ export default function Header() {
     const locale = useLocale();
     const pathname = usePathname();
     const router = useRouter();
-    const { user, isLoading, login, logout } = useAuth();
+    const { user, isLoading, logout } = useAuth();
 
     const [mounted, setMounted] = useState(false);
     const [scrolled, setScrolled] = useState(false);
@@ -34,6 +34,12 @@ export default function Header() {
     useEffect(() => {
         setMounted(true);
     }, []);
+
+    useEffect(() => {
+        if (user) {
+            setIsLoginModalOpen(false);
+        }
+    }, [user]);
 
     // 语言选择器状态
     const [isLangOpen, setIsLangOpen] = useState(false);

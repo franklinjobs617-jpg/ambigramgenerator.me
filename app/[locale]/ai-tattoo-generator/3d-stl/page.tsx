@@ -159,7 +159,7 @@ export default function AITattoo3DSTLPage() {
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/ai-tattoo-generator?style=line-art&prompt=Create%20a%20high-readability%20tattoo%20concept%20prepared%20for%20STL%20workflow"
-                  className="cursor-pointer inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-foreground text-background font-medium text-sm transition-all hover:opacity-90 hover:shadow-md active:scale-[0.98]"
+                  className="cursor-pointer inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-indigo-600 text-white font-medium text-sm transition-all hover:bg-indigo-700 hover:shadow-md active:scale-[0.98]"
                 >
                   Start STL-Ready Concept
                   <ArrowRight className="w-4 h-4" />
@@ -354,7 +354,7 @@ export default function AITattoo3DSTLPage() {
                       href={`/ai-tattoo-generator?prompt=${encodeURIComponent(
                         item.prompt
                       )}`}
-                      className="cursor-pointer w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-foreground text-background text-sm font-medium transition-all hover:opacity-90 hover:shadow-md active:scale-[0.98]"
+                      className="cursor-pointer w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-indigo-600 text-white text-sm font-medium transition-all hover:bg-indigo-700 hover:shadow-md active:scale-[0.98]"
                     >
                       Use This Prompt
                     </Link>
@@ -414,7 +414,7 @@ export default function AITattoo3DSTLPage() {
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/ai-tattoo-generator"
-                className="cursor-pointer inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-foreground text-background font-medium transition-all hover:opacity-90 hover:shadow-md active:scale-[0.98]"
+                className="cursor-pointer inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-indigo-600 text-white font-medium transition-all hover:bg-indigo-700 hover:shadow-md active:scale-[0.98]"
               >
                 Start Designing Now
                 <ArrowRight className="w-4 h-4" />

@@ -199,7 +199,7 @@ export default function AITattooNamesPage() {
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/ai-tattoo-generator?style=line-art&prompt=Create%20a%20clean%20two-name%20tattoo%20for%20Emma%20and%20Noah%20on%20forearm"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-foreground text-background font-medium text-sm transition-all hover:opacity-90 active:scale-[0.98]"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-indigo-600 text-white font-medium text-sm transition-all hover:bg-indigo-700 hover:shadow-md active:scale-[0.98]"
                 >
                   Start with Two-Name Template
                   <ArrowRight className="w-4 h-4" />
@@ -394,7 +394,7 @@ export default function AITattooNamesPage() {
                       href={`/ai-tattoo-generator?prompt=${encodeURIComponent(
                         item.prompt
                       )}`}
-                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-foreground text-background text-sm font-medium transition-all hover:opacity-90 active:scale-[0.98]"
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-indigo-600 text-white text-sm font-medium transition-all hover:bg-indigo-700 hover:shadow-md active:scale-[0.98]"
                     >
                       Use This Prompt
                     </Link>
@@ -454,7 +454,7 @@ export default function AITattooNamesPage() {
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/ai-tattoo-generator"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-foreground text-background font-medium transition-all hover:opacity-90 active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-indigo-600 text-white font-medium transition-all hover:bg-indigo-700 hover:shadow-md active:scale-[0.98]"
               >
                 Start Designing Now
                 <ArrowRight className="w-4 h-4" />

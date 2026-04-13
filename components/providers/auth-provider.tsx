@@ -37,6 +37,7 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 const AUTH_BASE_URL =
   process.env.NEXT_PUBLIC_AUTH_BASE_URL || "https://api.ambigramgenerator.me";
+const AUTH_APP_TYPE = "ambigr";
 const GOOGLE_CLIENT_ID =
   process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
   "310385587632-0o2qh66h3m2boj5fa70cm0n71jvs5323.apps.googleusercontent.com";
@@ -57,34 +58,90 @@ function parseLoginMessagePayload(rawData: unknown): {
   token: string;
   user: AuthUser;
 } | null {
-  let encodedPayload: string | null = null;
-
   if (rawData && typeof rawData === "object") {
-    const tokenValue = (rawData as { token?: unknown }).token;
-    if (typeof tokenValue === "string") {
-      encodedPayload = tokenValue;
+    const direct = rawData as {
+      token?: unknown;
+      user?: unknown;
+      data?: unknown;
+    };
+    if (typeof direct.token === "string") {
+      const directUser = direct.user;
+      if (directUser && typeof directUser === "object") {
+        const normalizedUser = normalizeAuthUser(directUser as AuthUser);
+        if (normalizedUser?.email) {
+          return {
+            token: direct.token,
+            user: normalizedUser,
+          };
+        }
+      }
+
+      try {
+        const parsedFromToken = JSON.parse(direct.token) as {
+          token?: string;
+          user?: AuthUser;
+        };
+        if (
+          parsedFromToken?.token &&
+          parsedFromToken?.user &&
+          parsedFromToken.user.email
+        ) {
+          return {
+            token: parsedFromToken.token,
+            user: normalizeAuthUser(parsedFromToken.user),
+          };
+        }
+      } catch {
+        // no-op
+      }
     }
-  } else if (typeof rawData === "string") {
-    encodedPayload = rawData;
+
+    if (direct.data && typeof direct.data === "object") {
+      const nested = direct.data as { token?: unknown; user?: unknown };
+      if (
+        typeof nested.token === "string" &&
+        nested.user &&
+        typeof nested.user === "object"
+      ) {
+        const normalizedUser = normalizeAuthUser(nested.user as AuthUser);
+        if (normalizedUser?.email) {
+          return {
+            token: nested.token,
+            user: normalizedUser,
+          };
+        }
+      }
+    }
+
+    return null;
   }
 
-  if (!encodedPayload) return null;
+  if (typeof rawData !== "string") return null;
 
   try {
-    const parsed = JSON.parse(encodedPayload) as {
+    const parsed = JSON.parse(rawData) as {
       token?: string;
       user?: AuthUser;
+      data?: { token?: string; user?: AuthUser };
     };
-    if (!parsed?.token || !parsed?.user?.email) {
-      return null;
+
+    if (parsed?.token && parsed?.user?.email) {
+      const normalizedUser = normalizeAuthUser(parsed.user);
+      return {
+        token: parsed.token,
+        user: normalizedUser,
+      };
     }
 
-    const normalizedUser = normalizeAuthUser(parsed.user);
+    if (parsed?.data?.token && parsed?.data?.user?.email) {
+      const normalizedUser = normalizeAuthUser(parsed.data.user);
+      return {
+        token: parsed.data.token,
+        user: normalizedUser,
+      };
+    }
 
-    return {
-      token: parsed.token,
-      user: normalizedUser,
-    };
+    return null;
   } catch {
     return null;
   }
@@ -109,7 +166,6 @@ function normalizeAuthUser(user: AuthUser): AuthUser {
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = useState(false);
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
@@ -117,7 +173,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Avoid hydration mismatch
   useEffect(() => {
-    setMounted(true);
     setUser(getStoredAuthUser());
     setIsLoading(false);
   }, []);
@@ -168,11 +223,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     lastRefreshAtRef.current = now;
 
     try {
-      const response = await fetch(`${AUTH_BASE_URL}/prod-api/g/getUser`, {
+      const response = await fetch(`${AUTH_BASE_URL}/prod-api/g/getUser?type=${AUTH_APP_TYPE}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          "X-App-Type": AUTH_APP_TYPE,
         },
         cache: "no-store",
       });
@@ -209,7 +265,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       response_type: "code",
       scope: "openid email profile",
       prompt: "select_account",
-      state: `${Date.now()}_ambigr`,
+      state: `${Date.now()}_${AUTH_APP_TYPE}`,
     });
     window.location.assign(`${googleAuthUrl}?${params.toString()}`);
   }, []);
@@ -231,7 +287,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       response_type: "code",
       scope: "openid email profile",
       prompt: "select_account",
-      state: `${Date.now()}_ambigr`,
+      state: `${Date.now()}_${AUTH_APP_TYPE}`,
     });
 
     const width = 600;
@@ -277,6 +333,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (!popupRef.current || popupRef.current.closed) {
         cleanupPopupFlow();
         setIsAuthenticating(false);
+        void refreshUser();
       }
     }, 500);
   }, [cleanupPopupFlow, refreshUser]);
