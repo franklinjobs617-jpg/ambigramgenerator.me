@@ -81,6 +81,7 @@ export default function Header() {
             icon: <Box size={18} className="text-blue-600" />,
             links: [
                 { label: t("nav.generators.items.3d"), href: "/3d-generator", badge: "hot" },
+                { label: "Two Word Ambigram Generator", href: "/two-word-ambigram-generator", badge: "hot" },
                 { label: "AI Tattoo Generator", href: "/ai-tattoo-generator", badge: "hot" },
                 { label: t("nav.generators.items.tattooStencil"), href: "/tattoo-stencil-maker", badge: "hot" },
                 { label: t("nav.generators.items.upsideDown"), href: "/upside-down-text-generator", },

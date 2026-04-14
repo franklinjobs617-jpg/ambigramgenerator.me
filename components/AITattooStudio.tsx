@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ChangeEvent, type PointerEvent as ReactPointerEvent } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/routing";
@@ -11,6 +11,7 @@ import {
     ChevronDown,
     ChevronRight,
     Download,
+    ImagePlus,
     Info,
     Lock,
     Loader2,
@@ -22,7 +23,14 @@ import { trackEvent } from "@/lib/analytics";
 import { PAYMENTS_ENABLED } from "@/lib/payment-config";
 import { createPayment } from "@/lib/payment-gateway-client";
 import type { PaymentChannel } from "@/lib/payment-types";
-import { generateTattoo, TattooApiError, type TattooResolution, type TattooStyle } from "@/lib/tattoo-api";
+import {
+    generateTattoo,
+    generateTryOnTattoo,
+    TattooApiError,
+    type GenerateTryOnTattooRequest,
+    type TattooResolution,
+    type TattooStyle,
+} from "@/lib/tattoo-api";
 import UpgradeModal from "./UpgradeModal";
 import PricingBlock from "./PricingBlock";
 
@@ -37,6 +45,7 @@ type FlowState =
     | "checkout_cancel";
 
 type HelperTone = "tip" | "success" | "warning" | "error";
+type StudioMode = "design" | "tryon";
 
 type Props = {
     locale: string;
@@ -163,21 +172,6 @@ const HERO_STYLE_CARDS: Array<{
     },
 ];
 
-const HERO_GALLERY_IMAGES = [
-    {
-        title: "Stencil precision",
-        image: "/images/tattoo-design-showcase.jpg",
-    },
-    {
-        title: "Contrast planning",
-        image: "/images/ai-tattoo-comparison-hero.jpg",
-    },
-    {
-        title: "Artist-ready lines",
-        image: "/images/rose-tattoo-stencil-design-outline.jpg",
-    },
-];
-
 const SEO_SHOWCASE_IMAGES = [
     {
         title: "AI tattoo generator from text: forearm stencil",
@@ -266,6 +260,24 @@ const RESOLUTION_OPTIONS: Array<{ value: TattooResolution; label: string; credit
     { value: "2K", label: "2K", credits: 2 },
 ];
 
+const TRY_ON_BODY_PARTS = [
+    { id: "forearm", label: "Forearm", image: "/images/example-photo-before.webp" },
+    { id: "shoulder", label: "Shoulder", image: "/images/ambigram-word-tattoo-female.jpg" },
+    { id: "chest", label: "Chest", image: "/images/tattoo-design-showcase.jpg" },
+    { id: "back", label: "Back", image: "/images/ai-tattoo-comparison-hero.jpg" },
+    { id: "ankle", label: "Ankle", image: "/images/manual-tattoo-stencil-tracing.jpg" },
+    { id: "ribs", label: "Ribs", image: "/images/tattoo-stencil-maker-hero.jpg" },
+];
+
+const TRY_ON_LOCATION_PRESETS: Record<string, { x: number; y: number; scale: number; rotate: number }> = {
+    forearm: { x: 66, y: 58, scale: 32, rotate: -8 },
+    shoulder: { x: 62, y: 40, scale: 34, rotate: -5 },
+    chest: { x: 52, y: 44, scale: 36, rotate: 0 },
+    back: { x: 54, y: 48, scale: 42, rotate: 0 },
+    ankle: { x: 48, y: 72, scale: 24, rotate: -4 },
+    ribs: { x: 64, y: 54, scale: 32, rotate: -10 },
+};
+
 const FAQS = [
     {
         q: "What is an ai tattoo generator and how does it work?",
@@ -335,10 +347,52 @@ export default function AITattooStudio({ locale }: Props) {
     const [helperText, setHelperText] = useState("");
     const [helperTone, setHelperTone] = useState<HelperTone>("tip");
     const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [studioMode, setStudioMode] = useState<StudioMode>("design");
+    const [tryOnSource, setTryOnSource] = useState<"generated" | "upload">("generated");
+    const [bodyPart, setBodyPart] = useState(TRY_ON_BODY_PARTS[0]?.id ?? "forearm");
+    const [uploadedTattooUrl, setUploadedTattooUrl] = useState("");
+    const [uploadedBodyUrl, setUploadedBodyUrl] = useState("");
+    const [processedGeneratedTattooUrl, setProcessedGeneratedTattooUrl] = useState("");
+    const [processedUploadedTattooUrl, setProcessedUploadedTattooUrl] = useState("");
+    const [isTryOnPreviewReady, setIsTryOnPreviewReady] = useState(false);
+    const [isTryOnRendering, setIsTryOnRendering] = useState(false);
+    const [tryOnRenderProgress, setTryOnRenderProgress] = useState(0);
+    const [tryOnRenderedUrl, setTryOnRenderedUrl] = useState("");
+    const [isStudioInView, setIsStudioInView] = useState(false);
+    const [isBodyDropActive, setIsBodyDropActive] = useState(false);
+    const [overlayX, setOverlayX] = useState(50);
+    const [overlayY, setOverlayY] = useState(56);
+    const [overlayScale, setOverlayScale] = useState(34);
+    const [overlayRotate, setOverlayRotate] = useState(0);
     const [isStylePanelOpen, setIsStylePanelOpen] = useState(false);
     const [isMobileStyleSheetOpen, setIsMobileStyleSheetOpen] = useState(false);
     const [heroStyleId, setHeroStyleId] = useState(HERO_STYLE_CARDS[0]?.id ?? "fine-line");
+    const studioSectionRef = useRef<HTMLElement | null>(null);
     const stylePanelRef = useRef<HTMLDivElement | null>(null);
+    const tryOnCanvasRef = useRef<HTMLDivElement | null>(null);
+    const tattooUploadInputRef = useRef<HTMLInputElement | null>(null);
+    const bodyUploadInputRef = useRef<HTMLInputElement | null>(null);
+    const uploadedTattooObjectUrlRef = useRef("");
+    const uploadedBodyObjectUrlRef = useRef("");
+    const processedGeneratedObjectUrlRef = useRef("");
+    const processedUploadedObjectUrlRef = useRef("");
+    const dragStateRef = useRef<{
+        active: boolean;
+        pointerX: number;
+        pointerY: number;
+        originX: number;
+        originY: number;
+        width: number;
+        height: number;
+    }>({
+        active: false,
+        pointerX: 0,
+        pointerY: 0,
+        originX: 0,
+        originY: 0,
+        width: 1,
+        height: 1,
+    });
     const searchParams = useSearchParams();
 
     useEffect(() => {
@@ -359,6 +413,78 @@ export default function AITattooStudio({ locale }: Props) {
         const target = document.getElementById(id);
         if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
     };
+    const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
+    const toBackendImageInput = async (sourceUrl: string): Promise<string> => {
+        if (!sourceUrl) return "";
+        if (!sourceUrl.startsWith("blob:")) return sourceUrl;
+        const response = await fetch(sourceUrl);
+        if (!response.ok) {
+            throw new Error("TRYON_READ_BLOB_FAILED");
+        }
+        const blob = await response.blob();
+        return await new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onerror = () => reject(new Error("TRYON_FILE_READER_FAILED"));
+            reader.onload = () => resolve(typeof reader.result === "string" ? reader.result : "");
+            reader.readAsDataURL(blob);
+        });
+    };
+
+    const createTransparentTattooUrl = useCallback(async (sourceUrl: string): Promise<string> => {
+        if (typeof window === "undefined" || !sourceUrl) return sourceUrl;
+        return new Promise((resolve) => {
+            const image = new window.Image();
+            image.crossOrigin = "anonymous";
+            image.onload = () => {
+                try {
+                    const canvas = document.createElement("canvas");
+                    canvas.width = image.naturalWidth || image.width;
+                    canvas.height = image.naturalHeight || image.height;
+                    const context = canvas.getContext("2d");
+                    if (!context || !canvas.width || !canvas.height) {
+                        resolve(sourceUrl);
+                        return;
+                    }
+                    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+                    const frame = context.getImageData(0, 0, canvas.width, canvas.height);
+                    const data = frame.data;
+
+                    for (let index = 0; index < data.length; index += 4) {
+                        const red = data[index];
+                        const green = data[index + 1];
+                        const blue = data[index + 2];
+                        const alpha = data[index + 3];
+                        const luminance = (red + green + blue) / 3;
+
+                        if (luminance > 245) {
+                            data[index + 3] = 0;
+                        } else if (luminance > 220) {
+                            const edgeAlpha = Math.max(0, Math.min(alpha, Math.round(((245 - luminance) / 25) * alpha)));
+                            data[index + 3] = edgeAlpha;
+                        }
+                    }
+
+                    context.putImageData(frame, 0, 0);
+                    canvas.toBlob(
+                        (blob) => {
+                            if (!blob) {
+                                resolve(sourceUrl);
+                                return;
+                            }
+                            resolve(URL.createObjectURL(blob));
+                        },
+                        "image/png",
+                        1,
+                    );
+                } catch {
+                    resolve(sourceUrl);
+                }
+            };
+            image.onerror = () => resolve(sourceUrl);
+            image.src = sourceUrl;
+        });
+    }, []);
 
     useEffect(() => {
         if (!isStylePanelOpen) return;
@@ -387,6 +513,132 @@ export default function AITattooStudio({ locale }: Props) {
             document.body.style.overflow = previousOverflow;
         };
     }, [isMobileStyleSheetOpen]);
+
+    useEffect(() => {
+        const target = studioSectionRef.current;
+        if (!target || typeof IntersectionObserver === "undefined") return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsStudioInView(entry.isIntersecting);
+            },
+            { threshold: 0.18 },
+        );
+        observer.observe(target);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        let cancelled = false;
+        const previousProcessedUrl = processedGeneratedObjectUrlRef.current;
+
+        if (!generatedUrl) {
+            if (previousProcessedUrl) {
+                URL.revokeObjectURL(previousProcessedUrl);
+                processedGeneratedObjectUrlRef.current = "";
+            }
+            setProcessedGeneratedTattooUrl("");
+            return;
+        }
+
+        const run = async () => {
+            const transparentUrl = await createTransparentTattooUrl(generatedUrl);
+            if (cancelled) {
+                if (transparentUrl.startsWith("blob:") && transparentUrl !== previousProcessedUrl) {
+                    URL.revokeObjectURL(transparentUrl);
+                }
+                return;
+            }
+
+            if (previousProcessedUrl && previousProcessedUrl !== transparentUrl) {
+                URL.revokeObjectURL(previousProcessedUrl);
+            }
+
+            processedGeneratedObjectUrlRef.current = transparentUrl.startsWith("blob:") ? transparentUrl : "";
+            setProcessedGeneratedTattooUrl(transparentUrl);
+        };
+
+        void run();
+        return () => {
+            cancelled = true;
+        };
+    }, [createTransparentTattooUrl, generatedUrl]);
+
+    useEffect(() => {
+        let cancelled = false;
+        const previousProcessedUrl = processedUploadedObjectUrlRef.current;
+
+        if (!uploadedTattooUrl) {
+            if (previousProcessedUrl) {
+                URL.revokeObjectURL(previousProcessedUrl);
+                processedUploadedObjectUrlRef.current = "";
+            }
+            setProcessedUploadedTattooUrl("");
+            return;
+        }
+
+        const run = async () => {
+            const transparentUrl = await createTransparentTattooUrl(uploadedTattooUrl);
+            if (cancelled) {
+                if (transparentUrl.startsWith("blob:") && transparentUrl !== previousProcessedUrl && transparentUrl !== uploadedTattooUrl) {
+                    URL.revokeObjectURL(transparentUrl);
+                }
+                return;
+            }
+
+            if (previousProcessedUrl && previousProcessedUrl !== transparentUrl) {
+                URL.revokeObjectURL(previousProcessedUrl);
+            }
+
+            processedUploadedObjectUrlRef.current =
+                transparentUrl.startsWith("blob:") && transparentUrl !== uploadedTattooUrl ? transparentUrl : "";
+            setProcessedUploadedTattooUrl(transparentUrl);
+        };
+
+        void run();
+        return () => {
+            cancelled = true;
+        };
+    }, [createTransparentTattooUrl, uploadedTattooUrl]);
+
+    useEffect(() => {
+        setIsTryOnPreviewReady(false);
+        setTryOnRenderedUrl("");
+        setTryOnRenderProgress(0);
+        setIsTryOnRendering(false);
+    }, [tryOnSource, uploadedBodyUrl, bodyPart, generatedUrl, uploadedTattooUrl]);
+
+    useEffect(() => {
+        return () => {
+            [uploadedTattooObjectUrlRef, uploadedBodyObjectUrlRef, processedGeneratedObjectUrlRef, processedUploadedObjectUrlRef].forEach((ref) => {
+                if (ref.current) {
+                    URL.revokeObjectURL(ref.current);
+                    ref.current = "";
+                }
+            });
+        };
+    }, []);
+
+    useEffect(() => {
+        const handlePointerMove = (event: PointerEvent) => {
+            const state = dragStateRef.current;
+            if (!state.active) return;
+            const deltaX = ((event.clientX - state.pointerX) / state.width) * 100;
+            const deltaY = ((event.clientY - state.pointerY) / state.height) * 100;
+            setOverlayX(clamp(state.originX + deltaX, 6, 94));
+            setOverlayY(clamp(state.originY + deltaY, 8, 92));
+        };
+
+        const handlePointerUp = () => {
+            dragStateRef.current.active = false;
+        };
+
+        window.addEventListener("pointermove", handlePointerMove);
+        window.addEventListener("pointerup", handlePointerUp);
+        return () => {
+            window.removeEventListener("pointermove", handlePointerMove);
+            window.removeEventListener("pointerup", handlePointerUp);
+        };
+    }, []);
 
     const handleUseStyle = (nextStyle: TattooStyle, options?: { scroll?: boolean }) => {
         setStyle(nextStyle);
@@ -685,10 +937,218 @@ export default function AITattooStudio({ locale }: Props) {
         if (generatedUrl) return "generated";
         return "idle";
     }, [flowState, generatedUrl]);
+    const selectedBodyPartPreset = useMemo(() => {
+        return TRY_ON_BODY_PARTS.find((item) => item.id === bodyPart) ?? TRY_ON_BODY_PARTS[0];
+    }, [bodyPart]);
+    const generatedTryOnSourceUrl = processedGeneratedTattooUrl || generatedUrl;
+    const uploadedTryOnSourceUrl = processedUploadedTattooUrl || uploadedTattooUrl;
+    const activeTryOnTattooUrl = tryOnSource === "generated" ? generatedTryOnSourceUrl : uploadedTryOnSourceUrl;
+    const hasTryOnTattooSource = Boolean(activeTryOnTattooUrl);
+    const hasTryOnRenderedResult = Boolean(tryOnRenderedUrl);
+    const activeTryOnBackgroundUrl = tryOnRenderedUrl || uploadedBodyUrl || "/cover10.webp";
+    const canGenerateTryOnPreview = Boolean(hasTryOnTattooSource && uploadedBodyUrl);
+    const isTryOnReady = Boolean(hasTryOnTattooSource && uploadedBodyUrl && isTryOnPreviewReady);
+    const shouldShowTryOnOverlay = isTryOnReady && !hasTryOnRenderedResult;
+    const isTryOnGenerateDisabled = !canGenerateTryOnPreview || isTryOnRendering;
+    const tryOnPreviewStatusText = isTryOnRendering
+        ? `Rendering... ${Math.min(99, Math.max(12, tryOnRenderProgress))}%`
+        : hasTryOnRenderedResult
+          ? "Preview ready"
+          : canGenerateTryOnPreview
+            ? "Tap Generate Try-On"
+            : "Upload body + tattoo";
     const isHeroIdle = heroPreviewState === "idle";
     const shouldShowMobilePreviewFirst = !isHeroIdle;
     const inputOrderClass = shouldShowMobilePreviewFirst ? "order-2 lg:order-1" : "order-1 lg:order-1";
     const previewOrderClass = shouldShowMobilePreviewFirst ? "order-1 lg:order-2" : "order-2 lg:order-2";
+    const shouldShowMobileStudioCta = !isStudioInView && !isMobileStyleSheetOpen && !isTryOnRendering;
+
+    const openTryOnWithGenerated = () => {
+        if (!generatedUrl) {
+            setHelperText("Generate a tattoo first, then preview it on skin.");
+            setHelperTone("warning");
+            return;
+        }
+        setTryOnSource("generated");
+        setStudioMode("tryon");
+        setIsTryOnPreviewReady(false);
+        setTryOnRenderedUrl("");
+        setTryOnRenderProgress(0);
+        setIsTryOnRendering(false);
+        setHelperTone("tip");
+        setHelperText(
+            uploadedBodyUrl
+                ? "Generated tattoo selected. Choose location and click Generate Try-On."
+                : "Generated tattoo selected. Upload a body photo, choose location, then click Generate Try-On."
+        );
+        trackEvent("cta_click", { section: "preview", action: "open_tryon_generated" });
+    };
+
+    const applyTryOnPreset = (partId: string) => {
+        const preset = TRY_ON_LOCATION_PRESETS[partId] ?? TRY_ON_LOCATION_PRESETS.forearm;
+        setOverlayX(preset.x);
+        setOverlayY(preset.y);
+        setOverlayScale(preset.scale);
+        setOverlayRotate(preset.rotate);
+    };
+
+    const handleTryOnGeneratePreview = async () => {
+        if (!hasTryOnTattooSource) {
+            setHelperTone("warning");
+            setHelperText("Please choose a tattoo source first.");
+            return;
+        }
+        if (!uploadedBodyUrl) {
+            setHelperTone("warning");
+            setHelperText("Please upload your body photo first.");
+            return;
+        }
+
+        applyTryOnPreset(bodyPart);
+        setIsTryOnPreviewReady(true);
+        setTryOnRenderedUrl("");
+        setIsTryOnRendering(true);
+        setTryOnRenderProgress(10);
+        setHelperTone("tip");
+        setHelperText(`Placement set to ${selectedBodyPartPreset.label}. Rendering your try-on...`);
+        trackEvent("cta_click", { section: "tryon", action: "generate_preview", bodyPart, source: tryOnSource });
+
+        try {
+            const [bodyImageInput, tattooImageInput] = await Promise.all([
+                toBackendImageInput(uploadedBodyUrl),
+                toBackendImageInput(activeTryOnTattooUrl),
+            ]);
+
+            const requestPayload: GenerateTryOnTattooRequest = {
+                bodyImage: bodyImageInput,
+                tattooImage: tattooImageInput,
+                prompt,
+                style,
+                placement: bodyPart,
+                size,
+                resolution,
+                locale,
+            };
+
+            const result = await generateTryOnTattoo(requestPayload, {
+                onTaskCreated: () => {
+                    setTryOnRenderProgress(24);
+                    setHelperTone("tip");
+                    setHelperText("Task created. Rendering try-on preview...");
+                },
+                onPolling: (payload, attempt) => {
+                    const nextProgress = Math.min(92, 24 + attempt * 7);
+                    setTryOnRenderProgress(nextProgress);
+                    if (payload.status === "processing") {
+                        setHelperTone("tip");
+                        setHelperText(`Rendering preview... ${nextProgress}%`);
+                    }
+                },
+            });
+
+            if (result.finalUrl) {
+                setTryOnRenderedUrl(result.finalUrl);
+                setTryOnRenderProgress(100);
+                setHelperTone("success");
+                setHelperText("Try-on preview is ready. You can continue adjusting or regenerate.");
+                return;
+            }
+
+            setHelperTone("error");
+            setHelperText("Try-on preview finished without image URL. Please retry.");
+        } catch (error) {
+            if (error instanceof TattooApiError) {
+                if (error.code === "LOGIN_REQUIRED") {
+                    setHelperTone("warning");
+                    setHelperText("Please log in to continue AI try-on generation.");
+                    return;
+                }
+                if (error.code === "PAYMENT_REQUIRED") {
+                    setHelperTone("warning");
+                    setHelperText("Credits are insufficient for try-on generation. Please purchase credits.");
+                    setIsUpgradeOpen(true);
+                    return;
+                }
+                if (error.code === "GUEST_LIMIT_EXCEEDED") {
+                    setHelperTone("warning");
+                    setHelperText("Guest tries are used up. Please log in and continue with credits.");
+                    setIsUpgradeOpen(true);
+                    return;
+                }
+                setHelperTone("error");
+                setHelperText(error.message || "Try-on generation failed. Please retry.");
+                return;
+            }
+            setHelperTone("error");
+            setHelperText("Try-on generation is unavailable. Please retry shortly.");
+        } finally {
+            setIsTryOnRendering(false);
+        }
+    };
+
+    const attachTattooFile = (file: File) => {
+        if (uploadedTattooObjectUrlRef.current) {
+            URL.revokeObjectURL(uploadedTattooObjectUrlRef.current);
+        }
+        const objectUrl = URL.createObjectURL(file);
+        uploadedTattooObjectUrlRef.current = objectUrl;
+        setUploadedTattooUrl(objectUrl);
+        setTryOnSource("upload");
+        setStudioMode("tryon");
+        setIsTryOnPreviewReady(false);
+        setTryOnRenderedUrl("");
+        setTryOnRenderProgress(0);
+        setIsTryOnRendering(false);
+        setHelperText("Custom tattoo uploaded. Now upload body photo and click Generate Try-On.");
+        setHelperTone("success");
+        trackEvent("cta_click", { section: "tryon", action: "upload_tattoo" });
+    };
+
+    const attachBodyFile = (file: File) => {
+        if (uploadedBodyObjectUrlRef.current) {
+            URL.revokeObjectURL(uploadedBodyObjectUrlRef.current);
+        }
+        const objectUrl = URL.createObjectURL(file);
+        uploadedBodyObjectUrlRef.current = objectUrl;
+        setUploadedBodyUrl(objectUrl);
+        setStudioMode("tryon");
+        setIsTryOnPreviewReady(false);
+        setTryOnRenderedUrl("");
+        setTryOnRenderProgress(0);
+        setIsTryOnRendering(false);
+        setHelperText("Body photo uploaded. Choose location and click Generate Try-On.");
+        setHelperTone("success");
+        trackEvent("cta_click", { section: "tryon", action: "upload_body" });
+    };
+
+    const handleTattooUploadChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        attachTattooFile(file);
+        event.target.value = "";
+    };
+
+    const handleBodyUploadChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        attachBodyFile(file);
+        event.target.value = "";
+    };
+
+    const handleTryOnOverlayDragStart = (event: ReactPointerEvent<HTMLButtonElement>) => {
+        if (!tryOnCanvasRef.current || !activeTryOnTattooUrl || !shouldShowTryOnOverlay) return;
+        const rect = tryOnCanvasRef.current.getBoundingClientRect();
+        dragStateRef.current = {
+            active: true,
+            pointerX: event.clientX,
+            pointerY: event.clientY,
+            originX: overlayX,
+            originY: overlayY,
+            width: rect.width || 1,
+            height: rect.height || 1,
+        };
+        event.preventDefault();
+    };
 
     const handleHeroStyleSelect = (card: (typeof HERO_STYLE_CARDS)[number]) => {
         setHeroStyleId(card.id);
@@ -703,6 +1163,7 @@ export default function AITattooStudio({ locale }: Props) {
             {/* Hero Section */}
             <section
                 id="studio"
+                ref={studioSectionRef}
                 className="relative overflow-x-clip pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-[linear-gradient(180deg,#F6F5FF_0%,#F2F5FF_46%,#FDFDFF_100%)]"
             >
                 <div className="pointer-events-none absolute inset-0 -z-10">
@@ -726,8 +1187,37 @@ export default function AITattooStudio({ locale }: Props) {
                         </p>
                     </div>
 
-                    <div className="mt-8 grid gap-6 lg:grid-cols-[1.03fr_0.97fr] items-start">
-                        <div className={`${inputOrderClass} rounded-[2rem] border border-slate-200/90 bg-white/94 p-5 sm:p-6 shadow-[0_24px_70px_-30px_rgba(15,23,42,0.32)] backdrop-blur-sm`}>
+                    <div className="mt-8 grid gap-6 lg:grid-cols-[1.03fr_0.97fr] items-stretch">
+                        <div className={`${inputOrderClass} h-full rounded-[2rem] border border-slate-200/90 bg-white/94 p-5 sm:p-6 shadow-[0_24px_70px_-30px_rgba(15,23,42,0.32)] backdrop-blur-sm lg:flex lg:flex-col`}>
+                            <div className="mb-4 inline-flex rounded-full border border-slate-200 bg-slate-50 p-1">
+                                <button
+                                    type="button"
+                                    onClick={() => setStudioMode("design")}
+                                    className={`cursor-pointer rounded-full px-4 py-1.5 text-xs font-semibold transition ${
+                                        studioMode === "design"
+                                            ? "bg-indigo-600 text-white shadow-sm"
+                                            : "text-slate-600 hover:bg-white"
+                                    }`}
+                                >
+                                    Design
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        if (generatedTryOnSourceUrl) setTryOnSource("generated");
+                                        setStudioMode("tryon");
+                                    }}
+                                    className={`cursor-pointer rounded-full px-4 py-1.5 text-xs font-semibold transition ${
+                                        studioMode === "tryon"
+                                            ? "bg-indigo-600 text-white shadow-sm"
+                                            : "text-slate-600 hover:bg-white"
+                                    }`}
+                                >
+                                    Virtual Try-On
+                                </button>
+                            </div>
+                            {studioMode === "design" ? (
+                                <>
                             <div className="flex items-center justify-between mb-3">
                                 <label htmlFor="hero-main-prompt" className="text-sm font-semibold text-[#1A1A1B]">
                                     Describe your tattoo idea
@@ -849,7 +1339,7 @@ export default function AITattooStudio({ locale }: Props) {
                                         type="button"
                                         onClick={() => {
                                             setPrompt(chip);
-                                            setHelperText("Template applied. Press Generate Tattoo.");
+                                            setHelperText("Template applied. Press Generate Design.");
                                             setHelperTone("tip");
                                             trackEvent("cta_click", { section: "hero", action: "quick_prompt" });
                                         }}
@@ -869,7 +1359,7 @@ export default function AITattooStudio({ locale }: Props) {
                                         </span>
                                     ) : (
                                         <span className="inline-flex items-center gap-2">
-                                            Generate Tattoo
+                                            Generate Design
                                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                                         </span>
                                     )}
@@ -882,6 +1372,161 @@ export default function AITattooStudio({ locale }: Props) {
                                     Browse Styles
                                 </button>
                             </div>
+                                </>
+                            ) : (
+                                <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50/80 p-3.5">
+                                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Virtual Try-On</p>
+                                    <p className="mt-1 text-xs text-slate-500">Upload body photo → choose location → Generate Try-On.</p>
+                                    <div
+                                        role="button"
+                                        tabIndex={0}
+                                        onClick={() => bodyUploadInputRef.current?.click()}
+                                        onKeyDown={(event) => {
+                                            if (event.key === "Enter" || event.key === " ") {
+                                                event.preventDefault();
+                                                bodyUploadInputRef.current?.click();
+                                            }
+                                        }}
+                                        onDragOver={(event) => {
+                                            event.preventDefault();
+                                            setIsBodyDropActive(true);
+                                        }}
+                                        onDragEnter={(event) => {
+                                            event.preventDefault();
+                                            setIsBodyDropActive(true);
+                                        }}
+                                        onDragLeave={(event) => {
+                                            event.preventDefault();
+                                            if (event.currentTarget.contains(event.relatedTarget as Node)) return;
+                                            setIsBodyDropActive(false);
+                                        }}
+                                        onDrop={(event) => {
+                                            event.preventDefault();
+                                            setIsBodyDropActive(false);
+                                            const file = event.dataTransfer.files?.[0];
+                                            if (file) attachBodyFile(file);
+                                        }}
+                                        className={`mt-3 rounded-2xl border border-dashed px-4 py-8 text-center transition ${
+                                            isBodyDropActive ? "border-indigo-300 bg-indigo-50/70" : "border-slate-200 bg-white hover:border-indigo-200"
+                                        }`}
+                                    >
+                                        <ImagePlus className="mx-auto h-6 w-6 text-slate-400" />
+                                        <p className="mt-2 text-lg font-semibold text-slate-700">
+                                            {uploadedBodyUrl ? "Body photo uploaded" : "Upload or Drag Image here"}
+                                        </p>
+                                        <p className="mt-2 text-xs text-slate-500">JPG, JPEG, PNG, WEBP or Paste from Clipboard</p>
+                                    </div>
+                                    <input
+                                        ref={bodyUploadInputRef}
+                                        type="file"
+                                        accept="image/*"
+                                        className="hidden"
+                                        onChange={handleBodyUploadChange}
+                                    />
+
+                                    <div className="mt-3 rounded-xl border border-slate-200 bg-white px-3 py-2.5">
+                                        <div className="flex items-center justify-between gap-2">
+                                            <p className="text-xs text-slate-500">
+                                                {hasTryOnTattooSource
+                                                    ? `Tattoo source: ${tryOnSource === "generated" ? "Generated design" : "Uploaded tattoo"}`
+                                                    : "No tattoo source yet. Use generated result or upload tattoo."}
+                                            </p>
+                                            <button
+                                                type="button"
+                                                onClick={() => tattooUploadInputRef.current?.click()}
+                                                className="cursor-pointer rounded-lg border border-slate-200 px-2.5 py-1 text-[11px] font-semibold text-slate-600 transition hover:border-indigo-200 hover:text-indigo-700"
+                                            >
+                                                Upload tattoo
+                                            </button>
+                                        </div>
+                                        {generatedTryOnSourceUrl && uploadedTryOnSourceUrl && (
+                                            <div className="mt-2 inline-flex rounded-lg border border-slate-200 bg-slate-50 p-1">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setTryOnSource("generated");
+                                                        setIsTryOnPreviewReady(false);
+                                                    }}
+                                                    className={`cursor-pointer rounded-md px-2.5 py-1 text-[11px] font-semibold transition ${
+                                                        tryOnSource === "generated"
+                                                            ? "bg-indigo-600 text-white shadow-sm"
+                                                            : "text-slate-600 hover:bg-white"
+                                                    }`}
+                                                >
+                                                    Generated
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setTryOnSource("upload");
+                                                        setIsTryOnPreviewReady(false);
+                                                    }}
+                                                    className={`cursor-pointer rounded-md px-2.5 py-1 text-[11px] font-semibold transition ${
+                                                        tryOnSource === "upload"
+                                                            ? "bg-indigo-600 text-white shadow-sm"
+                                                            : "text-slate-600 hover:bg-white"
+                                                    }`}
+                                                >
+                                                    Uploaded
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <input
+                                        ref={tattooUploadInputRef}
+                                        type="file"
+                                        accept="image/*"
+                                        className="hidden"
+                                        onChange={handleTattooUploadChange}
+                                    />
+
+                                    <div className="mt-3 rounded-xl border border-slate-200 bg-white px-3 py-2.5">
+                                        <div className="flex items-center justify-between gap-2">
+                                            <p className="text-[11px] font-medium text-slate-500">Tattoo location</p>
+                                            <p className="text-[11px] font-semibold text-slate-700">{selectedBodyPartPreset.label}</p>
+                                        </div>
+                                        <div className="mt-2 grid grid-cols-3 gap-2">
+                                            {TRY_ON_BODY_PARTS.map((item) => (
+                                                <button
+                                                    key={item.id}
+                                                    type="button"
+                                                    onClick={() => setBodyPart(item.id)}
+                                                    className={`cursor-pointer rounded-xl border px-2.5 py-2 text-center text-[11px] font-semibold transition ${
+                                                        bodyPart === item.id
+                                                            ? "border-indigo-300 bg-indigo-50 text-indigo-700"
+                                                            : "border-slate-200 bg-white text-slate-600 hover:border-indigo-200"
+                                                    }`}
+                                                >
+                                                    {item.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        onClick={handleTryOnGeneratePreview}
+                                        disabled={isTryOnGenerateDisabled}
+                                        className={`${heroPrimaryCta} mt-4 inline-flex w-full items-center justify-center gap-2 px-5 py-3.5 text-sm disabled:cursor-not-allowed disabled:opacity-45`}
+                                    >
+                                        {isTryOnRendering ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+                                        {isTryOnRendering ? "Rendering Try-On..." : "Generate Try-On"}
+                                    </button>
+                                    {isTryOnRendering && (
+                                        <div className="mt-2.5 rounded-xl border border-indigo-100 bg-indigo-50/70 px-3 py-2">
+                                            <div className="h-1.5 w-full overflow-hidden rounded-full bg-indigo-100">
+                                                <div
+                                                    className="h-full rounded-full bg-indigo-500 transition-all duration-300"
+                                                    style={{ width: `${Math.min(100, Math.max(10, tryOnRenderProgress))}%` }}
+                                                />
+                                            </div>
+                                            <p className="mt-1.5 text-[11px] font-medium text-indigo-700">
+                                                Generating realistic skin render... {Math.min(99, Math.max(12, tryOnRenderProgress))}%
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                             <div
                                 className={`mt-3 rounded-xl border px-3 py-2.5 text-xs ${
                                     helperTone === "success"
@@ -905,84 +1550,143 @@ export default function AITattooStudio({ locale }: Props) {
                                         <Info className="h-4 w-4 shrink-0 mt-0.5" />
                                     )}
                                     <span>
-                                        {helperText || `Tip: include subject + style + placement for better results. Current output: ${selectedResolutionInfo.label} (${selectedResolutionInfo.credits} credit${selectedResolutionInfo.credits > 1 ? "s" : ""}). Guest mode allows 2 tries per day.`}
+                                        {helperText ||
+                                            (studioMode === "tryon"
+                                                ? "Upload body photo, choose location, then click Generate Try-On."
+                                                : `Tip: include subject + style + placement for better results. Current output: ${selectedResolutionInfo.label} (${selectedResolutionInfo.credits} credit${selectedResolutionInfo.credits > 1 ? "s" : ""}). Guest mode allows 2 tries per day.`)}
                                     </span>
                                 </div>
                             </div>
                         </div>
 
-                        <div id="studio-preview" className={`${previewOrderClass} rounded-[2rem] border border-slate-200/90 bg-white/94 p-4 sm:p-5 shadow-[0_24px_70px_-34px_rgba(15,23,42,0.32)] backdrop-blur-sm`}>
-                            <div className="mb-4 flex items-center justify-between">
-                                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Live Preview</p>
-                                <span className="text-xs font-medium text-slate-500">
-                                    {heroPreviewState === "idle" ? "Ready to generate" : heroPreviewState === "generating" ? "Generating..." : "Result ready"}
+                        <div id="studio-preview" className={`${previewOrderClass} h-full rounded-[2rem] border border-slate-200/90 bg-white/94 p-4 sm:p-5 shadow-[0_24px_70px_-34px_rgba(15,23,42,0.32)] backdrop-blur-sm lg:flex lg:flex-col`}>
+                            <div className="mb-4 flex items-center justify-between gap-2">
+                                <p className="text-sm font-semibold text-[#1A1A1B]">{studioMode === "design" ? "Result Preview" : "Virtual Try-On Preview"}</p>
+                                <span className={`text-xs font-medium text-slate-500 ${studioMode === "tryon" ? "hidden sm:inline" : ""}`}>
+                                    {studioMode === "design"
+                                        ? heroPreviewState === "idle"
+                                            ? "Ready to generate"
+                                            : heroPreviewState === "generating"
+                                            ? "Generating..."
+                                            : "Result ready"
+                                        : tryOnPreviewStatusText}
                                 </span>
                             </div>
 
                             <div
                                 className={`relative rounded-[1.5rem] border border-slate-200 bg-white overflow-hidden ${
-                                    isHeroIdle ? "min-h-[170px] sm:min-h-[360px]" : "min-h-[250px] sm:min-h-[360px]"
-                                }`}
+                                    studioMode === "tryon"
+                                        ? "min-h-[280px] sm:min-h-[360px]"
+                                        : isHeroIdle
+                                          ? "min-h-[170px] sm:min-h-[360px]"
+                                          : "min-h-[250px] sm:min-h-[360px]"
+                                } lg:flex-1`}
                             >
-                                {heroPreviewState === "generated" ? (
+                                {studioMode === "design" ? (
                                     <>
+                                        {heroPreviewState === "generated" ? (
+                                            <>
+                                                <Image
+                                                    src={generatedUrl}
+                                                    alt="AI tattoo generator result preview"
+                                                    fill
+                                                    unoptimized
+                                                    sizes="(min-width: 1024px) 42vw, 92vw"
+                                                    className="object-cover"
+                                                />
+                                                <div className="absolute left-3 top-3 rounded-full bg-white/92 px-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-sm">
+                                                    Preview Ready
+                                                </div>
+                                                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/35 to-transparent" />
+                                                <div className="absolute right-3 top-3 rounded-full bg-indigo-600/90 px-2.5 py-1 text-[11px] font-semibold text-white shadow-sm">
+                                                    {resultResolution}
+                                                </div>
+                                            </>
+                                        ) : heroPreviewState === "generating" ? (
+                                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-slate-50 via-white to-indigo-50 text-center px-6">
+                                                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                                                    <Loader2 className="h-5 w-5 animate-spin" />
+                                                </span>
+                                                <p className="mt-4 text-sm font-semibold text-[#1A1A1B]">Generating your tattoo draft</p>
+                                                <p className="mt-1 text-xs text-slate-500">Adjusting style contrast and line clarity...</p>
+                                            </div>
+                                        ) : (
+                                            <div className={`relative h-full overflow-hidden ${isHeroIdle ? "min-h-[170px] sm:min-h-[360px]" : "min-h-[250px] sm:min-h-[360px]"}`}>
+                                                <Image
+                                                    src={selectedHeroStyle.image}
+                                                    alt={`${selectedHeroStyle.label} style preview`}
+                                                    fill
+                                                    sizes="(min-width: 1024px) 42vw, 92vw"
+                                                    className="object-cover"
+                                                />
+                                                <div className="absolute left-3 top-3 rounded-full bg-white/92 px-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-sm">
+                                                    Style Preview
+                                                </div>
+                                                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/72 via-black/30 to-transparent px-3 py-3">
+                                                    <p className="text-sm font-semibold text-white">{selectedHeroStyle.label}</p>
+                                                    <p className="text-xs text-white/80">{selectedHeroStyle.hint}</p>
+                                                    <p className="mt-1 text-[11px] text-white/70">Generate to view your final tattoo output.</p>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </>
+                                ) : (
+                                    <div ref={tryOnCanvasRef} className="relative h-full min-h-[280px] sm:min-h-[360px] bg-slate-100">
                                         <Image
-                                            src={generatedUrl}
-                                            alt="AI tattoo generator result preview"
+                                            src={activeTryOnBackgroundUrl}
+                                            alt={`${selectedBodyPartPreset.label} body placement preview`}
                                             fill
-                                            unoptimized
                                             sizes="(min-width: 1024px) 42vw, 92vw"
                                             className="object-cover"
                                         />
-                                        <div className="absolute left-3 top-3 rounded-full bg-white/92 px-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-sm">
-                                            Preview Ready
-                                        </div>
-                                        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/35 to-transparent" />
-                                        <div className="absolute right-3 top-3 rounded-full bg-indigo-600/90 px-2.5 py-1 text-[11px] font-semibold text-white shadow-sm">
-                                            {resultResolution}
-                                        </div>
-                                    </>
-                                ) : heroPreviewState === "generating" ? (
-                                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-slate-50 via-white to-indigo-50 text-center px-6">
-                                        <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
-                                            <Loader2 className="h-5 w-5 animate-spin" />
-                                        </span>
-                                        <p className="mt-4 text-sm font-semibold text-[#1A1A1B]">Generating your tattoo draft</p>
-                                        <p className="mt-1 text-xs text-slate-500">Adjusting style contrast and line clarity...</p>
-                                    </div>
-                                ) : (
-                                    <div className={`flex h-full flex-col gap-2.5 p-2.5 ${isHeroIdle ? "min-h-[170px] sm:min-h-[360px]" : "min-h-[250px] sm:min-h-[360px]"}`}>
-                                        <div className="relative h-full sm:h-[58%] min-h-[140px] sm:min-h-[198px] overflow-hidden rounded-xl border border-slate-200">
-                                            <Image
-                                                src={selectedHeroStyle.image}
-                                                alt={`${selectedHeroStyle.label} style preview`}
-                                                fill
-                                                sizes="(min-width: 1024px) 34vw, 92vw"
-                                                className="object-cover"
-                                            />
-                                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent px-3 py-2.5">
-                                                <p className="text-xs font-semibold text-white">{selectedHeroStyle.label}</p>
-                                                <p className="text-[11px] text-white/80">{selectedHeroStyle.hint}</p>
-                                            </div>
-                                        </div>
-                                        <div className="hidden sm:grid grid-cols-3 gap-2.5 flex-1 min-h-[64px] sm:min-h-[128px]">
-                                            {HERO_GALLERY_IMAGES.map((item) => (
-                                                <div key={item.title} className="relative overflow-hidden rounded-xl border border-slate-200">
-                                                    <Image src={item.image} alt={item.title} fill sizes="220px" className="object-cover" />
-                                                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent px-2.5 py-2">
-                                                        <p className="text-[11px] font-semibold text-white">{item.title}</p>
-                                                    </div>
+                                        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/10 via-transparent to-violet-900/10" />
+                                        {shouldShowTryOnOverlay ? (
+                                            <button
+                                                type="button"
+                                                onPointerDown={handleTryOnOverlayDragStart}
+                                                className="absolute touch-none cursor-move bg-transparent"
+                                                style={{
+                                                    left: `${overlayX}%`,
+                                                    top: `${overlayY}%`,
+                                                    width: `${overlayScale}%`,
+                                                    transform: `translate(-50%, -50%) rotate(${overlayRotate}deg)`,
+                                                }}
+                                                aria-label="Drag tattoo position on body preview"
+                                            >
+                                                <div className="relative aspect-square w-full">
+                                                    <Image
+                                                        src={activeTryOnTattooUrl}
+                                                        alt="Tattoo overlay preview on skin"
+                                                        fill
+                                                        unoptimized
+                                                        sizes="(min-width: 1024px) 24vw, 62vw"
+                                                        className="pointer-events-none select-none object-contain mix-blend-multiply"
+                                                    />
                                                 </div>
-                                            ))}
+                                            </button>
+                                        ) : !hasTryOnRenderedResult ? (
+                                            <div className="absolute inset-0 flex items-center justify-center px-4 text-center">
+                                                <div className="max-w-[320px] rounded-xl border border-white/70 bg-white/92 px-4 py-3 shadow-sm backdrop-blur-sm">
+                                                    <p className="text-sm font-semibold text-[#1A1A1B]">
+                                                        {!uploadedBodyUrl ? "Upload body photo to begin" : "Click Generate to render preview"}
+                                                    </p>
+                                                    <p className="mt-1 text-[11px] text-slate-600">
+                                                        {hasTryOnTattooSource ? "Tattoo source is ready." : "Use generated design or upload tattoo first."}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        ) : null}
+
+                                        <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/22 to-transparent" />
+                                        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/28 to-transparent" />
+                                        <div className="absolute right-3 top-3 rounded-full bg-white/92 px-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-sm">
+                                            {selectedBodyPartPreset.label}
                                         </div>
-                                        <p className="sm:hidden text-[11px] text-slate-500 px-1">
-                                            Preview follows your selected style. Generate to see your final tattoo result.
-                                        </p>
                                     </div>
                                 )}
                             </div>
 
-                            {heroPreviewState === "generated" && (
+                            {studioMode === "design" && heroPreviewState === "generated" && (
                                 <div className="mt-3 rounded-2xl border border-slate-200 bg-slate-50/80 p-3 sm:p-4">
                                     <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                                         <div>
@@ -1013,29 +1717,43 @@ export default function AITattooStudio({ locale }: Props) {
                                                 disabled={isBusy}
                                                 className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-600 transition-all hover:border-indigo-200 hover:text-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed"
                                             >
-                                                Generate Again
+                                                Generate New Design
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={openTryOnWithGenerated}
+                                                className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-600 transition-all hover:border-indigo-200 hover:text-indigo-700"
+                                            >
+                                                <ImagePlus className="h-4 w-4" />
+                                                Open Try-On
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             )}
 
-                            <div className="mt-3 hidden sm:grid grid-cols-4 gap-2">
-                                {HERO_STYLE_CARDS.slice(0, 4).map((item) => (
-                                    <button
-                                        key={item.id}
-                                        type="button"
-                                        onClick={() => handleHeroStyleSelect(item)}
-                                        className={`cursor-pointer overflow-hidden rounded-xl border text-left transition-all ${heroStyleId === item.id ? "border-indigo-300 ring-1 ring-indigo-200" : "border-slate-200 hover:border-indigo-200"}`}
-                                        aria-label={`Quick select ${item.label}`}
-                                    >
-                                        <div className="relative aspect-[1.15/1]">
-                                            <Image src={item.image} alt={item.label} fill sizes="120px" className="object-cover" />
-                                        </div>
-                                        <p className="truncate px-2 py-1.5 text-[11px] font-semibold text-[#1A1A1B]">{item.label}</p>
-                                    </button>
-                                ))}
-                            </div>
+                            {studioMode === "design" ? (
+                                <div className="mt-3 hidden sm:grid grid-cols-4 gap-2">
+                                    {HERO_STYLE_CARDS.slice(0, 4).map((item) => (
+                                        <button
+                                            key={item.id}
+                                            type="button"
+                                            onClick={() => handleHeroStyleSelect(item)}
+                                            className={`cursor-pointer overflow-hidden rounded-xl border text-left transition-all ${heroStyleId === item.id ? "border-indigo-300 ring-1 ring-indigo-200" : "border-slate-200 hover:border-indigo-200"}`}
+                                            aria-label={`Quick select ${item.label}`}
+                                        >
+                                            <div className="relative aspect-[1.15/1]">
+                                                <Image src={item.image} alt={item.label} fill sizes="120px" className="object-cover" />
+                                            </div>
+                                            <p className="truncate px-2 py-1.5 text-[11px] font-semibold text-[#1A1A1B]">{item.label}</p>
+                                        </button>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="mt-3 rounded-xl bg-slate-50/80 px-3 py-2 text-[11px] text-slate-500">
+                                    Drag to reposition after generate. White background is removed automatically.
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -1339,14 +2057,16 @@ export default function AITattooStudio({ locale }: Props) {
             </section>
 
             {/* Mobile Fixed CTA */}
-            <div className="fixed bottom-4 left-4 right-4 sm:hidden z-50">
-                <button
-                    onClick={() => scrollTo("studio")}
-                    className="cursor-pointer w-full rounded-2xl bg-indigo-600 text-white py-3.5 font-semibold text-sm shadow-lg transition-all hover:bg-indigo-700 hover:shadow-xl active:scale-[0.99]"
-                >
-                    Open Tattoo Studio
-                </button>
-            </div>
+            {shouldShowMobileStudioCta && (
+                <div className="fixed bottom-4 left-4 right-4 sm:hidden z-50">
+                    <button
+                        onClick={() => scrollTo("studio")}
+                        className="cursor-pointer w-full rounded-2xl bg-indigo-600 text-white py-3.5 font-semibold text-sm shadow-lg transition-all hover:bg-indigo-700 hover:shadow-xl active:scale-[0.99]"
+                    >
+                        Back to Studio
+                    </button>
+                </div>
+            )}
 
             {/* Upgrade Modal */}
             <UpgradeModal

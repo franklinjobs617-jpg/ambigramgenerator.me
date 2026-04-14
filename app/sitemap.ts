@@ -14,6 +14,7 @@ const multiLangPages = [
   '/ai-tattoo-generator/3d-stl',
   '/best-ai-tattoo-generator',
   '/faq',
+  '/generator',
   '/privacy',
   '/tattoo-design',
   '/tattoo-stencil-maker',
@@ -31,6 +32,7 @@ const multiLangPages = [
   '/tutorial/multi-word-guide',
   '/tutorial/tattoo-design',
   '/tutorial/two-name-ambigram',
+  '/two-word-ambigram-generator',
 ]
 
 const englishOnlyPages = [

@@ -12,6 +12,17 @@ export interface GenerateTattooRequest {
   locale: string;
 }
 
+export interface GenerateTryOnTattooRequest {
+  bodyImage: string;
+  tattooImage: string;
+  prompt?: string;
+  style: TattooStyle;
+  placement: string;
+  size: string;
+  resolution: TattooResolution;
+  locale?: string;
+}
+
 export interface GenerateTattooResponse {
   jobId: string;
   status: "queued" | "processing" | "completed" | "failed";
@@ -141,6 +152,11 @@ function sleep(ms: number) {
   });
 }
 
+function resolvePollIntervalMs(value: unknown) {
+  const raw = typeof value === "number" ? value : POLL_INTERVAL_MS;
+  return Math.max(600, Math.min(5000, raw));
+}
+
 export async function getGenerationStatus(jobId: string): Promise<GenerateTattooResponse> {
   const encoded = encodeURIComponent(jobId);
   return fetchTattooJson(`/api/ai-tattoo/status?taskId=${encoded}`, {
@@ -184,8 +200,7 @@ export async function generateTattoo(req: GenerateTattooRequest): Promise<Genera
   const startedAt = Date.now();
   let current = task;
   while (Date.now() - startedAt <= POLL_TIMEOUT_MS) {
-    const waitMsRaw = typeof current.pollAfterMs === "number" ? current.pollAfterMs : POLL_INTERVAL_MS;
-    const waitMs = Math.max(600, Math.min(5000, waitMsRaw));
+    const waitMs = resolvePollIntervalMs(current.pollAfterMs);
     await sleep(waitMs);
 
     current = await getGenerationStatus(task.jobId);
@@ -206,6 +221,95 @@ export async function generateTattoo(req: GenerateTattooRequest): Promise<Genera
     "Generation is taking longer than expected. Please retry in a moment.",
     504,
     "GENERATION_TIMEOUT",
+    { jobId: task.jobId },
+  );
+}
+
+export async function createTryOnTask(req: GenerateTryOnTattooRequest): Promise<GenerateTattooResponse> {
+  return fetchTattooJson("/api/ai-tattoo/tryon/create", {
+    method: "POST",
+    headers: buildHeaders(),
+    body: JSON.stringify(req),
+    cache: "no-store",
+  });
+}
+
+export async function getTryOnGenerationStatus(jobId: string): Promise<GenerateTattooResponse> {
+  const encoded = encodeURIComponent(jobId);
+  return fetchTattooJson(`/api/ai-tattoo/tryon/status?taskId=${encoded}`, {
+    method: "GET",
+    headers: buildHeaders(),
+    cache: "no-store",
+  });
+}
+
+export async function generateTryOnTattoo(
+  req: GenerateTryOnTattooRequest,
+  options?: {
+    onTaskCreated?: (jobId: string) => void;
+    onPolling?: (payload: GenerateTattooResponse, attempt: number) => void;
+  },
+): Promise<GenerateTattooResponse> {
+  let task = {} as GenerateTattooResponse;
+  try {
+    task = await createTryOnTask(req);
+  } catch (error) {
+    if (error instanceof TattooApiError && error.status === 404) {
+      throw new TattooApiError(
+        "Try-on endpoint is not available yet. Please deploy the latest backend and retry.",
+        502,
+        "TRYON_ENDPOINT_UNAVAILABLE",
+        error.details,
+      );
+    }
+    throw error;
+  }
+
+  if (task.status === "completed") {
+    return task;
+  }
+  if (task.status === "failed") {
+    throw new TattooApiError(
+      task.message || "Try-on generation failed. Please try again.",
+      502,
+      task.code || "TRYON_FAILED",
+      task,
+    );
+  }
+  if (!task.jobId) {
+    throw new TattooApiError("Try-on task was created without jobId.", 502, "TRYON_MISSING_JOB_ID", task);
+  }
+
+  options?.onTaskCreated?.(task.jobId);
+
+  const startedAt = Date.now();
+  let current = task;
+  let attempts = 0;
+  while (Date.now() - startedAt <= POLL_TIMEOUT_MS) {
+    const waitMs = resolvePollIntervalMs(current.pollAfterMs);
+    await sleep(waitMs);
+
+    current = await getTryOnGenerationStatus(task.jobId);
+    attempts += 1;
+    options?.onPolling?.(current, attempts);
+
+    if (current.status === "completed") {
+      return current;
+    }
+    if (current.status === "failed") {
+      throw new TattooApiError(
+        current.message || "Try-on generation failed. Please try again.",
+        502,
+        current.code || "TRYON_FAILED",
+        current,
+      );
+    }
+  }
+
+  throw new TattooApiError(
+    "Try-on generation is taking longer than expected. Please retry in a moment.",
+    504,
+    "TRYON_TIMEOUT",
     { jobId: task.jobId },
   );
 }

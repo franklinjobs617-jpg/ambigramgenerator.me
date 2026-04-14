@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { PenTool, Loader2, RotateCw } from "lucide-react";
+import { PenTool, Loader2, RotateCw, Download } from "lucide-react";
 import { useTranslations } from 'next-intl';
 // --- 1. 核心数据与辅助函数 (保留原生逻辑) ---
 
@@ -120,40 +120,100 @@ const getPossibleGlyphs = (words: string[], style: string) => {
 };
 
 // --- 2. 子组件：单个 Ambigram 图片 (处理旋转交互) ---
-const AmbigramItem = ({ src, alt }: { src: string, alt: string }) => {
+const AmbigramItem = ({ src, alt, fileName }: { src: string, alt: string, fileName: string }) => {
     const [angle, setAngle] = useState(0);
 
     return (
         <div
-            className="relative bg-gray-100 rounded-xl overflow-hidden shadow-md cursor-pointer group border border-gray-200"
+            className="group relative cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-100/80"
             onClick={() => setAngle(prev => prev + 180)}
         >
             <img
                 src={src}
                 alt={alt}
-                className="w-full h-auto transition-transform duration-500 ease-in-out"
+                className="h-auto w-full bg-slate-100 transition-transform duration-500 ease-in-out"
                 style={{ transform: `rotate(${angle}deg)` }}
                 width={320}
                 height={240}
             />
-            <div className="absolute top-2 right-2 bg-black/50 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="pointer-events-none absolute right-2 top-2 rounded-full border border-white/30 bg-slate-900/65 p-1.5 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <RotateCw size={16} />
             </div>
+            <a
+                href={src}
+                download={fileName}
+                onClick={(event) => event.stopPropagation()}
+                className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white/95 px-2.5 py-1 text-[11px] font-bold text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-200 hover:text-indigo-700"
+                aria-label="Download PNG"
+            >
+                <Download size={12} />
+                PNG
+            </a>
         </div>
     );
 };
 
+type Generator2dProps = {
+    mode?: "default" | "two-word";
+};
+
 // --- 3. 主组件: Generator2d ---
-export default function Generator2d() {
+export default function Generator2d({ mode = "default" }: Generator2dProps) {
     const t = useTranslations('Generator2D');
+    const isTwoWordMode = mode === "two-word";
+    const [wordA, setWordA] = useState("love");
+    const [wordB, setWordB] = useState("pain");
     const [inputText, setInputText] = useState("Hello");
     const [style, setStyle] = useState("calligraphy"); // 默认为 calligraphy，因为它是 "Best for Tattoos"
     const [isLoading, setIsLoading] = useState(false);
     const [generatedImages, setGeneratedImages] = useState<string[]>([]);
+    const preparedInput = isTwoWordMode ? `${wordA.trim()} ${wordB.trim()}` : inputText;
+    const lengthGap = Math.abs(wordA.trim().length - wordB.trim().length);
+    const fileStem = (isTwoWordMode ? `${wordA}-${wordB}` : inputText)
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "") || "ambigram";
+    const quickPairs: Array<[string, string]> = [
+        ["love", "pain"],
+        ["hope", "fear"],
+        ["life", "death"],
+        ["anna", "john"],
+    ];
+    const fieldClass =
+        "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 font-medium text-slate-900 transition-all duration-300 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200";
+    const selectClass =
+        "w-full appearance-none cursor-pointer rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 transition-all duration-300 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200";
+    const primaryButtonClass =
+        "flex w-full items-center justify-center gap-2 rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-200 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70";
+    const quickChipClass =
+        "rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-600 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-200 hover:text-indigo-700";
+    const panelSurfaceClass =
+        "mx-auto max-w-4xl rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-indigo-100/40 md:p-8";
+    const applyQuickPair = (nextA: string, nextB: string) => {
+        setWordA(nextA);
+        setWordB(nextB);
+        setGeneratedImages([]);
+    };
+    const swapWords = () => {
+        const nextA = wordB;
+        const nextB = wordA;
+        setWordA(nextA);
+        setWordB(nextB);
+        setGeneratedImages([]);
+    };
 
     const generateAmbigrams = async () => {
-        if (!inputText) return;
-        if (/[^a-zA-Z\s]/.test(inputText)) {
+        if (!preparedInput) return;
+        if (isTwoWordMode) {
+            if (!wordA.trim() || !wordB.trim()) {
+                alert("Please enter both words.");
+                return;
+            }
+            if (/[^a-zA-Z]/.test(wordA) || /[^a-zA-Z]/.test(wordB)) {
+                alert("Please use only letters in each word.");
+                return;
+            }
+        } else if (/[^a-zA-Z\s]/.test(preparedInput)) {
             alert("Please use only letters and spaces.");
             return;
         }
@@ -162,10 +222,14 @@ export default function Generator2d() {
         setGeneratedImages([]); // 清空旧结果
 
         // 解析单词
-        let words = inputText.toLowerCase().trim().split(/\s+/).filter((w) => w);
+        let words = preparedInput.toLowerCase().trim().split(/\s+/).filter((w) => w);
         let doubleWords = true;
 
-        if (words.length > 2) {
+        if (isTwoWordMode && words.length !== 2) {
+            alert("Please enter exactly two words.");
+            setIsLoading(false);
+            return;
+        } else if (words.length > 2) {
             alert("Please use one or two words.");
             setIsLoading(false);
             return;
@@ -271,57 +335,135 @@ export default function Generator2d() {
                     </p>
                 </div>
 
-                <div className="max-w-4xl mx-auto bg-slate-50/50 rounded-3xl border border-gray-200 p-6 md:p-8 shadow-xl">
+                <div className={panelSurfaceClass}>
                     {/* 输入控制区 */}
-                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
-                        <div className="md:col-span-3">
-                            <label htmlFor="ambigenerator_input" className="block text-gray-700 mb-2 font-bold text-sm">
-                                {t('inputLabel')}
-                            </label>
-                            <input
-                                type="text"
-                                id="ambigenerator_input"
-                                placeholder={t('inputPlaceholder')}
-                                className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-medium"
-                                value={inputText}
-                                onChange={(e) => setInputText(e.target.value)}
-                                onKeyDown={(e) => e.key === "Enter" && generateAmbigrams()}
-                            />
+                    {isTwoWordMode ? (
+                        <div className="space-y-4">
+                            <div>
+                                <label htmlFor="ambigenerator_word_1" className="mb-2 block text-sm font-bold text-slate-700">
+                                    Word Pair
+                                </label>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <input
+                                        type="text"
+                                        id="ambigenerator_word_1"
+                                        placeholder="Word 1 (e.g. love)"
+                                        className={fieldClass}
+                                        value={wordA}
+                                        onChange={(e) => setWordA(e.target.value)}
+                                        onKeyDown={(e) => e.key === "Enter" && generateAmbigrams()}
+                                    />
+                                    <input
+                                        type="text"
+                                        id="ambigenerator_word_2"
+                                        placeholder="Word 2 (e.g. pain)"
+                                        className={fieldClass}
+                                        value={wordB}
+                                        onChange={(e) => setWordB(e.target.value)}
+                                        onKeyDown={(e) => e.key === "Enter" && generateAmbigrams()}
+                                    />
+                                </div>
+                                <p className="mt-2 text-[12px] text-slate-500">
+                                    {lengthGap <= 1
+                                        ? "Good pair. Word lengths are balanced."
+                                        : "Tip: Use similar word lengths for cleaner symmetry."}
+                                </p>
+                                <div className="mt-2 flex flex-wrap items-center gap-2">
+                                    {quickPairs.map(([a, b]) => (
+                                        <button
+                                            key={`${a}-${b}`}
+                                            type="button"
+                                            onClick={() => applyQuickPair(a, b)}
+                                            className={quickChipClass}
+                                        >
+                                            {a} / {b}
+                                        </button>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        onClick={swapWords}
+                                        className="rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[11px] font-semibold text-indigo-700 transition-all duration-300 hover:-translate-y-0.5 hover:bg-indigo-100"
+                                    >
+                                        Swap
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto] gap-3 items-end">
+                                <div className="sm:max-w-[260px]">
+                                    <label htmlFor="style_dropdown" className="mb-2 block text-sm font-bold text-slate-700">
+                                        {t('styleLabel')}
+                                    </label>
+                                    <select
+                                        id="style_dropdown"
+                                        className={selectClass}
+                                        value={style}
+                                        onChange={(e) => setStyle(e.target.value)}
+                                    >
+                                        <option value="new">{t('styleBlocky')}</option>
+                                        <option value="calligraphy">{t('styleCalligraphy')}</option>
+                                    </select>
+                                </div>
+                                <button
+                                    onClick={generateAmbigrams}
+                                    disabled={isLoading}
+                                    className={`${primaryButtonClass} sm:min-w-[230px] sm:w-auto whitespace-nowrap`}
+                                >
+                                    {isLoading ? <Loader2 className="animate-spin" /> : <><PenTool size={18} /> Generate Two-Word</>}
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                            <label htmlFor="style_dropdown" className="block text-gray-700 mb-2 font-bold text-sm">
-                                {t('styleLabel')}
-                            </label>
-                            <select
-                                id="style_dropdown"
-                                className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all appearance-none cursor-pointer"
-                                value={style}
-                                onChange={(e) => setStyle(e.target.value)}
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+                            <div className="md:col-span-3">
+                                <label htmlFor="ambigenerator_input" className="mb-2 block text-sm font-bold text-slate-700">
+                                    {t('inputLabel')}
+                                </label>
+                                <input
+                                    type="text"
+                                    id="ambigenerator_input"
+                                    placeholder={t('inputPlaceholder')}
+                                    className={fieldClass}
+                                    value={inputText}
+                                    onChange={(e) => setInputText(e.target.value)}
+                                    onKeyDown={(e) => e.key === "Enter" && generateAmbigrams()}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="style_dropdown" className="mb-2 block text-sm font-bold text-slate-700">
+                                    {t('styleLabel')}
+                                </label>
+                                <select
+                                    id="style_dropdown"
+                                    className={selectClass}
+                                    value={style}
+                                    onChange={(e) => setStyle(e.target.value)}
+                                >
+                                    <option value="new">{t('styleBlocky')}</option>
+                                    <option value="calligraphy">{t('styleCalligraphy')}</option>
+                                </select>
+                            </div>
+                            <button
+                                onClick={generateAmbigrams}
+                                disabled={isLoading}
+                                className={`${primaryButtonClass} text-lg`}
                             >
-                                <option value="new">{t('styleBlocky')}</option>
-                                <option value="calligraphy">{t('styleCalligraphy')}</option>
-                            </select>
+                                {isLoading ? <Loader2 className="animate-spin" /> : <><PenTool size={18} /> {t('buttonGenerate')}</>}
+                            </button>
                         </div>
-                        <button
-                            onClick={generateAmbigrams}
-                            disabled={isLoading}
-                            className="w-full bg-slate-900 hover:bg-blue-600 text-white py-3 rounded-xl font-bold transition-all hover:shadow-lg text-lg flex items-center justify-center gap-2 active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
-                        >
-                            {isLoading ? <Loader2 className="animate-spin" /> : <><PenTool size={18} /> {t('buttonGenerate')}</>}
-                        </button>
-                    </div>
+                    )}
 
                     {/* 结果展示区 */}
-                    <div className="mt-8 pt-6 border-t border-gray-200">
+                    <div className="mt-8 border-t border-slate-200 pt-6">
                         {generatedImages.length === 0 && !isLoading && (
-                            <div className="text-center py-10 text-gray-400">
+                            <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-10 text-center text-slate-500">
                                 <p>{t('emptyStateText')}</p>
                             </div>
                         )}
 
                         {generatedImages.length > 0 && (
                             <>
-                                <p className="text-center text-gray-500 mb-6 text-sm font-medium">
+                                <p className="mb-6 text-center text-sm font-medium text-slate-500">
                                     {t('rotationHint')}
                                 </p>
                                 <div id="ambigrams" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -330,6 +472,7 @@ export default function Generator2d() {
                                             key={index}
                                             src={imgSrc}
                                             alt={t('altTextResult', { index: index + 1 })}
+                                            fileName={`${fileStem}-${index + 1}.png`}
                                         />
                                     ))}
                                 </div>
