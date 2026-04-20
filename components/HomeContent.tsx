@@ -1,28 +1,28 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl"; // 引入 i18n
+import { useTranslations } from "next-intl";
 import Generator3d from "@/components/Generator3d";
 import Generator2d from "@/components/Generator2d";
 import HeroSection from "@/components/HeroSection";
-import {
-    Box, PenTool, ChevronDown, Gift, Lightbulb, Sparkles, ArrowRight, Users, Palette, CheckCircle2
-} from "lucide-react";
+import { ArrowRight, Box, CheckCircle2, ChevronDown, Gift, Lightbulb, Palette, PenTool, Sparkles, Users } from "lucide-react";
 
-// --- FAQ Component ---
-const FaqItem = ({ question, answer }: { question: string; answer: React.ReactNode }) => {
+type WorkspaceTab = "3d" | "2d";
+
+function FaqItem({ question, answer }: { question: string; answer: React.ReactNode }) {
     const [isOpen, setIsOpen] = useState(false);
+
     return (
-        <div className="bg-white rounded-2xl border border-slate-100 mb-4 overflow-hidden shadow-sm hover:shadow-md transition-all">
+        <div className="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-md">
             <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-full px-6 py-5 text-left flex items-center justify-between font-bold text-[#1A1A1B]"
+                onClick={() => setIsOpen((prev) => !prev)}
+                className="w-full px-5 sm:px-6 py-4 sm:py-5 text-left flex items-center justify-between font-bold text-[#1A1A1B]"
             >
-                <span>{question}</span>
-                <ChevronDown size={18} className={`text-slate-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                <span className="pr-4">{question}</span>
+                <ChevronDown size={18} className={`shrink-0 text-slate-400 transition-transform ${isOpen ? "rotate-180" : ""}`} />
             </button>
             <AnimatePresence>
                 {isOpen && (
@@ -30,7 +30,7 @@ const FaqItem = ({ question, answer }: { question: string; answer: React.ReactNo
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="px-6 pb-5 text-[#666666] text-sm leading-relaxed border-t border-slate-50 pt-4"
+                        className="border-t border-slate-50 px-5 sm:px-6 pb-5 pt-4 text-sm leading-relaxed text-[#666666]"
                     >
                         {answer}
                     </motion.div>
@@ -38,88 +38,125 @@ const FaqItem = ({ question, answer }: { question: string; answer: React.ReactNo
             </AnimatePresence>
         </div>
     );
-};
+}
 
 export default function HomeContent() {
-    // 使用命名空间 HomePage
-    const t = useTranslations('HomePage');
+    const t = useTranslations("HomePage");
 
-    const [activeTab, setActiveTab] = useState<'3d' | '2d'>('2d');
-
-    // 🌟 1. 定义全局共享状态
+    const [activeTab, setActiveTab] = useState<WorkspaceTab>("2d");
     const [globalWordA, setGlobalWordA] = useState("");
     const [globalWordB, setGlobalWordB] = useState("");
-
-    // 🌟 2. 定义一个触发器
     const [generateTrigger, setGenerateTrigger] = useState(0);
+    const [showToast, setShowToast] = useState(false);
 
-    // 这个函数会传给 HeroSection
-    const handleHeroGenerate = (wordA: string, wordB: string, tab: '3d' | '2d') => {
+    const handleHeroGenerate = (wordA: string, wordB: string, tab: WorkspaceTab) => {
         setGlobalWordA(wordA);
         setGlobalWordB(wordB);
         setActiveTab(tab);
-        setGenerateTrigger(prev => prev + 1);
+        setGenerateTrigger((prev) => prev + 1);
     };
-
-    // 社交弹窗状态
-    const [showToast, setShowToast] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => setShowToast(true), 3000);
         const hideTimer = setTimeout(() => setShowToast(false), 8000);
-        return () => { clearTimeout(timer); clearTimeout(hideTimer); };
+        return () => {
+            clearTimeout(timer);
+            clearTimeout(hideTimer);
+        };
     }, []);
 
-    const applyInspiration = (a: string, b: string) => {
-        setGlobalWordA(a);
-        setGlobalWordB(b);
-        document.getElementById('workspace')?.scrollIntoView({ behavior: 'smooth' });
+    const applyInspiration = (wordA: string, wordB: string) => {
+        setGlobalWordA(wordA);
+        setGlobalWordB(wordB);
+        document.getElementById("workspace")?.scrollIntoView({ behavior: "smooth" });
     };
 
-    const features = [
+    const coreFeatures = [
         {
-            icon: <Users className="w-8 h-8 text-indigo-600" />,
-            title: t('CoreFeatures.item1.title'),
-            desc: t('CoreFeatures.item1.desc'),
-            bg: "bg-indigo-50"
+            icon: <Users className="h-8 w-8 text-indigo-600" />,
+            title: t("CoreFeatures.item1.title"),
+            desc: t("CoreFeatures.item1.desc"),
+            bg: "bg-indigo-50",
         },
         {
-            icon: <Users className="w-8 h-8 text-blue-600" />,
-            title: t('CoreFeatures.item2.title'),
-            desc: t('CoreFeatures.item2.desc'),
-            bg: "bg-blue-50"
+            icon: <Users className="h-8 w-8 text-blue-600" />,
+            title: t("CoreFeatures.item2.title"),
+            desc: t("CoreFeatures.item2.desc"),
+            bg: "bg-blue-50",
         },
         {
-            icon: <Palette className="w-8 h-8 text-purple-600" />,
-            title: t('CoreFeatures.item3.title'),
-            desc: t('CoreFeatures.item3.desc'),
-            bg: "bg-purple-50"
+            icon: <Palette className="h-8 w-8 text-purple-600" />,
+            title: t("CoreFeatures.item3.title"),
+            desc: t("CoreFeatures.item3.desc"),
+            bg: "bg-purple-50",
         },
         {
-            icon: <CheckCircle2 className="w-8 h-8 text-emerald-600" />,
-            title: t('CoreFeatures.item4.title'),
-            desc: t('CoreFeatures.item4.desc'),
-            bg: "bg-emerald-50"
-        }
+            icon: <CheckCircle2 className="h-8 w-8 text-emerald-600" />,
+            title: t("CoreFeatures.item4.title"),
+            desc: t("CoreFeatures.item4.desc"),
+            bg: "bg-emerald-50",
+        },
+    ];
+
+    const inspirationPairs = [
+        ["LOVE", "HATE"],
+        ["ANGEL", "DEVIL"],
+        ["LIFE", "DEATH"],
+        ["HOPE", "FAITH"],
+        ["TRUE", "FALSE"],
+    ];
+
+    const galleryCards = [
+        {
+            src: "/images/tatto-2-name-example.webp",
+            alt: "Two-Name Ambigram Sarah John",
+            title: t("Examples.ex1Title"),
+            desc: t("Examples.ex1Desc"),
+            dark: false,
+            badge: null,
+        },
+        {
+            src: "/images/tatto-2-name-example-generate.webp",
+            alt: "Tattoo Style Trust",
+            title: t("Examples.ex2Title"),
+            desc: t("Examples.ex2Desc"),
+            dark: false,
+            badge: null,
+        },
+        {
+            src: "/images/2-name-Ambigram-example-generate.webp",
+            alt: "3D Print Ambigram",
+            title: t("Examples.ex3Title"),
+            desc: t("Examples.ex3Desc"),
+            dark: true,
+            badge: t("Examples.ex3Badge"),
+        },
+        {
+            src: "/images/Animated-GIF-of-ILLUSION-rotating.webp",
+            alt: "Animated 3D Illusion",
+            title: t("Examples.ex4Title"),
+            desc: t("Examples.ex4Desc"),
+            dark: true,
+            badge: t("Examples.ex4Badge"),
+        },
     ];
 
     return (
         <div className="min-h-screen bg-[#FDFDFF] font-sans text-[#1A1A1B] selection:bg-indigo-100">
-            {/* 💡 社交反馈弹窗 */}
             <AnimatePresence>
                 {showToast && (
                     <motion.div
-                        initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                        initial={{ opacity: 0, y: 20, scale: 0.92 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                        className="fixed bottom-24 left-8 z-[100] bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-2xl p-3 pr-6 flex items-center gap-3"
+                        exit={{ opacity: 0, y: 10, scale: 0.92 }}
+                        className="fixed bottom-24 left-4 lg:left-8 z-[100] hidden sm:flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-3 pr-6 shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
                     >
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-white shadow-inner">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 text-white shadow-inner">
                             <Sparkles size={18} />
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-xs text-slate-400 font-medium">1 min ago in Paris</span>
-                            <span className="text-sm font-bold text-[#1A1A1B]">Someone generated a "Leo/Love" STL.</span>
+                            <span className="text-xs font-medium text-slate-400">1 min ago in Paris</span>
+                            <span className="text-sm font-bold text-[#1A1A1B]">Someone generated a &quot;Leo/Love&quot; STL.</span>
                         </div>
                     </motion.div>
                 )}
@@ -127,17 +164,15 @@ export default function HomeContent() {
 
             <HeroSection onGenerate={handleHeroGenerate} />
 
-            {/* 3. INSPIRATION LIBRARY */}
-            <section id="inspiration" className="py-16 px-6 bg-white border-t border-slate-100">
-                <div className="max-w-4xl mx-auto text-center">
-                    <div className="text-sm font-black text-slate-400 mb-6">{t('Inspiration.title')}</div>
-                    <div className="flex flex-wrap justify-center gap-3">
-                        {[["LOVE", "HATE"], ["ANGEL", "DEVIL"], ["LIFE", "DEATH"], ["HOPE", "FAITH"], ["TRUE", "FALSE"]
-                        ].map((pair, idx) => (
+            <section id="inspiration" className="border-t border-slate-100 bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+                <div className="mx-auto max-w-5xl text-center">
+                    <p className="mb-6 text-sm font-black text-slate-400">{t("Inspiration.title")}</p>
+                    <div className="mx-auto flex max-w-4xl gap-3 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center sm:overflow-visible">
+                        {inspirationPairs.map((pair) => (
                             <button
-                                key={idx}
+                                key={pair.join("-")}
                                 onClick={() => applyInspiration(pair[0], pair[1])}
-                                className="bg-slate-50 border border-slate-200 px-5 py-2.5 rounded-full text-sm font-bold text-[#666666] hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 hover:shadow-sm transition-all flex items-center gap-2"
+                                className="shrink-0 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-5 py-2.5 text-sm font-bold text-[#666666] transition-all hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-600 hover:shadow-sm"
                             >
                                 {pair[0]} <ArrowRight size={14} className="text-slate-300" /> {pair[1]}
                             </button>
@@ -146,50 +181,54 @@ export default function HomeContent() {
                 </div>
             </section>
 
-            {/* 4. THE UNIFIED WORKSPACE */}
-            <section id="workspace" className="px-6 max-w-7xl mx-auto scroll-mt-24">
-                <div className="bg-white rounded-[3rem] p-4 shadow-[0_20px_80px_-20px_rgba(0,0,0,0.05)] border border-slate-100">
-                    <div className="flex justify-center mb-6 pt-4">
-                        <div className="bg-slate-100 p-1.5 rounded-full flex gap-1">
-                            <button onClick={() => setActiveTab('3d')} className={`flex items-center gap-2 px-10 py-3 rounded-full text-sm font-bold transition-all ${activeTab === '3d' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-500 hover:text-[#1A1A1B]'}`}>
-                                <Box size={16} /> {t('Workspace.tab3d')}
+            <section id="workspace" className="mx-auto max-w-7xl scroll-mt-24 px-4 sm:px-6 lg:px-8">
+                <div className="rounded-[1.75rem] sm:rounded-[3rem] border border-slate-100 bg-white p-3 sm:p-4 shadow-[0_20px_80px_-20px_rgba(0,0,0,0.05)]">
+                    <div className="mb-5 sm:mb-6 flex justify-center pt-3 sm:pt-4">
+                        <div className="grid w-full max-w-md grid-cols-2 gap-1 rounded-2xl bg-slate-100 p-1 sm:rounded-full">
+                            <button
+                                onClick={() => setActiveTab("3d")}
+                                className={`inline-flex items-center justify-center gap-2 rounded-xl sm:rounded-full px-4 sm:px-8 py-3 text-sm font-bold transition-all ${activeTab === "3d"
+                                    ? "bg-indigo-600 text-white shadow-md shadow-indigo-200"
+                                    : "text-slate-500 hover:text-[#1A1A1B]"
+                                    }`}
+                            >
+                                <Box size={16} /> {t("Workspace.tab3d")}
                             </button>
-                            <button onClick={() => setActiveTab('2d')} className={`flex items-center gap-2 px-10 py-3 rounded-full text-sm font-bold transition-all ${activeTab === '2d' ? 'bg-[#1A1A1B] text-white shadow-md' : 'text-slate-500 hover:text-[#1A1A1B]'}`}>
-                                <PenTool size={16} /> {t('Workspace.tab2d')}
+                            <button
+                                onClick={() => setActiveTab("2d")}
+                                className={`inline-flex items-center justify-center gap-2 rounded-xl sm:rounded-full px-4 sm:px-8 py-3 text-sm font-bold transition-all ${activeTab === "2d"
+                                    ? "bg-[#1A1A1B] text-white shadow-md"
+                                    : "text-slate-500 hover:text-[#1A1A1B]"
+                                    }`}
+                            >
+                                <PenTool size={16} /> {t("Workspace.tab2d")}
                             </button>
                         </div>
                     </div>
 
-                    <div className="relative rounded-[2.5rem] overflow-hidden min-h-[650px]">
+                    <div className="relative min-h-[460px] sm:min-h-[560px] lg:min-h-[650px] overflow-hidden rounded-[1.5rem] sm:rounded-[2.5rem]">
                         <AnimatePresence mode="wait">
-                            {activeTab === '2d' ? (
+                            {activeTab === "2d" ? (
                                 <motion.div key="2d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white">
                                     <Generator2d />
-
                                 </motion.div>
-
                             ) : (
-                                <motion.div key="3d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full h-full  bg-slate-950">
-                                    <div className="text-3xl font-black text-white tracking-tight w-full text-center py-4">
-                                        <h2> {t('Generator3D.title')}</h2>
-                                        <p className="text-slate-400 text-sm mt-1">{t('Generator3D.subtitle')}</p>
+                                <motion.div key="3d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full w-full bg-slate-950">
+                                    <div className="w-full py-3 sm:py-4 text-center text-2xl sm:text-3xl font-black tracking-tight text-white">
+                                        <h2>{t("Generator3D.title")}</h2>
+                                        <p className="mt-1 text-sm text-slate-400">{t("Generator3D.subtitle")}</p>
                                     </div>
-                                    <Generator3d
-                                        incomingWordA={globalWordA}
-                                        incomingWordB={globalWordB}
-                                        triggerRender={generateTrigger}
-                                    />
+                                    <Generator3d incomingWordA={globalWordA} incomingWordB={globalWordB} triggerRender={generateTrigger} />
                                 </motion.div>
                             )}
-
-
                         </AnimatePresence>
-                        <div className="max-w-4xl mx-auto bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-r-xl text-left shadow-sm mt-4">
-                            <h2 className="text-xl font-bold text-[#1A1A1B]">{t('Workspace.tattooToolTitle')}</h2>
-                            <p className="text-[#666666] text-sm mt-2">
-                                {t.rich('Workspace.tattooToolDesc', {
+
+                        <div className="mx-auto mt-4 max-w-4xl rounded-r-xl border-l-4 border-indigo-600 bg-indigo-50 p-4 sm:p-6 text-left shadow-sm">
+                            <h2 className="text-lg sm:text-xl font-bold text-[#1A1A1B]">{t("Workspace.tattooToolTitle")}</h2>
+                            <p className="mt-2 text-sm text-[#666666]">
+                                {t.rich("Workspace.tattooToolDesc", {
                                     bold: (chunks) => <strong>{chunks}</strong>,
-                                    spanClass: (chunks) => <span className="text-indigo-600 font-bold">{chunks}</span>
+                                    spanClass: (chunks) => <span className="font-bold text-indigo-600">{chunks}</span>,
                                 })}
                             </p>
                         </div>
@@ -197,252 +236,203 @@ export default function HomeContent() {
                 </div>
             </section>
 
-            {/* 6. HOW IT WORKS */}
-            <section className="py-24 bg-white px-6">
-                <div className="max-w-5xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-black text-[#1A1A1B]">{t('HowItWorks.title')}</h2>
-                        <p className="text-[#666666] mt-4 font-medium">{t('HowItWorks.subtitle')}</p>
+            <section className="bg-white px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+                <div className="mx-auto max-w-5xl">
+                    <div className="mb-10 sm:mb-16 text-center">
+                        <h2 className="text-3xl sm:text-4xl font-black text-[#1A1A1B]">{t("HowItWorks.title")}</h2>
+                        <p className="mt-4 font-medium text-[#666666]">{t("HowItWorks.subtitle")}</p>
                     </div>
-                    <div className="grid md:grid-cols-3 gap-12 relative">
+                    <div className="grid gap-8 sm:gap-12 md:grid-cols-3">
                         {[
-                            { step: "1", title: t('HowItWorks.step1Title'), desc: t('HowItWorks.step1Desc') },
-                            { step: "2", title: t('HowItWorks.step2Title'), desc: t('HowItWorks.step2Desc') },
-                            { step: "3", title: t('HowItWorks.step3Title'), desc: t('HowItWorks.step3Desc') }
-                        ].map((s, i) => (
-                            <div key={i} className="text-center space-y-5">
-                                <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto shadow-sm">
-                                    <span className="text-2xl font-black text-indigo-600">{s.step}</span>
+                            { step: "1", title: t("HowItWorks.step1Title"), desc: t("HowItWorks.step1Desc") },
+                            { step: "2", title: t("HowItWorks.step2Title"), desc: t("HowItWorks.step2Desc") },
+                            { step: "3", title: t("HowItWorks.step3Title"), desc: t("HowItWorks.step3Desc") },
+                        ].map((item) => (
+                            <div key={item.step} className="space-y-5 text-center">
+                                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-50 shadow-sm">
+                                    <span className="text-2xl font-black text-indigo-600">{item.step}</span>
                                 </div>
-                                <h3 className="text-xl font-bold text-[#1A1A1B]">{s.title}</h3>
-                                <p className="text-[#666666] text-sm leading-relaxed">{s.desc}</p>
+                                <h3 className="text-xl font-bold text-[#1A1A1B]">{item.title}</h3>
+                                <p className="text-sm leading-relaxed text-[#666666]">{item.desc}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section id="coreFeatures" className="py-24 bg-white">
+            <section id="coreFeatures" className="bg-white py-16 sm:py-20 lg:py-24">
                 <div className="container mx-auto px-4 md:px-6">
-                    <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-black text-[#1A1A1B] tracking-tight">
-                            {t('CoreFeatures.mainTitle')}
-                        </h2>
-                        <div className="w-16 h-1.5 bg-indigo-600 mx-auto mt-4 rounded-full opacity-20"></div>
+                    <div className="mx-auto mb-10 sm:mb-16 max-w-3xl text-center">
+                        <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#1A1A1B]">{t("CoreFeatures.mainTitle")}</h2>
+                        <div className="mx-auto mt-4 h-1.5 w-16 rounded-full bg-indigo-600 opacity-20" />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {features.map((feature, index) => (
+                    <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-4">
+                        {coreFeatures.map((feature) => (
                             <div
-                                key={index}
-                                className="group p-8 bg-white border border-slate-100 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-500 hover:-translate-y-2 text-center flex flex-col items-center"
+                                key={feature.title}
+                                className="group flex flex-col items-center rounded-[2rem] sm:rounded-[2.5rem] border border-slate-100 bg-white p-6 sm:p-8 text-center shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-500/5"
                             >
-                                <div className={`w-20 h-20 ${feature.bg} rounded-[1.8rem] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500`}>
+                                <div className={`mb-6 flex h-20 w-20 items-center justify-center rounded-[1.8rem] ${feature.bg} transition-transform duration-500 group-hover:scale-110`}>
                                     {feature.icon}
                                 </div>
-                                <h3 className="text-xl font-bold text-[#1A1A1B] mb-3 tracking-tight">
-                                    {feature.title}
-                                </h3>
-                                <p className="text-slate-500 text-sm leading-relaxed font-medium">
-                                    {feature.desc}
-                                </p>
+                                <h3 className="mb-3 text-xl font-bold tracking-tight text-[#1A1A1B]">{feature.title}</h3>
+                                <p className="text-sm font-medium leading-relaxed text-slate-500">{feature.desc}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* 5. WHAT CAN YOU CREATE? */}
-            <section className="py-24 px-6 bg-slate-50 border-y border-slate-100">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-black text-[#1A1A1B]">{t('Features.title')}</h2>
-                        <p className="text-[#666666] mt-4 font-medium">{t('Features.subtitle')}</p>
+            <section className="border-y border-slate-100 bg-slate-50 px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+                <div className="mx-auto max-w-7xl">
+                    <div className="mb-10 sm:mb-16 text-center">
+                        <h2 className="text-3xl sm:text-4xl font-black text-[#1A1A1B]">{t("Features.title")}</h2>
+                        <p className="mt-4 font-medium text-[#666666]">{t("Features.subtitle")}</p>
                     </div>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
                         {[
-                            { icon: PenTool, title: t('Features.f1Title'), desc: t('Features.f1Desc'), color: "text-purple-600", bg: "bg-purple-100" },
-                            { icon: Box, title: t('Features.f2Title'), desc: t('Features.f2Desc'), color: "text-blue-600", bg: "bg-blue-100" },
-                            { icon: Gift, title: t('Features.f3Title'), desc: t('Features.f3Desc'), color: "text-indigo-600", bg: "bg-indigo-100" },
-                            { icon: Lightbulb, title: t('Features.f4Title'), desc: t('Features.f4Desc'), color: "text-orange-600", bg: "bg-orange-100" },
-                        ].map((card, i) => (
-                            <div key={i} className="p-8 bg-white rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
-                                <div className={`w-14 h-14 ${card.bg} ${card.color} rounded-2xl flex items-center justify-center mb-6`}><card.icon size={28} /></div>
-                                <h3 className="text-lg font-bold mb-3 leading-snug text-[#1A1A1B]">{card.title}</h3>
-                                <p className="text-[#666666] text-sm leading-relaxed">{card.desc}</p>
+                            { icon: PenTool, title: t("Features.f1Title"), desc: t("Features.f1Desc"), color: "text-purple-600", bg: "bg-purple-100" },
+                            { icon: Box, title: t("Features.f2Title"), desc: t("Features.f2Desc"), color: "text-blue-600", bg: "bg-blue-100" },
+                            { icon: Gift, title: t("Features.f3Title"), desc: t("Features.f3Desc"), color: "text-indigo-600", bg: "bg-indigo-100" },
+                            { icon: Lightbulb, title: t("Features.f4Title"), desc: t("Features.f4Desc"), color: "text-orange-600", bg: "bg-orange-100" },
+                        ].map((card) => (
+                            <div key={card.title} className="rounded-[1.6rem] sm:rounded-[2rem] bg-white p-6 sm:p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+                                <div className={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl ${card.bg} ${card.color}`}>
+                                    <card.icon size={28} />
+                                </div>
+                                <h3 className="mb-3 text-lg font-bold leading-snug text-[#1A1A1B]">{card.title}</h3>
+                                <p className="text-sm leading-relaxed text-[#666666]">{card.desc}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* 7. GALLERY / EXAMPLES */}
-            {/* 7. GALLERY / EXAMPLES */}
-            <section id="examples" className="py-24 px-6 bg-[#F8FAFC] border-t border-slate-100">
+            <section id="examples" className="border-t border-slate-100 bg-[#F8FAFC] px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
                 <div className="container mx-auto">
-                    {/* Section Header */}
-                    <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-4xl font-black text-[#1A1A1B] tracking-tight mb-4">
-                            {t('Examples.title')}
-                        </h2>
-                        <p className="text-slate-500 font-medium italic">
-                            {t('Examples.subtitle')}
-                        </p>
+                    <div className="mx-auto mb-10 sm:mb-16 max-w-3xl text-center">
+                        <h2 className="mb-4 text-3xl sm:text-4xl font-black tracking-tight text-[#1A1A1B]">{t("Examples.title")}</h2>
+                        <p className="font-medium italic text-slate-500">{t("Examples.subtitle")}</p>
                     </div>
 
-                    {/* Grid Container: Mobile Scroll -> Desktop Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
-                        {/* --- Example 1: Sarah/John --- */}
-                        <div className="group bg-white rounded-[2.5rem] p-4 border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 hover:-translate-y-2">
-                            <div className="relative aspect-[4/3] rounded-[1.8rem] overflow-hidden bg-slate-50 mb-6">
-                                <Image
-                                    src="/images/tatto-2-name-example.webp"
-                                    alt="Two-Name Ambigram Sarah John"
-                                    fill
-                                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                                    sizes="(max-width: 768px) 100vw, 25vw"
-                                />
-                            </div>
-                            <div className="px-2 pb-2">
-                                <div className="font-black text-lg text-[#1A1A1B] mb-1">{t('Examples.ex1Title')}</div>
-                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t('Examples.ex1Desc')}</p>
-                            </div>
-                        </div>
-
-                        {/* --- Example 2: Trust --- */}
-                        <div className="group bg-white rounded-[2.5rem] p-4 border border-slate-200/60 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 hover:-translate-y-2">
-                            <div className="relative aspect-[4/3] rounded-[1.8rem] overflow-hidden bg-slate-50 mb-6">
-                                <Image
-                                    src="/images/tatto-2-name-example-generate.webp"
-                                    alt="Tattoo Style Trust"
-                                    fill
-                                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                                    sizes="(max-width: 768px) 100vw, 25vw"
-                                />
-                            </div>
-                            <div className="px-2 pb-2">
-                                <div className="font-black text-lg text-[#1A1A1B] mb-1">{t('Examples.ex2Title')}</div>
-                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t('Examples.ex2Desc')}</p>
-                            </div>
-                        </div>
-
-                        {/* --- Example 3: 3D Print 1 --- */}
-                        <div className="group bg-white rounded-[2.5rem] p-4 border-2 border-indigo-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 hover:-translate-y-2">
-                            <div className="relative aspect-[4/3] rounded-[1.8rem] overflow-hidden bg-slate-900 mb-6">
-                                <Image
-                                    src="/images/2-name-Ambigram-example-generate.webp"
-                                    alt="3D Print Ambigram"
-                                    fill
-                                    className="object-contain p-4 group-hover:scale-110 transition-transform duration-700"
-                                    sizes="(max-width: 768px) 100vw, 25vw"
-                                />
-                                {/* Glassmorphism Badge */}
-                                <div className="absolute top-4 right-4 bg-indigo-600/90 backdrop-blur-md text-white text-[10px] font-black px-3 py-1.5 rounded-xl shadow-lg">
-                                    {t('Examples.ex3Badge')}
+                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
+                        {galleryCards.map((card) => (
+                            <div
+                                key={card.title}
+                                className={`group rounded-[2rem] sm:rounded-[2.5rem] p-4 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-500/10 ${card.dark ? "border-2 border-indigo-100 bg-white" : "border border-slate-200/60 bg-white"
+                                    }`}
+                            >
+                                <div className={`relative mb-6 aspect-[4/3] overflow-hidden rounded-[1.8rem] ${card.dark ? "bg-slate-900" : "bg-slate-50"}`}>
+                                    <Image
+                                        src={card.src}
+                                        alt={card.alt}
+                                        fill
+                                        className={`${card.dark ? "object-contain p-4" : "object-cover"} transition-transform duration-700 group-hover:scale-110`}
+                                        sizes="(max-width: 768px) 100vw, 25vw"
+                                    />
+                                    {card.badge ? (
+                                        <div className="absolute right-4 top-4 rounded-xl bg-indigo-600/90 px-3 py-1.5 text-[10px] font-black text-white shadow-lg backdrop-blur-md">
+                                            {card.badge}
+                                        </div>
+                                    ) : null}
+                                </div>
+                                <div className="px-2 pb-2">
+                                    <div className={`mb-1 text-lg font-black ${card.dark ? "text-indigo-600" : "text-[#1A1A1B]"}`}>{card.title}</div>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400">{card.desc}</p>
                                 </div>
                             </div>
-                            <div className="px-2 pb-2">
-                                <div className="font-black text-lg text-indigo-600 mb-1">{t('Examples.ex3Title')}</div>
-                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t('Examples.ex3Desc')}</p>
-                            </div>
-                        </div>
-
-                        {/* --- Example 4: 3D Print 2 (GIF) --- */}
-                        <div className="group bg-white rounded-[2.5rem] p-4 border-2 border-indigo-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 hover:-translate-y-2">
-                            <div className="relative aspect-[4/3] rounded-[1.8rem] overflow-hidden bg-slate-900 mb-6">
-                                <Image
-                                    src="/images/Animated-GIF-of-ILLUSION-rotating.webp"
-                                    alt="Animated 3D Illusion"
-                                    fill
-                                    className="object-contain p-4 group-hover:scale-110 transition-transform duration-700"
-                                    sizes="(max-width: 768px) 100vw, 25vw"
-                                />
-                                <div className="absolute top-4 right-4 bg-indigo-600/90 backdrop-blur-md text-white text-[10px] font-black px-3 py-1.5 rounded-xl shadow-lg">
-                                    {t('Examples.ex4Badge')}
-                                </div>
-                            </div>
-                            <div className="px-2 pb-2">
-                                <div className="font-black text-lg text-indigo-600 mb-1">{t('Examples.ex4Title')}</div>
-                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t('Examples.ex4Desc')}</p>
-                            </div>
-                        </div>
-
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* 8. COMPETITOR COMPARISON */}
-            <section className="py-24 px-6 bg-slate-900 text-white">
-                <div className="max-w-4xl mx-auto bg-slate-800/50 rounded-[3rem] p-10 border border-slate-700 shadow-2xl">
-                    <div className="text-center mb-10">
-                        <h2 className="text-3xl font-black">{t('Comparison.title')}</h2>
-                        <p className="text-slate-400 mt-2">{t('Comparison.subtitle')}</p>
+            <section className="bg-slate-900 px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 text-white">
+                <div className="mx-auto max-w-4xl rounded-[2rem] sm:rounded-[3rem] border border-slate-700 bg-slate-800/50 p-5 sm:p-10 shadow-2xl">
+                    <div className="mb-10 text-center">
+                        <h2 className="text-3xl font-black">{t("Comparison.title")}</h2>
+                        <p className="mt-2 text-slate-400">{t("Comparison.subtitle")}</p>
                     </div>
-                    <div className="overflow-hidden rounded-3xl border border-slate-700">
-                        <table className="w-full text-left">
-                            <thead className="bg-slate-950 text-white text-sm font-bold">
+                    <div className="overflow-x-auto rounded-3xl border border-slate-700">
+                        <table className="w-full min-w-[680px] text-left">
+                            <thead className="bg-slate-950 text-sm font-bold text-white">
                                 <tr>
-                                    <th className="p-5">{t('Comparison.headerFeature')}</th>
-                                    <th className="p-5 bg-indigo-600">{t('Comparison.headerUs')}</th>
-                                    <th className="p-5 text-slate-500">{t('Comparison.headerOthers')}</th>
+                                    <th className="p-5">{t("Comparison.headerFeature")}</th>
+                                    <th className="bg-indigo-600 p-5">{t("Comparison.headerUs")}</th>
+                                    <th className="p-5 text-slate-500">{t("Comparison.headerOthers")}</th>
                                 </tr>
                             </thead>
-                            <tbody className="text-sm font-bold text-slate-300 divide-y divide-slate-700/50">
-                                <tr><td className="p-5">{t('Comparison.priceLabel')}</td><td className="p-5 text-emerald-400">{t('Comparison.priceUs')}</td><td className="p-5 text-slate-500">{t('Comparison.priceOthers')}</td></tr>
-                                <tr><td className="p-5">{t('Comparison.modelLabel')}</td><td className="p-5 text-emerald-400">{t('Comparison.modelUs')}</td><td className="p-5 text-slate-500">{t('Comparison.modelOthers')}</td></tr>
-                                <tr><td className="p-5">{t('Comparison.twoNameLabel')}</td><td className="p-5 text-emerald-400">{t('Comparison.twoNameUs')}</td><td className="p-5 text-slate-500">{t('Comparison.twoNameOthers')}</td></tr>
-                                <tr><td className="p-5">{t('Comparison.formatLabel')}</td><td className="p-5 text-white">{t('Comparison.formatUs')}</td><td className="p-5 text-slate-500">{t('Comparison.formatOthers')}</td></tr>
+                            <tbody className="divide-y divide-slate-700/50 text-sm font-bold text-slate-300">
+                                <tr>
+                                    <td className="p-5">{t("Comparison.priceLabel")}</td>
+                                    <td className="p-5 text-emerald-400">{t("Comparison.priceUs")}</td>
+                                    <td className="p-5 text-slate-500">{t("Comparison.priceOthers")}</td>
+                                </tr>
+                                <tr>
+                                    <td className="p-5">{t("Comparison.modelLabel")}</td>
+                                    <td className="p-5 text-emerald-400">{t("Comparison.modelUs")}</td>
+                                    <td className="p-5 text-slate-500">{t("Comparison.modelOthers")}</td>
+                                </tr>
+                                <tr>
+                                    <td className="p-5">{t("Comparison.twoNameLabel")}</td>
+                                    <td className="p-5 text-emerald-400">{t("Comparison.twoNameUs")}</td>
+                                    <td className="p-5 text-slate-500">{t("Comparison.twoNameOthers")}</td>
+                                </tr>
+                                <tr>
+                                    <td className="p-5">{t("Comparison.formatLabel")}</td>
+                                    <td className="p-5 text-white">{t("Comparison.formatUs")}</td>
+                                    <td className="p-5 text-slate-500">{t("Comparison.formatOthers")}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </section>
-            {/* 9. FAQ SECTION */}
-            <section id="faq" className="py-32 px-6 bg-[#F8FAFC]">
-                <div className="max-w-4xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-black text-[#1A1A1B]">{t('FAQ.title')}</h2>
-                        <p className="text-[#666666] mt-4 font-medium">{t('FAQ.subtitle')}</p>
+
+            <section id="faq" className="bg-[#F8FAFC] px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
+                <div className="mx-auto max-w-4xl">
+                    <div className="mb-10 sm:mb-16 text-center">
+                        <h2 className="text-3xl sm:text-4xl font-black text-[#1A1A1B]">{t("FAQ.title")}</h2>
+                        <p className="mt-4 font-medium text-[#666666]">{t("FAQ.subtitle")}</p>
                     </div>
-                    <div className="space-y-2">
-                        {/* 修复：使用 t.rich 处理所有可能带有 <bold> 标签的翻译 */}
-                        <FaqItem question={t('FAQ.q1')} answer={t.rich('FAQ.a1', { bold: (chunks) => <strong>{chunks}</strong> })} />
-                        <FaqItem question={t('FAQ.q2')} answer={t.rich('FAQ.a2', { bold: (chunks) => <strong>{chunks}</strong> })} />
-                        <FaqItem question={t('FAQ.q3')} answer={t.rich('FAQ.a3', { bold: (chunks) => <strong>{chunks}</strong> })} />
-                        <FaqItem question={t('FAQ.q4')} answer={t.rich('FAQ.a4', { bold: (chunks) => <strong>{chunks}</strong> })} />
-
-                        {/* a5 比较特殊，包含列表，保持原样或确保 json 结构正确 */}
+                    <div className="space-y-3">
+                        <FaqItem question={t("FAQ.q1")} answer={t.rich("FAQ.a1", { bold: (chunks) => <strong>{chunks}</strong> })} />
+                        <FaqItem question={t("FAQ.q2")} answer={t.rich("FAQ.a2", { bold: (chunks) => <strong>{chunks}</strong> })} />
+                        <FaqItem question={t("FAQ.q3")} answer={t.rich("FAQ.a3", { bold: (chunks) => <strong>{chunks}</strong> })} />
+                        <FaqItem question={t("FAQ.q4")} answer={t.rich("FAQ.a4", { bold: (chunks) => <strong>{chunks}</strong> })} />
                         <FaqItem
-                            question={t('FAQ.q5')}
-                            answer={<>{t('FAQ.a5')}<ul className="list-disc pl-6 mt-2 space-y-1"><li>{t('FAQ.a5Li1')}</li><li>{t('FAQ.a5Li2')}</li><li>{t('FAQ.a5Li3')}</li></ul></>}
+                            question={t("FAQ.q5")}
+                            answer={
+                                <>
+                                    {t("FAQ.a5")}
+                                    <ul className="mt-2 list-disc space-y-1 pl-6">
+                                        <li>{t("FAQ.a5Li1")}</li>
+                                        <li>{t("FAQ.a5Li2")}</li>
+                                        <li>{t("FAQ.a5Li3")}</li>
+                                    </ul>
+                                </>
+                            }
                         />
-
-                        <FaqItem question={t('FAQ.q6')} answer={t.rich('FAQ.a6', { bold: (chunks) => <strong>{chunks}</strong> })} />
-
-                        {/* 🔴 报错的罪魁祸首在这里：a7 */}
-                        <FaqItem question={t('FAQ.q7')} answer={t.rich('FAQ.a7', { bold: (chunks) => <strong>{chunks}</strong> })} />
-
-                        <FaqItem question={t('FAQ.q8')} answer={t.rich('FAQ.a8', { bold: (chunks) => <strong>{chunks}</strong> })} />
+                        <FaqItem question={t("FAQ.q6")} answer={t.rich("FAQ.a6", { bold: (chunks) => <strong>{chunks}</strong> })} />
+                        <FaqItem question={t("FAQ.q7")} answer={t.rich("FAQ.a7", { bold: (chunks) => <strong>{chunks}</strong> })} />
+                        <FaqItem question={t("FAQ.q8")} answer={t.rich("FAQ.a8", { bold: (chunks) => <strong>{chunks}</strong> })} />
                     </div>
                 </div>
             </section>
 
-            <section className="py-20 bg-light">
+            <section className="bg-light py-16 sm:py-20">
                 <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-display font-bold text-dark mb-4">
-                        {t('CTA.title')}
-                    </h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-                        {t('CTA.subtitle')}
-                    </p>
-                    <Link href="#workspace"
-                        className="bg-indigo-600 text-white px-10 py-4 rounded-full text-xl font-semibold hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-3">
-                        <i className="fa fa-magic"></i> {t('CTA.button')}
+                    <h2 className="mb-4 text-3xl font-bold text-dark font-display">{t("CTA.title")}</h2>
+                    <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">{t("CTA.subtitle")}</p>
+                    <Link
+                        href="#workspace"
+                        className="inline-flex items-center gap-3 rounded-full bg-indigo-600 px-7 sm:px-10 py-3.5 sm:py-4 text-base sm:text-xl font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-indigo-700 hover:shadow-xl"
+                    >
+                        <i className="fa fa-magic" /> {t("CTA.button")}
                     </Link>
                 </div>
             </section>
-
         </div>
     );
 }
+
