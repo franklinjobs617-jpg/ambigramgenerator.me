@@ -77,6 +77,11 @@
       "tattooToolDesc": "Vous cherchez un <bold>tatouage ambigramme avec deux prénoms</bold> ? Notre générateur 2D ci-dessous propose des <spanClass>styles calligraphiques</spanClass> optimisés pour des lignes nettes et des pochoirs prêts pour la peau. Simplement entrer vos deux noms et retourner pour prévisualiser !",
       "loading2dText": "Chargement de l'interface du générateur 2D..."
     },
+    "AIBanner": {
+      "title": "AI Tattoo Generator",
+      "desc": "Turn your ambigram into a realistic tattoo preview with AI",
+      "cta": "Try AI Generator"
+    },
     "HowItWorks": {
       "title": "Générez votre Ambigramme en 3 Étapes Simples",
       "subtitle": "La création de votre ambigramme personnalisé ne prend que quelques clics.",

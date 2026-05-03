@@ -77,6 +77,11 @@
       "tattooToolDesc": "Cerchi idee per un <bold>ambigramma con due nomi</bold> da tatuare? Il nostro generatore 2D offre stili in <spanClass>Corsivo Elegante</spanClass> e Stampatello, ottimizzati per linee pulite e stencil perfetti per la pelle.",
       "loading2dText": "Caricamento dell'interfaccia 2D in corso..."
     },
+    "AIBanner": {
+      "title": "AI Tattoo Generator",
+      "desc": "Turn your ambigram into a realistic tattoo preview with AI",
+      "cta": "Try AI Generator"
+    },
     "HowItWorks": {
       "title": "Come Usare il Generatore in 3 Semplici Passi",
       "subtitle": "Creare il tuo ambigramma 2 nomi o l'effetto flip richiede solo pochi clic.",

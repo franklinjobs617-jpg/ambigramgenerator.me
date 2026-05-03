@@ -190,7 +190,7 @@ export default async function TwoWordAmbigramGeneratorPage({ params }: Props) {
 
             <section id="two-word-tool" className="px-6 pb-16 scroll-mt-24">
                 <div className="max-w-7xl mx-auto rounded-[2.5rem] border border-slate-200 bg-white p-4 shadow-2xl shadow-indigo-100/40">
-                    <Generator2d mode="two-word" />
+                    <Generator2d />
                 </div>
             </section>
 

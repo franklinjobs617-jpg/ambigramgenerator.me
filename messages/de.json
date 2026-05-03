@@ -76,6 +76,11 @@
       "tattooToolDesc": "Suchst du nach <bold>Tattoo Schriftarten für Namen</bold>? Unser Generator erstellt symmetrische Designs, optimiert als klare Vorlage für dein Tattoo.",
       "loading2dText": "Tattoo-Vorlage wird generiert..."
     },
+    "AIBanner": {
+      "title": "AI Tattoo Generator",
+      "desc": "Turn your ambigram into a realistic tattoo preview with AI",
+      "cta": "Try AI Generator"
+    },
     "HowItWorks": {
       "title": "In 3 Schritten dein Ambigramm erstellen",
       "subtitle": "Dein individuelles Design in wenigen Sekunden.",

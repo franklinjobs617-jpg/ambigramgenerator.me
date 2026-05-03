@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { PenTool, Loader2, RotateCw, Download } from "lucide-react";
+import { useState, useEffect } from "react";
+import { PenTool, Loader2, RotateCw, Download, AlertCircle } from "lucide-react";
 import { useTranslations } from 'next-intl';
 // --- 1. 核心数据与辅助函数 (保留原生逻辑) ---
 
@@ -77,11 +77,10 @@ const getGlyphImage = async (name: string, style: string) => {
         glyph.src = folder + name + ".png";
         glyph.onload = () => resolve(glyph);
         glyph.onerror = () => {
-            // 容错处理：如果图片不存在，生成空白 Canvas 占位
-            const units = parseInt(name[1]) || 1;
-            const strokeWidth = glyphs_lookup[style][3];
-            const height = glyphs_lookup[style][4];
             const canvas = document.createElement("canvas");
+            const units = parseInt(name[1]) || 1;
+            const strokeWidth = glyphs_lookup[style]?.[3] || 100;
+            const height = glyphs_lookup[style]?.[4] || 600;
             canvas.width = units * strokeWidth;
             canvas.height = height;
             resolve(canvas);
@@ -120,30 +119,42 @@ const getPossibleGlyphs = (words: string[], style: string) => {
 };
 
 // --- 2. 子组件：单个 Ambigram 图片 (处理旋转交互) ---
-const AmbigramItem = ({ src, alt, fileName }: { src: string, alt: string, fileName: string }) => {
+const AmbigramItem = ({ src, alt, fileName, wordA, wordB, darkPreview }: { src: string, alt: string, fileName: string, wordA: string, wordB: string, darkPreview: boolean }) => {
     const [angle, setAngle] = useState(0);
+    const isFlipped = angle % 360 !== 0;
 
     return (
         <div
-            className="group relative cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-100/80"
+            className={`group relative cursor-pointer overflow-hidden rounded-2xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${darkPreview ? "border-slate-700 bg-slate-900 hover:border-indigo-500 hover:shadow-indigo-900/30" : "border-slate-200 bg-white hover:border-indigo-200 hover:shadow-indigo-100/80"}`}
             onClick={() => setAngle(prev => prev + 180)}
         >
             <img
                 src={src}
                 alt={alt}
-                className="h-auto w-full bg-slate-100 transition-transform duration-500 ease-in-out"
-                style={{ transform: `rotate(${angle}deg)` }}
+                className="h-auto w-full transition-transform duration-500 ease-in-out"
+                style={{
+                    transform: `rotate(${angle}deg)${darkPreview ? " invert(1)" : ""}`,
+                }}
                 width={320}
                 height={240}
             />
-            <div className="pointer-events-none absolute right-2 top-2 rounded-full border border-white/30 bg-slate-900/65 p-1.5 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            {/* Direction labels */}
+            <div className="absolute left-0 right-0 top-0 flex justify-between px-3 pt-2 pointer-events-none">
+                <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${darkPreview ? "bg-white/15 text-white/80" : "bg-slate-900/10 text-slate-600"}`}>
+                    {isFlipped ? `↑ ${wordB}` : `↑ ${wordA}`}
+                </span>
+                <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${darkPreview ? "bg-white/15 text-white/80" : "bg-slate-900/10 text-slate-600"}`}>
+                    {isFlipped ? `↓ ${wordA}` : `↓ ${wordB}`}
+                </span>
+            </div>
+            <div className={`pointer-events-none absolute right-2 top-2 rounded-full border p-1.5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${darkPreview ? "border-white/20 bg-white/10 text-white" : "border-white/30 bg-slate-900/65 text-white"}`}>
                 <RotateCw size={16} />
             </div>
             <a
                 href={src}
                 download={fileName}
                 onClick={(event) => event.stopPropagation()}
-                className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white/95 px-2.5 py-1 text-[11px] font-bold text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-200 hover:text-indigo-700"
+                className={`absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-bold shadow-sm transition-all duration-300 hover:-translate-y-0.5 ${darkPreview ? "border-slate-600 bg-slate-800/95 text-slate-300 hover:border-indigo-400 hover:text-indigo-300" : "border-slate-200 bg-white/95 text-slate-700 hover:border-indigo-200 hover:text-indigo-700"}`}
                 aria-label="Download PNG"
             >
                 <Download size={12} />
@@ -154,19 +165,47 @@ const AmbigramItem = ({ src, alt, fileName }: { src: string, alt: string, fileNa
 };
 
 type Generator2dProps = {
-    mode?: "default" | "two-word";
+    incomingWordA?: string;
+    incomingWordB?: string;
+    triggerGenerate?: number;
 };
 
 // --- 3. 主组件: Generator2d ---
-export default function Generator2d({ mode = "default" }: Generator2dProps) {
+export default function Generator2d({ incomingWordA, incomingWordB, triggerGenerate }: Generator2dProps) {
     const t = useTranslations('Generator2D');
-    const isTwoWordMode = mode === "two-word";
+    const [isTwoWordMode, setIsTwoWordMode] = useState(true);
     const [wordA, setWordA] = useState("love");
     const [wordB, setWordB] = useState("pain");
     const [inputText, setInputText] = useState("Hello");
-    const [style, setStyle] = useState("calligraphy"); // 默认为 calligraphy，因为它是 "Best for Tattoos"
+    const [style, setStyle] = useState("new");
+
+    // Receive words from Hero section and auto-generate
+    useEffect(() => {
+        if (incomingWordA && incomingWordB && triggerGenerate && triggerGenerate > 0) {
+            setWordA(incomingWordA);
+            setWordB(incomingWordB);
+            setIsTwoWordMode(true);
+            // Trigger generation after state updates
+            setTimeout(() => {
+                const words = [incomingWordA.toLowerCase().trim(), incomingWordB.toLowerCase().trim()];
+                if (words[0] && words[1] && !/[^a-zA-Z]/.test(words[0]) && !/[^a-zA-Z]/.test(words[1])) {
+                    // Directly call generation logic
+                    generateFromWords(words[0], words[1]);
+                }
+            }, 100);
+        }
+    }, [incomingWordA, incomingWordB, triggerGenerate]);
     const [isLoading, setIsLoading] = useState(false);
     const [generatedImages, setGeneratedImages] = useState<string[]>([]);
+    const [previewDark, setPreviewDark] = useState(false);
+    const [message, setMessage] = useState<{ text: string; type: "error" | "info" } | null>(null);
+
+    // Auto-dismiss message after 4s
+    useEffect(() => {
+        if (!message) return;
+        const timer = setTimeout(() => setMessage(null), 4000);
+        return () => clearTimeout(timer);
+    }, [message]);
     const preparedInput = isTwoWordMode ? `${wordA.trim()} ${wordB.trim()}` : inputText;
     const lengthGap = Math.abs(wordA.trim().length - wordB.trim().length);
     const fileStem = (isTwoWordMode ? `${wordA}-${wordB}` : inputText)
@@ -175,10 +214,55 @@ export default function Generator2d({ mode = "default" }: Generator2dProps) {
         .replace(/^-+|-+$/g, "") || "ambigram";
     const quickPairs: Array<[string, string]> = [
         ["love", "pain"],
-        ["hope", "fear"],
-        ["life", "death"],
-        ["anna", "john"],
+        ["eric", "mary"],
+        ["noah", "liam"],
+        ["amy", "tom"],
     ];
+
+    // Lightweight compatibility check
+    const getCompatibility = () => {
+        if (!isTwoWordMode) return null;
+        const a = wordA.trim().toLowerCase();
+        const b = wordB.trim().toLowerCase();
+        if (!a || !b || /[^a-zA-Z]/.test(a) || /[^a-zA-Z]/.test(b)) return null;
+
+        const starters = glyphs_lookup[style][0];
+        const middlers = glyphs_lookup[style][1];
+        const enders = glyphs_lookup[style][2];
+
+        const getWordRange = (word: string) => {
+            let min = 0, max = 0;
+            const addLetter = (variants: string[][]) => {
+                if (!variants) return;
+                const widths = variants.map(g => parseInt(g[0][1]) || 1);
+                min += Math.min(...widths);
+                max += Math.max(...widths);
+            };
+            if (starters[letterIndex(word[0])]) addLetter(starters[letterIndex(word[0])]);
+            for (let i = 1; i < word.length - 1; i++) {
+                if (middlers[letterIndex(word[i])]) addLetter(middlers[letterIndex(word[i])]);
+            }
+            if (word.length > 1 && enders[letterIndex(word[word.length - 1])]) {
+                addLetter(enders[letterIndex(word[word.length - 1])]);
+            }
+            return { min, max };
+        };
+
+        const rangeA = getWordRange(a);
+        const rangeB = getWordRange(b);
+        const overlap = Math.min(rangeA.max, rangeB.max) - Math.max(rangeA.min, rangeB.min);
+        const compatible = overlap >= 0;
+
+        return {
+            compatible,
+            rangeA,
+            rangeB,
+            overlap,
+            lengthDiff: Math.abs(a.length - b.length),
+        };
+    };
+
+    const compat = getCompatibility();
     const fieldClass =
         "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 font-medium text-slate-900 transition-all duration-300 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200";
     const selectClass =
@@ -202,125 +286,131 @@ export default function Generator2d({ mode = "default" }: Generator2dProps) {
         setGeneratedImages([]);
     };
 
-    const generateAmbigrams = async () => {
-        if (!preparedInput) return;
-        if (isTwoWordMode) {
-            if (!wordA.trim() || !wordB.trim()) {
-                alert("Please enter both words.");
-                return;
-            }
-            if (/[^a-zA-Z]/.test(wordA) || /[^a-zA-Z]/.test(wordB)) {
-                alert("Please use only letters in each word.");
-                return;
-            }
-        } else if (/[^a-zA-Z\s]/.test(preparedInput)) {
-            alert("Please use only letters and spaces.");
-            return;
-        }
+    const generateFromWords = async (w1: string, w2: string) => {
+        const words = [w1, w2];
+        const doubleWords = w1 !== w2;
 
         setIsLoading(true);
-        setGeneratedImages([]); // 清空旧结果
+        setGeneratedImages([]);
 
-        // 解析单词
-        let words = preparedInput.toLowerCase().trim().split(/\s+/).filter((w) => w);
-        let doubleWords = true;
-
-        if (isTwoWordMode && words.length !== 2) {
-            alert("Please enter exactly two words.");
-            setIsLoading(false);
-            return;
-        } else if (words.length > 2) {
-            alert("Please use one or two words.");
-            setIsLoading(false);
-            return;
-        } else if (words.length === 0) {
-            alert("Please type something first.");
-            setIsLoading(false);
-            return;
-        } else if (words.length === 1) {
-            words = [words[0], words[0]];
-            doubleWords = false;
-        }
-
-        // 核心算法
         try {
-            const glyphs = getPossibleGlyphs(words, style);
-            let permutsA = cartesian(glyphs[0]);
-            let permutsB = cartesian(glyphs[1]);
-            let matchingCombos = [];
-
-            if (doubleWords) {
-                for (let permutA of permutsA) {
-                    for (let permutB of permutsB) {
-                        permutA = Array.isArray(permutA) ? permutA : [permutA];
-                        permutB = Array.isArray(permutB) ? permutB : [permutB];
-                        if (countStrokes(permutA) === countStrokes(permutB)) {
-                            matchingCombos.push([permutA, permutB]);
-                        }
-                    }
-                }
-            } else {
-                for (let i of permutsA) {
-                    matchingCombos.push([i, i]);
-                }
-            }
-
-            if (matchingCombos.length === 0) {
-                alert(`Could not match "${words[0]}" with "${words[1]}". Try shorter words or different spellings.`);
-                setIsLoading(false);
-                return;
-            }
-
-            // 限制生成数量，防止浏览器卡死 (原逻辑是分块处理，这里简化为生成前12个)
-            const combosToProcess = matchingCombos.slice(0, 12);
             const newImages: string[] = [];
 
-            for (const combo of combosToProcess) {
-                let width = countStrokes(combo[0]);
-                const strokeWidth = glyphs_lookup[style][3];
-                width += 3;
-                width *= strokeWidth;
+            // Original variable-width styles (new, calligraphy)
+            const glyphs = getPossibleGlyphs(words, style);
+                let permutsA = cartesian(glyphs[0]);
+                let permutsB = cartesian(glyphs[1]);
+                let matchingCombos: any[] = [];
 
-                const canvas = document.createElement("canvas");
-                canvas.width = width;
-                canvas.height = glyphs_lookup[style][4];
-                const ctx = canvas.getContext("2d");
-
-                if (ctx) {
-                    // 背景色：Tailwind gray-200 #E5E7EB
-                    ctx.fillStyle = "#E5E7EB";
-                    ctx.fillRect(0, 0, width, canvas.height);
-
-                    // 绘制正向单词
-                    let x = 0;
-                    for (const glyph of combo[0]) {
-                        const glyphImage = await getGlyphImage(glyph, style);
-                        ctx.drawImage(glyphImage, x, 0);
-                        x += strokeWidth * countStrokes([glyph]);
+                if (doubleWords) {
+                    for (let permutA of permutsA) {
+                        for (let permutB of permutsB) {
+                            permutA = Array.isArray(permutA) ? permutA : [permutA];
+                            permutB = Array.isArray(permutB) ? permutB : [permutB];
+                            if (countStrokes(permutA) === countStrokes(permutB)) {
+                                matchingCombos.push([permutA, permutB]);
+                            }
+                        }
                     }
-
-                    // 旋转画布
-                    ctx.rotate(Math.PI);
-
-                    // 绘制反向单词 (在旋转后的坐标系中)
-                    x = 0;
-                    for (const glyph of combo[1]) {
-                        const glyphImage = await getGlyphImage(glyph, style);
-                        ctx.drawImage(glyphImage, x - canvas.width, -canvas.height);
-                        x += strokeWidth * countStrokes([glyph]);
+                } else {
+                    for (let i of permutsA) {
+                        matchingCombos.push([i, i]);
                     }
-
-                    newImages.push(canvas.toDataURL());
                 }
+
+                if (matchingCombos.length === 0) {
+                    const diff = Math.abs(words[0].length - words[1].length);
+                    const hint = diff > 2
+                        ? `The names differ by ${diff} letters — try shorter names or nicknames (e.g. "Alex" instead of "Alexander").`
+                        : `Try different spellings or shorter versions of the names.`;
+                    setMessage({ text: `No match found for "${words[0]}" & "${words[1]}". ${hint}`, type: "error" });
+                    setIsLoading(false);
+                    return;
+                }
+
+                const combosToProcess = matchingCombos.slice(0, 12);
+
+                for (const combo of combosToProcess) {
+                    let width = countStrokes(combo[0]);
+                    const strokeWidth = glyphs_lookup[style][3];
+                    width += 3;
+                    width *= strokeWidth;
+
+                    const canvas = document.createElement("canvas");
+                    canvas.width = width;
+                    canvas.height = glyphs_lookup[style][4];
+                    const ctx = canvas.getContext("2d");
+
+                    if (ctx) {
+                        ctx.fillStyle = "#FFFFFF";
+                        ctx.fillRect(0, 0, width, canvas.height);
+
+                        let x = 0;
+                        for (const glyph of combo[0]) {
+                            const glyphImage = await getGlyphImage(glyph, style);
+                            ctx.drawImage(glyphImage, x, 0);
+                            x += strokeWidth * countStrokes([glyph]);
+                        }
+
+                        ctx.rotate(Math.PI);
+
+                        x = 0;
+                        for (const glyph of combo[1]) {
+                            const glyphImage = await getGlyphImage(glyph, style);
+                            ctx.drawImage(glyphImage, x - canvas.width, -canvas.height);
+                            x += strokeWidth * countStrokes([glyph]);
+                        }
+
+                        newImages.push(canvas.toDataURL());
+                    }
+                }
+
+            if (newImages.length === 0) {
+                setMessage({ text: `No ambigrams could be generated for "${w1}" & "${w2}".`, type: "error" });
             }
 
             setGeneratedImages(newImages);
         } catch (e) {
             console.error(e);
-            alert("Generation failed. Please try different words.");
+            setMessage({ text: "Generation failed. Please try different words.", type: "error" });
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const generateAmbigrams = async () => {
+        setMessage(null);
+        if (!preparedInput) return;
+        if (isTwoWordMode) {
+            if (!wordA.trim() || !wordB.trim()) {
+                setMessage({ text: "Please enter both words.", type: "error" });
+                return;
+            }
+            if (/[^a-zA-Z]/.test(wordA) || /[^a-zA-Z]/.test(wordB)) {
+                setMessage({ text: "Please use only letters in each word.", type: "error" });
+                return;
+            }
+        } else if (/[^a-zA-Z\s]/.test(preparedInput)) {
+            setMessage({ text: "Please use only letters and spaces.", type: "error" });
+            return;
+        }
+
+        let words = preparedInput.toLowerCase().trim().split(/\s+/).filter((w) => w);
+
+        if (isTwoWordMode && words.length !== 2) {
+            setMessage({ text: "Please enter exactly two words.", type: "error" });
+            return;
+        } else if (words.length > 2) {
+            setMessage({ text: "Please use one or two words.", type: "error" });
+            return;
+        } else if (words.length === 0) {
+            setMessage({ text: "Please type something first.", type: "error" });
+            return;
+        } else if (words.length === 1) {
+            words = [words[0], words[0]];
+        }
+
+        await generateFromWords(words[0], words[1]);
     };
 
     return (
@@ -363,11 +453,21 @@ export default function Generator2d({ mode = "default" }: Generator2dProps) {
                                         onKeyDown={(e) => e.key === "Enter" && generateAmbigrams()}
                                     />
                                 </div>
-                                <p className="mt-2 text-[12px] text-slate-500">
-                                    {lengthGap <= 1
-                                        ? "Good pair. Word lengths are balanced."
-                                        : "Tip: Use similar word lengths for cleaner symmetry."}
-                                </p>
+                                {/* Compatibility hint */}
+                                {compat && (
+                                    <div className={`mt-2 flex items-center gap-2 rounded-lg px-3 py-2 text-[12px] font-medium ${compat.compatible ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>
+                                        {compat.compatible ? (
+                                            <span>Great match — these names can form a valid ambigram.</span>
+                                        ) : (
+                                            <span>
+                                                These names are hard to match.
+                                                {compat.lengthDiff > 0
+                                                    ? ` Try shortening the longer name (e.g. use a nickname).`
+                                                    : ` Try different spellings.`}
+                                            </span>
+                                        )}
+                                    </div>
+                                )}
                                 <div className="mt-2 flex flex-wrap items-center gap-2">
                                     {quickPairs.map(([a, b]) => (
                                         <button
@@ -441,6 +541,7 @@ export default function Generator2d({ mode = "default" }: Generator2dProps) {
                                 >
                                     <option value="new">{t('styleBlocky')}</option>
                                     <option value="calligraphy">{t('styleCalligraphy')}</option>
+                                    <option value="github">Classic Ambigram</option>
                                 </select>
                             </div>
                             <button
@@ -450,6 +551,14 @@ export default function Generator2d({ mode = "default" }: Generator2dProps) {
                             >
                                 {isLoading ? <Loader2 className="animate-spin" /> : <><PenTool size={18} /> {t('buttonGenerate')}</>}
                             </button>
+                        </div>
+                    )}
+
+                    {/* Inline message */}
+                    {message && (
+                        <div className={`mt-4 flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-medium animate-in fade-in slide-in-from-top-1 duration-300 ${message.type === "error" ? "border-red-200 bg-red-50 text-red-700" : "border-blue-200 bg-blue-50 text-blue-700"}`}>
+                            <AlertCircle size={16} className="shrink-0" />
+                            <span>{message.text}</span>
                         </div>
                     )}
 
@@ -463,16 +572,28 @@ export default function Generator2d({ mode = "default" }: Generator2dProps) {
 
                         {generatedImages.length > 0 && (
                             <>
-                                <p className="mb-6 text-center text-sm font-medium text-slate-500">
-                                    {t('rotationHint')}
-                                </p>
-                                <div id="ambigrams" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div className="mb-5 flex items-center justify-between">
+                                    <p className="text-sm font-medium text-slate-500">
+                                        {t('rotationHint')}
+                                    </p>
+                                    <button
+                                        type="button"
+                                        onClick={() => setPreviewDark(prev => !prev)}
+                                        className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-bold transition-all duration-300 ${previewDark ? "border-slate-600 bg-slate-800 text-white" : "border-slate-200 bg-white text-slate-600 hover:border-indigo-200 hover:text-indigo-700"}`}
+                                    >
+                                        {previewDark ? "☀️ Light" : "🌙 Dark Preview"}
+                                    </button>
+                                </div>
+                                <div id="ambigrams" className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 rounded-2xl p-4 ${previewDark ? "bg-slate-950" : "bg-slate-50"}`}>
                                     {generatedImages.map((imgSrc, index) => (
                                         <AmbigramItem
                                             key={index}
                                             src={imgSrc}
                                             alt={t('altTextResult', { index: index + 1 })}
                                             fileName={`${fileStem}-${index + 1}.png`}
+                                            wordA={isTwoWordMode ? wordA.trim() : inputText.trim()}
+                                            wordB={isTwoWordMode ? wordB.trim() : inputText.trim()}
+                                            darkPreview={previewDark}
                                         />
                                     ))}
                                 </div>

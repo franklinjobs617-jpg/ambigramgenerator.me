@@ -8,6 +8,7 @@ import { saveAs } from 'file-saver';
 import GIF from 'gif.js';
 import { letterData } from '@/lib/letterData';
 import { useTranslations } from 'next-intl';
+import { AlertCircle } from 'lucide-react';
 
 interface Generator3dProps {
     incomingWordA?: string;
@@ -28,6 +29,14 @@ export default function Generator3d({ incomingWordA, incomingWordB, triggerRende
     // GIF 相关状态
     const [isRenderingGif, setIsRenderingGif] = useState(false);
     const [gifText, setGifText] = useState("Render GIF");
+    const [message, setMessage] = useState<{ text: string; type: "error" | "info" } | null>(null);
+
+    // Auto-dismiss message after 4s
+    useEffect(() => {
+        if (!message) return;
+        const timer = setTimeout(() => setMessage(null), 4000);
+        return () => clearTimeout(timer);
+    }, [message]);
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const sceneRef = useRef<THREE.Scene | null>(null);
@@ -62,154 +71,180 @@ export default function Generator3d({ incomingWordA, incomingWordB, triggerRende
     useEffect(() => {
         if (!canvasRef.current) return;
 
-        const renderer = new THREE.WebGLRenderer({
-            canvas: canvasRef.current,
-            logarithmicDepthBuffer: true,
-            antialias: false,
-            powerPreference: "high-performance",
-            preserveDrawingBuffer: true // ⚠️ GIF 截图必须开启此项
-        });
-        renderer.setClearColor(0x121212);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        rendererRef.current = renderer;
-
-        const width = 300;
-        const rect = canvasRef.current.getBoundingClientRect();
-        const aspectRatio = rect.height / rect.width;
-
-        const camera = new THREE.OrthographicCamera(width / -2 + 40, width / 2 + 40, width / 2 * aspectRatio, width / -2 * aspectRatio, 0.01, 10000);
-        camera.position.set(40, 40, 40);
-        cameraRef.current = camera;
-
-        const controls = new OrbitControls(camera, renderer.domElement);
-        controls.addEventListener('change', () => {
-            if (sceneRef.current && cameraRef.current && rendererRef.current) {
-                rendererRef.current.render(sceneRef.current, cameraRef.current);
-            }
-        });
-        controlsRef.current = controls;
-
-        const scene = new THREE.Scene();
-        scene.add(new THREE.AmbientLight(0x101010));
-
-        for (let i = 0; i < 10; i++) {
-            const light1 = new THREE.PointLight(0xffffff, 0.08, 0, 2);
-            light1.position.set(-300 + 100 * i, 300, 500);
-            scene.add(light1);
-            const light2 = new THREE.PointLight(0xffcccc, 0.12, 0, 2);
-            light2.position.set(2000, 400, -300 - 100 * i);
-            scene.add(light2);
-        }
-        sceneRef.current = scene;
-
-        const handleResize = () => {
-            if (!canvasRef.current || !rendererRef.current || !cameraRef.current || !sceneRef.current) return;
-            const width = canvasRef.current.clientWidth;
-            const height = canvasRef.current.clientHeight;
-
-            const aspect = height / width;
-            const cam = cameraRef.current;
-            cam.top = (cam.right - cam.left) * aspect / 2;
-            cam.bottom = (cam.right - cam.left) * aspect / -2;
-            cam.updateProjectionMatrix();
-
-            rendererRef.current.setSize(width, height, false);
-            rendererRef.current.render(sceneRef.current, cam);
-        };
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
         let animationFrameId: number;
-        const animate = () => {
-            animationFrameId = requestAnimationFrame(animate);
-            if (controlsRef.current) controlsRef.current.update();
+        let resizeHandler: (() => void) | null = null;
+        let disposed = false;
 
-            // GIF 录制逻辑
-            if (gifDataRef.current && gifRendererRef.current && rendererRef.current && cameraRef.current) {
-                const data = gifDataRef.current;
-                const gif = gifRendererRef.current;
-                const dom = rendererRef.current.domElement;
+        // Wait for canvas to have proper dimensions before initializing
+        const waitForDimensions = () => {
+            if (disposed) return;
+            const canvas = canvasRef.current;
+            if (!canvas) return;
 
-                const updateCam = (x: number, y: number, z: number, w: number) => {
-                    const cam = cameraRef.current!;
-                    const size = new THREE.Vector2();
-                    rendererRef.current!.getSize(size);
-                    const aspect = size.y / size.x;
-                    cam.position.set(x, y, z);
-                    cam.left = w / -2;
-                    cam.right = w / 2;
-                    cam.top = (cam.right - cam.left) * aspect / 2 + 10;
-                    cam.bottom = (cam.right - cam.left) * aspect / -2 + 10;
-                    cam.updateProjectionMatrix();
-                    if (controlsRef.current) controlsRef.current.update();
-                };
-
-                switch (data.state) {
-                    case 0: case 2: case 4:
-                        gif.addFrame(dom, { delay: data.pauseDelay, copy: true });
-                        data.step = 0;
-                        data.state++;
-                        break;
-                    case 1:
-                        gif.addFrame(dom, { delay: data.frameDelay, copy: true });
-                        updateCam(
-                            (data.a.x - data.b.x) * (1 - (data.step / data.frameAmount)) + data.b.x,
-                            (data.a.y - data.b.y) * (1 - (data.step / data.frameAmount)) + data.b.y,
-                            (data.a.z - data.b.z) * (1 - (data.step / data.frameAmount)) + data.b.z,
-                            (data.a.width - data.b.width) * (1 - (data.step / data.frameAmount)) + data.b.width
-                        );
-                        data.step++;
-                        if (data.step > data.frameAmount) {
-                            updateCam(data.b.x, data.b.y, data.b.z, data.b.width);
-                            data.state++;
-                        }
-                        break;
-                    case 3:
-                        gif.addFrame(dom, { delay: data.frameDelay, copy: true });
-                        updateCam(
-                            (data.b.x - data.c.x) * (1 - (data.step / data.frameAmount)) + data.c.x,
-                            (data.b.y - data.c.y) * (1 - (data.step / data.frameAmount)) + data.c.y,
-                            (data.b.z - data.c.z) * (1 - (data.step / data.frameAmount)) + data.c.z,
-                            (data.b.width - data.c.width) * (1 - (data.step / data.frameAmount)) + data.c.width
-                        );
-                        data.step++;
-                        if (data.step > data.frameAmount) {
-                            updateCam(data.c.x, data.c.y, data.c.z, data.c.width);
-                            data.state++;
-                        }
-                        break;
-                    case 5:
-                        gif.addFrame(dom, { delay: data.frameDelay, copy: true });
-                        updateCam(
-                            (data.c.x - data.a.x) * (1 - (data.step / data.frameAmount)) + data.a.x,
-                            (data.c.y - data.a.y) * (1 - (data.step / data.frameAmount)) + data.a.y,
-                            (data.c.z - data.a.z) * (1 - (data.step / data.frameAmount)) + data.a.z,
-                            (data.c.width - data.a.width) * (1 - (data.step / data.frameAmount)) + data.a.width
-                        );
-                        data.step++;
-                        if (data.step > data.frameAmount) {
-                            updateCam(data.a.x, data.a.y, data.a.z, data.a.width);
-                            data.state++;
-                        }
-                        break;
-                    case 6:
-                        gif.render();
-                        data.state++;
-                        break;
-                }
+            const rect = canvas.getBoundingClientRect();
+            if (rect.width < 10 || rect.height < 10) {
+                requestAnimationFrame(waitForDimensions);
+                return;
             }
 
-            if (rendererRef.current && sceneRef.current && cameraRef.current) {
-                rendererRef.current.render(sceneRef.current, cameraRef.current);
-            }
+            initThreeJS();
         };
-        animate();
+
+        const initThreeJS = () => {
+            if (!canvasRef.current || disposed) return;
+
+            const renderer = new THREE.WebGLRenderer({
+                canvas: canvasRef.current,
+                logarithmicDepthBuffer: true,
+                antialias: false,
+                powerPreference: "high-performance",
+                preserveDrawingBuffer: true
+            });
+            renderer.setClearColor(0x121212);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            rendererRef.current = renderer;
+
+            const width = 300;
+            const rect = canvasRef.current.getBoundingClientRect();
+            const aspectRatio = rect.height / rect.width;
+
+            const camera = new THREE.OrthographicCamera(width / -2 + 40, width / 2 + 40, width / 2 * aspectRatio, width / -2 * aspectRatio, 0.01, 10000);
+            camera.position.set(40, 40, 40);
+            cameraRef.current = camera;
+
+            const controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.08;
+            controls.enableRotate = true;
+            controls.enablePan = true;
+            controls.enableZoom = true;
+            controls.rotateSpeed = 0.8;
+            controlsRef.current = controls;
+
+            const scene = new THREE.Scene();
+            scene.add(new THREE.AmbientLight(0x101010));
+
+            for (let i = 0; i < 10; i++) {
+                const light1 = new THREE.PointLight(0xffffff, 0.08, 0, 2);
+                light1.position.set(-300 + 100 * i, 300, 500);
+                scene.add(light1);
+                const light2 = new THREE.PointLight(0xffcccc, 0.12, 0, 2);
+                light2.position.set(2000, 400, -300 - 100 * i);
+                scene.add(light2);
+            }
+            sceneRef.current = scene;
+
+            resizeHandler = () => {
+                if (!canvasRef.current || !rendererRef.current || !cameraRef.current || !sceneRef.current) return;
+                const w = canvasRef.current.clientWidth;
+                const h = canvasRef.current.clientHeight;
+
+                const aspect = h / w;
+                const cam = cameraRef.current;
+                cam.top = (cam.right - cam.left) * aspect / 2;
+                cam.bottom = (cam.right - cam.left) * aspect / -2;
+                cam.updateProjectionMatrix();
+
+                rendererRef.current.setSize(w, h, false);
+                rendererRef.current.render(sceneRef.current, cam);
+            };
+            window.addEventListener('resize', resizeHandler);
+            resizeHandler();
+
+            const animate = () => {
+                animationFrameId = requestAnimationFrame(animate);
+                if (controlsRef.current) controlsRef.current.update();
+
+                if (rendererRef.current && sceneRef.current && cameraRef.current) {
+                    rendererRef.current.render(sceneRef.current, cameraRef.current);
+                }
+
+                if (gifDataRef.current && gifRendererRef.current && rendererRef.current && cameraRef.current) {
+                    const data = gifDataRef.current;
+                    const gif = gifRendererRef.current;
+                    const dom = rendererRef.current.domElement;
+
+                    const updateCam = (x: number, y: number, z: number, w: number) => {
+                        const cam = cameraRef.current!;
+                        const size = new THREE.Vector2();
+                        rendererRef.current!.getSize(size);
+                        const aspect = size.y / size.x;
+                        cam.position.set(x, y, z);
+                        cam.left = w / -2;
+                        cam.right = w / 2;
+                        cam.top = (cam.right - cam.left) * aspect / 2 + 10;
+                        cam.bottom = (cam.right - cam.left) * aspect / -2 + 10;
+                        cam.updateProjectionMatrix();
+                        if (controlsRef.current) controlsRef.current.update();
+                    };
+
+                    switch (data.state) {
+                        case 0: case 2: case 4:
+                            gif.addFrame(dom, { delay: data.pauseDelay, copy: true });
+                            data.step = 0;
+                            data.state++;
+                            break;
+                        case 1:
+                            gif.addFrame(dom, { delay: data.frameDelay, copy: true });
+                            updateCam(
+                                (data.a.x - data.b.x) * (1 - (data.step / data.frameAmount)) + data.b.x,
+                                (data.a.y - data.b.y) * (1 - (data.step / data.frameAmount)) + data.b.y,
+                                (data.a.z - data.b.z) * (1 - (data.step / data.frameAmount)) + data.b.z,
+                                (data.a.width - data.b.width) * (1 - (data.step / data.frameAmount)) + data.b.width
+                            );
+                            data.step++;
+                            if (data.step > data.frameAmount) {
+                                updateCam(data.b.x, data.b.y, data.b.z, data.b.width);
+                                data.state++;
+                            }
+                            break;
+                        case 3:
+                            gif.addFrame(dom, { delay: data.frameDelay, copy: true });
+                            updateCam(
+                                (data.b.x - data.c.x) * (1 - (data.step / data.frameAmount)) + data.c.x,
+                                (data.b.y - data.c.y) * (1 - (data.step / data.frameAmount)) + data.c.y,
+                                (data.b.z - data.c.z) * (1 - (data.step / data.frameAmount)) + data.c.z,
+                                (data.b.width - data.c.width) * (1 - (data.step / data.frameAmount)) + data.c.width
+                            );
+                            data.step++;
+                            if (data.step > data.frameAmount) {
+                                updateCam(data.c.x, data.c.y, data.c.z, data.c.width);
+                                data.state++;
+                            }
+                            break;
+                        case 5:
+                            gif.addFrame(dom, { delay: data.frameDelay, copy: true });
+                            updateCam(
+                                (data.c.x - data.a.x) * (1 - (data.step / data.frameAmount)) + data.a.x,
+                                (data.c.y - data.a.y) * (1 - (data.step / data.frameAmount)) + data.a.y,
+                                (data.c.z - data.a.z) * (1 - (data.step / data.frameAmount)) + data.a.z,
+                                (data.c.width - data.a.width) * (1 - (data.step / data.frameAmount)) + data.a.width
+                            );
+                            data.step++;
+                            if (data.step > data.frameAmount) {
+                                updateCam(data.a.x, data.a.y, data.a.z, data.a.width);
+                                data.state++;
+                            }
+                            break;
+                        case 6:
+                            gif.render();
+                            data.state++;
+                            break;
+                    }
+                }
+
+            };
+            animate();
+        };
+
+        waitForDimensions();
 
         return () => {
-            window.removeEventListener('resize', handleResize);
+            disposed = true;
+            if (resizeHandler) window.removeEventListener('resize', resizeHandler);
             cancelAnimationFrame(animationFrameId);
             if (workerRef.current) workerRef.current.terminate();
-            renderer.dispose();
+            if (rendererRef.current) rendererRef.current.dispose();
         };
     }, []);
 
@@ -372,7 +407,7 @@ export default function Generator3d({ incomingWordA, incomingWordB, triggerRende
     // ==========================================
     const handleMakeGif = () => {
         const c = constructionRef.current;
-        if (!c) return alert("Please generate the 3D model first!");
+        if (!c) { setMessage({ text: "Please generate the 3D model first!", type: "error" }); return; }
 
         setIsRenderingGif(true);
         setGifText("Recording... 0%");
@@ -526,6 +561,14 @@ export default function Generator3d({ incomingWordA, incomingWordB, triggerRende
                     <div className="flex-1 relative bg-black/40 rounded-[2rem] border-2 border-slate-800/50 shadow-inner overflow-hidden min-h-[400px] group">
                         <canvas ref={canvasRef} className="w-full h-full cursor-grab active:cursor-grabbing outline-none" />
                     </div>
+
+                    {/* Inline message */}
+                    {message && (
+                        <div className={`flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-medium ${message.type === "error" ? "border-red-800 bg-red-900/40 text-red-300" : "border-blue-800 bg-blue-900/40 text-blue-300"}`}>
+                            <AlertCircle size={16} className="shrink-0" />
+                            <span>{message.text}</span>
+                        </div>
+                    )}
 
                     {/* 底部工具栏 */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
