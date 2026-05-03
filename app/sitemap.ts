@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 
-const baseUrl = 'https://ambigramgenerator.me'
+const baseUrl = 'https://www.ambigramgenerator.me'
 
 const locales = ['en', 'fr', 'de', 'es', 'it']
 
