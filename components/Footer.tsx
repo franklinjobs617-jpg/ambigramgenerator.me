@@ -107,6 +107,12 @@ export default function Footer() {
                 { label: tNav("support.items.terms"), href: "/terms" },
             ],
         },
+        {
+            title: "Friends",
+            links: [
+                { label: "AI Clothes Changer - Virtual Try-On & Outfit Swap", href: "https://aiclotheschangers.app/", external: true },
+            ],
+        },
     ];
 
     return (
@@ -201,12 +207,23 @@ export default function Footer() {
                             <ul className="space-y-4">
                                 {column.links.map((link) => (
                                     <li key={link.href}>
-                                        <Link
-                                            href={link.href}
-                                            className="text-[14.5px] font-bold text-slate-500 hover:text-white transition-colors duration-200"
-                                        >
-                                            {link.label}
-                                        </Link>
+                                        {(link as any).external ? (
+                                            <a
+                                                href={link.href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-[14.5px] font-bold text-slate-500 hover:text-white transition-colors duration-200"
+                                            >
+                                                {link.label}
+                                            </a>
+                                        ) : (
+                                            <Link
+                                                href={link.href}
+                                                className="text-[14.5px] font-bold text-slate-500 hover:text-white transition-colors duration-200"
+                                            >
+                                                {link.label}
+                                            </Link>
+                                        )}
                                     </li>
                                 ))}
                             </ul>
