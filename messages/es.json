@@ -76,6 +76,11 @@
       "tattooToolTitle": "Herramienta Profesional de Diseño de Tatuajes de Ambigramas",
       "tattooToolDesc": "¿Buscas un tatuaje de ambigrama con dos nombres? Nuestro generador 2D ofrece estilos de caligrafía optimizados para líneas limpias y plantillas listas para la piel."
     },
+    "AIBanner": {
+      "title": "AI Tattoo Generator",
+      "desc": "Turn your ambigram into a realistic tattoo preview with AI",
+      "cta": "Try AI Generator"
+    },
     "HowItWorks": {
       "title": "3 Pasos Sencillos para Crear tu Ambigrama",
       "subtitle": "Crear tu ambigrama personalizado solo toma unos clics.",

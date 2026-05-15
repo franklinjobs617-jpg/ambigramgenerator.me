@@ -5,9 +5,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import {
-    Twitter,
-    Instagram,
-    Github,
     Mail,
     Box,
     ChevronUp,
@@ -179,22 +176,14 @@ export default function Footer() {
                             </div>
                         </div>
 
-                        {/* Social Icons */}
+                        {/* Contact */}
                         <div className="flex items-center gap-3 pt-2">
-                            {[
-                                { icon: <Twitter size={18} />, href: "#" },
-                                { icon: <Instagram size={18} />, href: "#" },
-                                { icon: <Github size={18} />, href: "#" },
-                                { icon: <Mail size={18} />, href: "mailto:support@ambigramgenerator.me" },
-                            ].map((social, i) => (
-                                <a
-                                    key={i}
-                                    href={social.href}
-                                    className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-500 hover:bg-indigo-600 hover:text-white hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
-                                >
-                                    {social.icon}
-                                </a>
-                            ))}
+                            <a
+                                href="mailto:support@ambigramgenerator.me"
+                                className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-500 hover:bg-indigo-600 hover:text-white hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+                            >
+                                <Mail size={18} />
+                            </a>
                         </div>
                     </div>
 

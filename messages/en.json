@@ -20,8 +20,8 @@
         "items": {
           "whatIs": "What is Ambigram",
           "examples": "Ambigram Examples",
-          "wordTattoos" : "Ambigramm Word tattoos ",
-          "lovePain": "Love & Pain Ambigramm",
+          "wordTattoos": "Ambigram Word Tattoos",
+          "lovePain": "Love & Pain Ambigram",
           "upsideDownWords": "Upside Down Words",
           "history": "History & Art",
           "principles": "Design Principles",
@@ -78,6 +78,11 @@
       "tattooToolTitle": "Professional Ambigram Tattoo Design Tool",
       "tattooToolDesc": "Looking for a <bold>two-name ambigram tattoo</bold>? Our 2D generator features <spanClass>Calligraphy styles</spanClass> optimized for clean lines and skin-ready stencils.",
       "loading2dText": "2D Stencil Generator UI Loading..."
+    },
+    "AIBanner": {
+      "title": "AI Tattoo Generator",
+      "desc": "Turn your ambigram into a realistic tattoo preview with AI",
+      "cta": "Try AI Generator"
     },
     "HowItWorks": {
       "title": "3 Easy Steps to Generate Your Ambigram",

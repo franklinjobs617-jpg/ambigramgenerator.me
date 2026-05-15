@@ -16,13 +16,13 @@ function FaqItem({ question, answer }: { question: string; answer: React.ReactNo
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-md">
+        <div className="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all duration-300 hover:border-indigo-100 hover:shadow-md">
             <button
                 onClick={() => setIsOpen((prev) => !prev)}
                 className="w-full px-5 sm:px-6 py-4 sm:py-5 text-left flex items-center justify-between font-bold text-[#1A1A1B]"
             >
                 <span className="pr-4">{question}</span>
-                <ChevronDown size={18} className={`shrink-0 text-slate-400 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                <ChevronDown size={18} className={`shrink-0 text-slate-400 transition-transform duration-300 ${isOpen ? "rotate-180 text-indigo-500" : ""}`} />
             </button>
             <AnimatePresence>
                 {isOpen && (
@@ -65,12 +65,6 @@ export default function HomeContent() {
         };
     }, []);
 
-    const applyInspiration = (wordA: string, wordB: string) => {
-        setGlobalWordA(wordA);
-        setGlobalWordB(wordB);
-        document.getElementById("workspace")?.scrollIntoView({ behavior: "smooth" });
-    };
-
     const coreFeatures = [
         {
             icon: <Users className="h-8 w-8 text-indigo-600" />,
@@ -96,14 +90,6 @@ export default function HomeContent() {
             desc: t("CoreFeatures.item4.desc"),
             bg: "bg-emerald-50",
         },
-    ];
-
-    const inspirationPairs = [
-        ["LOVE", "HATE"],
-        ["ANGEL", "DEVIL"],
-        ["LIFE", "DEATH"],
-        ["HOPE", "FAITH"],
-        ["TRUE", "FALSE"],
     ];
 
     const galleryCards = [
@@ -162,26 +148,11 @@ export default function HomeContent() {
                 )}
             </AnimatePresence>
 
+            {/* Hero - contains H1 */}
             <HeroSection onGenerate={handleHeroGenerate} />
 
-            <section id="inspiration" className="border-t border-slate-100 bg-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-                <div className="mx-auto max-w-5xl text-center">
-                    <p className="mb-6 text-sm font-black text-slate-400">{t("Inspiration.title")}</p>
-                    <div className="mx-auto flex max-w-4xl gap-3 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center sm:overflow-visible">
-                        {inspirationPairs.map((pair) => (
-                            <button
-                                key={pair.join("-")}
-                                onClick={() => applyInspiration(pair[0], pair[1])}
-                                className="shrink-0 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-5 py-2.5 text-sm font-bold text-[#666666] transition-all hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-600 hover:shadow-sm"
-                            >
-                                {pair[0]} <ArrowRight size={14} className="text-slate-300" /> {pair[1]}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section id="workspace" className="mx-auto max-w-7xl scroll-mt-24 px-4 sm:px-6 lg:px-8">
+            {/* Workspace - moved up, right after Hero */}
+            <section id="workspace" className="mx-auto max-w-7xl scroll-mt-24 px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
                 <div className="rounded-[1.75rem] sm:rounded-[3rem] border border-slate-100 bg-white p-3 sm:p-4 shadow-[0_20px_80px_-20px_rgba(0,0,0,0.05)]">
                     <div className="mb-5 sm:mb-6 flex justify-center pt-3 sm:pt-4">
                         <div className="grid w-full max-w-md grid-cols-2 gap-1 rounded-2xl bg-slate-100 p-1 sm:rounded-full">
@@ -210,10 +181,10 @@ export default function HomeContent() {
                         <AnimatePresence mode="wait">
                             {activeTab === "2d" ? (
                                 <motion.div key="2d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white">
-                                    <Generator2d />
+                                    <Generator2d incomingWordA={globalWordA} incomingWordB={globalWordB} triggerGenerate={generateTrigger} />
                                 </motion.div>
                             ) : (
-                                <motion.div key="3d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full w-full bg-slate-950">
+                                <motion.div key="3d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full bg-slate-950" style={{ height: '100%', minHeight: '460px' }}>
                                     <div className="w-full py-3 sm:py-4 text-center text-2xl sm:text-3xl font-black tracking-tight text-white">
                                         <h2>{t("Generator3D.title")}</h2>
                                         <p className="mt-1 text-sm text-slate-400">{t("Generator3D.subtitle")}</p>
@@ -223,9 +194,9 @@ export default function HomeContent() {
                             )}
                         </AnimatePresence>
 
-                        <div className="mx-auto mt-4 max-w-4xl rounded-r-xl border-l-4 border-indigo-600 bg-indigo-50 p-4 sm:p-6 text-left shadow-sm">
+                        <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50/80 to-transparent p-5 sm:p-6 text-left">
                             <h2 className="text-lg sm:text-xl font-bold text-[#1A1A1B]">{t("Workspace.tattooToolTitle")}</h2>
-                            <p className="mt-2 text-sm text-[#666666]">
+                            <p className="mt-2 text-sm text-[#666666] leading-relaxed">
                                 {t.rich("Workspace.tattooToolDesc", {
                                     bold: (chunks) => <strong>{chunks}</strong>,
                                     spanClass: (chunks) => <span className="font-bold text-indigo-600">{chunks}</span>,
@@ -236,23 +207,48 @@ export default function HomeContent() {
                 </div>
             </section>
 
-            <section className="bg-white px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-                <div className="mx-auto max-w-5xl">
-                    <div className="mb-10 sm:mb-16 text-center">
-                        <h2 className="text-3xl sm:text-4xl font-black text-[#1A1A1B]">{t("HowItWorks.title")}</h2>
-                        <p className="mt-4 font-medium text-[#666666]">{t("HowItWorks.subtitle")}</p>
+            {/* AI Tattoo Generator - compact banner */}
+            <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+                <Link
+                    href="/ai-tattoo-generator"
+                    className="group flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50 to-purple-50 px-6 py-5 transition-all hover:border-indigo-200 hover:shadow-lg"
+                >
+                    <div className="flex items-center gap-4">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-md">
+                            <Sparkles size={22} />
+                        </div>
+                        <div>
+                            <h2 className="text-base font-black text-[#1A1A1B]">{t("AIBanner.title")}</h2>
+                            <p className="text-sm text-slate-500">{t("AIBanner.desc")}</p>
+                        </div>
                     </div>
-                    <div className="grid gap-8 sm:gap-12 md:grid-cols-3">
+                    <div className="flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all group-hover:bg-indigo-700 group-hover:shadow-lg">
+                        {t("AIBanner.cta")} <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                    </div>
+                </Link>
+            </section>
+
+            {/* How It Works */}
+            <section className="bg-white px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+                <div className="mx-auto max-w-5xl">
+                    <div className="mb-10 sm:mb-14 text-center">
+                        <h2 className="text-2xl sm:text-3xl font-black text-[#1A1A1B]">{t("HowItWorks.title")}</h2>
+                        <p className="mt-3 font-medium text-sm text-[#666666]">{t("HowItWorks.subtitle")}</p>
+                    </div>
+                    <div className="relative grid gap-8 md:grid-cols-3">
                         {[
                             { step: "1", title: t("HowItWorks.step1Title"), desc: t("HowItWorks.step1Desc") },
                             { step: "2", title: t("HowItWorks.step2Title"), desc: t("HowItWorks.step2Desc") },
                             { step: "3", title: t("HowItWorks.step3Title"), desc: t("HowItWorks.step3Desc") },
-                        ].map((item) => (
-                            <div key={item.step} className="space-y-5 text-center">
-                                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-50 shadow-sm">
-                                    <span className="text-2xl font-black text-indigo-600">{item.step}</span>
+                        ].map((item, i) => (
+                            <div key={item.step} className="relative space-y-4 text-center">
+                                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-50 to-indigo-100/80 shadow-sm ring-1 ring-indigo-100">
+                                    <span className="text-xl font-black text-indigo-600">{item.step}</span>
                                 </div>
-                                <h3 className="text-xl font-bold text-[#1A1A1B]">{item.title}</h3>
+                                {i < 2 && (
+                                    <div className="absolute left-[calc(50%+2.5rem)] top-8 hidden h-px w-[calc(100%-5rem)] bg-gradient-to-r from-indigo-200 to-transparent md:block" />
+                                )}
+                                <h3 className="text-lg font-bold text-[#1A1A1B]">{item.title}</h3>
                                 <p className="text-sm leading-relaxed text-[#666666]">{item.desc}</p>
                             </div>
                         ))}
@@ -260,86 +256,83 @@ export default function HomeContent() {
                 </div>
             </section>
 
-            <section id="coreFeatures" className="bg-white py-16 sm:py-20 lg:py-24">
-                <div className="container mx-auto px-4 md:px-6">
-                    <div className="mx-auto mb-10 sm:mb-16 max-w-3xl text-center">
-                        <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#1A1A1B]">{t("CoreFeatures.mainTitle")}</h2>
-                        <div className="mx-auto mt-4 h-1.5 w-16 rounded-full bg-indigo-600 opacity-20" />
+            {/* Features */}
+            <section className="bg-gradient-to-b from-slate-50 to-white px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+                <div className="mx-auto max-w-6xl">
+                    <div className="mb-10 sm:mb-14 text-center">
+                        <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-[#1A1A1B]">{t("CoreFeatures.mainTitle")}</h2>
+                        <div className="mx-auto mt-3 h-1 w-12 rounded-full bg-indigo-600/30" />
                     </div>
 
-                    <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-4">
+                    <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
                         {coreFeatures.map((feature) => (
                             <div
                                 key={feature.title}
-                                className="group flex flex-col items-center rounded-[2rem] sm:rounded-[2.5rem] border border-slate-100 bg-white p-6 sm:p-8 text-center shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-500/5"
+                                className="group flex flex-col items-center rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-100 hover:shadow-lg hover:shadow-indigo-50"
                             >
-                                <div className={`mb-6 flex h-20 w-20 items-center justify-center rounded-[1.8rem] ${feature.bg} transition-transform duration-500 group-hover:scale-110`}>
+                                <div className={`mb-4 flex h-14 w-14 items-center justify-center rounded-2xl ${feature.bg} transition-transform duration-300 group-hover:scale-110`}>
                                     {feature.icon}
                                 </div>
-                                <h3 className="mb-3 text-xl font-bold tracking-tight text-[#1A1A1B]">{feature.title}</h3>
-                                <p className="text-sm font-medium leading-relaxed text-slate-500">{feature.desc}</p>
+                                <h3 className="mb-2 text-sm font-bold tracking-tight text-[#1A1A1B]">{feature.title}</h3>
+                                <p className="text-xs leading-relaxed text-slate-500">{feature.desc}</p>
                             </div>
                         ))}
                     </div>
-                </div>
-            </section>
 
-            <section className="border-y border-slate-100 bg-slate-50 px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-                <div className="mx-auto max-w-7xl">
-                    <div className="mb-10 sm:mb-16 text-center">
-                        <h2 className="text-3xl sm:text-4xl font-black text-[#1A1A1B]">{t("Features.title")}</h2>
-                        <p className="mt-4 font-medium text-[#666666]">{t("Features.subtitle")}</p>
+                    <div className="mt-14 sm:mt-20 text-center">
+                        <h2 className="text-2xl sm:text-3xl font-black text-[#1A1A1B]">{t("Features.title")}</h2>
+                        <p className="mt-3 font-medium text-sm text-[#666666]">{t("Features.subtitle")}</p>
                     </div>
-                    <div className="grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    <div className="mt-8 grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-4">
                         {[
-                            { icon: PenTool, title: t("Features.f1Title"), desc: t("Features.f1Desc"), color: "text-purple-600", bg: "bg-purple-100" },
-                            { icon: Box, title: t("Features.f2Title"), desc: t("Features.f2Desc"), color: "text-blue-600", bg: "bg-blue-100" },
-                            { icon: Gift, title: t("Features.f3Title"), desc: t("Features.f3Desc"), color: "text-indigo-600", bg: "bg-indigo-100" },
-                            { icon: Lightbulb, title: t("Features.f4Title"), desc: t("Features.f4Desc"), color: "text-orange-600", bg: "bg-orange-100" },
+                            { icon: PenTool, title: t("Features.f1Title"), desc: t("Features.f1Desc"), color: "text-purple-600", bg: "bg-purple-50", ring: "ring-purple-100" },
+                            { icon: Box, title: t("Features.f2Title"), desc: t("Features.f2Desc"), color: "text-blue-600", bg: "bg-blue-50", ring: "ring-blue-100" },
+                            { icon: Gift, title: t("Features.f3Title"), desc: t("Features.f3Desc"), color: "text-indigo-600", bg: "bg-indigo-50", ring: "ring-indigo-100" },
+                            { icon: Lightbulb, title: t("Features.f4Title"), desc: t("Features.f4Desc"), color: "text-orange-600", bg: "bg-orange-50", ring: "ring-orange-100" },
                         ].map((card) => (
-                            <div key={card.title} className="rounded-[1.6rem] sm:rounded-[2rem] bg-white p-6 sm:p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
-                                <div className={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl ${card.bg} ${card.color}`}>
-                                    <card.icon size={28} />
+                            <div key={card.title} className="group rounded-2xl border border-slate-100 bg-white p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-100 hover:shadow-lg hover:shadow-indigo-50">
+                                <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${card.bg} ${card.color} ring-1 ${card.ring}`}>
+                                    <card.icon size={22} />
                                 </div>
-                                <h3 className="mb-3 text-lg font-bold leading-snug text-[#1A1A1B]">{card.title}</h3>
-                                <p className="text-sm leading-relaxed text-[#666666]">{card.desc}</p>
+                                <h3 className="mb-2 text-sm font-bold leading-snug text-[#1A1A1B]">{card.title}</h3>
+                                <p className="text-xs leading-relaxed text-[#666666]">{card.desc}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section id="examples" className="border-t border-slate-100 bg-[#F8FAFC] px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-                <div className="container mx-auto">
-                    <div className="mx-auto mb-10 sm:mb-16 max-w-3xl text-center">
-                        <h2 className="mb-4 text-3xl sm:text-4xl font-black tracking-tight text-[#1A1A1B]">{t("Examples.title")}</h2>
-                        <p className="font-medium italic text-slate-500">{t("Examples.subtitle")}</p>
+            {/* Examples */}
+            <section id="examples" className="bg-[#F8FAFC] px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+                <div className="mx-auto max-w-7xl">
+                    <div className="mx-auto mb-10 sm:mb-14 max-w-3xl text-center">
+                        <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-[#1A1A1B]">{t("Examples.title")}</h2>
+                        <p className="mt-3 font-medium text-sm text-slate-500">{t("Examples.subtitle")}</p>
                     </div>
 
-                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
+                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
                         {galleryCards.map((card) => (
                             <div
                                 key={card.title}
-                                className={`group rounded-[2rem] sm:rounded-[2.5rem] p-4 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-500/10 ${card.dark ? "border-2 border-indigo-100 bg-white" : "border border-slate-200/60 bg-white"
-                                    }`}
+                                className="group rounded-2xl border border-slate-200/60 bg-white p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-50"
                             >
-                                <div className={`relative mb-6 aspect-[4/3] overflow-hidden rounded-[1.8rem] ${card.dark ? "bg-slate-900" : "bg-slate-50"}`}>
+                                <div className={`relative mb-3 aspect-[4/3] overflow-hidden rounded-xl ${card.dark ? "bg-slate-900" : "bg-slate-50"}`}>
                                     <Image
                                         src={card.src}
                                         alt={card.alt}
                                         fill
-                                        className={`${card.dark ? "object-contain p-4" : "object-cover"} transition-transform duration-700 group-hover:scale-110`}
+                                        className={`${card.dark ? "object-contain p-3" : "object-cover"} transition-transform duration-500 group-hover:scale-105`}
                                         sizes="(max-width: 768px) 100vw, 25vw"
                                     />
                                     {card.badge ? (
-                                        <div className="absolute right-4 top-4 rounded-xl bg-indigo-600/90 px-3 py-1.5 text-[10px] font-black text-white shadow-lg backdrop-blur-md">
+                                        <div className="absolute right-3 top-3 rounded-lg bg-indigo-600/90 px-2.5 py-1 text-[9px] font-black text-white shadow-lg backdrop-blur-sm">
                                             {card.badge}
                                         </div>
                                     ) : null}
                                 </div>
-                                <div className="px-2 pb-2">
-                                    <div className={`mb-1 text-lg font-black ${card.dark ? "text-indigo-600" : "text-[#1A1A1B]"}`}>{card.title}</div>
-                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400">{card.desc}</p>
+                                <div className="px-1 pb-1">
+                                    <div className="mb-1 text-sm font-bold text-[#1A1A1B]">{card.title}</div>
+                                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{card.desc}</p>
                                 </div>
                             </div>
                         ))}
@@ -347,41 +340,42 @@ export default function HomeContent() {
                 </div>
             </section>
 
-            <section className="bg-slate-900 px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 text-white">
-                <div className="mx-auto max-w-4xl rounded-[2rem] sm:rounded-[3rem] border border-slate-700 bg-slate-800/50 p-5 sm:p-10 shadow-2xl">
-                    <div className="mb-10 text-center">
-                        <h2 className="text-3xl font-black">{t("Comparison.title")}</h2>
-                        <p className="mt-2 text-slate-400">{t("Comparison.subtitle")}</p>
+            {/* Comparison */}
+            <section className="bg-gradient-to-b from-slate-900 to-slate-950 px-4 sm:px-6 lg:px-8 py-14 sm:py-20 text-white">
+                <div className="mx-auto max-w-4xl">
+                    <div className="mb-8 sm:mb-10 text-center">
+                        <h2 className="text-2xl sm:text-3xl font-black">{t("Comparison.title")}</h2>
+                        <p className="mt-3 text-sm text-slate-400">{t("Comparison.subtitle")}</p>
                     </div>
-                    <div className="overflow-x-auto rounded-3xl border border-slate-700">
-                        <table className="w-full min-w-[680px] text-left">
-                            <thead className="bg-slate-950 text-sm font-bold text-white">
+                    <div className="overflow-x-auto rounded-2xl border border-slate-700/60 bg-white/[0.03] backdrop-blur-sm">
+                        <table className="w-full min-w-[600px] text-left">
+                            <thead className="text-sm font-bold text-white">
                                 <tr>
-                                    <th className="p-5">{t("Comparison.headerFeature")}</th>
-                                    <th className="bg-indigo-600 p-5">{t("Comparison.headerUs")}</th>
-                                    <th className="p-5 text-slate-500">{t("Comparison.headerOthers")}</th>
+                                    <th className="p-4 sm:p-5 text-slate-300">{t("Comparison.headerFeature")}</th>
+                                    <th className="bg-indigo-600/90 p-4 sm:p-5 rounded-tr-none">{t("Comparison.headerUs")}</th>
+                                    <th className="p-4 sm:p-5 text-slate-500">{t("Comparison.headerOthers")}</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-slate-700/50 text-sm font-bold text-slate-300">
-                                <tr>
-                                    <td className="p-5">{t("Comparison.priceLabel")}</td>
-                                    <td className="p-5 text-emerald-400">{t("Comparison.priceUs")}</td>
-                                    <td className="p-5 text-slate-500">{t("Comparison.priceOthers")}</td>
+                            <tbody className="divide-y divide-slate-800 text-sm font-bold">
+                                <tr className="transition-colors hover:bg-white/[0.02]">
+                                    <td className="p-4 sm:p-5 text-slate-300">{t("Comparison.priceLabel")}</td>
+                                    <td className="p-4 sm:p-5 text-emerald-400">{t("Comparison.priceUs")}</td>
+                                    <td className="p-4 sm:p-5 text-slate-500">{t("Comparison.priceOthers")}</td>
                                 </tr>
-                                <tr>
-                                    <td className="p-5">{t("Comparison.modelLabel")}</td>
-                                    <td className="p-5 text-emerald-400">{t("Comparison.modelUs")}</td>
-                                    <td className="p-5 text-slate-500">{t("Comparison.modelOthers")}</td>
+                                <tr className="transition-colors hover:bg-white/[0.02]">
+                                    <td className="p-4 sm:p-5 text-slate-300">{t("Comparison.modelLabel")}</td>
+                                    <td className="p-4 sm:p-5 text-emerald-400">{t("Comparison.modelUs")}</td>
+                                    <td className="p-4 sm:p-5 text-slate-500">{t("Comparison.modelOthers")}</td>
                                 </tr>
-                                <tr>
-                                    <td className="p-5">{t("Comparison.twoNameLabel")}</td>
-                                    <td className="p-5 text-emerald-400">{t("Comparison.twoNameUs")}</td>
-                                    <td className="p-5 text-slate-500">{t("Comparison.twoNameOthers")}</td>
+                                <tr className="transition-colors hover:bg-white/[0.02]">
+                                    <td className="p-4 sm:p-5 text-slate-300">{t("Comparison.twoNameLabel")}</td>
+                                    <td className="p-4 sm:p-5 text-emerald-400">{t("Comparison.twoNameUs")}</td>
+                                    <td className="p-4 sm:p-5 text-slate-500">{t("Comparison.twoNameOthers")}</td>
                                 </tr>
-                                <tr>
-                                    <td className="p-5">{t("Comparison.formatLabel")}</td>
-                                    <td className="p-5 text-white">{t("Comparison.formatUs")}</td>
-                                    <td className="p-5 text-slate-500">{t("Comparison.formatOthers")}</td>
+                                <tr className="transition-colors hover:bg-white/[0.02]">
+                                    <td className="p-4 sm:p-5 text-slate-300">{t("Comparison.formatLabel")}</td>
+                                    <td className="p-4 sm:p-5 text-white">{t("Comparison.formatUs")}</td>
+                                    <td className="p-4 sm:p-5 text-slate-500">{t("Comparison.formatOthers")}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -389,11 +383,12 @@ export default function HomeContent() {
                 </div>
             </section>
 
-            <section id="faq" className="bg-[#F8FAFC] px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
+            {/* FAQ */}
+            <section id="faq" className="bg-white px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
                 <div className="mx-auto max-w-4xl">
-                    <div className="mb-10 sm:mb-16 text-center">
-                        <h2 className="text-3xl sm:text-4xl font-black text-[#1A1A1B]">{t("FAQ.title")}</h2>
-                        <p className="mt-4 font-medium text-[#666666]">{t("FAQ.subtitle")}</p>
+                    <div className="mb-10 sm:mb-14 text-center">
+                        <h2 className="text-2xl sm:text-3xl font-black text-[#1A1A1B]">{t("FAQ.title")}</h2>
+                        <p className="mt-3 font-medium text-sm text-[#666666]">{t("FAQ.subtitle")}</p>
                     </div>
                     <div className="space-y-3">
                         <FaqItem question={t("FAQ.q1")} answer={t.rich("FAQ.a1", { bold: (chunks) => <strong>{chunks}</strong> })} />
@@ -420,19 +415,21 @@ export default function HomeContent() {
                 </div>
             </section>
 
-            <section className="bg-light py-16 sm:py-20">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="mb-4 text-3xl font-bold text-dark font-display">{t("CTA.title")}</h2>
-                    <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">{t("CTA.subtitle")}</p>
+            {/* CTA */}
+            <section className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-700 py-16 sm:py-24">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.15),transparent_60%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(99,102,241,0.3),transparent_60%)]" />
+                <div className="relative mx-auto max-w-3xl px-4 text-center">
+                    <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">{t("CTA.title")}</h2>
+                    <p className="mx-auto mt-4 max-w-xl text-base text-indigo-100 leading-relaxed">{t("CTA.subtitle")}</p>
                     <Link
                         href="#workspace"
-                        className="inline-flex items-center gap-3 rounded-full bg-indigo-600 px-7 sm:px-10 py-3.5 sm:py-4 text-base sm:text-xl font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-indigo-700 hover:shadow-xl"
+                        className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-lg font-bold text-indigo-700 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:bg-indigo-50"
                     >
-                        <i className="fa fa-magic" /> {t("CTA.button")}
+                        <Sparkles size={20} /> {t("CTA.button")}
                     </Link>
                 </div>
             </section>
         </div>
     );
 }
-

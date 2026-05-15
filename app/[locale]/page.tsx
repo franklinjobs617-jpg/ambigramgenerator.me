@@ -88,13 +88,6 @@ export default async function HomePage({ params }: Props) {
                     "price": "0",
                     "priceCurrency": "USD"
                 },
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.8",
-                    "ratingCount": "1250",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                },
                 "description": "Free tool to create 3D ambigrams and two-name tattoo designs.",
                 "image": `${DOMAIN}/logo.png`
             }
