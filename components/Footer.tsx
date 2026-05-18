@@ -11,6 +11,7 @@ import {
     Globe
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { label } from "framer-motion/client";
 
 export default function Footer() {
     const t = useTranslations("Footer");
@@ -65,6 +66,9 @@ export default function Footer() {
             links: [
                 { label: tNav("generators.items.3d"), href: "/3d-generator" },
                 { label: "Two Word Ambigram Generator", href: "/two-word-ambigram-generator" },
+                {
+                    label: "Gamehub", href: "https://base64pro.top"
+                },
                 { label: "AI Tattoo Generator", href: "/ai-tattoo-generator" },
                 { label: tNav("generators.items.twoName"), href: "/tutorial/two-name-ambigram" },
                 { label: tNav("generators.items.upsideDown"), href: "/upside-down-text-generator", },
