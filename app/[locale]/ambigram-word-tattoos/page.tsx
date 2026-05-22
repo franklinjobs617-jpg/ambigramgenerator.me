@@ -6,11 +6,10 @@ import {
     BookOpen,
     Sparkles,
     PenTool,
-    Type,
     AlertTriangle,
-    Image as ImageIcon,
     ArrowRight,
-    Quote
+    Quote,
+    Users
 } from "lucide-react";
 
 const DOMAIN = "https://www.ambigramgenerator.me";
@@ -27,6 +26,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AmbigramWordTattoosPage() {
+    const tattooWordIdeas = [
+        { pair: "Love / Pain", use: "Classic duality tattoo", fit: "Best for 4-letter word balance" },
+        { pair: "Life / Death", use: "High-contrast meaning", fit: "Works best as a custom artist reference" },
+        { pair: "Saint / Sinner", use: "Double meaning tattoo", fit: "Needs strong blackletter or script styling" },
+        { pair: "Family / Forever", use: "Personal commitment", fit: "Longer pair; keep the tattoo larger" },
+        { pair: "MOM / WOW", use: "Natural upside-down word idea", fit: "Good for simple lettering experiments" },
+    ];
+
     // Schema: 包含文章和解答易混淆概念的 FAQ
     const jsonLd = [
         {
@@ -74,10 +81,51 @@ export default async function AmbigramWordTattoosPage() {
                     <p className="text-lg md:text-xl text-slate-600 mb-8 leading-relaxed max-w-3xl mx-auto">
                         Looking for ink that shifts perspective? From symmetrical <strong>ambigram name tattoos</strong> to deep, <strong>double meaning ambigram tattoo</strong> designs, explore the ultimate guide and word list for your next piece of skin art.
                     </p>
+                    <div className="flex flex-wrap justify-center gap-3">
+                        <Link href="/two-word-ambigram-generator" className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-200 transition-colors hover:bg-indigo-700">
+                            <Sparkles size={16} /> Generate Two-Word Tattoo
+                        </Link>
+                        <Link href="/love-pain-ambigram" className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-700 transition-colors hover:border-indigo-200 hover:text-indigo-700">
+                            Love / Pain Meaning <ArrowRight size={16} />
+                        </Link>
+                    </div>
                 </div>
             </section>
 
             <div className="container mx-auto px-4 max-w-4xl py-16 space-y-20">
+                <section className="rounded-[2rem] border border-indigo-100 bg-white p-6 md:p-8 shadow-sm">
+                    <div className="flex items-start gap-4">
+                        <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 md:flex">
+                            <Users size={24} />
+                        </div>
+                        <div>
+                            <h2 className="text-2xl font-black text-slate-900">Quick answer: what are tattoos that say two words in one?</h2>
+                            <p className="mt-3 text-slate-600 leading-relaxed">
+                                They are usually called <strong>double meaning ambigram tattoos</strong> or symbiotogram ambigrams. One word is readable upright, and the second word appears after rotation or a change in viewing angle.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="mt-6 overflow-x-auto">
+                        <table className="w-full min-w-[680px] text-left text-sm">
+                            <thead className="bg-slate-50 text-xs uppercase tracking-widest text-slate-500">
+                                <tr>
+                                    <th className="px-4 py-3">Word pair</th>
+                                    <th className="px-4 py-3">Best use</th>
+                                    <th className="px-4 py-3">Design note</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100">
+                                {tattooWordIdeas.map((item) => (
+                                    <tr key={item.pair}>
+                                        <td className="px-4 py-4 font-black text-indigo-700">{item.pair}</td>
+                                        <td className="px-4 py-4 text-slate-700">{item.use}</td>
+                                        <td className="px-4 py-4 text-slate-600">{item.fit}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
 
                 {/* ==========================================
                     2. DOUBLE MEANING (解决最核心的用户意图)
@@ -163,7 +211,7 @@ export default async function AmbigramWordTattoosPage() {
 
                         <h3 className="py-4 text-2xl">Ambigram Name Tattoos</h3>
                         <p>
-                            Getting your own name, or your child's name, is arguably the most requested design. <strong>Ambigram name tattoos</strong> require custom typography because every letter combination is unique. If you want to see how your name looks flipped, our <Link href="/" className="text-indigo-600 font-bold hover:underline">online generator</Link> is the best place to start drafting.
+                            Getting your own name, or your child&apos;s name, is arguably the most requested design. <strong>Ambigram name tattoos</strong> require custom typography because every letter combination is unique. If you want to see how your name looks flipped, our <Link href="/two-word-ambigram-generator" className="text-indigo-600 font-bold hover:underline">two-word ambigram generator</Link> is the best place to start drafting.
                         </p>
                     </div>
                 </section>
@@ -207,10 +255,10 @@ export default async function AmbigramWordTattoosPage() {
                 <section className="text-center pb-12 border-t border-slate-200 py-16">
                     <h2 className="text-3xl font-black text-slate-900 mb-4">Stop Searching, Start Creating</h2>
                     <p className="text-lg text-slate-600 mb-8">
-                        You've seen the <strong>ambigram tattoo designs</strong>. Now it's time to see your own words come to life.
+                        You&apos;ve seen the <strong>ambigram tattoo designs</strong>. Now it&apos;s time to see your own words come to life.
                     </p>
-                    <Link href="/" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 hover:-translate-y-1">
-                        Try the Ambigram Generator <ArrowRight size={20} />
+                    <Link href="/two-word-ambigram-generator" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 hover:-translate-y-1">
+                        Try the Two-Word Ambigram Generator <ArrowRight size={20} />
                     </Link>
                 </section>
 

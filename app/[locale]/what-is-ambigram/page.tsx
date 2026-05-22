@@ -22,8 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const seoData: Record<string, { title: string; description: string }> = {
         en: {
-            title: "What is an Ambigram? 2026 Guide + 50 Unique Tattoo Designs",
-            description: "Learn what an ambigram is, explore rotational and reflective styles, and try a free no-sign-up ambigram tattoo generator with practical examples."
+            title: "What is an Ambigram? Definition, Types, Examples & Generator",
+            description: "Learn what an ambigram is, compare rotational, mirror and 3D types, see practical examples, and try a free ambigram generator."
         },
         fr: {
             title: "Qu'est-ce qu'un ambigramme ? Définition, types et exemples",
@@ -118,7 +118,7 @@ export default async function WhatIsAmbigramPage({ params }: Props) {
                             <div className="text-center mt-24 p-12 bg-gradient-to-br from-slate-900 to-[#1A1A1B] rounded-[4rem] shadow-2xl border border-slate-800 text-white not-prose">
                                 <h3 className="text-4xl font-black mb-6 tracking-tight italic">Prêt à créer le vôtre ?</h3>
                                 <p className="text-slate-400 mb-10 font-medium text-lg">Utilisez notre créateur pour appliquer ces principes instantanément. C&apos;est gratuit et facile !</p>
-                                <Link href={localizedPath("/generator")} className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl active:scale-95">
+                                <Link href={localizedPath("")} className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl active:scale-95">
                                     <Sparkles size={20} /> Lancer le Générateur
                                 </Link>
                             </div>
@@ -238,7 +238,7 @@ export default async function WhatIsAmbigramPage({ params }: Props) {
                                 <p className="text-slate-400 mb-12 font-medium max-w-xl mx-auto text-lg leading-relaxed text-indigo-50/60">
                                     Nutzen Sie den weltweit vielseitigsten Ambigramm-Generator, um diese Prinzipien sofort anzuwenden. Es ist kostenlos, schnell und professionell.
                                 </p>
-                                <Link href={localizedPath("/generator")} className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl shadow-indigo-900/40 active:scale-95">
+                                <Link href={localizedPath("")} className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl shadow-indigo-900/40 active:scale-95">
                                     <Sparkles className="fill-current" size={20} />
                                     Kostenlosen Generator starten
                                 </Link>
@@ -263,6 +263,14 @@ export default async function WhatIsAmbigramPage({ params }: Props) {
                     <p className="text-xl text-slate-400 max-w-3xl mx-auto font-medium leading-relaxed">
                         Discover the art of words that reveal hidden meanings when rotated or reflected. We break down the <strong>ambigram definition</strong>, types, and history.
                     </p>
+                    <div className="mt-8 flex flex-wrap justify-center gap-3">
+                        <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-200 transition-colors hover:bg-indigo-700">
+                            Try the Free Ambigram Generator <ArrowRight size={16} />
+                        </Link>
+                        <Link href="/two-word-ambigram-generator" className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-700 transition-colors hover:border-indigo-200 hover:text-indigo-700">
+                            Create Two-Name Ambigram
+                        </Link>
+                    </div>
                 </div>
             </section>
 
@@ -270,6 +278,12 @@ export default async function WhatIsAmbigramPage({ params }: Props) {
                 <div className="container mx-auto px-4 max-w-4xl">
                     <article className="prose prose-lg prose-slate text-slate-700 max-w-none">
                         <h2 className="text-3xl font-black text-[#1A1A1B] mb-6 border-b border-slate-200 pb-4 tracking-tight">The Ambigram Definition: Symmetry in Typography</h2>
+                        <div className="not-prose mb-8 rounded-3xl border border-indigo-100 bg-indigo-50/60 p-6">
+                            <h2 className="text-xl font-black text-slate-900">Quick answer: what is an ambigram?</h2>
+                            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+                                An <strong>ambigram</strong> is a word design that stays readable after a transformation, most often a 180-degree rotation or mirror reflection. People use ambigrams for name tattoos, logos, word art, and 3D printable objects.
+                            </p>
+                        </div>
                         <p className="leading-relaxed mb-6">
                             An <strong>Ambigram</strong> is a graphical figure that can be read as one or more words not only in its primary orientation but also when rotated or reflected. Essentially, it is a word or phrase crafted to possess a specific form of visual symmetry, blending artistry with logic.
                         </p>
@@ -347,7 +361,7 @@ export default async function WhatIsAmbigramPage({ params }: Props) {
                             <p className="text-slate-400 mb-12 font-medium max-w-xl mx-auto text-lg leading-relaxed">
                                 Use the world&apos;s most versatile ambigram creator to apply these principles instantly. It&apos;s free, fast, and professional.
                             </p>
-                            <Link href="/generator" className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl shadow-indigo-900/40 active:scale-95">
+                            <Link href="/" className="inline-flex items-center gap-3 bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-bold text-xl hover:bg-indigo-500 hover:scale-105 transition-all shadow-xl shadow-indigo-900/40 active:scale-95">
                                 <Sparkles className="fill-current" size={20} />
                                 Launch Free Generator
                             </Link>

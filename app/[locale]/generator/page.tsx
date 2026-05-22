@@ -263,7 +263,7 @@ export default async function GeneratorPage({ params }: Props) {
                 <div className="relative z-10 max-w-3xl mx-auto space-y-10">
                     <h2 className="text-5xl md:text-7xl font-black tracking-tighter italic">Ready to Flip?</h2>
                     <p className="text-indigo-100 text-xl font-medium">Design your unique masterpiece in seconds. Fast, free, and stunning.</p>
-                    <Link href="/free-generator" className="inline-flex items-center gap-3 bg-white text-indigo-600 px-12 py-5 rounded-2xl font-black text-xl shadow-2xl hover:scale-105 transition-transform active:scale-95">
+                    <Link href="/" className="inline-flex items-center gap-3 bg-white text-indigo-600 px-12 py-5 rounded-2xl font-black text-xl shadow-2xl hover:scale-105 transition-transform active:scale-95">
                         <Pencil size={24} /> Launch 3D Mode
                     </Link>
                 </div>
