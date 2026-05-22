@@ -29,6 +29,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description:
                 "Create two-word and two-name ambigram designs online free. Great for tattoo ideas, logo concepts, and PNG export.",
         },
+        es: {
+            title: "Generador de Ambigramas de Dos Palabras y Dos Nombres | PNG",
+            description:
+                "Crea ambigramas de dos palabras o dos nombres online. Genera ideas para tatuajes y descarga referencias PNG limpias.",
+        },
+        it: {
+            title: "Generatore di Ambigrammi Due Parole e Due Nomi | PNG",
+            description:
+                "Crea ambigrammi con due parole o due nomi online. Genera idee per tatuaggi e scarica riferimenti PNG puliti.",
+        },
     };
 
     const current = seo[locale] || seo.en;
@@ -145,9 +155,11 @@ export default async function TwoWordAmbigramGeneratorPage({ params }: Props) {
     ];
 
     const pageTitle =
-        locale === "fr" || locale === "de"
-            ? "Two Word Ambigram Generator Online Free"
-            : "Two Word Ambigram Generator Online Free";
+        locale === "es"
+            ? "Generador de Ambigramas de Dos Palabras"
+            : locale === "it"
+              ? "Generatore di Ambigrammi con Due Parole"
+              : "Two Word Ambigram Generator Online Free";
 
     return (
         <main className="bg-[#FDFDFF]">
@@ -171,6 +183,19 @@ export default async function TwoWordAmbigramGeneratorPage({ params }: Props) {
                         If you searched for <strong>two name ambigram generator free</strong>, this page is built for
                         that exact task: create fast, compare, then download.
                     </p>
+                    <div className="mx-auto grid max-w-3xl gap-3 pt-2 text-left sm:grid-cols-3">
+                        {[
+                            ["1", "Enter two words or names", "Short, similar-length pairs produce cleaner rotations."],
+                            ["2", "Generate and rotate", "Compare readability before choosing a tattoo or logo reference."],
+                            ["3", "Download PNG", "Save the strongest result for your artist or design workflow."],
+                        ].map(([step, title, desc]) => (
+                            <div key={step} className="rounded-2xl border border-indigo-100 bg-white p-4 shadow-sm">
+                                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-indigo-600 text-xs font-black text-white">{step}</span>
+                                <h2 className="mt-3 text-sm font-black text-slate-900">{title}</h2>
+                                <p className="mt-1 text-xs leading-relaxed text-slate-500">{desc}</p>
+                            </div>
+                        ))}
+                    </div>
                     <div className="flex flex-wrap justify-center gap-3 pt-1">
                         <Link
                             href="#two-word-tool"
@@ -179,10 +204,10 @@ export default async function TwoWordAmbigramGeneratorPage({ params }: Props) {
                             Start Generating
                         </Link>
                         <Link
-                            href="/tutorial/two-name-ambigram"
+                            href="/ambigram-word-tattoos"
                             className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-200 hover:text-indigo-700 hover:shadow-md hover:shadow-indigo-100"
                         >
-                            Read Two-Name Guide
+                            Browse Tattoo Word Ideas
                         </Link>
                     </div>
                 </div>
@@ -320,7 +345,7 @@ export default async function TwoWordAmbigramGeneratorPage({ params }: Props) {
                     </div>
                     <div className="mt-10 flex flex-wrap justify-center gap-3">
                         <Link
-                            href="/generator"
+                            href="/"
                             className={`${actionButtonClass} border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:text-indigo-700 hover:shadow-md hover:shadow-indigo-100`}
                         >
                             <Compass size={16} className="mr-1" />

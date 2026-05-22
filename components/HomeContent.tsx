@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -47,7 +47,6 @@ export default function HomeContent() {
     const [globalWordA, setGlobalWordA] = useState("");
     const [globalWordB, setGlobalWordB] = useState("");
     const [generateTrigger, setGenerateTrigger] = useState(0);
-    const [showToast, setShowToast] = useState(false);
 
     const handleHeroGenerate = (wordA: string, wordB: string, tab: WorkspaceTab) => {
         setGlobalWordA(wordA);
@@ -55,15 +54,6 @@ export default function HomeContent() {
         setActiveTab(tab);
         setGenerateTrigger((prev) => prev + 1);
     };
-
-    useEffect(() => {
-        const timer = setTimeout(() => setShowToast(true), 3000);
-        const hideTimer = setTimeout(() => setShowToast(false), 8000);
-        return () => {
-            clearTimeout(timer);
-            clearTimeout(hideTimer);
-        };
-    }, []);
 
     const coreFeatures = [
         {
@@ -89,6 +79,30 @@ export default function HomeContent() {
             title: t("CoreFeatures.item4.title"),
             desc: t("CoreFeatures.item4.desc"),
             bg: "bg-emerald-50",
+        },
+    ];
+
+    const intentPaths = [
+        {
+            href: "/two-word-ambigram-generator",
+            icon: <Users size={18} />,
+            label: "Two Names",
+            title: "Free ambigram generator for two names",
+            desc: "Enter two names, compare readable outputs, and download a PNG reference.",
+        },
+        {
+            href: "/ambigram-word-tattoos",
+            icon: <PenTool size={18} />,
+            label: "Tattoo",
+            title: "Ambigram tattoo generator workflow",
+            desc: "Use clean 2D lettering as a tattoo-ready starting point for your artist.",
+        },
+        {
+            href: "/3d-generator",
+            icon: <Box size={18} />,
+            label: "3D STL",
+            title: "3D ambigram generator for STL files",
+            desc: "Turn words into printable 3D ambigram objects and desk pieces.",
         },
     ];
 
@@ -129,27 +143,31 @@ export default function HomeContent() {
 
     return (
         <div className="min-h-screen bg-[#FDFDFF] font-sans text-[#1A1A1B] selection:bg-indigo-100">
-            <AnimatePresence>
-                {showToast && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20, scale: 0.92 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.92 }}
-                        className="fixed bottom-24 left-4 lg:left-8 z-[100] hidden sm:flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-3 pr-6 shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
-                    >
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 text-white shadow-inner">
-                            <Sparkles size={18} />
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-xs font-medium text-slate-400">1 min ago in Paris</span>
-                            <span className="text-sm font-bold text-[#1A1A1B]">Someone generated a &quot;Leo/Love&quot; STL.</span>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
             {/* Hero - contains H1 */}
             <HeroSection onGenerate={handleHeroGenerate} />
+
+            <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 -mt-4 pb-6">
+                <div className="grid gap-3 md:grid-cols-3">
+                    {intentPaths.map((item) => (
+                        <Link
+                            key={item.href}
+                            href={item.href}
+                            className="group flex h-full items-start gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-100/60"
+                        >
+                            <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
+                                {item.icon}
+                            </span>
+                            <span>
+                                <span className="inline-flex rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                                    {item.label}
+                                </span>
+                                <span className="mt-2 block text-sm font-black text-slate-900">{item.title}</span>
+                                <span className="mt-1 block text-xs leading-relaxed text-slate-500">{item.desc}</span>
+                            </span>
+                        </Link>
+                    ))}
+                </div>
+            </section>
 
             {/* Workspace - moved up, right after Hero */}
             <section id="workspace" className="mx-auto max-w-7xl scroll-mt-24 px-4 sm:px-6 lg:px-8 py-10 sm:py-14">

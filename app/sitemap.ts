@@ -4,6 +4,11 @@ const baseUrl = 'https://www.ambigramgenerator.me'
 
 const locales = ['en', 'fr', 'de', 'es', 'it']
 
+const localizedUrl = (locale: string, page: string) => {
+  const localePrefix = locale === 'en' ? '' : `/${locale}`
+  return `${baseUrl}${localePrefix}${page}`
+}
+
 const multiLangPages = [
   '',
   '/3d-generator',
@@ -14,7 +19,6 @@ const multiLangPages = [
   '/ai-tattoo-generator/3d-stl',
   '/best-ai-tattoo-generator',
   '/faq',
-  '/generator',
   '/privacy',
   '/tattoo-design',
   '/tattoo-stencil-maker',
@@ -49,15 +53,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   multiLangPages.forEach((page) => {
     locales.forEach((locale) => {
       sitemapEntries.push({
-        url: `${baseUrl}/${locale}${page}`,
+        url: localizedUrl(locale, page),
         lastModified: new Date(),
         changeFrequency: page === '' ? 'daily' : 'weekly',
         priority: page === '' ? 1 : page.includes('guide') || page.includes('tutorial') ? 0.7 : 0.8,
         alternates: {
           languages: locales.reduce((acc, lang) => {
-            acc[lang] = `${baseUrl}/${lang}${page}`
+            acc[lang] = localizedUrl(lang, page)
             return acc
-          }, {} as Record<string, string>),
+          }, { 'x-default': localizedUrl('en', page) } as Record<string, string>),
         },
       })
     })
@@ -65,7 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   englishOnlyPages.forEach((page) => {
     sitemapEntries.push({
-      url: `${baseUrl}/en${page}`,
+      url: localizedUrl('en', page),
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,

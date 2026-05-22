@@ -36,12 +36,22 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/free-generator.html',
+        destination: '/',
+        permanent: true,
+      },
+      {
         source: '/:locale(en|fr|de|es|it|ja|ko|zh)/generator',
         destination: '/:locale',
         permanent: true,
       },
       {
         source: '/:locale(en|fr|de|es|it|ja|ko|zh)/free-generator',
+        destination: '/:locale',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|fr|de|es|it|ja|ko|zh)/free-generator.html',
         destination: '/:locale',
         permanent: true,
       },

@@ -19,8 +19,8 @@ const DOMAIN = "https://www.ambigramgenerator.me";
 // 1. TDK: 覆盖 "same upside down", "spell words upside down"
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Words That Spell Words Upside Down: The Ultimate List & Meanings",
-        description: "Discover a curated list of words that are the same upside down and learn the secret behind ambigrams. Find out what words read the same when flipped!",
+        title: "Words That Spell Words Upside Down: MOW/WOW, POD & SWIMS List",
+        description: "Find words that read the same or change meaning upside down, including MOW/WOW, POD, MOM/WOW and SWIMS. Learn which are natural ambigrams.",
         alternates: {
             canonical: `${DOMAIN}/guide/words-that-spell-words-upside-down`,
         }
@@ -28,19 +28,43 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function WordsUpsideDownPage() {
+    const quickAnswers = [
+        { word: "MOW", rotated: "WOW", result: "Different word", note: "M can rotate into W in many simple type styles." },
+        { word: "MOM", rotated: "WOW", result: "Different word", note: "A common natural upside-down word pair." },
+        { word: "POD", rotated: "MOD / BOP", result: "Different word", note: "Font dependent; rounded fonts work best." },
+        { word: "SWIMS", rotated: "SWIMS", result: "Same word", note: "Classic same upside-down and backwards answer." },
+        { word: "NOON", rotated: "NOON", result: "Same word", note: "Works well in symmetric uppercase lettering." },
+    ];
+
     // 2. Schema: Article + FAQ (针对脑筋急转弯词汇)
     const jsonLd = [
         {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Words That Spell Words Upside Down: A Comprehensive Guide",
-            "description": "An educational guide exploring ambigrammatic words that remain readable or change meaning when rotated 180 degrees.",
+            "headline": "Words That Spell Words Upside Down: MOW/WOW, POD and SWIMS List",
+            "description": "A practical guide to upside-down words that remain readable or change meaning when rotated 180 degrees.",
             "author": { "@type": "Person", "name": "Ambigram Specialist" }
         },
         {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Does MOW spell WOW upside down?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. MOW can read as WOW when rotated 180 degrees in many simple fonts because M visually becomes W while O remains O."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What does POD spell upside down?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "POD can look like MOD or BOP when rotated, depending on the font style. It is a font-dependent upside-down word pair."
+                    }
+                },
                 {
                     "@type": "Question",
                     "name": "What word is the same upside down and backwards?",
@@ -67,7 +91,7 @@ export default async function WordsUpsideDownPage() {
                         Words That Spell <span className="text-indigo-600">Words Upside Down</span>
                     </h1>
                     <p className="text-slate-500 font-medium italic text-lg max-w-2xl mx-auto">
-                        Turning your world 180 degrees to find hidden symmetry in common language.
+                        Quick answers for MOW/WOW, POD, MOM/WOW, SWIMS, and other natural ambigram words.
                     </p>
                 </div>
             </section>
@@ -93,6 +117,34 @@ export default async function WordsUpsideDownPage() {
                             <article className="prose prose-lg prose-slate text-slate-700 max-w-none">
 
                                 <div id="intro" className="scroll-mt-28 mb-16">
+                                    <div className="not-prose mb-10 overflow-hidden rounded-3xl border border-indigo-100 bg-white shadow-sm">
+                                        <div className="border-b border-indigo-100 bg-indigo-50/70 px-5 py-4">
+                                            <h2 className="text-lg font-black text-slate-900">Quick upside-down word answers</h2>
+                                            <p className="mt-1 text-sm text-slate-600">Use this table first if you searched for a specific word pair.</p>
+                                        </div>
+                                        <div className="overflow-x-auto">
+                                            <table className="w-full min-w-[680px] text-left text-sm">
+                                                <thead className="bg-slate-50 text-xs uppercase tracking-widest text-slate-500">
+                                                    <tr>
+                                                        <th className="px-5 py-3">Word</th>
+                                                        <th className="px-5 py-3">Upside-down result</th>
+                                                        <th className="px-5 py-3">Type</th>
+                                                        <th className="px-5 py-3">What to know</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody className="divide-y divide-slate-100">
+                                                    {quickAnswers.map((item) => (
+                                                        <tr key={item.word} className="align-top">
+                                                            <td className="px-5 py-4 font-black text-slate-900">{item.word}</td>
+                                                            <td className="px-5 py-4 font-black text-indigo-700">{item.rotated}</td>
+                                                            <td className="px-5 py-4 text-slate-700">{item.result}</td>
+                                                            <td className="px-5 py-4 text-slate-600">{item.note}</td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                     <p className="lead text-xl text-slate-600 font-medium">
                                         Have you ever turned your phone upside down and realized that a word on the screen still makes perfect sense? This is no accident—it's a fascinating typographical phenomenon where <strong>words spell words upside down</strong> through rotational symmetry.
                                     </p>
@@ -143,8 +195,9 @@ export default async function WordsUpsideDownPage() {
                                         Even more impressive are the <strong>words that can be read upside down</strong> to reveal a totally different word. This occurs when one letter rotates to form another (like 'd' turning into 'p', or 'm' into 'w').
                                     </p>
                                     <ul>
+                                        <li><strong>MOW</strong> flipped upside down often reads as <strong>WOW</strong></li>
                                         <li><strong>MOM</strong> flipped upside down spells <strong>WOW</strong></li>
-                                        <li><strong>POD</strong> flipped upside down spells <strong>MOD</strong></li>
+                                        <li><strong>POD</strong> flipped upside down can read as <strong>MOD</strong> or <strong>BOP</strong> depending on the font</li>
                                         <li><strong>NO</strong> flipped upside down spells <strong>ON</strong></li>
                                     </ul>
                                 </div>
@@ -207,13 +260,13 @@ export default async function WordsUpsideDownPage() {
                                 {/* CTA Section */}
                                 <div id="create" className="scroll-mt-28 border-t border-slate-100 pt-12 text-center">
                                     <h2 className="text-2xl font-black text-[#1A1A1B] mb-4 tracking-tight">
-                                        Want to See How Your Own Name Flips?
+                                        Want to Test Your Own Upside-Down Word?
                                     </h2>
                                     <p className="text-slate-600 mb-8">
-                                        If these natural <strong>words that read the same upside down</strong> inspired you, wait until you see what we can do with your name. Our generator creates custom ambigrams for any word combination.
+                                        If these natural <strong>words that read the same upside down</strong> inspired you, try your own name or word pair in the generator and check whether the letters can become a readable ambigram.
                                     </p>
                                     <Link href="/" className="inline-flex items-center justify-center gap-2 bg-indigo-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-indigo-700 transition-colors shadow-lg">
-                                        Launch Custom Ambigram Generator <ArrowRight size={18} className="ml-2" />
+                                        Try the Free Ambigram Generator <ArrowRight size={18} className="ml-2" />
                                     </Link>
 
                                     {/* 内链导航 */}

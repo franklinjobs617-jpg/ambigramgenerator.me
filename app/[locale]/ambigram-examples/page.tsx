@@ -120,7 +120,7 @@ export default async function AmbigramExamplesPage() {
                         <div className="prose prose-lg text-slate-600 max-w-none">
                             <p>
                                 If you are looking for the most iconic dual-meaning design, you are looking for the
-                                <Link href={'/love-pain-ambigram-tattoo'} className="text-indigo-600 hover:underline">
+                                <Link href={'/love-pain-ambigram'} className="text-indigo-600 hover:underline">
                                     <strong> ambigram love pain</strong>
                                 </Link>
                                 tattoo.

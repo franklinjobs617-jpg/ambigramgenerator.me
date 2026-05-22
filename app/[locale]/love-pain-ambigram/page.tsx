@@ -8,10 +8,10 @@ import {
     Heart,
     Palette,
     History,
-    AlertTriangle,
-    Image as ImageIcon,
     Quote,
-    ChevronRight
+    ChevronRight,
+    ArrowRight,
+    Wand2
 } from "lucide-react";
 
 const DOMAIN = "https://www.ambigramgenerator.me";
@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
         title: "The Love Pain Ambigram Tattoo: Meaning, Designs & History",
         description: "A deep dive into the iconic love pain ambigram tattoo. Explore the meaning behind the design, discover love and pain tattoo designs, and generate your own.",
         alternates: {
-            canonical: `${DOMAIN}/love-pain-ambigram-tattoo`,
+            canonical: `${DOMAIN}/love-pain-ambigram`,
         }
     };
 }
@@ -50,6 +50,14 @@ export default async function LovePainAmbigramPage() {
                     <p className="text-slate-500 font-medium italic text-lg max-w-2xl mx-auto">
                         Meaning, Designs, and the History of the Ultimate Optical Illusion
                     </p>
+                    <div className="mt-8 flex flex-wrap justify-center gap-3">
+                        <Link href="/two-word-ambigram-generator" className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-200 transition-colors hover:bg-indigo-700">
+                            <Wand2 size={16} /> Generate a Two-Word Ambigram
+                        </Link>
+                        <Link href="/ambigram-word-tattoos" className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-700 transition-colors hover:border-indigo-200 hover:text-indigo-700">
+                            See More Tattoo Word Ideas <ArrowRight size={16} />
+                        </Link>
+                    </div>
                 </div>
             </section>
 
@@ -82,6 +90,12 @@ export default async function LovePainAmbigramPage() {
                                     <p className="lead text-xl text-slate-600 font-medium">
                                         It is arguably the most famous optical illusion in modern tattoo history. A design that reads 'Love' one way, and 'Pain' when flipped. In this ultimate guide, we explore the deep meaning, history, and various design styles of this iconic piece of word art.
                                     </p>
+                                    <div className="not-prose mt-8 rounded-3xl border border-indigo-100 bg-indigo-50/60 p-6">
+                                        <h2 className="text-xl font-black text-slate-900">Quick answer: what is a love pain ambigram?</h2>
+                                        <p className="mt-3 text-sm leading-relaxed text-slate-700">
+                                            A <strong>love pain ambigram</strong> is a rotational word design that reads LOVE from one direction and PAIN after a 180-degree turn. It works because the two four-letter words can share balanced strokes, making it one of the most requested <strong>double meaning ambigram tattoo</strong> ideas.
+                                        </p>
+                                    </div>
 
                                     {/* 
                                         🖼️ [图片生成任务 A] - The Hero Image
@@ -187,10 +201,10 @@ export default async function LovePainAmbigramPage() {
                                         Ready to Design Your Own Word Tattoo?
                                     </h2>
                                     <p className="text-slate-600 mb-8">
-                                        Inspired by the <strong>love pain ambigram</strong>? While this specific dual-word design requires a custom touch, you can use our generator to experiment with perfectly symmetrical single-word ambigrams for your name or other meaningful words.
+                                        Inspired by the <strong>love pain ambigram</strong>? Use the two-word generator to test short pairs like love/hate, life/death, or two names before taking a reference to your tattoo artist.
                                     </p>
-                                    <Link href="/" className="inline-flex items-center justify-center gap-2 bg-indigo-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-indigo-700 transition-colors shadow-lg">
-                                        Launch Free Ambigram Generator
+                                    <Link href="/two-word-ambigram-generator" className="inline-flex items-center justify-center gap-2 bg-indigo-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-indigo-700 transition-colors shadow-lg">
+                                        Open Two-Word Ambigram Generator
                                     </Link>
                                 </div>
 

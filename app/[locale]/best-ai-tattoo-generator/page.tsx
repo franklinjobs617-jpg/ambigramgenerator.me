@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     images: ["/images/ai-tattoo-comparison-hero.jpg"],
   },
   alternates: {
-    canonical: "/best-3d-generator",
+    canonical: "/best-ai-tattoo-generator",
   },
 };
 
@@ -194,7 +194,7 @@ export default function BestAiTattooGeneratorPage() {
             },
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "/best-3d-generator"
+              "@id": "/best-ai-tattoo-generator"
             }
           })
         }}
