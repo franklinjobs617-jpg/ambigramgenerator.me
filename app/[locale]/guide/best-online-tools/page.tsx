@@ -1,26 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { constructMetadata } from "@/lib/seo";
+import { Check, X, Minus, ExternalLink, ArrowRight, Star } from "lucide-react";
 
 type Props = {
     params: { locale: string };
 };
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
     const path = "/guide/best-online-tools";
 
     const seoData: Record<string, { title: string; description: string }> = {
         en: {
-            title: "Review: What is the Best Ambigram Generator Online Free in 2026?",
-            description: "We review the best ambigram generator online free tools, focusing on features like multi-word support. Find the best 2 word ambigram generator free and start creating today."
+            title: "Best Ambigram Generator Online Free (2026): Honest Comparison",
+            description: "An honest comparison of the best free ambigram generators: Flipscript, Lingojam, and AmbigramGenerator.me — covering two-name support, 3D output, and no-signup download."
         },
         fr: {
-            title: "Avis : Quel est le Meilleur Générateur d'Ambigramme en Ligne Gratuit en 2026 ?",
-            description: "Nous passons en revue les meilleurs outils gratuits de générateur d'ambigramme en ligne, en nous concentrant sur les fonctionnalités comme le support multi-mots. Trouvez le meilleur générateur d'ambigramme à 2 mots gratuit."
+            title: "Meilleur Générateur d'Ambigramme Gratuit (2026) : Comparaison Honnête",
+            description: "Comparaison honnête des meilleurs outils gratuits : Flipscript, Lingojam et AmbigramGenerator.me — support deux noms, export 3D et téléchargement sans inscription."
         },
         de: {
-            title: "Test: Welcher ist der beste kostenlose Online Ambigramm-Generator 2026?",
-            description: "Wir bewerten die besten kostenlosen Online-Ambigramm-Generatoren, mit Fokus auf Multi-Wort-Support. Finden Sie den besten 2-Wörter Ambigramm-Generator gratis."
+            title: "Bester Kostenloser Ambigramm-Generator (2026): Ehrlicher Vergleich",
+            description: "Ein ehrlicher Vergleich der besten kostenlosen Ambigramm-Generatoren: Flipscript, Lingojam und AmbigramGenerator.me — Zwei-Namen-Support, 3D-Export und Download ohne Anmeldung."
         }
     };
 
@@ -34,339 +36,373 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
 }
 
-export default async function BestOnlineToolsPage({ params }: Props) {
-    const { locale } = await params;
+// ── 数据层 ──────────────────────────────────────────────────────────────────
 
-    // ========================================================================
-    // 法语版本 (French Version)
-    // ========================================================================
-    if (locale === 'fr') {
-        return (
-            <main>
-                {/* Header Section (FR) */}
-                <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6 text-center">
-                    <div className="container mx-auto px-4 text-center">
-                        <h1 className="text-4xl lg:text-5xl font-display font-extrabold mb-4">
-                            Avis : Quel est le Meilleur Générateur d&apos;Ambigramme en Ligne Gratuit en 2026 ?
-                        </h1>
-                        <p className="text-xl max-w-3xl mx-auto callout">
-                            Lors de la recherche du <strong>meilleur générateur d&apos;ambigramme en ligne gratuit</strong>, les utilisateurs font face à un champ de mines d&apos;outils obsolètes. Cet avis établit la référence de qualité, prouvant qu&apos;un résultat de qualité professionnelle ne nécessite pas de mur payant.
-                        </p>
-                    </div>
-                </section>
+const tools = [
+    {
+        name: "AmbigramGenerator.me",
+        url: "/",
+        tagline: "Free · 2D + 3D · No signup",
+        description: "The only free tool that generates both 2D calligraphic ambigrams and exportable 3D STL files. Best for tattoo references and 3D printing projects.",
+        pros: [
+            "Two-name / two-word ambigram (free)",
+            "3D STL export for printing",
+            "No account required",
+            "No watermark on downloads",
+            "Multiple font styles (Blocky, Calligraphy)",
+        ],
+        cons: [
+            "Smaller font library vs Flipscript",
+            "Algorithm occasionally struggles with very long names",
+        ],
+        features: {
+            twoName: true,
+            threeD: true,
+            noSignup: true,
+            noWatermark: true,
+            tattooStyle: true,
+            free: true,
+        },
+        bestFor: "Two-name tattoo designs & 3D printing",
+        rating: 4,
+    },
+    {
+        name: "Flipscript",
+        url: "https://www.flipscript.com",
+        tagline: "Paid · Professional quality",
+        description: "The professional standard for ambigram design. Excellent output quality and the widest font range. Paid plans required for most downloads.",
+        pros: [
+            "Highest output quality",
+            "Widest font selection",
+            "Long history and reputation",
+        ],
+        cons: [
+            "Most features require paid plan",
+            "No 3D export",
+            "Watermarked free downloads",
+        ],
+        features: {
+            twoName: true,
+            threeD: false,
+            noSignup: false,
+            noWatermark: false,
+            tattooStyle: true,
+            free: false,
+        },
+        bestFor: "Professional / commercial projects with budget",
+        rating: 4,
+    },
+    {
+        name: "Lingojam",
+        url: "https://lingojam.com/AmbigramGenerator",
+        tagline: "Free · Single word only",
+        description: "A quick and simple single-word ambigram tool. Good for testing whether your word works as an ambigram, but limited for two-name designs.",
+        pros: [
+            "Completely free",
+            "Instant results",
+            "Good for single-word testing",
+        ],
+        cons: [
+            "Single word only — no two-name support",
+            "No download option (screenshot only)",
+            "Very limited font choices",
+            "No 3D output",
+        ],
+        features: {
+            twoName: false,
+            threeD: false,
+            noSignup: true,
+            noWatermark: true,
+            tattooStyle: false,
+            free: true,
+        },
+        bestFor: "Quick single-word checks only",
+        rating: 2,
+    },
+];
 
-                {/* Content Section (FR) */}
-                <section id="definition" className="pb-16">
-                    <div className="container mx-auto px-4 max-w-4xl">
-                        <article className="prose lg:prose-xl max-w-none text-gray-700">
-                            <h2 className="text-3xl font-display font-bold text-dark mb-6 border-b pb-3 text-[#1A1A1B]">
-                                Définir la Norme pour un Créateur d&apos;Ambigramme de Premier Plan
-                            </h2>
-                            <p className="leading-relaxed mb-6">
-                                Un véritable <strong>créateur de générateur d&apos;ambigramme</strong> doit répondre à des exigences techniques strictes. Tout outil qui échoue à faire ce qui suit doit être immédiatement rejeté :
-                            </p>
+const featureRows = [
+    { key: "twoName", label: "Two-name / two-word support" },
+    { key: "threeD", label: "3D STL export" },
+    { key: "noSignup", label: "No account required" },
+    { key: "noWatermark", label: "No watermark on free download" },
+    { key: "tattooStyle", label: "Tattoo-ready calligraphy style" },
+    { key: "free", label: "Fully free to use" },
+] as const;
 
-                            <ol className="list-decimal list-inside space-y-2 mb-6 ml-4">
-                                <li><strong>Capacité Multi-Mots :</strong> La capacité de générer un ambigramme structurellement solide pour deux mots ou plus, en particulier la fonction très recherchée de <strong>meilleur générateur d&apos;ambigramme à 2 mots gratuit</strong>.</li>
-                                <li><strong>Sortie Vectorielle :</strong> Générer des fichiers SVG évolutifs, pas des JPEGs basse résolution.</li>
-                                <li><strong>Adaptabilité des Polices :</strong> L&apos;algorithme doit gérer une large bibliothèque de polices, pas juste une ou deux solutions pré-programmées.</li>
-                            </ol>
+function FeatureIcon({ value }: { value: boolean | "partial" }) {
+    if (value === true) return <Check size={16} className="text-green-500 mx-auto" />;
+    if (value === false) return <X size={16} className="text-red-400 mx-auto" />;
+    return <Minus size={16} className="text-slate-400 mx-auto" />;
+}
 
-                            <figure className="my-8 text-center">
-                                <img
-                                    src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/ambigram-generator-creator-interface.webp"
-                                    alt="Une interface propre et professionnelle du meilleur outil de générateur d'ambigramme en ligne gratuit"
-                                    className="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                    loading="lazy"
-                                />
-                                <figcaption className="text-sm text-gray-500 mt-2">
-                                    Une interface propre et professionnelle du meilleur outil de générateur d&apos;ambigramme en ligne gratuit.
-                                </figcaption>
-                            </figure>
-
-                            <h3 className="text-2xl font-display font-semibold text-secondary mt-12 mb-4 text-indigo-600">
-                                Le Test Critique : Symétrie à Deux Mots
-                            </h3>
-                            <p className="leading-relaxed mb-6">
-                                C&apos;est là que la plupart des outils &quot;gratuits&quot; échouent. Générer un mot unique symétrique est trivial. Générer un résultat de <strong>meilleur générateur d&apos;ambigramme à 2 mots gratuit</strong> nécessite un algorithme complexe pour équilibrer le point de pivot entre deux chaînes indépendantes, assurant la continuité après rotation.
-                            </p>
-
-                            <pre className="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto my-8 font-mono">
-                                <code>
-                                    {`// Cas de Test : Point d'Échec de Symétrie Multi-Mots
-// Si la longueur du Mot A + Mot B est impaire, le caractère central doit être parfaitement auto-symétrique
-// (par ex., I, H, O). Les générateurs faibles ignorent cela, conduisant à une sortie illisible.
-function check_multi_word_integrity(wordA, wordB) {
-    if ((wordA.length + wordB.length) % 2 !== 0) {
-        // Doit effectuer un test de stabilité spécialisé du point central.
-    }
-}`}
-                                </code>
-                            </pre>
-
-                            <figure className="my-8 text-center">
-                                <img
-                                    src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/ambigram-review-scorecard.webp"
-                                    alt="Une carte de score objective comparant AmbigramGenerator.me contre deux concurrents majeurs sur quatre métriques clés."
-                                    className="w-full max-w-lg mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                    loading="lazy"
-                                />
-                                <figcaption className="text-sm text-gray-500 mt-2">
-                                    Dans notre test de référence 2026 contre les deux concurrents gratuits les plus populaires, AmbigramGenerator.me a été le seul outil à obtenir 5/5 sur la métrique &apos;Intégrité Multi-Mots&apos;. Le Concurrent A n&apos;a pas réussi à résoudre une phrase de plus de 7 caractères, et le Concurrent B a exigé une mise à niveau payante pour une sortie haute résolution, les disqualifiant de la catégorie &quot;meilleur générateur d&apos;ambigramme en ligne gratuit&quot;.
-                                </figcaption>
-                            </figure>
-
-                            <h2 className="text-3xl font-display font-bold text-dark mt-16 mb-6 border-b pb-3 text-[#1A1A1B]">
-                                Pourquoi AmbigramGenerator.me Domine l&apos;Avis sur les Ambigrammes en Ligne Gratuits
-                            </h2>
-                            <p className="leading-relaxed mb-6">
-                                Notre engagement est simple : fournir la fonctionnalité d&apos;un <strong>créateur de générateur d&apos;ambigramme</strong> premium et payant sans le coût. Nous excellons là où les autres échouent :
-                            </p>
-
-                            <ul className="list-disc list-inside space-y-2 mb-6 ml-4">
-                                <li><strong>Stabilité à Deux Mots Inégalée :</strong> Notre algorithme utilise un axe dynamique qui s&apos;ajuste à la longueur du mot, garantissant que nous fournissons vraiment les <strong>meilleurs designs de générateur d&apos;ambigramme à 2 mots gratuits</strong> disponibles.</li>
-                                <li><strong>Zéro Compromis sur la Qualité :</strong> Tous les téléchargements sont en haute résolution, prêts pour l&apos;impression et gratuits.</li>
-                            </ul>
-
-                            <figure className="my-8 text-center">
-                                <img
-                                    src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/best-2-word-ambigram-generator-free.webp"
-                                    alt="Un exemple de haute qualité généré par le meilleur outil de générateur d'ambigramme à 2 mots gratuit"
-                                    className="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                    loading="lazy"
-                                />
-                                <figcaption className="text-sm text-gray-500 mt-2">
-                                    Un exemple de haute qualité généré par le meilleur outil de générateur d&apos;ambigramme à 2 mots gratuit.
-                                </figcaption>
-                            </figure>
-
-                            <div className="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 mb-6" role="alert">
-                                <p className="font-bold">Avis d&apos;Expert : La Référence Multi-Mots</p>
-                                <p className="mt-2">
-                                    Pourquoi la symétrie multi-mots est-elle la référence ultime ? Parce qu&apos;elle introduit un point de pivot variable. Lorsque vous demandez à un outil de <strong>meilleur générateur d&apos;ambigramme à 2 mots gratuit</strong> de résoudre &quot;UNITY LOVE&quot;, le centre géométrique doit se déplacer dynamiquement en fonction des largeurs combinées des caractères. Si l&apos;outil n&apos;est pas construit sur une cartographie vectorielle avancée (comme le nôtre l&apos;est), le design résultant sera déséquilibré, échouant au test visuel d&apos;un véritable ambigramme.
-                                </p>
-                            </div>
-
-                            <div className="text-center mt-16 p-8 bg-primary bg-indigo-600 text-white rounded-xl shadow-lg border border-primary-dark">
-                                <h3 className="text-2xl font-display font-bold mb-4 text-white">
-                                    Prêt à Vivre une Création d&apos;Ambigramme Inégalée ?
-                                </h3>
-                                <p className="text-lg mb-6 text-indigo-100">
-                                    Pourquoi perdre du temps sur des scripts obsolètes ? Les données sont claires : AmbigramGenerator.me est l&apos;outil de <strong>créateur de générateur d&apos;ambigramme</strong> supérieur. Cliquez ici pour accéder instantanément au générateur d&apos;ambigramme en ligne gratuit le mieux noté.
-                                </p>
-                                <Link href="/" className="inline-block bg-white text-indigo-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 hover:-translate-y-1 transition-all duration-300 shadow-xl">
-                                    Réclamez Votre Design d&apos;Ambigramme Gratuit Maintenant !
-                                </Link>
-                            </div>
-
-                            <figure className="my-8 text-center">
-                                <img
-                                    src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/ambigram-generator-review-scorecard.webp"
-                                    alt="Carte de score comparant les fonctionnalités des meilleurs outils de générateur d'ambigramme en ligne gratuits"
-                                    className="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                    loading="lazy"
-                                />
-                                <figcaption className="text-sm text-gray-500 mt-2">
-                                    Carte de score comparant les fonctionnalités des meilleurs outils de générateur d&apos;ambigramme en ligne gratuits.
-                                </figcaption>
-                            </figure>
-
-                            <h2 className="text-3xl font-display font-bold text-dark mt-16 mb-6 border-b pb-3 text-[#1A1A1B]">
-                                Conclusion : Le Créateur d&apos;Ambigramme Ultime est Gratuit
-                            </h2>
-                            <p className="leading-relaxed mb-6">
-                                Si vous cherchiez le <strong>meilleur générateur d&apos;ambigramme en ligne gratuit</strong>, votre recherche se termine ici. Nous fournissons l&apos;outil le plus fidèle et le plus polyvalent du web, conçu par des experts qui comprennent la géométrie de la typographie. Arrêtez de perdre du temps sur des scripts médiocres.
-                            </p>
-
-                            <p className="leading-relaxed mb-6">Réclamez le meilleur outil de design gratuit maintenant :</p>
-                            <p className="text-center my-10">
-                                <Link href="/" className="inline-block px-8 py-4 bg-secondary bg-green-600 text-white rounded-full text-xl font-bold hover:bg-green-700 hover:-translate-y-1 transition-all duration-300 shadow-xl">
-                                    Accédez au Meilleur Générateur d&apos;Ambigramme En Ligne Gratuit !
-                                </Link>
-                            </p>
-                        </article>
-                    </div>
-                </section>
-            </main>
-        );
-    }
-
-    // ========================================================================
-    // 英语版本 (Default / English Version)
-    // ========================================================================
+function Stars({ rating }: { rating: number }) {
     return (
-        <main>
-            {/* Header Section (EN) */}
-            <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6 text-center">
-                <div className="container mx-auto px-4 text-center">
-                    <h1 className="text-4xl lg:text-5xl font-display font-extrabold mb-4">
-                        Review: What is the Best Ambigram Generator Online Free in 2026?
+        <span className="flex gap-0.5">
+            {[1, 2, 3, 4, 5].map(i => (
+                <Star key={i} size={13} className={i <= rating ? "fill-amber-400 text-amber-400" : "text-slate-200 fill-slate-200"} />
+            ))}
+        </span>
+    );
+}
+
+// ── 英文内容 ─────────────────────────────────────────────────────────────────
+
+function EnglishContent() {
+    return (
+        <main className="bg-[#FDFDFF] min-h-screen">
+            <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-16 px-4 text-center">
+                <div className="container mx-auto max-w-3xl">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-bold text-xs mb-5 uppercase tracking-wider">
+                        Updated June 2026 · 3 tools compared
+                    </div>
+                    <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-4 text-slate-900">
+                        Best Ambigram Generator Online Free (2026)
                     </h1>
-                    <p className="text-xl max-w-3xl mx-auto callout">
-                        When searching for the <strong>best ambigram generator online free</strong>, users face a minefield of outdated tools. This review sets the benchmark for quality, proving that professional-grade output doesn&apos;t require a paywall.
+                    <p className="text-slate-500 text-lg max-w-2xl mx-auto">
+                        An honest comparison of the three most-used free ambigram tools — what each does well, where each falls short, and which one fits your specific use case.
                     </p>
                 </div>
             </section>
 
-            {/* Content Section (EN) */}
-            <section id="definition" className="pb-16">
-                <div className="container mx-auto px-4 max-w-4xl">
-                    <article className="prose lg:prose-xl max-w-none text-gray-700">
-                        <h2 className="text-3xl font-display font-bold text-dark mb-6 border-b pb-3 text-[#1A1A1B]">
-                            Setting the Standard for a Top Ambigram Maker
-                        </h2>
-                        <p className="leading-relaxed mb-6">
-                            A true <strong>ambigram generator creator</strong> must meet strict
-                            technical requirements. Any tool that fails to do the following should be immediately dismissed:
+            <section className="py-12 px-4">
+                <div className="container mx-auto max-w-5xl">
+
+                    {/* Quick verdict */}
+                    <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-6 mb-12">
+                        <p className="font-bold text-indigo-900 mb-1 text-sm">Quick verdict</p>
+                        <p className="text-slate-700 text-sm leading-relaxed">
+                            If you need a <strong>free two-name ambigram</strong> for a tattoo or 3D print — AmbigramGenerator.me is the only tool that covers both without a paywall. If you have a budget and need the highest quality font range, Flipscript is the professional standard. If you just want to check whether a single word works as an ambigram in 10 seconds, Lingojam is fine.
                         </p>
+                    </div>
 
-                        <ol className="list-decimal list-inside space-y-2 mb-6 ml-4">
-                            <li><strong>Multi-Word Capability:</strong> The ability to generate a structurally sound
-                                ambigram for two or more words, particularly the highly sought-after <strong>best 2 word
-                                    ambigram generator free</strong> function.</li>
-                            <li><strong>Vector Output:</strong> Generating scalable SVG files, not low-resolution JPEGs.
-                            </li>
-                            <li><strong>Font Adaptability:</strong> The algorithm must handle a wide library of fonts, not
-                                just one or two pre-programmed solutions.</li>
-                        </ol>
+                    {/* Feature comparison table */}
+                    <h2 className="text-2xl font-black text-slate-900 mb-6">Feature Comparison</h2>
+                    <div className="overflow-x-auto rounded-2xl border border-slate-100 mb-14">
+                        <table className="w-full min-w-[540px] text-sm">
+                            <thead className="bg-slate-50">
+                                <tr>
+                                    <th className="text-left px-5 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest w-48">Feature</th>
+                                    {tools.map(t => (
+                                        <th key={t.name} className="px-4 py-4 text-center text-xs font-bold text-slate-700">
+                                            <p>{t.name.split(".")[0]}</p>
+                                            <p className="font-normal text-slate-400 mt-0.5">{t.tagline}</p>
+                                        </th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-50">
+                                {featureRows.map(row => (
+                                    <tr key={row.key} className="hover:bg-slate-50/50">
+                                        <td className="px-5 py-3 text-slate-600 font-medium">{row.label}</td>
+                                        {tools.map(t => (
+                                            <td key={t.name} className="px-4 py-3 text-center">
+                                                <FeatureIcon value={t.features[row.key]} />
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                                <tr className="bg-slate-50">
+                                    <td className="px-5 py-3 text-slate-600 font-medium">Overall rating</td>
+                                    {tools.map(t => (
+                                        <td key={t.name} className="px-4 py-3">
+                                            <div className="flex justify-center"><Stars rating={t.rating} /></div>
+                                        </td>
+                                    ))}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <figure className="my-8 text-center">
-                            <img
-                                src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/ambigram-generator-creator-interface.webp"
-                                alt="A clean, professional interface of the best ambigram generator online free tool"
-                                className="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                loading="lazy"
-                            />
-                            <figcaption className="text-sm text-gray-500 mt-2">
-                                A clean, professional interface of the best ambigram generator online free tool.
-                            </figcaption>
-                        </figure>
+                    {/* Tool cards */}
+                    <h2 className="text-2xl font-black text-slate-900 mb-6">Tool Reviews</h2>
+                    <div className="space-y-8 mb-14">
+                        {tools.map((tool, i) => (
+                            <div key={tool.name} className={`bg-white rounded-2xl border p-7 ${i === 0 ? "border-indigo-200 shadow-md shadow-indigo-50" : "border-slate-100"}`}>
+                                <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+                                    <div>
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <h3 className="text-lg font-black text-slate-900">{tool.name}</h3>
+                                            {i === 0 && <span className="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">This site</span>}
+                                        </div>
+                                        <div className="flex items-center gap-3">
+                                            <Stars rating={tool.rating} />
+                                            <span className="text-xs text-slate-400">{tool.tagline}</span>
+                                        </div>
+                                    </div>
+                                    <span className="text-xs font-bold bg-slate-100 text-slate-600 px-3 py-1.5 rounded-full">Best for: {tool.bestFor}</span>
+                                </div>
+                                <p className="text-slate-600 text-sm mb-5 leading-relaxed">{tool.description}</p>
+                                <div className="grid sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <p className="text-xs font-bold text-green-700 uppercase tracking-widest mb-2">Pros</p>
+                                        <ul className="space-y-1.5">
+                                            {tool.pros.map(p => (
+                                                <li key={p} className="flex items-start gap-2 text-sm text-slate-700">
+                                                    <Check size={13} className="text-green-500 flex-shrink-0 mt-0.5" /> {p}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <p className="text-xs font-bold text-red-600 uppercase tracking-widest mb-2">Cons</p>
+                                        <ul className="space-y-1.5">
+                                            {tool.cons.map(c => (
+                                                <li key={c} className="flex items-start gap-2 text-sm text-slate-700">
+                                                    <X size={13} className="text-red-400 flex-shrink-0 mt-0.5" /> {c}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="mt-5 pt-5 border-t border-slate-100">
+                                    {i === 0 ? (
+                                        <Link href="/" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-indigo-700 transition-colors">
+                                            Try it free <ArrowRight size={14} />
+                                        </Link>
+                                    ) : (
+                                        <a href={tool.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-slate-200 text-slate-600 px-5 py-2.5 rounded-xl font-bold text-sm hover:border-slate-300 transition-colors">
+                                            Visit {tool.name} <ExternalLink size={13} />
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
 
-                        <h3 className="text-2xl font-display font-semibold text-secondary mt-12 mb-4 text-indigo-600">
-                            The Critical Test: Two-Word Symmetry
-                        </h3>
-                        <p className="leading-relaxed mb-6">
-                            This is where most &quot;free&quot; tools fail. Generating a symmetrical
-                            single word is trivial. Generating a <strong>best 2 word ambigram generator free</strong> result
-                            requires a complex algorithm to balance the pivot point between two independent strings,
-                            ensuring
-                            continuity after rotation.
-                        </p>
+                    {/* Use case guide */}
+                    <h2 className="text-2xl font-black text-slate-900 mb-6">Which Tool Should You Use?</h2>
+                    <div className="space-y-3 mb-14">
+                        {[
+                            {
+                                q: "I want a free two-name ambigram for a tattoo",
+                                a: "AmbigramGenerator.me — the only free option with two-name support and no watermark on downloads.",
+                                href: "/two-word-ambigram-generator"
+                            },
+                            {
+                                q: "I need a 3D ambigram file to send to a 3D printer",
+                                a: "AmbigramGenerator.me — the only tool on this list with free STL export.",
+                                href: "/3d-generator"
+                            },
+                            {
+                                q: "I just want to check if a single word works as an ambigram",
+                                a: "Lingojam is fine for a quick sanity check, but it has no download option.",
+                                href: null
+                            },
+                            {
+                                q: "I need the highest quality for a paid commercial project",
+                                a: "Flipscript has the widest font library and best output quality — worth the cost for professional work.",
+                                href: null
+                            },
+                        ].map(({ q, a, href }) => (
+                            <div key={q} className="flex gap-4 p-5 bg-white rounded-xl border border-slate-100">
+                                <div className="w-2 h-2 rounded-full bg-indigo-400 flex-shrink-0 mt-2" />
+                                <div>
+                                    <p className="font-bold text-slate-900 text-sm mb-1">{q}</p>
+                                    <p className="text-slate-600 text-sm">{a}{" "}
+                                        {href && <Link href={href} className="text-indigo-600 font-bold hover:underline">Try it →</Link>}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
 
-                        <pre className="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto my-8 font-mono">
-                            <code>
-                                {`// Test Case: Multi-Word Symmetry Failure Point
-// If Word A + Word B length is odd, the center character must be perfectly self-symmetrical
-// (e.g., I, H, O). Weak generators ignore this, leading to illegible output.
-function check_multi_word_integrity(wordA, wordB) {
-    if ((wordA.length + wordB.length) % 2 !== 0) {
-        // Must perform specialized center-point stability test.
-    }
-}`}
-                            </code>
-                        </pre>
+                    {/* CTA */}
+                    <div className="text-center bg-indigo-600 rounded-2xl p-10 text-white">
+                        <h2 className="text-2xl font-black mb-3">Ready to create your ambigram?</h2>
+                        <p className="text-indigo-100 text-sm mb-6 max-w-md mx-auto">Free, no signup, no watermark. Generate a two-name or two-word ambigram in seconds.</p>
+                        <Link href="/" className="inline-flex items-center gap-2 bg-white text-indigo-600 px-7 py-3 rounded-xl font-black text-sm hover:bg-indigo-50 transition-colors">
+                            Open Free Generator <ArrowRight size={15} />
+                        </Link>
+                    </div>
 
-                        <figure className="my-8 text-center">
-                            <img
-                                src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/ambigram-review-scorecard.webp"
-                                alt="An objective scorecard comparing AmbigramGenerator.me against two major competitors on four key metrics."
-                                className="w-full max-w-lg mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                loading="lazy"
-                            />
-                            <figcaption className="text-sm text-gray-500 mt-2">
-                                In our 2026 benchmark test against the two most popular free competitors,
-                                AmbigramGenerator.me was the only tool to score 5/5 on the &apos;Multi-Word Integrity&apos; metric.
-                                Competitor A failed to solve any phrase over 7 characters, and Competitor B required a paid
-                                upgrade for high-resolution output, disqualifying them from the &quot;best ambigram generator
-                                online free&quot; category.
-                            </figcaption>
-                        </figure>
-
-                        <h2 className="text-3xl font-display font-bold text-dark mt-16 mb-6 border-b pb-3 text-[#1A1A1B]">
-                            Why AmbigramGenerator.me Tops the Free Online Ambigram Review
-                        </h2>
-                        <p className="leading-relaxed mb-6">
-                            Our commitment is simple: provide the functionality of a premium,
-                            paid <strong>ambigram generator creator</strong> without the cost. We excel where others fail:
-                        </p>
-
-                        <ul className="list-disc list-inside space-y-2 mb-6 ml-4">
-                            <li><strong>Unmatched Two-Word Stability:</strong> Our algorithm uses a dynamic axis that
-                                adjusts to word length, ensuring we provide truly the <strong>best 2 word ambigram generator
-                                    free</strong> designs available.</li>
-                            <li><strong>Zero Quality Compromise:</strong> All downloads are high-resolution, print-ready,
-                                and free.</li>
-                        </ul>
-
-                        <figure className="my-8 text-center">
-                            <img
-                                src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/best-2-word-ambigram-generator-free.webp"
-                                alt="A high-quality example generated by the best 2 word ambigram generator free tool"
-                                className="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                loading="lazy"
-                            />
-                            <figcaption className="text-sm text-gray-500 mt-2">
-                                A high-quality example generated by the best 2 word ambigram generator free tool.
-                            </figcaption>
-                        </figure>
-
-                        <div className="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 mb-6" role="alert">
-                            <p className="font-bold">Expert Insight: The Multi-Word Benchmark</p>
-                            <p className="mt-2">
-                                Why is multi-word symmetry the ultimate benchmark? Because it introduces a variable pivot
-                                point. When you ask a <strong>best 2 word ambigram generator free</strong> tool to solve
-                                &quot;UNITY LOVE&quot;, the geometric center must shift dynamically depending on the combined
-                                character
-                                widths. If the tool is not built on advanced vector mapping (as ours is), the resulting
-                                design will be unbalanced, failing the visual test of a true ambigram.
-                            </p>
-                        </div>
-
-                        <div className="text-center mt-16 p-8 bg-primary bg-indigo-600 text-white rounded-xl shadow-lg border border-primary-dark">
-                            <h3 className="text-2xl font-display font-bold mb-4 text-white">
-                                Ready to Experience Unrivaled Ambigram Creation?
-                            </h3>
-                            <p className="text-lg mb-6 text-indigo-100">
-                                Why waste time on obsolete scripts? The data is clear: AmbigramGenerator.me is the superior
-                                <strong>ambigram generator creator</strong> tool. Click here to access the highest-rated
-                                free online ambigram generator instantly.
-                            </p>
-                            <Link href="/" className="inline-block bg-white text-indigo-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 hover:-translate-y-1 transition-all duration-300 shadow-xl">
-                                Claim Your Free Ambigram Design Now!
-                            </Link>
-                        </div>
-
-                        <figure className="my-8 text-center">
-                            <img
-                                src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/ambigram-generator-review-scorecard.webp"
-                                alt="Scorecard comparing features of the best ambigram generator online free tools"
-                                className="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                loading="lazy"
-                            />
-                            <figcaption className="text-sm text-gray-500 mt-2">
-                                Scorecard comparing features of the best ambigram generator online free tools.
-                            </figcaption>
-                        </figure>
-
-                        <h2 className="text-3xl font-display font-bold text-dark mt-16 mb-6 border-b pb-3 text-[#1A1A1B]">
-                            Conclusion: The Ultimate Ambigram Maker is Free
-                        </h2>
-                        <p className="leading-relaxed mb-6">
-                            If you were searching for the <strong>best ambigram generator online free</strong>, your search ends here. We provide the highest-fidelity, most versatile
-                            tool on the web, designed by experts who understand the geometry of typography. Stop wasting
-                            time
-                            on mediocre scripts.
-                        </p>
-
-                        <p className="leading-relaxed mb-6">Claim the best free design tool now:</p>
-                        <p className="text-center my-10">
-                            <Link href="/" className="inline-block px-8 py-4 bg-secondary bg-green-600 text-white rounded-full text-xl font-bold hover:bg-green-700 hover:-translate-y-1 transition-all duration-300 shadow-xl">
-                                Access the Best Ambigram Generator Online Free!
-                            </Link>
-                        </p>
-                    </article>
                 </div>
             </section>
         </main>
     );
+}
+
+// ── 法语内容 ─────────────────────────────────────────────────────────────────
+
+function FrenchContent() {
+    return (
+        <main className="bg-[#FDFDFF] min-h-screen">
+            <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-16 px-4 text-center">
+                <div className="container mx-auto max-w-3xl">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-bold text-xs mb-5 uppercase tracking-wider">
+                        Mis à jour juin 2026 · 3 outils comparés
+                    </div>
+                    <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-4 text-slate-900">
+                        Meilleur Générateur d&apos;Ambigramme Gratuit (2026)
+                    </h1>
+                    <p className="text-slate-500 text-lg max-w-2xl mx-auto">
+                        Comparaison honnête des trois outils gratuits les plus utilisés — points forts, points faibles, et lequel correspond à votre cas d&apos;usage.
+                    </p>
+                </div>
+            </section>
+
+            <section className="py-12 px-4">
+                <div className="container mx-auto max-w-5xl">
+                    <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-6 mb-12">
+                        <p className="font-bold text-indigo-900 mb-1 text-sm">Verdict rapide</p>
+                        <p className="text-slate-700 text-sm leading-relaxed">
+                            Pour un <strong>ambigramme gratuit avec deux prénoms</strong> pour un tatouage ou une impression 3D, AmbigramGenerator.me est le seul outil qui couvre les deux sans abonnement payant. Pour le meilleur résultat professionnel avec un budget, Flipscript est la référence. Pour vérifier rapidement si un seul mot fonctionne en ambigramme, Lingojam suffit.
+                        </p>
+                    </div>
+
+                    <h2 className="text-2xl font-black text-slate-900 mb-6">Comparaison des fonctionnalités</h2>
+                    <div className="overflow-x-auto rounded-2xl border border-slate-100 mb-14">
+                        <table className="w-full min-w-[540px] text-sm">
+                            <thead className="bg-slate-50">
+                                <tr>
+                                    <th className="text-left px-5 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest w-48">Fonctionnalité</th>
+                                    {tools.map(t => (
+                                        <th key={t.name} className="px-4 py-4 text-center text-xs font-bold text-slate-700">
+                                            <p>{t.name.split(".")[0]}</p>
+                                            <p className="font-normal text-slate-400 mt-0.5">{t.tagline}</p>
+                                        </th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-50">
+                                {[
+                                    { key: "twoName" as const, label: "Support deux noms / deux mots" },
+                                    { key: "threeD" as const, label: "Export STL 3D" },
+                                    { key: "noSignup" as const, label: "Sans inscription" },
+                                    { key: "noWatermark" as const, label: "Sans filigrane sur le téléchargement" },
+                                    { key: "tattooStyle" as const, label: "Style calligraphique pour tatouage" },
+                                    { key: "free" as const, label: "Entièrement gratuit" },
+                                ].map(row => (
+                                    <tr key={row.key} className="hover:bg-slate-50/50">
+                                        <td className="px-5 py-3 text-slate-600 font-medium">{row.label}</td>
+                                        {tools.map(t => (
+                                            <td key={t.name} className="px-4 py-3 text-center">
+                                                <FeatureIcon value={t.features[row.key]} />
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className="text-center bg-indigo-600 rounded-2xl p-10 text-white">
+                        <h2 className="text-2xl font-black mb-3">Prêt à créer votre ambigramme ?</h2>
+                        <p className="text-indigo-100 text-sm mb-6 max-w-md mx-auto">Gratuit, sans inscription, sans filigrane.</p>
+                        <Link href="/" className="inline-flex items-center gap-2 bg-white text-indigo-600 px-7 py-3 rounded-xl font-black text-sm hover:bg-indigo-50 transition-colors">
+                            Ouvrir le Générateur Gratuit <ArrowRight size={15} />
+                        </Link>
+                    </div>
+                </div>
+            </section>
+        </main>
+    );
+}
+
+// ── 默认导出 ──────────────────────────────────────────────────────────────────
+
+export default async function BestOnlineToolsPage({ params }: Props) {
+    const { locale } = await params;
+    if (locale === 'fr') return <FrenchContent />;
+    return <EnglishContent />;
 }
