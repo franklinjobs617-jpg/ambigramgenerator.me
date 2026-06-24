@@ -139,7 +139,7 @@ export default async function AmbigramWordTattoosPage() {
                             Many people search for <strong>tattoo words with two meanings</strong>. In the tattoo world, <strong>tattoos that say two words in one</strong> are technically called <em>Symbiotograms</em>.
                         </p>
                         <p>
-                            This is the holy grail of a <strong>double meaning ambigram tattoo</strong>. The artist manipulates the typography so that when you look at it right-side up, you read Word A. When you flip it 180 degrees, you read Word B. It is a powerful way to express duality, such as life/death, saint/sinner, or family/friends.
+                            This is the holy grail of a <strong>double meaning ambigram tattoo</strong>. The artist manipulates the typography so that when you look at it right-side up, you read Word A. When you flip it 180 degrees, you read Word B. It is a powerful way to express duality, such as life/death, saint/sinner, or family/friends. If you want to understand the full mechanics behind this, read our guide on <Link href="/what-is-ambigram" className="font-bold text-indigo-600 hover:underline">what an ambigram is and how it works</Link>.
                         </p>
 
 

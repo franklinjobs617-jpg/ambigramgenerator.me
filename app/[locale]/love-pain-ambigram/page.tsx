@@ -93,7 +93,7 @@ export default async function LovePainAmbigramPage() {
                                     <div className="not-prose mt-8 rounded-3xl border border-indigo-100 bg-indigo-50/60 p-6">
                                         <h2 className="text-xl font-black text-slate-900">Quick answer: what is a love pain ambigram?</h2>
                                         <p className="mt-3 text-sm leading-relaxed text-slate-700">
-                                            A <strong>love pain ambigram</strong> is a rotational word design that reads LOVE from one direction and PAIN after a 180-degree turn. It works because the two four-letter words can share balanced strokes, making it one of the most requested <strong>double meaning ambigram tattoo</strong> ideas.
+                                            A <strong>love pain ambigram</strong> is a rotational word design that reads LOVE from one direction and PAIN after a 180-degree turn. It works because the two four-letter words can share balanced strokes, making it one of the most requested <strong>double meaning ambigram tattoo</strong> ideas. New to ambigrams? <Link href="/what-is-ambigram" className="font-bold text-indigo-600 hover:underline">Learn what an ambigram is →</Link>
                                         </p>
                                     </div>
 

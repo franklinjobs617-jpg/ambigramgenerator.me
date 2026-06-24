@@ -61,7 +61,8 @@ export default async function WhatIsAmbigramPage({ params }: Props) {
             "name": "AmbigramStudio",
             "logo": { "@type": "ImageObject", "url": `${DOMAIN}/logo.png` }
         },
-        "datePublished": "2024-01-01"
+        "datePublished": "2024-01-01",
+        "dateModified": "2026-06-24"
     };
 
     // ========================================================================
