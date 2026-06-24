@@ -64,7 +64,83 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function HomePage({ params }: Props) {
     const { locale } = await params;
 
-    // JSON-LD 结构化数据 (SoftwareApplication + WebSite)
+    // JSON-LD 结构化数据 (WebSite + SoftwareApplication + FAQPage)
+    // FAQ 内容基于 GSC 高频 query，与 /faq 页面不重复（/faq 覆盖完整版）
+    const faqByLocale: Record<string, { q: string; a: string }[]> = {
+        en: [
+            {
+                q: "Is the ambigram generator really free?",
+                a: "Yes. You can create and download 2D ambigram designs at no cost, with no account required. The 3D STL export is also available for free."
+            },
+            {
+                q: "How do I make a two-name ambigram?",
+                a: "Enter the first name in the top field and the second name in the bottom field, then click Generate. Names with similar letter counts produce the best results."
+            },
+            {
+                q: "Can I use the generated ambigram for a tattoo?",
+                a: "Yes. Download the high-resolution PNG and share it with your tattoo artist as a reference. All designs are free to use for personal and commercial purposes."
+            },
+        ],
+        fr: [
+            {
+                q: "Le générateur d'ambigrammes est-il vraiment gratuit ?",
+                a: "Oui. Vous pouvez créer et télécharger des ambigrammes 2D gratuitement, sans création de compte. L'export STL 3D est également disponible sans frais."
+            },
+            {
+                q: "Comment créer un ambigramme avec deux prénoms ?",
+                a: "Entrez le premier prénom dans le champ supérieur et le second dans le champ inférieur, puis cliquez sur Générer. Les prénoms de longueur similaire donnent les meilleurs résultats."
+            },
+            {
+                q: "Puis-je utiliser l'ambigramme généré pour un tatouage ?",
+                a: "Oui. Téléchargez le PNG en haute résolution et partagez-le avec votre tatoueur comme référence. Tous les designs sont libres d'utilisation."
+            },
+        ],
+        de: [
+            {
+                q: "Ist der Ambigramm-Generator wirklich kostenlos?",
+                a: "Ja. Sie können 2D-Ambigramme kostenlos erstellen und herunterladen, ohne ein Konto zu benötigen. Der 3D-STL-Export ist ebenfalls kostenlos verfügbar."
+            },
+            {
+                q: "Wie erstelle ich ein Ambigramm mit zwei Namen?",
+                a: "Geben Sie den ersten Namen in das obere Feld und den zweiten in das untere Feld ein, dann klicken Sie auf Generieren. Namen mit ähnlicher Buchstanzahl liefern die besten Ergebnisse."
+            },
+            {
+                q: "Kann ich das generierte Ambigramm für ein Tattoo verwenden?",
+                a: "Ja. Laden Sie das hochauflösende PNG herunter und zeigen Sie es Ihrem Tätowierer als Referenz. Alle Designs sind zur privaten und kommerziellen Nutzung freigegeben."
+            },
+        ],
+        es: [
+            {
+                q: "¿El generador de ambigramas es realmente gratuito?",
+                a: "Sí. Puedes crear y descargar diseños de ambigramas 2D de forma gratuita, sin necesidad de cuenta. La exportación STL 3D también está disponible sin coste."
+            },
+            {
+                q: "¿Cómo creo un ambigrama con dos nombres?",
+                a: "Escribe el primer nombre en el campo superior y el segundo en el campo inferior, luego haz clic en Generar. Los nombres con un número similar de letras producen los mejores resultados."
+            },
+            {
+                q: "¿Puedo usar el ambigrama generado para un tatuaje?",
+                a: "Sí. Descarga el PNG en alta resolución y compártelo con tu tatuador como referencia. Todos los diseños son de uso libre para fines personales y comerciales."
+            },
+        ],
+        it: [
+            {
+                q: "Il generatore di ambigrammi è davvero gratuito?",
+                a: "Sì. Puoi creare e scaricare design 2D gratuitamente, senza bisogno di account. L'esportazione STL 3D è anch'essa disponibile senza costi."
+            },
+            {
+                q: "Come si crea un ambigramma con due nomi?",
+                a: "Inserisci il primo nome nel campo superiore e il secondo nel campo inferiore, poi clicca su Genera. I nomi con un numero simile di lettere producono i risultati migliori."
+            },
+            {
+                q: "Posso usare l'ambigramma generato per un tatuaggio?",
+                a: "Sì. Scarica il PNG ad alta risoluzione e mostralo al tuo tatuatore come riferimento. Tutti i design sono liberi da utilizzare per uso personale e commerciale."
+            },
+        ],
+    };
+
+    const currentFaq = faqByLocale[locale] || faqByLocale.en;
+
     const jsonLd = {
         "@context": "https://schema.org",
         "@graph": [
@@ -81,6 +157,7 @@ export default async function HomePage({ params }: Props) {
             {
                 "@type": "SoftwareApplication",
                 "name": "Ambigram Generator",
+                "url": DOMAIN,
                 "applicationCategory": "DesignApplication",
                 "operatingSystem": "Web Browser",
                 "offers": {
@@ -88,8 +165,20 @@ export default async function HomePage({ params }: Props) {
                     "price": "0",
                     "priceCurrency": "USD"
                 },
-                "description": "Free tool to create 3D ambigrams and two-name tattoo designs.",
-                "image": `${DOMAIN}/logo.png`
+                "description": "Free tool to create 2D and 3D ambigrams online. Design two-name tattoo ambigrams and export 3D printable STL files. No signup required.",
+                "image": `${DOMAIN}/logo.png`,
+                "screenshot": `${DOMAIN}/og-image.png`
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": currentFaq.map(({ q, a }) => ({
+                    "@type": "Question",
+                    "name": q,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": a
+                    }
+                }))
             }
         ]
     };
