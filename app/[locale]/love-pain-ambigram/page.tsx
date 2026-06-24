@@ -19,8 +19,8 @@ const DOMAIN = "https://www.ambigramgenerator.me";
 // 1. TDK: 覆盖所有关键词变体
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "The Love Pain Ambigram Tattoo: Meaning, Designs & History",
-        description: "A deep dive into the iconic love pain ambigram tattoo. Explore the meaning behind the design, discover love and pain tattoo designs, and generate your own.",
+        title: "Love Pain Ambigram Tattoo — Meaning, Free Generator & Designs",
+        description: "The love pain ambigram reads 'Love' right-side up and 'Pain' upside down. See the best designs, understand the meaning, and generate your own free version.",
         alternates: {
             canonical: `${DOMAIN}/love-pain-ambigram`,
         }
@@ -28,14 +28,55 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function LovePainAmbigramPage() {
-    // Schema: 明确声明这是一篇关于视觉艺术作品的文章
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "VisualArtwork",
-        "name": "The Love Pain Ambigram Tattoo",
-        "alternateName": "Pain Love Tattoo",
-        "description": "An iconic ambigram design where the word 'Love' reads as 'Pain' when rotated 180 degrees, often used for tattoos."
-    };
+    // Schema: Article + FAQPage（比VisualArtwork更准确，FAQPage可争取富摘要）
+    const jsonLd = [
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Love Pain Ambigram Tattoo — Meaning, Designs & Free Generator",
+            "description": "The love pain ambigram reads 'Love' right-side up and 'Pain' when rotated 180 degrees. A comprehensive guide covering meaning, design styles, history and a free generator.",
+            "image": `${DOMAIN}/images/love-pain-ambigram-tattoo-design.avif`,
+            "author": { "@type": "Organization", "name": "AmbigramGenerator" },
+            "publisher": {
+                "@type": "Organization",
+                "name": "AmbigramGenerator",
+                "logo": { "@type": "ImageObject", "url": `${DOMAIN}/logo.png` }
+            },
+            "datePublished": "2024-06-01",
+            "dateModified": "2026-06-24",
+            "url": `${DOMAIN}/love-pain-ambigram`
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is a love pain ambigram?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "A love pain ambigram is a rotational typographic design that reads 'Love' when viewed normally and 'Pain' when rotated 180 degrees. It is one of the most popular ambigram tattoo designs because the two four-letter words share complementary letter strokes."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I generate a love pain ambigram for free?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. The ambigram generator at ambigramgenerator.me lets you create love/pain and similar two-word ambigrams for free. No sign-up is required and you can download the design as a high-resolution PNG."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What tattoo style works best for a love pain ambigram?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Gothic blackletter and fine-line styles are the most popular choices. Gothic gives a bold, dramatic look while fine-line produces a delicate result. A minimum width of 6 cm is recommended so both words remain legible after healing."
+                    }
+                }
+            ]
+        }
+    ];
 
     return (
         <main className="bg-[#FDFDFF] min-h-screen">
