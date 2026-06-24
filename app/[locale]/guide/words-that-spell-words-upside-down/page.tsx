@@ -1,279 +1,303 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { constructMetadata } from "@/lib/seo";
-import {
-    CheckSquare,
-    BookOpen,
-    HelpCircle,
-    Zap,
-    Type,
-    ChevronRight,
-    Search,
-    RotateCw,
-    Quote
-} from "lucide-react";
+import { ChevronRight, HelpCircle, ArrowRight, Sparkles, Check } from "lucide-react";
 
 const DOMAIN = "https://www.ambigramgenerator.me";
 
-// 1. TDK: 覆盖 "same upside down", "spell words upside down"
+// Metadata: canonical fisso IT, nessun alternates (pagina esclusivamente italiana)
+// Non usiamo constructMetadata perché questa pagina non ha versioni in altre lingue
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Words That Spell Words Upside Down: MOW/WOW, POD & SWIMS List",
-        description: "Find words that read the same or change meaning upside down, including MOW/WOW, POD, MOM/WOW and SWIMS. Learn which are natural ambigrams.",
+        title: "Ambigramma con Due Nomi Gratis — Generatore Online Gratis",
+        description: "Crea subito il tuo ambigramma con due nomi gratis. Generatore online: inserisci i due nomi, scegli lo stile, scarica PNG o STL 3D. Nessuna registrazione.",
         alternates: {
-            canonical: `${DOMAIN}/guide/words-that-spell-words-upside-down`,
-        }
+            canonical: `${DOMAIN}/it/ambigramma-con-due-nomi`,
+        },
     };
 }
 
-export default async function WordsUpsideDownPage() {
-    const quickAnswers = [
-        { word: "MOW", rotated: "WOW", result: "Different word", note: "M can rotate into W in many simple type styles." },
-        { word: "MOM", rotated: "WOW", result: "Different word", note: "A common natural upside-down word pair." },
-        { word: "POD", rotated: "MOD / BOP", result: "Different word", note: "Font dependent; rounded fonts work best." },
-        { word: "SWIMS", rotated: "SWIMS", result: "Same word", note: "Classic same upside-down and backwards answer." },
-        { word: "NOON", rotated: "NOON", result: "Same word", note: "Works well in symmetric uppercase lettering." },
+export default async function AmbigrammaConDueNomiPage() {
+
+    // Query GSC di riferimento per i contenuti:
+    // "ambigramma con due nomi generatore" pos 2.7 CTR 48%
+    // "ambigramma con due nomi gratis" pos 2.51 CTR 52%
+    // "crea ambigramma" pos 3.96 CTR 43%
+    // "ambigramma con due nomi online" pos 3.21 CTR 36%
+    // "ambigramma con due nomi 3d" pos 5.78 CTR 11%
+    // "ambigramma tatuaggio" pos 9.46
+    // "ambigramma nomi" pos 6.32
+    // "ambigramma esempi" pos 10.97
+
+    const coppiePopolari = [
+        { coppia: "Marco / Sara", risultato: "Ottimo", motivo: "Stessa lunghezza, buona simmetria rotazionale" },
+        { coppia: "Luca / Anna", risultato: "Ottimo", motivo: "4 lettere ciascuno, lettere ben compatibili" },
+        { coppia: "Amore / Odio", risultato: "Eccellente", motivo: "Classico assoluto, bilanciamento perfetto" },
+        { coppia: "Vita / Morte", risultato: "Buono", motivo: "Contrasto forte, molto richiesto" },
+        { coppia: "Fede / Pace", risultato: "Buono", motivo: "4 lettere, stile spirituale" },
+        { coppia: "Alessandra / Marco", risultato: "Difficile", motivo: "Lunghezze molto diverse — prova con soprannomi" },
     ];
 
-    // 2. Schema: Article + FAQ (针对脑筋急转弯词汇)
-    const jsonLd = [
-        {
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": "Words That Spell Words Upside Down: MOW/WOW, POD and SWIMS List",
-            "description": "A practical guide to upside-down words that remain readable or change meaning when rotated 180 degrees.",
-            "author": { "@type": "Person", "name": "Ambigram Specialist" }
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "Does MOW spell WOW upside down?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Yes. MOW can read as WOW when rotated 180 degrees in many simple fonts because M visually becomes W while O remains O."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "What does POD spell upside down?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "POD can look like MOD or BOP when rotated, depending on the font style. It is a font-dependent upside-down word pair."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "What word is the same upside down and backwards?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "The most famous word that is the same upside down and backwards is 'SWIMS'. This is known as a natural rotational ambigram."
-                    }
+    // FAQPage Schema — domande basate direttamente sui query GSC italiani
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Come si crea un ambigramma con due nomi gratis?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Vai al generatore su ambigramgenerator.me, inserisci il primo nome nel campo superiore e il secondo nel campo inferiore, scegli lo stile e premi Genera. Il download è gratuito e senza registrazione."
                 }
-            ]
-        }
-    ];
+            },
+            {
+                "@type": "Question",
+                "name": "Quali nomi funzionano meglio per un ambigramma?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "I nomi con lo stesso numero di lettere danno i risultati migliori. Coppie come Marco/Sara, Luca/Anna, Amore/Odio funzionano molto bene. Se i nomi hanno lunghezze diverse, prova abbreviazioni o soprannomi."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "È possibile creare un ambigramma con due nomi in 3D?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sì. Il generatore 3D crea un oggetto fisico che mostra il primo nome da un lato e il secondo dall'altro. Puoi scaricare il file STL e stamparlo con qualsiasi stampante 3D."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "L'ambigramma generato si può usare per un tatuaggio?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sì. Il file PNG scaricabile è in alta risoluzione e può essere mostrato direttamente al tatuatore come riferimento. È libero da copyright per uso personale e commerciale."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Ambigramma con due nomi: quanto costa?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Il generatore base è completamente gratuito. Puoi creare e scaricare design 2D senza pagare nulla. La versione 3D STL è disponibile senza costi aggiuntivi."
+                }
+            }
+        ]
+    };
 
     return (
         <main className="bg-[#FDFDFF] min-h-screen">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-            {/* Header Section */}
-            <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6 text-center">
-                <div className="container mx-auto px-4 text-center">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 font-bold text-xs mb-6 uppercase tracking-wider">
-                        <RotateCw size={14} /> Optical Illusion Word List
+            {/* ── HERO: utente arriva già con intento chiaro, CTA immediata ── */}
+            <section className="bg-gradient-to-b from-indigo-50/60 to-white pt-32 pb-16 px-4 text-center">
+                <div className="container mx-auto max-w-2xl">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-green-700 font-bold text-xs mb-5 uppercase tracking-wider">
+                        <Check size={12} /> Gratis · Nessuna Registrazione · Download Immediato
                     </div>
-                    <h1 className="text-4xl lg:text-6xl font-black tracking-tight mb-4 text-slate-900">
-                        Words That Spell <span className="text-indigo-600">Words Upside Down</span>
+                    {/* H1 = query principale GSC */}
+                    <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-4 text-slate-900">
+                        Ambigramma con <span className="text-indigo-600">Due Nomi</span> Gratis
                     </h1>
-                    <p className="text-slate-500 font-medium italic text-lg max-w-2xl mx-auto">
-                        Quick answers for MOW/WOW, POD, MOM/WOW, SWIMS, and other natural ambigram words.
+                    <p className="text-slate-500 text-lg mb-8">
+                        Inserisci i due nomi, genera il design, scarica subito. Perfetto per tatuaggi, regali e stampa 3D.
                     </p>
+                    <div className="flex flex-col sm:flex-row justify-center gap-3">
+                        <Link
+                            href="/two-word-ambigram-generator"
+                            className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-7 py-4 text-sm font-bold text-white shadow-lg shadow-indigo-200 transition-colors hover:bg-indigo-700"
+                        >
+                            <Sparkles size={16} /> Crea Ambigramma Gratis
+                        </Link>
+                        {/* query "ambigramma con due nomi 3d" — seconda CTA */}
+                        <Link
+                            href="/3d-generator"
+                            className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-7 py-4 text-sm font-bold text-slate-700 transition-colors hover:border-indigo-200 hover:text-indigo-700"
+                        >
+                            Versione 3D STL <ArrowRight size={15} />
+                        </Link>
+                    </div>
                 </div>
             </section>
 
-            <section className="pb-12">
+            <section className="pb-16">
                 <div className="container mx-auto px-4 max-w-7xl">
-                    <div className="flex flex-col lg:flex-row gap-12">
+                    <div className="flex flex-col lg:flex-row gap-10">
 
-                        {/* LEFT SIDEBAR: TOC */}
+                        {/* SIDEBAR — solo desktop */}
                         <aside className="lg:w-1/4 lg:sticky lg:top-24 h-fit hidden lg:block">
                             <nav className="space-y-1 bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
-                                <h3 className="font-black text-xs uppercase tracking-widest text-indigo-600 mb-4 px-3">On this page</h3>
-                                <Link href="#intro" className="flex items-center gap-2 p-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all"><ChevronRight size={14} /> The Phenomenon</Link>
-                                <Link href="#same-words" className="flex items-center gap-2 p-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all"><ChevronRight size={14} /> Read Same Upside Down</Link>
-                                <Link href="#different-words" className="flex items-center gap-2 p-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all"><ChevronRight size={14} /> Flip for New Meaning</Link>
-                                <Link href="#meaning" className="flex items-center gap-2 p-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all"><ChevronRight size={14} /> Ambigram Meaning</Link>
-                                <Link href="#swims" className="flex items-center gap-2 p-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all"><ChevronRight size={14} /> The "SWIMS" Secret</Link>
+                                <h3 className="font-black text-xs uppercase tracking-widest text-indigo-600 mb-4 px-3">In questa pagina</h3>
+                                {[
+                                    ["#come-fare", "Come fare"],
+                                    ["#quali-nomi", "Quali nomi scegliere"],
+                                    ["#tatuaggio", "Per il tatuaggio"],
+                                    ["#3d", "Versione 3D"],
+                                    ["#faq", "Domande frequenti"],
+                                ].map(([href, label]) => (
+                                    <Link key={href} href={href} className="flex items-center gap-2 p-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all">
+                                        <ChevronRight size={14} /> {label}
+                                    </Link>
+                                ))}
                             </nav>
                         </aside>
 
-                        {/* RIGHT CONTENT: Main Article */}
-                        <div className="lg:w-3/4 bg-white p-8 md:p-16 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100">
+                        {/* CONTENUTO */}
+                        <div className="lg:w-3/4 bg-white p-6 md:p-14 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100">
                             <article className="prose prose-lg prose-slate text-slate-700 max-w-none">
 
-                                <div id="intro" className="scroll-mt-28 mb-16">
-                                    <div className="not-prose mb-10 overflow-hidden rounded-3xl border border-indigo-100 bg-white shadow-sm">
-                                        <div className="border-b border-indigo-100 bg-indigo-50/70 px-5 py-4">
-                                            <h2 className="text-lg font-black text-slate-900">Quick upside-down word answers</h2>
-                                            <p className="mt-1 text-sm text-slate-600">Use this table first if you searched for a specific word pair.</p>
-                                        </div>
-                                        <div className="overflow-x-auto">
-                                            <table className="w-full min-w-[680px] text-left text-sm">
-                                                <thead className="bg-slate-50 text-xs uppercase tracking-widest text-slate-500">
-                                                    <tr>
-                                                        <th className="px-5 py-3">Word</th>
-                                                        <th className="px-5 py-3">Upside-down result</th>
-                                                        <th className="px-5 py-3">Type</th>
-                                                        <th className="px-5 py-3">What to know</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody className="divide-y divide-slate-100">
-                                                    {quickAnswers.map((item) => (
-                                                        <tr key={item.word} className="align-top">
-                                                            <td className="px-5 py-4 font-black text-slate-900">{item.word}</td>
-                                                            <td className="px-5 py-4 font-black text-indigo-700">{item.rotated}</td>
-                                                            <td className="px-5 py-4 text-slate-700">{item.result}</td>
-                                                            <td className="px-5 py-4 text-slate-600">{item.note}</td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <p className="lead text-xl text-slate-600 font-medium">
-                                        Have you ever turned your phone upside down and realized that a word on the screen still makes perfect sense? This is no accident—it's a fascinating typographical phenomenon where <strong>words spell words upside down</strong> through rotational symmetry.
-                                    </p>
-                                    <p>
-                                        In this guide, we’ve compiled the ultimate list of <strong>words that are the same upside down</strong>, explored the hidden <strong>ambigram meaning</strong>, and solved the riddle of the word that stays the same even when flipped and mirrored.
-                                    </p>
-                                </div>
-
-                                {/* SECTION 2: Words that stay the same */}
-                                <div id="same-words" className="scroll-mt-28 mb-16">
-                                    <h2 className="text-2xl font-black text-[#1A1A1B] flex items-center gap-4 mb-6 tracking-tight">
-                                        <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600"><CheckSquare size={20} /></div>
-                                        Words That Read the Same Upside Down
+                                {/* ── SEZIONE 1: Come fare — risponde a "crea ambigramma" e "generatore" ── */}
+                                <div id="come-fare" className="scroll-mt-28 mb-14">
+                                    {/* H2 = variante query "ambigramma con due nomi online" */}
+                                    <h2 className="text-2xl font-black text-slate-900 mb-6">
+                                        Come creare un ambigramma con due nomi online
                                     </h2>
-                                    <p>
-                                        Some <strong>words look the same upside down</strong> because their letters have natural rotational symmetry. For example, letters like 'o', 's', 'x', 'z', 'H', 'I', 'N', and 'M' are the building blocks of these visual illusions.
-                                    </p>
-
-                                    <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 not-prose my-10">
-                                        <h3 className="text-lg font-bold text-slate-900 mb-4">Top "Same Both Ways" Word List:</h3>
-                                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                            {['NOON', 'SIS', 'MOW', 'SOS', 'DEED', 'XOXO'].map(word => (
-                                                <div key={word} className="bg-white p-4 rounded-xl border border-slate-200 text-center font-black text-2xl tracking-widest text-indigo-600 shadow-sm transition-transform hover:rotate-180">
-                                                    {word}
+                                    <div className="not-prose space-y-3 mb-8">
+                                        {[
+                                            ["1", "Inserisci i due nomi", "Scrivi il primo nome nel campo in alto e il secondo in basso. Il generatore accetta nomi italiani, stranieri e qualsiasi parola."],
+                                            ["2", "Scegli lo stile", "Blocky per un look deciso, Calligraphy per tatuaggi e scritte eleganti. L'anteprima si aggiorna in tempo reale."],
+                                            ["3", "Scarica gratis", "Clicca Download per ottenere il PNG in alta risoluzione. Nessuna filigrana, nessun account richiesto."],
+                                        ].map(([n, titolo, desc]) => (
+                                            <div key={n} className="flex gap-4 p-5 rounded-2xl border border-slate-100 bg-slate-50/40">
+                                                <div className="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-sm flex-shrink-0">{n}</div>
+                                                <div>
+                                                    <p className="font-bold text-slate-900 text-sm mb-1">{titolo}</p>
+                                                    <p className="text-slate-600 text-sm leading-relaxed">{desc}</p>
                                                 </div>
-                                            ))}
-                                        </div>
-                                        <p className="mt-6 text-sm text-slate-500 italic text-center">Try rotating your screen! These words <strong>read same upside down</strong> without changing a single letter.</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="not-prose">
+                                        <Link href="/two-word-ambigram-generator" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-indigo-700 transition-colors">
+                                            Vai al Generatore <ArrowRight size={15} />
+                                        </Link>
                                     </div>
                                 </div>
-                                <div className="relative aspect-video bg-slate-100 rounded-[2rem] overflow-hidden border border-slate-200 shadow-sm my-10 flex flex-col items-center justify-center text-center">
-                                    <Image
-                                        src="/images/swims-upside-down-demonstration.jpg"
-                                        alt="The word SWIMS shown normally and rotated 180 degrees"
-                                        width={1920}
-                                        height={1080}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </div>
 
-                                {/* SECTION 3: Different Meaning */}
-                                <div id="different-words" className="scroll-mt-28 mb-16">
-                                    <h2 className="text-2xl font-black text-[#1A1A1B] flex items-center gap-4 mb-6 tracking-tight">
-                                        <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600"><RotateCw size={20} /></div>
-                                        Words That Change Meaning When Flipped
+                                {/* ── SEZIONE 2: Quali nomi — risponde a "ambigramma nomi" e "ambigramma esempi" ── */}
+                                <div id="quali-nomi" className="scroll-mt-28 mb-14">
+                                    <h2 className="text-2xl font-black text-slate-900 mb-4">
+                                        Quali nomi funzionano meglio?
                                     </h2>
                                     <p>
-                                        Even more impressive are the <strong>words that can be read upside down</strong> to reveal a totally different word. This occurs when one letter rotates to form another (like 'd' turning into 'p', or 'm' into 'w').
+                                        La qualità di un <strong>ambigramma con due nomi</strong> dipende quasi interamente dalla compatibilità delle lettere dopo la rotazione di 180°. La regola pratica più importante: <strong>nomi con lo stesso numero di lettere danno sempre i risultati migliori</strong>.
+                                    </p>
+
+                                    <div className="not-prose overflow-x-auto rounded-2xl border border-slate-100 my-6">
+                                        <table className="w-full min-w-[480px] text-left text-sm">
+                                            <thead className="bg-slate-50 text-xs uppercase tracking-widest text-slate-500">
+                                                <tr>
+                                                    <th className="px-4 py-3">Coppia</th>
+                                                    <th className="px-4 py-3">Qualità</th>
+                                                    <th className="px-4 py-3">Perché</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-slate-100">
+                                                {coppiePopolari.map((item) => (
+                                                    <tr key={item.coppia} className="align-top">
+                                                        <td className="px-4 py-3 font-bold text-indigo-700">{item.coppia}</td>
+                                                        <td className="px-4 py-3 text-slate-700">{item.risultato}</td>
+                                                        <td className="px-4 py-3 text-slate-500 text-xs">{item.motivo}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div className="bg-amber-50 border-l-4 border-amber-400 rounded-r-2xl p-5 not-prose">
+                                        <p className="font-bold text-amber-900 text-sm mb-1">Consiglio pratico</p>
+                                        <p className="text-amber-800 text-sm leading-relaxed">
+                                            Se il tuo nome ha molte lettere (es. "Alessandra"), prova con la versione abbreviata ("Ale") o un soprannome. Un ambigramma leggibile con 4–6 lettere vale molto più di uno confuso con 10.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* ── SEZIONE 3: Tatuaggio — risponde a "ambigramma tatuaggio" ── */}
+                                <div id="tatuaggio" className="scroll-mt-28 mb-14">
+                                    <h2 className="text-2xl font-black text-slate-900 mb-4">
+                                        Ambigramma tatuaggio: come usare il design
+                                    </h2>
+                                    <p>
+                                        Il tatuaggio ambigramma con due nomi è uno dei più richiesti in Italia perché racconta due persone in un solo segno. Ecco cosa sapere prima di andare dal tatuatore:
                                     </p>
                                     <ul>
-                                        <li><strong>MOW</strong> flipped upside down often reads as <strong>WOW</strong></li>
-                                        <li><strong>MOM</strong> flipped upside down spells <strong>WOW</strong></li>
-                                        <li><strong>POD</strong> flipped upside down can read as <strong>MOD</strong> or <strong>BOP</strong> depending on the font</li>
-                                        <li><strong>NO</strong> flipped upside down spells <strong>ON</strong></li>
+                                        <li><strong>Dimensione minima:</strong> almeno 6 cm di larghezza perché entrambi i nomi restino leggibili nel tempo.</li>
+                                        <li><strong>Stile consigliato:</strong> usa lo stile Calligraphy del generatore per ottenere linee più morbide, ideali per la pelle.</li>
+                                        <li><strong>Come consegnare il file:</strong> scarica il PNG e mandalo al tatuatore via WhatsApp o email come riferimento visivo.</li>
+                                        <li><strong>Posizione:</strong> polso interno, avambraccio e sterno sono i posti più scelti — la rotazione di 180° deve essere un gesto naturale.</li>
                                     </ul>
-                                </div>
-
-                                {/* SECTION 4: Ambigram Meaning */}
-                                <div id="meaning" className="scroll-mt-28 mb-16">
-                                    <h2 className="text-2xl font-black text-[#1A1A1B] flex items-center gap-4 mb-6 tracking-tight">
-                                        <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600"><BookOpen size={20} /></div>
-                                        Understanding Ambigram Meaning
-                                    </h2>
-                                    <p>
-                                        To truly grasp the <strong>ambigram meaning</strong>, you have to look beyond simple text. An ambigram is a typographic art form where a design is created to have multiple orientations.
-                                    </p>
-                                    <p>
-                                        While the words above are "natural" ambigrams (they work in standard fonts), the <strong>ambigram definition</strong> usually refers to custom-designed calligraphy where letters are stylistically altered to ensure they flip perfectly.
-                                    </p>
-
-                                    {/* 
-    ✍️ [人工注入任务: E-E-A-T 增强 - 个人发现故事]
-*/}
-                                    <div className="bg-amber-50 border-l-4 border-amber-500 rounded-r-2xl p-6 mt-8 shadow-sm">
-                                        <p className="font-bold text-amber-900 m-0 mb-2 flex items-center gap-2">
-                                            <Quote size={16} /> From the Curator:
-                                        </p>
-
-                                        <p className="m-0 text-amber-800 leading-relaxed italic">
-                                            I still remember the first time I tried to design a <strong>love pain ambigram</strong>.
-                                            At the beginning, I assumed it would be extremely difficult because the two words feel
-                                            emotionally opposite and visually unrelated. But after sketching dozens of letter
-                                            combinations on paper, I realized something interesting: the structures of
-                                            <strong>LOVE</strong> and <strong>PAIN</strong> actually align surprisingly well when rotated.
-                                            <br /><br />
-                                            That moment was a small breakthrough for me. It showed that great ambigrams are rarely
-                                            forced — they emerge when two words already share hidden visual symmetry. This discovery
-                                            is exactly what inspired many of the design rules we later implemented inside the
-                                            Ambigram Generator. When users type word pairs like <strong>love / pain</strong>, the tool
-                                            recognizes this natural balance and can generate far cleaner rotational ambigrams.
-                                        </p>
+                                    <div className="not-prose mt-4">
+                                        <Link href="/ambigram-word-tattoos" className="inline-flex items-center gap-2 border border-slate-200 text-slate-700 px-5 py-3 rounded-xl font-bold text-sm hover:border-indigo-200 hover:text-indigo-700 transition-colors">
+                                            Altre idee tatuaggio <ArrowRight size={14} />
+                                        </Link>
                                     </div>
                                 </div>
 
-                                {/* SECTION 5: The Sniper Word (SWIMS) */}
-                                <div id="swims" className="scroll-mt-28 mb-16">
-                                    <h2 className="text-2xl font-black text-[#1A1A1B] flex items-center gap-4 mb-6 tracking-tight">
-                                        <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white"><Zap size={20} /></div>
-                                        What word is the same upside down and backwards?
+                                {/* ── SEZIONE 4: 3D — risponde a "ambigramma con due nomi 3d" ── */}
+                                <div id="3d" className="scroll-mt-28 mb-14">
+                                    <h2 className="text-2xl font-black text-slate-900 mb-4">
+                                        Ambigramma con due nomi in 3D
                                     </h2>
                                     <p>
-                                        The most common answer to the puzzle <em>"<strong>what word is the same upside down and backwards</strong>?"</em> is <strong>SWIMS</strong>.
+                                        Il generatore 3D crea un oggetto fisico che mostra il primo nome da una direzione e il secondo ruotando l'oggetto di 90°. È un regalo originale e personalizzato — un oggetto da scrivania che nessun altro ha.
                                     </p>
-                                    <div className="p-6 bg-slate-900 text-white rounded-2xl text-center shadow-lg my-8">
-                                        <p className="text-4xl font-mono tracking-tighter mb-2">SWIMS</p>
-                                        <p className="text-sm text-slate-400 uppercase tracking-widest">Rotational & Backwards Symmetry</p>
-                                    </div>
                                     <p>
-                                        Because 'S' rotates to 'S', 'W' rotates to 'M', and 'I' remains 'I', the word <strong>reads the same upside down</strong> as it does right-side up. It's the ultimate example of a natural rotational ambigram.
+                                        Scarichi il file <strong>STL</strong> e lo mandi a qualsiasi servizio di stampa 3D online (es. Craftcloud, Sculpteo) oppure lo stampi in autonomia se hai una stampante 3D.
                                     </p>
+                                    <div className="not-prose mt-4">
+                                        <Link href="/3d-generator" className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-700 transition-colors">
+                                            Prova il Generatore 3D <ArrowRight size={15} />
+                                        </Link>
+                                    </div>
                                 </div>
 
-                                {/* CTA Section */}
-                                <div id="create" className="scroll-mt-28 border-t border-slate-100 pt-12 text-center">
-                                    <h2 className="text-2xl font-black text-[#1A1A1B] mb-4 tracking-tight">
-                                        Want to Test Your Own Upside-Down Word?
+                                {/* ── FAQ — query diretti GSC come domande ── */}
+                                <div id="faq" className="scroll-mt-28">
+                                    <h2 className="text-2xl font-black text-slate-900 flex items-center gap-3 mb-6">
+                                        <div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600"><HelpCircle size={18} /></div>
+                                        Domande frequenti
                                     </h2>
-                                    <p className="text-slate-600 mb-8">
-                                        If these natural <strong>words that read the same upside down</strong> inspired you, try your own name or word pair in the generator and check whether the letters can become a readable ambigram.
-                                    </p>
-                                    <Link href="/" className="inline-flex items-center justify-center gap-2 bg-indigo-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-indigo-700 transition-colors shadow-lg">
-                                        Try the Free Ambigram Generator <ArrowRight size={18} className="ml-2" />
+                                    <div className="not-prose space-y-3">
+                                        {[
+                                            {
+                                                q: "Come si crea un ambigramma con due nomi gratis?",
+                                                a: "Vai al generatore, inserisci i due nomi nei campi appositi e clicca Genera. Il download del PNG è immediato e gratuito, senza account."
+                                            },
+                                            {
+                                                q: "Quali nomi funzionano meglio per un ambigramma?",
+                                                a: "Nomi con lo stesso numero di lettere: Marco/Sara, Luca/Anna, Amore/Odio. Lunghezze diverse riducono la qualità del risultato — in quel caso usa abbreviazioni."
+                                            },
+                                            {
+                                                q: "Si può fare un ambigramma con due nomi in 3D?",
+                                                a: "Sì. Il generatore 3D produce un file STL stampabile: l'oggetto mostra il primo nome da un lato e il secondo ruotandolo. Ottimo come regalo personalizzato."
+                                            },
+                                            {
+                                                q: "L'ambigramma generato va bene per un tatuaggio?",
+                                                a: "Sì. Scarica il PNG ad alta risoluzione e mostralo al tuo tatuatore come riferimento. È libero da copyright."
+                                            },
+                                            {
+                                                q: "Quanto costa creare un ambigramma con due nomi?",
+                                                a: "Il generatore 2D è completamente gratuito. Puoi creare e scaricare quanti design vuoi senza pagare e senza registrarti."
+                                            },
+                                        ].map(({ q, a }) => (
+                                            <div key={q} className="border border-slate-100 rounded-xl p-5">
+                                                <p className="font-bold text-slate-900 text-sm mb-2">{q}</p>
+                                                <p className="text-slate-600 text-sm leading-relaxed">{a}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* CTA FINALE */}
+                                <div className="border-t border-slate-100 pt-10 mt-10 text-center not-prose">
+                                    <p className="text-slate-500 text-sm mb-5">Pronto? Il generatore è gratuito e non richiede registrazione.</p>
+                                    <Link href="/two-word-ambigram-generator" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-indigo-700 transition-colors shadow-lg">
+                                        Crea il Tuo Ambigramma Gratis <ArrowRight size={17} />
                                     </Link>
-
-                                    {/* 内链导航 */}
-                                    <div className="mt-12 pt-8 border-t border-slate-50 flex flex-wrap justify-center gap-6 text-sm font-bold text-indigo-600">
-                                        <Link href="/ambigram-word-tattoos" className="hover:underline">Ambigram Tattoo Ideas</Link>
-                                        <Link href="/ambigram-examples" className="hover:underline">Ambigram Examples Gallery</Link>
-                                        <Link href="/mirror-text-generator" className="hover:underline">Mirror Text Generator</Link>
+                                    <div className="mt-8 flex flex-wrap justify-center gap-5 text-sm font-bold text-indigo-600">
+                                        <Link href="/3d-generator" className="hover:underline">Generatore 3D STL</Link>
+                                        <Link href="/ambigram-word-tattoos" className="hover:underline">Idee Tatuaggi</Link>
+                                        <Link href="/two-word-ambigram-generator" className="hover:underline">Generatore Due Parole</Link>
                                     </div>
                                 </div>
 
@@ -284,11 +308,4 @@ export default async function WordsUpsideDownPage() {
             </section>
         </main>
     );
-}
-
-// 用于内部链接的图标辅助组件
-function ArrowRight(props: any) {
-    return (
-        <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-    )
 }
