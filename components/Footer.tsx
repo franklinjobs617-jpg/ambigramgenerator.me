@@ -66,9 +66,6 @@ export default function Footer() {
             links: [
                 { label: tNav("generators.items.3d"), href: "/3d-generator" },
                 { label: "Two Word Ambigram Generator", href: "/two-word-ambigram-generator" },
-                {
-                    label: "Gamehub", href: "https://base64pro.top"
-                },
                 { label: "AI Tattoo Generator", href: "/ai-tattoo-generator" },
                 { label: tNav("generators.items.twoName"), href: "/tutorial/two-name-ambigram" },
                 { label: tNav("generators.items.upsideDown"), href: "/upside-down-text-generator", },
@@ -106,12 +103,6 @@ export default function Footer() {
                 { label: tNav("support.items.about"), href: "/about" },
                 { label: tNav("support.items.privacy"), href: "/privacy" },
                 { label: tNav("support.items.terms"), href: "/terms" },
-            ],
-        },
-        {
-            title: "Friends",
-            links: [
-                { label: "AI Clothes Changer - Virtual Try-On & Outfit Swap", href: "https://aiclotheschangers.app/", external: true },
             ],
         },
     ];
