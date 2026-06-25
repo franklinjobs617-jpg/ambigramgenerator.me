@@ -187,17 +187,54 @@ export default function GeneradorAmbigramasNombresPage() {
                         </div>
                     </div>
 
-                    {/* AMBIGRAMA 3D */}
+                    {/* AMBIGRAMA 3D — expandido para cubrir "ambigrama 3d" (81 imp, pos 6.91) */}
                     <div>
                         <h2 className="text-2xl font-black text-slate-900 mb-4">
                             Ambigrama 3D con dos nombres
                         </h2>
-                        <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                            El generador 3D crea un objeto físico que muestra el primer nombre desde un ángulo y el segundo al rotarlo 90°. Es un regalo original y personalizado — un objeto de escritorio que nadie más tiene.
-                        </p>
                         <p className="text-slate-600 text-sm leading-relaxed mb-5">
-                            Descarga el archivo <strong>STL</strong> y envíalo a cualquier servicio de impresión 3D online o imprímelo tú mismo si tienes una impresora 3D.
+                            El generador 3D crea un objeto físico tridimensional que muestra el primer nombre desde un ángulo y el segundo nombre al girarlo 90°. Es la evolución del ambigramma 2D clásico — en lugar de una imagen plana, obtienes un modelo real que puedes imprimir.
                         </p>
+
+                        {/* SVG ilustración 3D */}
+                        <div className="flex justify-center mb-6">
+                            <svg viewBox="0 0 340 90" className="w-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="340" height="90" rx="16" fill="#0F172A"/>
+                                <text x="60" y="35" textAnchor="middle" fontFamily="Georgia, serif" fontSize="13" fill="#94A3B8">Vista frontal</text>
+                                <text x="60" y="62" textAnchor="middle" fontFamily="Georgia, serif" fontSize="20" fontWeight="bold" fill="#818CF8">Carlos</text>
+                                <text x="170" y="52" textAnchor="middle" fontFamily="Georgia, serif" fontSize="22" fill="#475569">↻ 90°</text>
+                                <text x="280" y="35" textAnchor="middle" fontFamily="Georgia, serif" fontSize="13" fill="#94A3B8">Vista lateral</text>
+                                <text x="280" y="62" textAnchor="middle" fontFamily="Georgia, serif" fontSize="20" fontWeight="bold" fill="#A5B4FC">María</text>
+                            </svg>
+                        </div>
+
+                        <div className="grid sm:grid-cols-3 gap-3 mb-5">
+                            {[
+                                { titulo: "Impresión 3D", desc: "Descarga el STL y envíalo a cualquier servicio de impresión 3D online — o imprímelo si tienes impresora." },
+                                { titulo: "Regalo original", desc: "Un objeto de escritorio único que muestra dos nombres según el ángulo. Perfecto para aniversarios y bodas." },
+                                { titulo: "GIF animado", desc: "Exporta un GIF del modelo rotando para compartir en redes sociales y mostrar ambos nombres en movimiento." },
+                            ].map(({ titulo, desc }) => (
+                                <div key={titulo} className="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                                    <p className="font-bold text-slate-900 text-sm mb-1">{titulo}</p>
+                                    <p className="text-slate-500 text-xs leading-relaxed">{desc}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4 mb-5 text-sm">
+                            <p className="font-bold text-indigo-900 mb-1">2D vs 3D — ¿cuál elegir?</p>
+                            <div className="grid sm:grid-cols-2 gap-3 mt-2">
+                                <div>
+                                    <p className="font-bold text-slate-700 text-xs mb-1">Ambigrama 2D</p>
+                                    <p className="text-slate-500 text-xs leading-relaxed">Imagen plana. Ideal para tatuajes, logos y descarga PNG. Gratis sin límites.</p>
+                                </div>
+                                <div>
+                                    <p className="font-bold text-slate-700 text-xs mb-1">Ambigrama 3D</p>
+                                    <p className="text-slate-500 text-xs leading-relaxed">Objeto físico imprimible. Ideal para regalos y arte de escritorio. Descarga STL.</p>
+                                </div>
+                            </div>
+                        </div>
+
                         <Link href="/3d-generator" className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-700 transition-colors">
                             Probar el Generador 3D <ArrowRight size={14} />
                         </Link>
