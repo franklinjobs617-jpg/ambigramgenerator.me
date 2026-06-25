@@ -51,6 +51,7 @@ export default function Header() {
         { code: "de", name: "Deutsch", flag: "DE" },
         { code: "es", name: "Español", flag: "ES" },
         { code: "it", name: "Italiano", flag: "IT" },
+        { code: "pt", name: "Português", flag: "BR" },
     ];
 
     const currentLang = languages.find(l => l.code === locale) || languages[0];
@@ -192,6 +193,14 @@ export default function Header() {
                             </AnimatePresence>
                         </div>
 
+                        {/* Pricing link */}
+                        <Link
+                            href="/pricing"
+                            className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold transition-all ${scrolled ? "text-slate-700 hover:bg-slate-100" : "text-slate-900 hover:bg-white/10"}`}
+                        >
+                            Pricing
+                        </Link>
+
                         {/* User Menu / Login Button */}
                         {mounted && !isLoading && (
                             <div className="hidden sm:block relative" ref={userMenuRef}>
@@ -318,6 +327,13 @@ export default function Header() {
                         </div>
 
                         <div className="p-6 border-t border-slate-100 space-y-3">
+                            <Link
+                                href="/pricing"
+                                onClick={() => setIsMobileOpen(false)}
+                                className="w-full flex items-center justify-center gap-2 border border-indigo-200 text-indigo-600 py-3 rounded-2xl font-bold hover:bg-indigo-50 transition-all"
+                            >
+                                Pricing
+                            </Link>
                             {user ? (
                                 <>
                                     {/* User Info */}

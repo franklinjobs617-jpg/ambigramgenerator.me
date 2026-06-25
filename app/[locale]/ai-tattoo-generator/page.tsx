@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ...constructMetadata({
         title: "AI Tattoo Generator Free: From Text to Tattoo Design | AmbigramGenerator",
         description:
-            "Use our ai tattoo generator to create tattoo designs from text. Start with 2 guest tries, then continue with login and credits for more generations.",
+            "Use our ai tattoo generator to create tattoo designs from text. Guest users get 2 credits, free accounts get 5 credits. 1K output costs 1 credit, 2K costs 2 credits.",
         path: "/ai-tattoo-generator",
         locale,
         }),
@@ -44,7 +44,7 @@ export default async function AITattooGeneratorPage({ params }: Props) {
             name: "Is this tattoo ai generator free?",
             acceptedAnswer: {
                 "@type": "Answer",
-                text: "You can start with 2 guest generations daily. After that, log in and continue with credits.",
+                text: "Guest users receive 2 credits to try the generator. Creating a free account gives you 5 credits. Each 1K generation costs 1 credit; 2K costs 2 credits. Upgrade to Pro for 666 credits/month plus HD downloads.",
             },
         },
         {
