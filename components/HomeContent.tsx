@@ -212,20 +212,37 @@ export default function HomeContent() {
                             )}
                         </AnimatePresence>
 
-                        <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50/80 to-transparent p-5 sm:p-6 text-left">
-                            <h2 className="text-lg sm:text-xl font-bold text-[#1A1A1B]">{t("Workspace.tattooToolTitle")}</h2>
-                            <p className="mt-2 text-sm text-[#666666] leading-relaxed">
-                                {t.rich("Workspace.tattooToolDesc", {
-                                    bold: (chunks) => <strong>{chunks}</strong>,
-                                    spanClass: (chunks) => <span className="font-bold text-indigo-600">{chunks}</span>,
-                                })}
-                            </p>
+                        {/* Pro upgrade hook — 生成器正下方，最高意图位置 */}
+                        <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50/80 to-transparent p-5 sm:p-6">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className="inline-flex items-center gap-1 rounded-full bg-indigo-600 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white">
+                                            <Sparkles size={10} /> Pro
+                                        </span>
+                                        <span className="text-xs text-slate-400 font-medium">Free plan: 2 generations/day · standard resolution</span>
+                                    </div>
+                                    <h2 className="text-base font-black text-[#1A1A1B]">{t("Workspace.tattooToolTitle")}</h2>
+                                    <p className="mt-1 text-sm text-[#666666] leading-relaxed">
+                                        {t.rich("Workspace.tattooToolDesc", {
+                                            bold: (chunks) => <strong>{chunks}</strong>,
+                                            spanClass: (chunks) => <span className="font-bold text-indigo-600">{chunks}</span>,
+                                        })}
+                                    </p>
+                                </div>
+                                <Link
+                                    href="/ai-tattoo-generator"
+                                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-md transition-all hover:bg-indigo-700 hover:shadow-lg whitespace-nowrap flex-shrink-0"
+                                >
+                                    <Sparkles size={14} /> Unlock HD + Unlimited
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* AI Tattoo Generator - compact banner */}
+            {/* Pro upgrade banner — secondary CTA */}
             <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
                 <Link
                     href="/ai-tattoo-generator"
@@ -236,12 +253,15 @@ export default function HomeContent() {
                             <Sparkles size={22} />
                         </div>
                         <div>
-                            <h2 className="text-base font-black text-[#1A1A1B]">{t("AIBanner.title")}</h2>
-                            <p className="text-sm text-slate-500">{t("AIBanner.desc")}</p>
+                            <div className="flex items-center gap-2 mb-0.5">
+                                <span className="text-base font-black text-[#1A1A1B]">Upgrade to Pro — $15/month</span>
+                                <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-[10px] font-black text-indigo-700 uppercase tracking-widest">or $72/year</span>
+                            </div>
+                            <p className="text-sm text-slate-500">666 credits/month · HD downloads · Visualize + 3D STL export · No daily limits</p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all group-hover:bg-indigo-700 group-hover:shadow-lg">
-                        {t("AIBanner.cta")} <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                    <div className="flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all group-hover:bg-indigo-700 group-hover:shadow-lg whitespace-nowrap">
+                        Start Pro <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                     </div>
                 </Link>
             </section>
