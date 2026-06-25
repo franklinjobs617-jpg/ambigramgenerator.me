@@ -13,7 +13,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
     const path = "/generator";
 
-    // 定义多语言文案 (填充完整内容)
     const seo: Record<string, { title: string; description: string }> = {
         en: {
             title: "Free Ambigram Generator Online: Two-Name, Tattoo & Custom Designs",
@@ -31,18 +30,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const current = seo[locale] || seo.en;
 
-    return constructMetadata({
-        title: current.title,
-        description: current.description,
-        path: path,
-        locale: locale
-    });
+    return {
+        ...constructMetadata({
+            title: current.title,
+            description: current.description,
+            path: path,
+            locale: locale,
+        }),
+        alternates: {
+            canonical: "https://www.ambigramgenerator.me",
+        },
+    };
 }
 
 export default async function GeneratorPage({ params }: Props) {
     const { locale } = await params;
 
-    // 🌟 JSON-LD 结构化数据
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
@@ -63,9 +66,6 @@ export default async function GeneratorPage({ params }: Props) {
         </div>
     );
 
-    // ========================================================================
-    // 法语版本 (French)
-    // ========================================================================
     if (locale === 'fr') {
         return (
             <main className="bg-[#FDFDFF]">
@@ -128,9 +128,6 @@ export default async function GeneratorPage({ params }: Props) {
         );
     }
 
-    // ========================================================================
-    // 德语版本 (German)
-    // ========================================================================
     if (locale === 'de') {
         return (
             <main className="bg-[#FDFDFF]">
@@ -153,14 +150,10 @@ export default async function GeneratorPage({ params }: Props) {
         );
     }
 
-    // ========================================================================
-    // 英语版本 (Default / English)
-    // ========================================================================
     return (
         <main className="bg-[#FDFDFF]">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-            {/* Hero Section */}
             <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6 text-center">
                 <div className="max-w-4xl mx-auto space-y-6">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-indigo-100 text-xs font-bold text-indigo-600 uppercase tracking-widest shadow-sm">
@@ -181,14 +174,12 @@ export default async function GeneratorPage({ params }: Props) {
                 </div>
             </section>
 
-            {/* Generator Component Area */}
             <section id="generator-tool" className="py-12 scroll-mt-24 px-6">
                 <div className="max-w-7xl mx-auto bg-white rounded-[3rem] p-4 shadow-2xl shadow-indigo-100/50 border border-slate-100 overflow-hidden">
                     <Generator2d />
                 </div>
             </section>
 
-            {/* Inspiration Gallery */}
             <section className="py-32 bg-slate-50 px-6">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-20 space-y-4">
@@ -221,7 +212,6 @@ export default async function GeneratorPage({ params }: Props) {
                 </div>
             </section>
 
-            {/* Guides Section */}
             <section className="py-32 bg-white px-6">
                 <div className="container mx-auto max-w-6xl">
                     <div className="grid md:grid-cols-2 gap-20 items-center">
@@ -257,7 +247,6 @@ export default async function GeneratorPage({ params }: Props) {
                 </div>
             </section>
 
-            {/* Final CTA */}
             <section className="py-40 bg-indigo-600 text-white text-center px-6 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent" />
                 <div className="relative z-10 max-w-3xl mx-auto space-y-10">
