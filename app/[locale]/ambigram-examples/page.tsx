@@ -18,8 +18,8 @@ const DOMAIN = "https://www.ambigramgenerator.me";
 // 1. TDK 配置：主关键词前置
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Stunning Ambigram Examples: Love/Pain, Logos & Tattoos",
-        description: "Explore our ultimate library of ambigram examples. Featuring the famous 'Love Pain' ambigram, ABBA's mirror logo, and creative tattoo style inspiration.",
+        title: "Famous Ambigram Examples: Love/Pain, ABBA Logo & Tattoo Styles",
+        description: "The best ambigram examples in one gallery — Love/Pain symbiotogram, ABBA mirror logo, gothic and script tattoo styles. Try the free ambigram generator to create your own.",
         alternates: {
             canonical: `${DOMAIN}/ambigram-examples`,
         }
@@ -267,6 +267,23 @@ export default async function AmbigramExamplesPage() {
                             </p>
                             <Link href="/" className="block w-full py-4 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-bold transition-all shadow-lg shadow-indigo-900/50">
                                 Launch Generator
+                            </Link>
+                        </div>
+
+                        {/* Pro upgrade hook */}
+                        <div className="bg-white border border-indigo-100 rounded-2xl p-6 text-center">
+                            <div className="inline-flex items-center gap-1.5 bg-indigo-600 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest mb-3">
+                                <Zap size={10} /> Pro
+                            </div>
+                            <h3 className="font-black text-slate-900 mb-1 text-base">Unlock HD + 3D STL</h3>
+                            <p className="text-slate-500 text-xs mb-4 leading-relaxed">
+                                666 credits/month · HD downloads · 3D printable STL files · No daily limits
+                            </p>
+                            <Link
+                                href="/pricing"
+                                className="block w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm transition-colors"
+                            >
+                                See Pricing — $15/month
                             </Link>
                         </div>
 

@@ -46,6 +46,7 @@ const englishOnlyPages = [
   '/guide/words-that-spell-words-upside-down',
   '/mirror-text-generator',
   '/illuminati-ambigram',
+  '/pricing',
 ]
 
 // 意大利语专属落地页
