@@ -53,6 +53,16 @@ const italianOnlyPages = [
   '/ambigramma-con-due-nomi',
 ]
 
+// 法语专属落地页
+const frenchOnlyPages = [
+  '/generateur-ambigramme-prenom',
+]
+
+// 西班牙语专属落地页
+const spanishOnlyPages = [
+  '/generador-ambigramas-nombres',
+]
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const sitemapEntries: MetadataRoute.Sitemap = []
 
@@ -85,6 +95,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
   italianOnlyPages.forEach((page) => {
     sitemapEntries.push({
       url: localizedUrl('it', page),
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    })
+  })
+
+  frenchOnlyPages.forEach((page) => {
+    sitemapEntries.push({
+      url: localizedUrl('fr', page),
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    })
+  })
+
+  spanishOnlyPages.forEach((page) => {
+    sitemapEntries.push({
+      url: localizedUrl('es', page),
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.85,
