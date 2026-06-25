@@ -49,6 +49,7 @@ const englishOnlyPages = [
   '/pricing',
   '/flipscript-alternative',
   '/ambigram-tattoo-generator',
+  '/ambigram-name-generator',
 ]
 
 // 意大利语专属落地页
