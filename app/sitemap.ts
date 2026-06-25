@@ -55,11 +55,13 @@ const englishOnlyPages = [
 // 意大利语专属落地页
 const italianOnlyPages = [
   '/ambigramma-con-due-nomi',
+  '/ambigramma-3d',
 ]
 
 // 法语专属落地页
 const frenchOnlyPages = [
   '/generateur-ambigramme-prenom',
+  '/generateur-ambigramme',
 ]
 
 // 西班牙语专属落地页
