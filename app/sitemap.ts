@@ -73,6 +73,7 @@ const spanishOnlyPages = [
 // 德语专属落地页
 const germanOnlyPages = [
   '/ambigramm-erstellen',
+  '/ambigramm-zwei-namen',
 ]
 
 // 葡萄牙语专属落地页
