@@ -29,16 +29,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         }
     };
 
-    const current = seo[locale] || seo.en;
-
-    return constructMetadata({
+return {
+    ...constructMetadata({
         title: current.title,
         description: current.description,
         path: path,
-        locale: locale
-        canonical: "https://www.ambigramgenerator.me"
-    });
-}
+        locale: locale,
+    }),
+    alternates: {
+        canonical: "https://www.ambigramgenerator.me",
+    },
+};
 
 export default async function GeneratorPage({ params }: Props) {
     const { locale } = await params;
