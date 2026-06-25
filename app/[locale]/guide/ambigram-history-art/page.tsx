@@ -1,365 +1,351 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { constructMetadata } from "@/lib/seo";
+import { ArrowRight, BookOpen, HelpCircle, Sparkles } from "lucide-react";
 
-type Props = {
-    params: { locale: string };
-};
+type Props = { params: { locale: string } };
 
+// TDH: 基于 GSC query — "ambigram art" 208次展示, "ambigram history" 相关词群
+// 原文件内容是 advanced-3d-controls 的拷贝，path 也指向错误路由，全部修正
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
-    const path = "/guide/advanced-3d-controls";
+    const path = "/guide/ambigram-history-art";
 
     const seoData: Record<string, { title: string; description: string }> = {
         en: {
-            title: "Advanced 3D Ambigram Controls: Mastering Lighting and Axis Rotation",
-            description: "Move beyond basic designs. Learn to use advanced controls within our ambigram generator software to create new ambigram generator-level 3D renders with dynamic lighting and rotation."
+            title: "History of Ambigrams: Origin, Art & the Artists Who Defined It",
+            description: "The complete history of ambigrams — from ancient letterforms to Scott Kim, John Langdon, Angels & Demons and today's digital generators. Who invented ambigrams and how the art evolved.",
         },
         fr: {
-            title: "Contrôles Avancés d'Ambigramme 3D : Maîtriser l'Éclairage et la Rotation",
-            description: "Allez au-delà des designs basiques. Apprenez à utiliser les contrôles avancés de notre logiciel générateur d'ambigrammes pour créer des rendus 3D professionnels avec éclairage dynamique."
+            title: "Histoire des Ambigrammes : Origines, Art et Artistes Fondateurs",
+            description: "L'histoire complète des ambigrammes — des lettres anciennes à Scott Kim, John Langdon, Anges et Démons et les générateurs numériques d'aujourd'hui.",
         },
         de: {
-            title: "Fortgeschrittene 3D-Ambigramm-Steuerung: Beherrschung von Beleuchtung und Achsenrotation",
-            description: "Gehen Sie über einfache Designs hinaus. Lernen Sie, fortgeschrittene Steuerungen in unserer Ambigramm-Generator-Software zu nutzen, um professionelle 3D-Renders zu erstellen."
-        }
+            title: "Geschichte der Ambigramme: Ursprung, Kunst und die Künstler dahinter",
+            description: "Die vollständige Geschichte der Ambigramme — von antiken Schriftformen über Scott Kim und John Langdon bis zu Angels & Demons und heutigen digitalen Generatoren.",
+        },
     };
 
     const currentSeo = seoData[locale] || seoData.en;
-
     return constructMetadata({
         title: currentSeo.title,
         description: currentSeo.description,
-        path: path,
-        locale: locale,
-        image: "https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/advanced-3d-controls-lighting.webp"
+        path,
+        locale,
     });
 }
 
-export default async function Advanced3dControlsPage({ params }: Props) {
-    const { locale } = await params;
+// ── 共用数据 ──────────────────────────────────────────────────────────────────
 
-    // ========================================================================
-    // 法语版本 (French Version)
-    // ========================================================================
-    if (locale === 'fr') {
-        return (
-            <main>
-                {/* Header Section (FR) */}
-                <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6 text-center">
-                    <div className="container mx-auto px-4 text-center">
-                        <h1 className="text-4xl lg:text-5xl font-display font-extrabold mb-4">
-                            Contrôles Avancés d&apos;Ambigramme 3D : Maîtriser l&apos;Éclairage et la Rotation d&apos;Axe
-                        </h1>
-                        <p className="text-xl max-w-3xl mx-auto callout">
-                            Si vous cherchez à obtenir des résultats de niveau <strong>nouveau générateur d&apos;ambigramme</strong>, vous devez maîtriser le rendu 3D. La différence entre un modèle simple et un rendu professionnel réside dans les <strong>contrôles avancés d&apos;ambigramme</strong>—spécifiquement, l&apos;éclairage, la science des matériaux et les axes de rotation personnalisés.
-                        </p>
-                    </div>
-                </section>
+const timeline = [
+    {
+        era: "Pre-1970s",
+        title: "Ancient roots",
+        body: "Rotational and mirror-symmetric letterforms appear throughout history — in medieval manuscripts, Islamic geometric calligraphy, and carved stone inscriptions. These were not called ambigrams, but the underlying principle of readable symmetry was already being explored.",
+    },
+    {
+        era: "1970s–1980s",
+        title: "Scott Kim and the formalization of ambigram art",
+        body: "American designer and puzzle author Scott Kim created his first ambigrams in the 1970s and published Inversions (1981) — the first book dedicated to the art form. Kim's work established ambigrams as a legitimate typographic discipline and introduced systematic methods for letter-pair design.",
+    },
+    {
+        era: "1977–1990s",
+        title: "John Langdon and the term 'ambigram'",
+        body: "John Langdon, a Philadelphia-based graphic designer, began creating symmetrical word designs independently in the late 1970s. Cognitive scientist Douglas Hofstadter coined the term 'ambigram' in 1983 to describe these designs. Langdon published Wordplay (1992), expanding awareness of the art form internationally.",
+    },
+    {
+        era: "2000",
+        title: "Angels & Demons: the mainstream breakthrough",
+        body: "Dan Brown commissioned John Langdon to create four element ambigrams — Earth, Air, Fire, Water — for the Illuminati in Angels & Demons. The novel's global success exposed millions of readers to ambigrams for the first time and directly drove the first wave of online ambigram interest.",
+    },
+    {
+        era: "2000s–2010s",
+        title: "The tattoo era",
+        body: "Ambigrams became one of the most searched tattoo styles online. 'Love/Pain' and 'Life/Death' symbiotograms spread across tattoo forums. The ambigram moved from typographic curiosity to mainstream body art, with dedicated tattoo artists specialising in the form.",
+    },
+    {
+        era: "2010s–present",
+        title: "Digital generators and 3D ambigrams",
+        body: "Automated ambigram generators made the art accessible to anyone without design skills. The latest development is 3D ambigrams — physical objects that display one word from one angle and a different word when rotated 90° — exported as STL files for 3D printing.",
+    },
+];
 
-                {/* Content Section (FR) */}
-                <section id="definition" className="pb-16">
-                    <div className="container mx-auto px-4 max-w-4xl">
-                        <article className="prose lg:prose-xl max-w-none text-gray-700">
-                            <h2 className="text-3xl font-display font-bold text-dark mb-6 border-b pb-3 text-[#1A1A1B]">
-                                Au-delà des Bases : Pourquoi l&apos;Éclairage est la Nouvelle Symétrie
-                            </h2>
-                            <p className="leading-relaxed mb-6">
-                                En 2D, la symétrie est absolue. En 3D, la symétrie est souvent *implicite* à travers une illusion d&apos;optique, et la lumière est l&apos;outil principal. Tout <strong>logiciel générateur d&apos;ambigramme</strong> professionnel doit permettre à l&apos;utilisateur un contrôle granulaire sur la source de lumière pour s&apos;assurer que les ombres définissent correctement le mot secondaire.
-                            </p>
+const timelineFr = [
+    { era: "Avant 1970", title: "Racines anciennes", body: "Des lettres symétriques rotatives apparaissent dans les manuscrits médiévaux, la calligraphie islamique et les inscriptions gravées. Le principe de symétrie lisible était déjà exploré." },
+    { era: "1970–1980", title: "Scott Kim et la formalisation", body: "Le designer américain Scott Kim crée ses premiers ambigrammes dans les années 1970 et publie Inversions (1981), le premier livre dédié à cette forme d'art." },
+    { era: "1977–1990", title: "John Langdon et le mot 'ambigram'", body: "Le designer John Langdon développe ses designs symétriques indépendamment. Douglas Hofstadter invente le terme 'ambigram' en 1983. Langdon publie Wordplay en 1992." },
+    { era: "2000", title: "Anges et Démons : percée grand public", body: "Dan Brown commande à John Langdon quatre ambigrammes des éléments pour les Illuminati. Le succès mondial du roman expose des millions de lecteurs à l'art des ambigrammes." },
+    { era: "2000–2010", title: "L'ère du tatouage", body: "Les ambigrammes deviennent l'un des styles de tatouage les plus recherchés en ligne. 'Love/Pain' et 'Life/Death' se répandent sur les forums de tatouage." },
+    { era: "2010–présent", title: "Générateurs numériques et 3D", body: "Les générateurs automatiques rendent l'art accessible à tous. Les ambigrammes 3D — objets physiques affichant un mot d'un côté et un autre après rotation — représentent la dernière évolution." },
+];
 
-                            <h3 className="text-2xl font-display font-semibold text-secondary mt-12 mb-4 text-indigo-600">
-                                1. Éclairage Dynamique : La Clé du Succès de l&apos;Ambigramme 3D
-                            </h3>
-                            <p className="leading-relaxed mb-6">
-                                Utilisant une technologie comme Three.js, notre outil simule la physique du monde réel. Vous devez positionner la source de lumière avec soin :
-                            </p>
-                            <ul className="list-disc list-inside space-y-2 mb-6 ml-4">
-                                <li><strong>Éclairage Axial :</strong> Les sources lumineuses placées directement sur l&apos;axe de rotation principal (180°) détruisent souvent l&apos;effet en minimisant les ombres critiques.</li>
-                                <li><strong>Projecteurs Inclinés :</strong> Les meilleurs résultats pour les effets d&apos;<strong>ambigramme à éclairage 3D</strong> proviennent de projecteurs positionnés à un angle vertical de 45°, maximisant la profondeur et la séparation des ombres.</li>
-                            </ul>
+// ── Page anglaise ─────────────────────────────────────────────────────────────
 
-                            <pre className="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto my-8 font-mono">
-                                <code>
-                                    {`// Concept d'implémentation d'éclairage Three.js
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
-directionalLight.position.set(5, 10, 7); // Accent sur l'angle de 45 degrés
-scene.add(directionalLight);`}
-                                </code>
-                            </pre>
+function EnglishPage() {
+    const jsonLd = [
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "History of Ambigrams: Origin, Art and the Artists Who Defined It",
+            "description": "The complete history of ambigrams from ancient letterforms to Scott Kim, John Langdon, Angels & Demons and today's digital generators.",
+            "author": { "@type": "Organization", "name": "AmbigramGenerator" },
+            "publisher": { "@type": "Organization", "name": "AmbigramGenerator", "logo": { "@type": "ImageObject", "url": "https://www.ambigramgenerator.me/logo.png" } },
+            "datePublished": "2026-06-24",
+            "dateModified": "2026-06-24",
+            "url": "https://www.ambigramgenerator.me/guide/ambigram-history-art",
+            "inLanguage": "en"
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Who invented ambigrams?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "No single person invented ambigrams — symmetrical letterforms appear throughout history. However, Scott Kim (Inversions, 1981) and John Langdon (Wordplay, 1992) are the two artists most credited with formalizing ambigram design as a discipline. The term 'ambigram' itself was coined by cognitive scientist Douglas Hofstadter in 1983." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the history of ambigrams?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Ambigrams have roots in ancient symmetric letterforms, but emerged as a named art form in the 1970s–80s through the work of Scott Kim and John Langdon. They reached mainstream awareness through Dan Brown's Angels & Demons (2000), then became a major tattoo trend in the 2000s. Digital generators and 3D-printed ambigrams represent the current frontier." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the difference between an ambigram and a palindrome?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "A palindrome reads the same forwards and backwards in standard text (e.g., RADAR). An ambigram is a visual/typographic design that reads the same or differently when rotated or mirrored — it relies on how letters look, not just their sequence." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Who made ambigrams famous?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "John Langdon made ambigrams famous worldwide through the four Earth/Air/Fire/Water designs he created for Dan Brown's Angels & Demons in 2000. Scott Kim's earlier book Inversions was important within design circles, but Angels & Demons reached a global general audience." }
+                }
+            ]
+        }
+    ];
 
-                            <figure className="my-8 text-center">
-                                <img
-                                    src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/advanced-3d-controls-lighting.webp"
-                                    alt="Diagramme montrant l'effet de différents angles de source lumineuse sur un modèle d'ambigramme 3d"
-                                    className="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                    loading="lazy"
-                                />
-                                <figcaption className="text-sm text-gray-500 mt-2">
-                                    Diagramme montrant l&apos;effet de différents angles de source lumineuse sur un modèle d&apos;ambigramme 3d.
-                                </figcaption>
-                            </figure>
-
-                            <div className="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-4 mb-6" role="alert">
-                                <p className="font-bold">L&apos;Importance du Matériau : Brillant vs Mat</p>
-                                <p className="mt-2">
-                                    Le choix du matériau est critique. Une finition métallique brillante (Haute Spécularité) amplifie considérablement les reflets, confondant parfois le spectateur et brisant l&apos;illusion. Inversement, une finition mate et non réfléchissante (Faible Spécularité) absorbe la lumière ambiante et repose uniquement sur l&apos;ombre, rendant l&apos;effet d&apos;ambigramme plus fiable pour les impressions 3D physiques.
-                                </p>
-                            </div>
-
-                            <h2 className="text-3xl font-display font-bold text-dark mt-16 mb-6 border-b pb-3 text-[#1A1A1B]">
-                                2. Maîtriser les Contrôles Avancés : Rotation et Exportation
-                            </h2>
-                            <p className="leading-relaxed mb-6">
-                                Pour vraiment <strong>créer de nouveaux designs de générateur d&apos;ambigramme</strong>, vous avez besoin de contrôler chaque degré des axes X, Y et Z. Ce n&apos;est pas seulement pour la visualisation ; c&apos;est pour préparer le fichier pour une fabrication spécialisée ou un rendu haut de gamme.
-                            </p>
-
-                            <h3 className="text-2xl font-display font-semibold text-secondary mt-12 mb-4 text-indigo-600">
-                                Manipulation Personnalisée des Axes
-                            </h3>
-                            <p className="leading-relaxed mb-6">
-                                La plupart des générateurs forcent une simple rotation de l&apos;axe Z à 180°. Notre <strong>logiciel générateur d&apos;ambigramme</strong> permet des ajustements minutieux. Pour les designs complexes à plusieurs mots, décaler le centre de rotation de seulement 0,5 unité le long de l&apos;axe X peut faire la différence entre l&apos;échec et le succès.
-                            </p>
-
-                            <div className="bg-red-50 border-l-4 border-red-500 text-red-800 p-4 mb-6" role="alert">
-                                <p className="font-bold">Avertissement d&apos;Expert : Intégrité du Maillage</p>
-                                <p className="mt-2">
-                                    Bien que de nombreux tutoriels de base prétendent que vous pouvez &quot;créer de nouveaux effets de générateur d&apos;ambigramme&quot; en utilisant des logiciels 3D gratuits simples, ils manquent d&apos;optimisation du maillage géométrique sous-jacent. Si l&apos;extrusion initiale de vecteur 2D vers 3D est médiocre, aucun ajustement manuel de l&apos;éclairage ne corrigera l&apos;intégrité défectueuse du maillage du fichier STL final. Utilisez des outils professionnels dès le départ.
-                                </p>
-                            </div>
-
-                            <figure className="my-8 text-center">
-                                <img
-                                    src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/ambigram-generator-software-controls.webp"
-                                    alt="Vue détaillée du panneau de contrôles avancés d'ambigramme montrant les curseurs d'axe de rotation"
-                                    className="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                    loading="lazy"
-                                />
-                                <figcaption className="text-sm text-gray-500 mt-2">
-                                    Vue détaillée du panneau de contrôles avancés d&apos;ambigramme montrant les curseurs d&apos;axe de rotation.
-                                </figcaption>
-                            </figure>
-
-                            <div className="text-center mt-16 p-8 bg-primary bg-indigo-600 text-white rounded-xl shadow-lg border border-primary-dark">
-                                <h3 className="text-2xl font-display font-bold mb-4 text-white">
-                                    Maîtrisez l&apos;Environnement 3D Aujourd&apos;hui
-                                </h3>
-                                <p className="text-lg mb-6 text-indigo-100">
-                                    Prêt à aller au-delà du 2D de base ? Cliquez ici pour accéder au **logiciel générateur d&apos;ambigramme** qui vous permet de créer facilement de nouveaux effets d&apos;ambigramme en manipulant l&apos;environnement 3D.
-                                </p>
-                                <Link href="/" className="inline-block bg-white text-indigo-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 hover:-translate-y-1 transition-all duration-300 shadow-xl">
-                                    Débloquer les Contrôles Avancés 3D Maintenant !
-                                </Link>
-                            </div>
-
-                            <figure className="my-8 text-center">
-                                <img
-                                    src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/3d-ambigram-stl-export-quality.webp"
-                                    alt="Comparaison d'un fichier d'exportation STL basse résolution vs haute résolution"
-                                    className="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                    loading="lazy"
-                                />
-                                <figcaption className="text-sm text-gray-500 mt-2">
-                                    Comparaison d&apos;un fichier d&apos;exportation STL basse résolution vs haute résolution provenant du logiciel générateur.
-                                </figcaption>
-                            </figure>
-
-                            <h2 className="text-3xl font-display font-bold text-dark mt-16 mb-6 border-b pb-3 text-[#1A1A1B]">
-                                Conclusion : L&apos;Avenir du Logiciel de Design d&apos;Ambigramme
-                            </h2>
-                            <p className="leading-relaxed mb-6">
-                                Le <strong>logiciel générateur d&apos;ambigramme</strong> du futur doit être capable de rendu 3D dynamique. Maîtriser les <strong>contrôles avancés d&apos;ambigramme</strong> comme la lumière et l&apos;axe est la compétence nécessaire pour exploiter pleinement ce médium artistique. Arrêtez de vous contenter de designs plats et commencez à travailler en trois dimensions.
-                            </p>
-
-                            <p className="leading-relaxed mb-6">Prêt à tirer parti de ces contrôles avancés ?</p>
-                            <p className="text-center my-10">
-                                <Link href="/" className="inline-block px-8 py-4 bg-secondary bg-green-600 text-white rounded-full text-xl font-bold hover:bg-green-700 hover:-translate-y-1 transition-all duration-300 shadow-xl">
-                                    Débloquer les Contrôles Avancés 3D Maintenant !
-                                </Link>
-                            </p>
-                        </article>
-                    </div>
-                </section>
-            </main>
-        );
-    }
-
-    // ========================================================================
-    // 英语版本 (Default / English Version)
-    // ========================================================================
     return (
-        <main>
-            {/* Header Section (EN) */}
-            <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6 text-center">
-                <div className="container mx-auto px-4 text-center">
-                    <h1 className="text-4xl lg:text-5xl font-display font-extrabold mb-4">
-                        Advanced 3D Ambigram Controls: Mastering Lighting and Axis Rotation
+        <main className="bg-[#FDFDFF] min-h-screen">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
+            <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-16 px-4 text-center">
+                <div className="container mx-auto max-w-3xl">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 font-bold text-xs mb-5 uppercase tracking-wider">
+                        <BookOpen size={12} /> History · Art · Origins
+                    </div>
+                    <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-4 text-slate-900">
+                        History of Ambigrams
                     </h1>
-                    <p className="text-xl max-w-3xl mx-auto callout">
-                        If you seek to <strong>create new ambigram generator</strong>-level results, you must master 3D rendering. The difference between a simple
-                        model and a professional render lies in the <strong>advanced ambigram controls</strong>—specifically,
-                        lighting, material science, and custom rotation axes.
+                    <p className="text-slate-500 text-lg max-w-2xl mx-auto">
+                        From ancient symmetric letterforms to Scott Kim, John Langdon, <em>Angels & Demons</em>, and today's 3D generators — the complete story of ambigram art and the people who shaped it.
                     </p>
                 </div>
             </section>
 
-            {/* Content Section (EN) */}
-            <section id="definition" className="pb-16">
-                <div className="container mx-auto px-4 max-w-4xl">
-                    <article className="prose lg:prose-xl max-w-none text-gray-700">
-                        <h2 className="text-3xl font-display font-bold text-dark mb-6 border-b pb-3 text-[#1A1A1B]">
-                            Beyond the Basics: Why Lighting is the New Symmetry
-                        </h2>
-                        <p className="leading-relaxed mb-6">
-                            In 2D, symmetry is absolute. In 3D, symmetry is often *implied*
-                            through optical illusion, and light is the primary tool. Any professional <strong>ambigram
-                                generator software</strong> must allow the user granular control over the light source to
-                            ensure the shadows correctly define the secondary word.
-                        </p>
+            <section className="py-12 px-4">
+                <div className="container mx-auto max-w-7xl">
+                    <div className="flex flex-col lg:flex-row gap-10">
 
-                        <h3 className="text-2xl font-display font-semibold text-secondary mt-12 mb-4 text-indigo-600">
-                            1. Dynamic Lighting: The Key to 3D Ambigram Success
-                        </h3>
-                        <p className="leading-relaxed mb-6">
-                            Using technology like Three.js, our tool simulates real-world
-                            physics. You must position the light source carefully:
-                        </p>
-                        <ul className="list-disc list-inside space-y-2 mb-6 ml-4">
-                            <li><strong>Axial Lighting:</strong> Light sources placed directly on the main rotation axis
-                                (180°) will often destroy the effect by minimizing critical shadows.</li>
-                            <li><strong>Angled Spotlights:</strong> The best results for <strong>3d lighting
-                                ambigram</strong> effects come from spotlights positioned at a 45° vertical
-                                angle, maximizing the depth and shadow separation.</li>
-                        </ul>
+                        {/* Sidebar */}
+                        <aside className="lg:w-1/4 lg:sticky lg:top-24 h-fit hidden lg:block">
+                            <nav className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm space-y-1">
+                                <h3 className="font-black text-xs uppercase tracking-widest text-indigo-600 mb-4 px-3">On this page</h3>
+                                {[
+                                    ["#timeline", "Timeline"],
+                                    ["#scott-kim", "Scott Kim"],
+                                    ["#john-langdon", "John Langdon"],
+                                    ["#angels-demons", "Angels & Demons"],
+                                    ["#today", "Ambigrams today"],
+                                    ["#faq", "FAQ"],
+                                ].map(([href, label]) => (
+                                    <Link key={href} href={href} className="flex items-center gap-2 px-3 py-2.5 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all">
+                                        <ArrowRight size={13} /> {label}
+                                    </Link>
+                                ))}
+                            </nav>
+                        </aside>
 
-                        <pre className="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto my-8 font-mono">
-                            <code>
-                                {`// Three.js Lighting Implementation Concept
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
-directionalLight.position.set(5, 10, 7); // 45-degree angle emphasis
-scene.add(directionalLight);`}
-                            </code>
-                        </pre>
+                        {/* Main */}
+                        <div className="lg:w-3/4 bg-white p-6 md:p-14 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100">
+                            <article className="prose prose-lg prose-slate max-w-none text-slate-700">
 
-                        <figure className="my-8 text-center">
-                            <img
-                                src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/advanced-3d-controls-lighting.webp"
-                                alt="Diagram showing the effect of different light source angles on a 3d ambigram model"
-                                data-seo-name="advanced-3d-controls-lighting"
-                                className="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                loading="lazy"
-                            />
-                            <figcaption className="text-sm text-gray-500 mt-2">
-                                Diagram showing the effect of different light source angles on a 3d ambigram model.
-                            </figcaption>
-                        </figure>
+                                {/* Timeline */}
+                                <div id="timeline" className="scroll-mt-28 mb-14">
+                                    <h2 className="text-2xl font-black text-slate-900 mb-8">Ambigram history: a timeline</h2>
+                                    <div className="not-prose space-y-4">
+                                        {timeline.map((item, i) => (
+                                            <div key={i} className="flex gap-5">
+                                                <div className="flex flex-col items-center">
+                                                    <div className="w-2 h-2 rounded-full bg-indigo-500 mt-2 flex-shrink-0" />
+                                                    {i < timeline.length - 1 && <div className="w-px flex-1 bg-slate-100 mt-2" />}
+                                                </div>
+                                                <div className="pb-8">
+                                                    <span className="text-xs font-black text-indigo-600 uppercase tracking-widest">{item.era}</span>
+                                                    <h3 className="font-black text-slate-900 mt-1 mb-2">{item.title}</h3>
+                                                    <p className="text-slate-600 text-sm leading-relaxed">{item.body}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
 
-                        <div className="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-4 mb-6" role="alert">
-                            <p className="font-bold">Material Matters: Glossy vs. Matte</p>
-                            <p className="mt-2">
-                                The material choice is critical. A glossy metallic finish (High Specularity) dramatically
-                                amplifies reflections, sometimes confusing the viewer and breaking the illusion. Conversely,
-                                a
-                                matte, non-reflective finish (Low Specularity) absorbs ambient light and relies purely on
-                                the
-                                shadow, making the ambigram effect more reliable for physical 3D prints (see comparison
-                                below).
-                            </p>
+                                {/* Scott Kim */}
+                                <div id="scott-kim" className="scroll-mt-28 mb-14">
+                                    <h2 className="text-2xl font-black text-slate-900 mb-5">Scott Kim: the first systematic ambigram artist</h2>
+                                    <p>
+                                        Scott Kim is an American designer, author, and puzzle creator who began exploring inversional letterforms in the early 1970s. His 1981 book <em>Inversions</em> was the first dedicated study of ambigram design — it classified different types (rotational, reflective, figure-ground, chain) and showed through hundreds of examples that nearly any word could be designed as an ambigram with sufficient skill.
+                                    </p>
+                                    <p>
+                                        Kim's contribution was methodological: he showed that ambigram creation follows principles, not just intuition. His work influenced an entire generation of typographers and puzzle designers, and established ambigrams as a discipline worth taking seriously.
+                                    </p>
+                                </div>
+
+                                {/* John Langdon */}
+                                <div id="john-langdon" className="scroll-mt-28 mb-14">
+                                    <h2 className="text-2xl font-black text-slate-900 mb-5">John Langdon: the artist who made ambigrams famous</h2>
+                                    <p>
+                                        John Langdon developed his symmetrical word designs independently of Scott Kim, beginning in the late 1970s. Where Kim approached ambigrams as visual puzzles, Langdon approached them as graphic design — focusing on elegance, readability, and emotional resonance.
+                                    </p>
+                                    <p>
+                                        His 1992 book <em>Wordplay</em> expanded international awareness of the form. But his most significant contribution came in 2000, when Dan Brown commissioned him to create the four element ambigrams for <em>Angels & Demons</em>. Brown was so influenced by Langdon's work that he named his protagonist Robert Langdon in the artist's honor.
+                                    </p>
+                                    <div className="not-prose mt-4">
+                                        <Link href="/illuminati-ambigram" className="inline-flex items-center gap-2 border border-indigo-100 bg-indigo-50 text-indigo-700 px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-indigo-100 transition-colors">
+                                            The Illuminati ambigrams explained <ArrowRight size={14} />
+                                        </Link>
+                                    </div>
+                                </div>
+
+                                {/* Angels & Demons */}
+                                <div id="angels-demons" className="scroll-mt-28 mb-14">
+                                    <h2 className="text-2xl font-black text-slate-900 mb-5">Angels & Demons: the mainstream breakthrough</h2>
+                                    <p>
+                                        Before 2000, ambigrams were appreciated by typographers, puzzle enthusiasts, and design students. <em>Angels & Demons</em> changed that scale entirely. The four Illuminati element ambigrams — <strong>Earth, Air, Fire, Water</strong> — appeared throughout the novel and became cultural touchstones. Readers who had never encountered the word "ambigram" searched for generators and examples online.
+                                    </p>
+                                    <p>
+                                        The novel directly created the first large-scale consumer demand for ambigram creation tools. It is the single event most responsible for why "ambigram generator" is a significant search term today.
+                                    </p>
+                                </div>
+
+                                {/* Today */}
+                                <div id="today" className="scroll-mt-28 mb-14">
+                                    <h2 className="text-2xl font-black text-slate-900 mb-5">Ambigrams today: tattoos, generators, and 3D printing</h2>
+                                    <p>
+                                        The 2000s and 2010s transformed ambigrams from art-world curiosity to mainstream tattoo style. "Love/Pain," "Life/Death," and two-name ambigrams became staples of tattoo studios worldwide. The emotional resonance of a design that reads two things depending on orientation proved ideal for body art.
+                                    </p>
+                                    <p>
+                                        Digital generators democratized the form — anyone can now create a passable ambigram without design training. The current frontier is <strong>3D ambigrams</strong>: physical objects that show one word from one viewing angle and a completely different word when rotated 90°. These can be exported as STL files and 3D printed as desk objects, jewelry, or gifts.
+                                    </p>
+                                    <div className="not-prose mt-6 flex flex-wrap gap-3">
+                                        <Link href="/" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-indigo-700 transition-colors">
+                                            <Sparkles size={14} /> Try the Free Generator
+                                        </Link>
+                                        <Link href="/3d-generator" className="inline-flex items-center gap-2 border border-slate-200 text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm hover:border-indigo-200 hover:text-indigo-700 transition-colors">
+                                            3D Generator (STL) <ArrowRight size={14} />
+                                        </Link>
+                                    </div>
+                                </div>
+
+                                {/* FAQ */}
+                                <div id="faq" className="scroll-mt-28">
+                                    <h2 className="text-2xl font-black text-slate-900 flex items-center gap-3 mb-6">
+                                        <div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 flex-shrink-0"><HelpCircle size={17} /></div>
+                                        Frequently asked questions
+                                    </h2>
+                                    <div className="not-prose space-y-3">
+                                        {[
+                                            { q: "Who invented ambigrams?", a: "No single person invented ambigrams — symmetric letterforms appear throughout history. Scott Kim (Inversions, 1981) and John Langdon (Wordplay, 1992) are the two artists most credited with formalizing the discipline. The term 'ambigram' was coined by Douglas Hofstadter in 1983." },
+                                            { q: "What is the history of ambigrams?", a: "Ambigrams emerged as a named art form in the 1970s–80s through Scott Kim and John Langdon, reached mainstream awareness through Angels & Demons (2000), became a tattoo trend in the 2000s, and have evolved into 3D-printed objects today." },
+                                            { q: "What is the difference between an ambigram and a palindrome?", a: "A palindrome reads the same forwards and backwards in standard text (e.g., RADAR). An ambigram is a visual design that reads the same or differently when rotated or mirrored — it relies on letterform shape, not letter sequence." },
+                                            { q: "Who made ambigrams famous?", a: "John Langdon made ambigrams famous globally through the four Illuminati element designs in Angels & Demons (2000). Scott Kim was foundational within design circles earlier, but the novel reached a worldwide general audience." },
+                                        ].map(({ q, a }) => (
+                                            <div key={q} className="border border-slate-100 rounded-xl p-5">
+                                                <p className="font-bold text-slate-900 text-sm mb-2">{q}</p>
+                                                <p className="text-slate-600 text-sm leading-relaxed">{a}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Internal links */}
+                                <div className="border-t border-slate-100 pt-10 mt-10 not-prose">
+                                    <p className="font-bold text-slate-900 text-sm mb-4">Continue exploring</p>
+                                    <div className="flex flex-wrap gap-3">
+                                        <Link href="/what-is-ambigram" className="inline-flex items-center gap-2 border border-slate-200 text-slate-700 px-4 py-2 rounded-xl font-bold text-sm hover:border-indigo-200 hover:text-indigo-700 transition-colors">What is an ambigram? <ArrowRight size={13} /></Link>
+                                        <Link href="/illuminati-ambigram" className="inline-flex items-center gap-2 border border-slate-200 text-slate-700 px-4 py-2 rounded-xl font-bold text-sm hover:border-indigo-200 hover:text-indigo-700 transition-colors">Illuminati ambigrams <ArrowRight size={13} /></Link>
+                                        <Link href="/ambigram-word-tattoos" className="inline-flex items-center gap-2 border border-slate-200 text-slate-700 px-4 py-2 rounded-xl font-bold text-sm hover:border-indigo-200 hover:text-indigo-700 transition-colors">Ambigram tattoos <ArrowRight size={13} /></Link>
+                                    </div>
+                                </div>
+
+                            </article>
                         </div>
-
-                        <h2 className="text-3xl font-display font-bold text-dark mt-16 mb-6 border-b pb-3 text-[#1A1A1B]">
-                            2. Mastering Advanced Ambigram Controls: Rotation and Export
-                        </h2>
-                        <p className="leading-relaxed mb-6">
-                            To truly <strong>create new ambigram generator</strong> designs, you
-                            need control over every degree of the X, Y, and Z axes. This is not just for viewing; it&apos;s for
-                            preparing the file for specialized manufacturing or high-end rendering.
-                        </p>
-
-                        <h3 className="text-2xl font-display font-semibold text-secondary mt-12 mb-4 text-indigo-600">
-                            Custom Axis Manipulation
-                        </h3>
-                        <p className="leading-relaxed mb-6">
-                            Most generators force a simple 180° Z-axis rotation. Our
-                            <strong>ambigram generator software</strong> allows for minute adjustments. For complex
-                            multi-word designs, shifting the rotation center by just 0.5 units along the X-axis can be the
-                            difference between failure and success.
-                        </p>
-
-                        <div className="bg-red-50 border-l-4 border-red-500 text-red-800 p-4 mb-6" role="alert">
-                            <p className="font-bold">Expert Warning: Mesh Integrity</p>
-                            <p className="mt-2">
-                                While many basic tutorials claim you can &quot;create new ambigram generator&quot; effects using
-                                simple
-                                free 3D software, they lack the underlying geometric mesh optimization. If the initial 2D
-                                vector-to-3D extrusion is poor, no amount of manual lighting adjustment will fix the flawed
-                                mesh integrity of the final STL file. Use professional-grade tools from the start.
-                            </p>
-                        </div>
-
-                        <figure className="my-8 text-center">
-                            <img
-                                src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/ambigram-generator-software-controls.webp"
-                                alt="Detailed view of the advanced ambigram controls panel showing rotation axis sliders and material options"
-                                data-seo-name="ambigram-generator-software-controls"
-                                className="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                loading="lazy"
-                            />
-                            <figcaption className="text-sm text-gray-500 mt-2">
-                                Detailed view of the advanced ambigram controls panel showing rotation axis sliders and
-                                material options.
-                            </figcaption>
-                        </figure>
-
-                        <div className="text-center mt-16 p-8 bg-primary bg-indigo-600 text-white rounded-xl shadow-lg border border-primary-dark">
-                            <h3 className="text-2xl font-display font-bold mb-4 text-white">
-                                Master the 3D Environment Today
-                            </h3>
-                            <p className="text-lg mb-6 text-indigo-100">
-                                Ready to move beyond basic 2D? Click here to access the **ambigram generator software** that
-                                allows you to easily create new ambigram generator effects by manipulating the 3D
-                                environment.
-                            </p>
-                            <Link href="/"
-                                className="inline-block bg-white text-indigo-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 hover:-translate-y-1 transition-all duration-300 shadow-xl">
-                                Unlock Advanced 3D Ambigram Controls Now!
-                            </Link>
-                        </div>
-
-                        <figure className="my-8 text-center">
-                            <img
-                                src="https://pub-6a88cf89018f42d1a3fa4400f9d3896f.r2.dev/guide-image/3d-ambigram-stl-export-quality.webp"
-                                alt="Comparison of a low-resolution vs. high-resolution STL export file from ambigram generator software"
-                                data-seo-name="3d-ambigram-stl-export-quality"
-                                className="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl border border-gray-300"
-                                loading="lazy"
-                            />
-                            <figcaption className="text-sm text-gray-500 mt-2">
-                                Comparison of a low-resolution vs. high-resolution STL export file from ambigram generator
-                                software.
-                            </figcaption>
-                        </figure>
-
-                        <h2 className="text-3xl font-display font-bold text-dark mt-16 mb-6 border-b pb-3 text-[#1A1A1B]">
-                            Conclusion: The Future of Ambigram Design Software
-                        </h2>
-                        <p className="leading-relaxed mb-6">
-                            The <strong>ambigram generator software</strong> of the future must
-                            be capable of dynamic 3D rendering. Mastering <strong>advanced ambigram controls</strong> like
-                            light and axis is the necessary skill to fully exploit this artistic medium. Stop settling for
-                            flat designs and start working in three dimensions.
-                        </p>
-
-                        <p className="leading-relaxed mb-6">Ready to leverage these advanced controls?</p>
-                        <p className="text-center my-10">
-                            <Link href="/"
-                                className="inline-block px-8 py-4 bg-secondary bg-green-600 text-white rounded-full text-xl font-bold hover:bg-green-700 hover:-translate-y-1 transition-all duration-300 shadow-xl">
-                                Unlock Advanced 3D Ambigram Controls Now!
-                            </Link>
-                        </p>
-                    </article>
+                    </div>
                 </div>
             </section>
         </main>
     );
+}
+
+// ── Page française ────────────────────────────────────────────────────────────
+
+function FrenchPage() {
+    return (
+        <main className="bg-[#FDFDFF] min-h-screen">
+            <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-16 px-4 text-center">
+                <div className="container mx-auto max-w-3xl">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 font-bold text-xs mb-5 uppercase tracking-wider">
+                        <BookOpen size={12} /> Histoire · Art · Origines
+                    </div>
+                    <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-4 text-slate-900">
+                        Histoire des Ambigrammes
+                    </h1>
+                    <p className="text-slate-500 text-lg max-w-2xl mx-auto">
+                        Des lettres symétriques antiques à Scott Kim, John Langdon, <em>Anges et Démons</em> et les générateurs 3D d&apos;aujourd&apos;hui.
+                    </p>
+                </div>
+            </section>
+
+            <section className="py-12 px-4">
+                <div className="container mx-auto max-w-4xl">
+                    <div className="bg-white p-6 md:p-14 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100">
+                        <article className="prose prose-lg prose-slate max-w-none text-slate-700">
+
+                            <h2 className="text-2xl font-black text-slate-900 mb-8">Chronologie de l&apos;histoire des ambigrammes</h2>
+                            <div className="not-prose space-y-4 mb-14">
+                                {timelineFr.map((item, i) => (
+                                    <div key={i} className="flex gap-5">
+                                        <div className="flex flex-col items-center">
+                                            <div className="w-2 h-2 rounded-full bg-indigo-500 mt-2 flex-shrink-0" />
+                                            {i < timelineFr.length - 1 && <div className="w-px flex-1 bg-slate-100 mt-2" />}
+                                        </div>
+                                        <div className="pb-8">
+                                            <span className="text-xs font-black text-indigo-600 uppercase tracking-widest">{item.era}</span>
+                                            <h3 className="font-black text-slate-900 mt-1 mb-2">{item.title}</h3>
+                                            <p className="text-slate-600 text-sm leading-relaxed">{item.body}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="not-prose border-t border-slate-100 pt-8 flex flex-wrap gap-3">
+                                <Link href="/" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-indigo-700 transition-colors">
+                                    <Sparkles size={14} /> Générateur Gratuit
+                                </Link>
+                                <Link href="/illuminati-ambigram" className="inline-flex items-center gap-2 border border-slate-200 text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm hover:border-indigo-200 hover:text-indigo-700 transition-colors">
+                                    Ambigrammes Illuminati <ArrowRight size={14} />
+                                </Link>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </main>
+    );
+}
+
+// ── 默认导出 ──────────────────────────────────────────────────────────────────
+
+export default async function AmbigramHistoryArtPage({ params }: Props) {
+    const { locale } = await params;
+    if (locale === 'fr') return <FrenchPage />;
+    return <EnglishPage />;
 }
