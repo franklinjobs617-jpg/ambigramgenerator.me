@@ -25,16 +25,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const seo: Record<string, { title: string; description: string }> = {
         en: {
-            title: "Free 3D Ambigram Generator | Create Ambigrams Online",
-            description: "Our free 3D ambigram generator lets you create stunning word art for 3D printing. Design custom ambigrams online without any fees or limitations and download as STL."
+            title: "Free 3D Ambigram Generator — STL Download, Two Names, No Signup",
+            description: "Free 3D ambigram generator: enter two names, create a rotating 3D model and download STL for printing. No account required. Guest: 2 credits, free account: 5 credits."
         },
         fr: {
-            title: "Générateur d'Ambigramme 3D Gratuit | Créer en ligne",
-            description: "Notre générateur d'ambigrammes 3D gratuit vous permet de créer de l'art textuel pour l'impression 3D. Concevez des ambigrammes personnalisés sans frais ni limites et téléchargez-les en STL."
+            title: "Générateur d'Ambigramme 3D Gratuit — STL, Deux Prénoms, Sans Inscription",
+            description: "Générateur d'ambigramme 3D gratuit : entrez deux prénoms, créez un modèle 3D rotatif et téléchargez le STL. Sans compte. Invité : 2 crédits, compte gratuit : 5 crédits."
         },
         de: {
-            title: "Kostenloser 3D Ambigramm Generator | Online erstellen",
-            description: "Mit unserem kostenlosen 3D-Ambigramm-Generator erstellen Sie beeindruckende Wortkunst für den 3D-Druck. Entwerfen Sie online Ambigramme ohne Gebühren und laden Sie diese als STL herunter."
+            title: "Kostenloser 3D Ambigramm Generator — STL, Zwei Namen, Ohne Anmeldung",
+            description: "Kostenloser 3D-Ambigramm-Generator: Zwei Namen eingeben, rotierendes 3D-Modell erstellen und STL herunterladen. Kein Konto nötig. Gast: 2 Credits, kostenloses Konto: 5 Credits."
         }
     };
 
@@ -287,6 +287,30 @@ export default async function FreeGeneratorPage({ params }: Props) {
             <section id="generator" className="py-20 px-6 scroll-mt-24">
                 <div className="container mx-auto max-w-7xl bg-slate-950 rounded-[3.5rem] p-4 shadow-2xl border border-slate-100 overflow-hidden">
                     <Generator3d />
+                </div>
+                {/* Pro upgrade hook */}
+                <div className="container mx-auto max-w-7xl mt-5 rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50/80 to-transparent p-5">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                                <span className="inline-flex items-center gap-1 rounded-full bg-indigo-600 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white">
+                                    <Zap size={10} /> Pro
+                                </span>
+                                <span className="text-xs text-slate-400">Guest: 2 credits · Free account: 5 credits · 1K = 1 credit, 2K = 2 credits</span>
+                            </div>
+                            <p className="text-sm font-bold text-slate-900">Need more credits, HD output or unlimited 3D STL?</p>
+                            <p className="text-xs text-slate-500 mt-0.5">Pro: 666 credits/month, 2K HD resolution, priority export.</p>
+                        </div>
+                        <Link href="/pricing" className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white hover:bg-indigo-700 transition-colors whitespace-nowrap flex-shrink-0">
+                            <Zap size={14} /> See Pricing
+                        </Link>
+                    </div>
+                </div>
+                {/* Internal links */}
+                <div className="container mx-auto max-w-7xl mt-4 flex flex-wrap gap-3">
+                    <Link href="/ambigram-tattoo-generator" className="inline-flex items-center gap-1.5 border border-slate-200 text-slate-600 px-4 py-2 rounded-xl font-bold text-xs hover:border-indigo-200 hover:text-indigo-700 transition-colors">2D Tattoo Generator →</Link>
+                    <Link href="/two-word-ambigram-generator" className="inline-flex items-center gap-1.5 border border-slate-200 text-slate-600 px-4 py-2 rounded-xl font-bold text-xs hover:border-indigo-200 hover:text-indigo-700 transition-colors">Two-Name Generator →</Link>
+                    <Link href="/flipscript-alternative" className="inline-flex items-center gap-1.5 border border-slate-200 text-slate-600 px-4 py-2 rounded-xl font-bold text-xs hover:border-indigo-200 hover:text-indigo-700 transition-colors">Flipscript Alternative →</Link>
                 </div>
             </section>
 

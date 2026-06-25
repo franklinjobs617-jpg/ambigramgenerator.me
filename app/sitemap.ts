@@ -67,6 +67,11 @@ const spanishOnlyPages = [
   '/generador-ambigramas-nombres',
 ]
 
+// 德语专属落地页
+const germanOnlyPages = [
+  '/ambigramm-erstellen',
+]
+
 // 葡萄牙语专属落地页
 const portugueseOnlyPages = [
   '/gerador-ambigramas-nomes',
@@ -131,6 +136,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   portugueseOnlyPages.forEach((page) => {
     sitemapEntries.push({
       url: localizedUrl('pt', page),
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    })
+  })
+
+  germanOnlyPages.forEach((page) => {
+    sitemapEntries.push({
+      url: localizedUrl('de', page),
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.85,
