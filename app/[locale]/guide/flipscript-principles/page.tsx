@@ -16,16 +16,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const seoData: Record<string, { title: string; description: string }> = {
         en: {
-            title: "Mastering the FlipScript Ambigram Generator: Principles of Reversible Design",
-            description: "Unlock the secrets of the flipscript ambigram generator. Learn the design principles for perfect reversible ambigrams. Try our ambigram generator flipscript tool free."
+            title: "FlipScript Ambigram Generator: Design Principles & Free Alternative",
+            description: "How the FlipScript ambigram generator works: letter pairing, rotational symmetry and reversible design principles. Plus: the best free FlipScript alternative with no signup."
         },
         fr: {
-            title: "Maîtriser le Générateur d'Ambigrammes FlipScript : Principes du Design Réversible",
-            description: "Débloquez les secrets du générateur d'ambigrammes flipscript. Apprenez les principes de conception pour des ambigrammes réversibles parfaits. Essayez gratuitement notre outil."
+            title: "Générateur FlipScript : Principes de Design et Alternative Gratuite",
+            description: "Comment fonctionne le générateur d'ambigrammes FlipScript : appariement des lettres et symétrie rotationnelle. Et la meilleure alternative gratuite sans inscription."
         },
         de: {
-            title: "Mastering FlipScript Ambigramm-Generator: Prinzipien des reversiblen Designs",
-            description: "Entschlüsseln Sie die Geheimnisse des FlipScript Ambigramm-Generators. Lernen Sie Design-Prinzipien für perfekte reversible Ambigramme."
+            title: "FlipScript Ambigramm-Generator: Design-Prinzipien & Kostenlose Alternative",
+            description: "Wie der FlipScript-Ambigramm-Generator funktioniert: Buchstaben-Pairing und Rotationssymmetrie. Plus: die beste kostenlose FlipScript-Alternative ohne Anmeldung."
         }
     };
 
@@ -263,6 +263,18 @@ function check_flipscript_pair(char1, char2) {
             {/* Content Section (EN) */}
             <section className="pb-16">
                 <div className="container mx-auto px-4 max-w-4xl">
+
+                    {/* Banner: 引导想直接用工具的用户 */}
+                    <div className="mb-10 bg-indigo-50 border border-indigo-100 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div>
+                            <p className="font-bold text-indigo-900 text-sm">Looking for a free FlipScript alternative?</p>
+                            <p className="text-indigo-700 text-xs mt-0.5">This page explains the design principles. If you want to generate an ambigram now — no signup, no cost:</p>
+                        </div>
+                        <a href="/flipscript-alternative" className="inline-flex items-center justify-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-indigo-700 transition-colors whitespace-nowrap flex-shrink-0">
+                            Try Free Generator →
+                        </a>
+                    </div>
+
                     <article className="prose prose-lg prose-slate max-w-none">
 
                         <h2 className="text-3xl font-black text-[#1A1A1B] mb-6 border-b border-slate-200 pb-4">
