@@ -196,23 +196,109 @@ export default function GeradorAmbigramasNomesPage() {
                         </div>
                     </div>
 
-                    {/* AMBIGRAMA 3D */}
+                    {/* AMBIGRAMA 3D — expandido */}
                     <div>
                         <h2 className="text-2xl font-black text-slate-900 mb-4">
                             Ambigrama 3D com dois nomes
                         </h2>
-                        <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                            O gerador 3D cria um objeto físico que mostra o primeiro nome de um ângulo e o segundo ao girá-lo 90°. É um presente original e personalizado — um objeto de mesa que ninguém mais tem.
-                        </p>
                         <p className="text-slate-600 text-sm leading-relaxed mb-5">
-                            Baixe o arquivo <strong>STL</strong> e envie para qualquer serviço de impressão 3D online ou imprima você mesmo se tiver uma impressora 3D.
+                            O gerador 3D cria um objeto físico tridimensional que mostra o primeiro nome de um ângulo e o segundo ao girá-lo 90°. É a evolução do ambigrama 2D clássico — em vez de uma imagem plana, você obtém um modelo real que pode imprimir.
                         </p>
+
+                        {/* SVG ilustração */}
+                        <div className="flex justify-center mb-6">
+                            <svg viewBox="0 0 340 90" className="w-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="340" height="90" rx="16" fill="#0F172A"/>
+                                <text x="60" y="35" textAnchor="middle" fontFamily="Georgia, serif" fontSize="13" fill="#94A3B8">Vista frontal</text>
+                                <text x="60" y="62" textAnchor="middle" fontFamily="Georgia, serif" fontSize="20" fontWeight="bold" fill="#818CF8">Lucas</text>
+                                <text x="170" y="52" textAnchor="middle" fontFamily="Georgia, serif" fontSize="22" fill="#475569">↻ 90°</text>
+                                <text x="280" y="35" textAnchor="middle" fontFamily="Georgia, serif" fontSize="13" fill="#94A3B8">Vista lateral</text>
+                                <text x="280" y="62" textAnchor="middle" fontFamily="Georgia, serif" fontSize="20" fontWeight="bold" fill="#A5B4FC">Ana</text>
+                            </svg>
+                        </div>
+
+                        <div className="grid sm:grid-cols-3 gap-3 mb-5">
+                            {[
+                                { titulo: "Impressão 3D", desc: "Baixe o STL e envie para qualquer serviço de impressão 3D online — ou imprima você mesmo se tiver uma impressora." },
+                                { titulo: "Presente original", desc: "Um objeto de mesa único que mostra dois nomes conforme o ângulo. Perfeito para aniversários e casamentos." },
+                                { titulo: "GIF animado", desc: "Exporte um GIF do modelo girando para compartilhar nas redes sociais mostrando os dois nomes em movimento." },
+                            ].map(({ titulo, desc }) => (
+                                <div key={titulo} className="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                                    <p className="font-bold text-slate-900 text-sm mb-1">{titulo}</p>
+                                    <p className="text-slate-500 text-xs leading-relaxed">{desc}</p>
+                                </div>
+                            ))}
+                        </div>
+
                         <Link
                             href="/3d-generator"
                             className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-700 transition-colors"
                         >
                             Experimentar o Gerador 3D <ArrowRight size={14} />
                         </Link>
+                    </div>
+
+                    {/* LOGO — gerador de logo ambigrama */}
+                    <div>
+                        <h2 className="text-2xl font-black text-slate-900 mb-4">
+                            Gerador de logo ambigrama
+                        </h2>
+                        <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                            Um ambigrama é uma das formas mais inteligentes de criar um logo memorável — um design que revela um segundo significado ao ser girado. Marcas, estúdios e criadores usam ambigramas para construir identidades visuais que surpreendem.
+                        </p>
+                        <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 mb-5">
+                            <p className="font-bold text-slate-900 text-sm mb-3">Como usar o gerador para criar um logo ambigrama:</p>
+                            <ul className="space-y-2 text-sm text-slate-600">
+                                {[
+                                    ["Nome da marca", "Digite o nome da marca ou produto no campo principal. Nomes com 4–6 letras funcionam melhor."],
+                                    ["Escolha o estilo Bloco", "Para logos, o estilo Bloco oferece traços mais geométricos e modernos, ideais para identidade visual."],
+                                    ["Baixe em PNG", "O PNG sem marca d'água está pronto para uso em apresentações, redes sociais e materiais de marca."],
+                                ].map(([titulo, desc]) => (
+                                    <li key={titulo} className="flex gap-3">
+                                        <span className="font-bold text-slate-900 flex-shrink-0">{titulo}:</span>
+                                        <span>{desc}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <Link href="/" className="inline-flex items-center gap-2 border border-slate-200 text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm hover:border-indigo-200 hover:text-indigo-700 transition-colors">
+                            Criar Logo Ambigrama <ArrowRight size={14} />
+                        </Link>
+                    </div>
+
+                    {/* FONTE — gerador de fonte ambigrama */}
+                    <div>
+                        <h2 className="text-2xl font-black text-slate-900 mb-4">
+                            Fonte de ambigrama — qual estilo escolher?
+                        </h2>
+                        <p className="text-slate-600 text-sm leading-relaxed mb-5">
+                            O gerador oferece duas fontes principais otimizadas para ambigramas. A escolha certa depende do uso final do seu design.
+                        </p>
+                        <div className="grid sm:grid-cols-2 gap-4">
+                            {[
+                                {
+                                    fonte: "Caligrafia",
+                                    melhor: "Tatuagens e arte pessoal",
+                                    desc: "Traços fluidos e curvas suaves que se traduzem bem na pele. Preferência da maioria dos tatuadores ao trabalhar com uma referência de ambigrama.",
+                                    tag: "Recomendado para tatuagens",
+                                },
+                                {
+                                    fonte: "Bloco",
+                                    melhor: "Logos e branding",
+                                    desc: "Traços geométricos e marcantes para um visual moderno. Funciona bem em tamanhos maiores como antebraço e em aplicações digitais.",
+                                    tag: "Recomendado para logos",
+                                },
+                            ].map((item) => (
+                                <div key={item.fonte} className="border border-slate-100 rounded-2xl p-5 bg-white">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <h3 className="font-bold text-slate-900">{item.fonte}</h3>
+                                        <span className="text-[10px] font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">{item.tag}</span>
+                                    </div>
+                                    <p className="text-xs text-slate-500 mb-2 font-medium">Melhor para: {item.melhor}</p>
+                                    <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
                     {/* TATUAGEM */}
