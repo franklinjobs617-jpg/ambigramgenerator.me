@@ -50,6 +50,7 @@ const englishOnlyPages = [
   '/flipscript-alternative',
   '/ambigram-tattoo-generator',
   '/ambigram-name-generator',
+  '/john-langdon-ambigram',
 ]
 
 // 意大利语专属落地页
