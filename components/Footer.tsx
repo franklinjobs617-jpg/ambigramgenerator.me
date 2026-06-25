@@ -47,7 +47,7 @@ export default function Footer() {
         { code: "de", name: "Deutsch", flag: "DE" },
         { code: "es", name: "Español", flag: "ES" },
         { code: "it", name: "Italiano", flag: "IT" },
-
+        { code: "pt", name: "Português", flag: "BR" },
     ];
 
     const currentLang = languages.find((l) => l.code === currentLocale) || languages[0];

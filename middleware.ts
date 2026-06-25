@@ -11,7 +11,7 @@ export const config = {
   matcher: [
     // 1. 匹配国际化路由
     '/',
-    '/(de|en|es|fr|it|ja|ko|zh)/:path*',
+    '/(de|en|es|fr|it|pt)/:path*',
 
     // 2. 匹配其他页面，但排除特定的静态文件和文件夹
     // 修正后的正则：确保 sitemap|robots 被排除在外
