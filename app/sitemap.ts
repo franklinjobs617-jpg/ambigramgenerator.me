@@ -47,6 +47,7 @@ const englishOnlyPages = [
   '/mirror-text-generator',
   '/illuminati-ambigram',
   '/pricing',
+  '/flipscript-alternative',
 ]
 
 // 意大利语专属落地页
