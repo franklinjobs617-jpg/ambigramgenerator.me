@@ -15,9 +15,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const seo: Record<string, { title: string; description: string }> = {
         en: {
-            title: "Free Two Word & Two Name Ambigram Generator | Tattoo + PNG Download",
+            title: "Free Two Name & Two Word Ambigram Generator | Tattoo + PNG Download",
             description:
-                "Use our free ambigram generator for two names and two words. Create tattoo-ready designs online and download PNG results instantly.",
+                "The best free ambigram generator for two names and two words. Create tattoo-ready designs, compare outputs and download PNG instantly. No signup required.",
         },
         fr: {
             title: "Free Two Word & Two Name Ambigram Generator | Tattoo + PNG Download",
@@ -156,10 +156,10 @@ export default async function TwoWordAmbigramGeneratorPage({ params }: Props) {
 
     const pageTitle =
         locale === "es"
-            ? "Generador de Ambigramas de Dos Palabras"
+            ? "Generador de Ambigramas de Dos Nombres y Dos Palabras"
             : locale === "it"
-              ? "Generatore di Ambigrammi con Due Parole"
-              : "Two Word Ambigram Generator Online Free";
+              ? "Generatore di Ambigrammi con Due Nomi e Due Parole"
+              : "Free Two Name & Two Word Ambigram Generator";
 
     return (
         <main className="bg-[#FDFDFF]">
@@ -213,9 +213,65 @@ export default async function TwoWordAmbigramGeneratorPage({ params }: Props) {
                 </div>
             </section>
 
-            <section id="two-word-tool" className="px-6 pb-16 scroll-mt-24">
+            <section id="two-word-tool" className="px-6 pb-8 scroll-mt-24">
                 <div className="max-w-7xl mx-auto rounded-[2.5rem] border border-slate-200 bg-white p-4 shadow-2xl shadow-indigo-100/40">
                     <Generator2d />
+                </div>
+
+                {/* Pro upgrade hook — 工具正下方最高意图位置 */}
+                <div className="max-w-7xl mx-auto mt-5 rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50/80 to-transparent p-5">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                                <span className="inline-flex items-center gap-1 rounded-full bg-indigo-600 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white">
+                                    <Sparkles size={10} /> Pro
+                                </span>
+                                <span className="text-xs text-slate-400 font-medium">Free plan: limited credits · standard resolution</span>
+                            </div>
+                            <p className="text-sm font-bold text-slate-900">Want HD downloads and 3D STL export?</p>
+                            <p className="text-xs text-slate-500 mt-0.5">Upgrade to Pro for 666 credits/month, 2K HD output and 3D printable STL files.</p>
+                        </div>
+                        <Link
+                            href="/pricing"
+                            className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-md transition-all hover:bg-indigo-700 whitespace-nowrap flex-shrink-0"
+                        >
+                            <Sparkles size={14} /> See Pricing
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* 名字配对内容区块 — 覆盖 "two name ambigram" informational query */}
+            <section className="px-6 pb-12 bg-white">
+                <div className="max-w-5xl mx-auto">
+                    <h2 className="text-2xl font-black text-slate-900 mb-3 text-center">
+                        Best name pairs for a two-name ambigram
+                    </h2>
+                    <p className="text-slate-500 text-sm text-center mb-8 max-w-2xl mx-auto">
+                        The quality of a two-name ambigram depends almost entirely on letter compatibility after 180° rotation. Names with similar length and complementary letter shapes produce the most readable results.
+                    </p>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                        {[
+                            { pair: "Love / Hate", fit: "Excellent", note: "4 letters each — the classic duality pair" },
+                            { pair: "Luke / Anna", fit: "Excellent", note: "4 letters each — balanced rotation" },
+                            { pair: "Life / Dead", fit: "Very good", note: "4 letters, strong contrast concept" },
+                            { pair: "Mark / Mary", fit: "Very good", note: "4 letters, similar structure" },
+                            { pair: "Faith / Fate", fit: "Good", note: "5 vs 4 letters — slight asymmetry" },
+                            { pair: "Alexander / Emma", fit: "Difficult", note: "Very different lengths — try Alex/Emma" },
+                        ].map(({ pair, fit, note }) => (
+                            <div key={pair} className="border border-slate-100 rounded-xl p-4 bg-slate-50/50">
+                                <p className="font-black text-indigo-700 mb-1">{pair}</p>
+                                <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${fit === "Excellent" ? "bg-green-100 text-green-700" : fit === "Very good" ? "bg-indigo-100 text-indigo-700" : fit === "Good" ? "bg-amber-100 text-amber-700" : "bg-red-50 text-red-500"}`}>{fit}</span>
+                                <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">{note}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="bg-amber-50 border-l-4 border-amber-400 rounded-r-2xl p-5">
+                        <p className="font-bold text-amber-900 text-sm mb-1">Practical tip</p>
+                        <p className="text-amber-800 text-sm leading-relaxed">
+                            If your names have very different lengths (e.g. Christopher and Ana), try a nickname or shortened version. A clean 4–6 letter ambigram is far more readable than a complex 10-letter design. Symmetric letters like <strong>A, H, I, M, O, T, U, V, W</strong> pair especially well across rotations.
+                        </p>
+                    </div>
                 </div>
             </section>
 
