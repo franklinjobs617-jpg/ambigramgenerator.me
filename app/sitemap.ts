@@ -45,6 +45,7 @@ const englishOnlyPages = [
   '/ambigram-word-tattoos',
   '/guide/words-that-spell-words-upside-down',
   '/mirror-text-generator',
+  '/illuminati-ambigram',
 ]
 
 // 意大利语专属落地页

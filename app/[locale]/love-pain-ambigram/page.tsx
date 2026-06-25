@@ -229,7 +229,7 @@ export default async function LovePainAmbigramPage() {
                                         The History of This Iconic Ambigram
                                     </h2>
                                     <p>
-                                        While the concept of ambigrams is centuries old, the specific <strong>love pain ambigram tattoo</strong>  gained mainstream popularity in the late 1990s and early 2000s, largely thanks to the rise of online tattoo galleries and forums. Artists like John Langdon (who coined the term "ambigram" for Dan Brown's <em>Angels & Demons</em>) and Scott Kim were pioneers in the field, showcasing what was possible with symmetrical typography.
+                                        While the concept of ambigrams is centuries old, the specific <strong>love pain ambigram tattoo</strong>  gained mainstream popularity in the late 1990s and early 2000s, largely thanks to the rise of online tattoo galleries and forums. Artists like John Langdon (who designed the iconic <Link href="/illuminati-ambigram" className="font-bold text-indigo-600 hover:underline">Illuminati ambigrams for Dan Brown&apos;s <em>Angels & Demons</em></Link>) and Scott Kim were pioneers in the field, showcasing what was possible with symmetrical typography.
                                     </p>
                                     <p>
                                         The "Love/Pain" design became a viral sensation because it was one of the first "symbiotograms" (an ambigram where the word changes) that was both emotionally powerful and visually stunning. It moved from a niche typographic puzzle to a mainstream symbol of emotional depth.
