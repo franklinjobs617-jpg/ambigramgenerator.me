@@ -36,6 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         description: current.description,
         path: path,
         locale: locale
+        canonical: "https://www.ambigramgenerator.me"
     });
 }
 
