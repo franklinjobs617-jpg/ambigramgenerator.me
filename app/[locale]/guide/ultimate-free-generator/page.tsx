@@ -17,16 +17,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const seoData: Record<string, { title: string; description: string }> = {
         en: {
-            title: "The Ultimate Free Ambigram Generator: Quality, Features, and Zero Cost",
-            description: "Stop settling for low-quality tools. Find out what makes the best free ambigram generator stand out, and access our high-quality free online ambigram generator today."
+            title: "Best Free Ambigram Generator Online — No Signup, No Watermark",
+            description: "The best free ambigram generator online: 2D tattoo designs, 3D STL export and two-name ambigrams with no account required. See how it compares to paid tools."
         },
         fr: {
-            title: "Le Générateur d'Ambigrammes Gratuit Ultime : Qualité, Fonctionnalités et Coût Zéro",
-            description: "Arrêtez de vous contenter d'outils de faible qualité. Découvrez ce qui distingue le meilleur générateur d'ambigrammes gratuit et accédez à notre outil en ligne dès aujourd'hui."
+            title: "Meilleur Générateur d'Ambigrammes Gratuit en Ligne — Sans Inscription",
+            description: "Le meilleur générateur d'ambigrammes gratuit en ligne : designs 2D pour tatouages, export STL 3D et ambigrammes deux prénoms sans compte requis."
         },
         de: {
-            title: "Der ultimative kostenlose Ambigramm-Generator: Qualität, Funktionen und null Kosten",
-            description: "Geben Sie sich nicht mit minderwertigen Tools zufrieden. Erfahren Sie, was den besten kostenlosen Ambigramm-Generator ausmacht, und nutzen Sie unser hochwertiges Online-Tool noch heute."
+            title: "Bester Kostenloser Ambigramm-Generator Online — Ohne Anmeldung",
+            description: "Der beste kostenlose Ambigramm-Generator online: 2D-Tattoo-Designs, 3D-STL-Export und Zwei-Namen-Ambigramme ohne Konto erforderlich."
         }
     };
 
