@@ -246,21 +246,21 @@
       "slide2DDesc": "Caligrafía elegante optimizada para tatuajes. Líneas limpias y simetría perfecta desde cualquier ángulo.",
       "slide2DLiveLabel": "Vista Previa de Tatuaje",
       "slide2DReadyLabel": "Vectorial"
-    },
-    "Generator2D": {
-      "title": "Diseña Ambigramas 2D para Tatuajes y Logos",
-      "subtitle": "Ideal para Tatuajes, Logos y Arte Digital",
-      "inputLabel": "Una o Dos Palabras",
-      "inputPlaceholder": "ej., familia / siempre",
-      "styleLabel": "Estilo",
-      "styleBlocky": "Bloque",
-      "styleCalligraphy": "Caligrafía",
-      "buttonGenerate": "Generar",
-      "emptyStateText": "Ingresa palabras arriba para generar tu diseño",
-      "rotationHint": "(Haz clic en un ambigrama para rotarlo 180°)",
-      "altTextResult": "Resultado de ambigrama {index}",
-      "tattooStencilsDesc": "Perfecto para plantillas de tatuajes. Nuestro estilo de caligrafía está específicamente optimizado para el arte en la piel. A diferencia de otros generadores, aseguramos líneas limpias que tu tatuador puede calcar fácilmente. Descarga el PNG y lleva tu diseño único de dos nombres al estudio hoy mismo."
     }
+  },
+  "Generator2D": {
+    "title": "Diseña Ambigramas 2D para Tatuajes y Logos",
+    "subtitle": "Ideal para Tatuajes, Logos y Arte Digital",
+    "inputLabel": "Una o Dos Palabras",
+    "inputPlaceholder": "ej., familia / siempre",
+    "styleLabel": "Estilo",
+    "styleBlocky": "Bloque",
+    "styleCalligraphy": "Caligrafía",
+    "buttonGenerate": "Generar",
+    "emptyStateText": "Ingresa palabras arriba para generar tu diseño",
+    "rotationHint": "(Haz clic en un ambigrama para rotarlo 180°)",
+    "altTextResult": "Resultado de ambigrama {index}",
+    "tattooStencilsDesc": "Perfecto para plantillas de tatuajes. Nuestro estilo de caligrafía está específicamente optimizado para el arte en la piel. A diferencia de otros generadores, aseguramos líneas limpias que tu tatuador puede calcar fácilmente. Descarga el PNG y lleva tu diseño único de dos nombres al estudio hoy mismo."
   },
    "Footer": {
     "description": "El motor profesional para ambigramas imprimibles en 3D y plantillas de tatuajes de dos nombres. Diseña, visualiza e imprime tus propias ilusiones ópticas.",

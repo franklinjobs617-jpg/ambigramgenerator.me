@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useEffectEvent, useRef } from "react";
 import { PenTool, Loader2, RotateCw, Download, AlertCircle } from "lucide-react";
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { isAmbigramWord } from '@/lib/ambigram-input';
 // --- 1. 核心数据与辅助函数 (保留原生逻辑) ---
 
 // 字形数据表
@@ -119,18 +120,29 @@ const getPossibleGlyphs = (words: string[], style: string) => {
 };
 
 // --- 2. 子组件：单个 Ambigram 图片 (处理旋转交互) ---
-const AmbigramItem = ({ src, alt, fileName, wordA, wordB, darkPreview }: { src: string, alt: string, fileName: string, wordA: string, wordB: string, darkPreview: boolean }) => {
+const AmbigramItem = ({ src, alt, ordinal, fileName, wordA, wordB, darkPreview, isItalian }: {
+    src: string;
+    alt: string;
+    ordinal: number;
+    fileName: string;
+    wordA: string;
+    wordB: string;
+    darkPreview: boolean;
+    isItalian: boolean;
+}) => {
+    const t = useTranslations('Generator2D');
     const [angle, setAngle] = useState(0);
     const isFlipped = angle % 360 !== 0;
 
     return (
         <div
-            className={`group relative cursor-pointer overflow-hidden rounded-2xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${darkPreview ? "border-slate-700 bg-slate-900 hover:border-indigo-500 hover:shadow-indigo-900/30" : "border-slate-200 bg-white hover:border-indigo-200 hover:shadow-indigo-100/80"}`}
+            className={`group relative cursor-pointer overflow-hidden rounded-2xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${isItalian ? "motion-reduce:transition-none motion-reduce:hover:translate-y-0" : ""} ${darkPreview ? "border-slate-700 bg-slate-900 hover:border-indigo-500 hover:shadow-indigo-900/30" : "border-slate-200 bg-white hover:border-indigo-200 hover:shadow-indigo-100/80"}`}
         >
             <button
                 type="button"
                 className="block w-full cursor-pointer focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-indigo-500"
-                aria-label={`Rotate ${alt}`}
+                aria-label={isItalian ? t('rotateResult', { index: ordinal }) : `Rotate ${alt}`}
+                aria-describedby={isItalian ? `ambigram-orientation-${ordinal}` : undefined}
                 aria-pressed={isFlipped}
                 onClick={() => setAngle(prev => prev + 180)}
             >
@@ -139,32 +151,37 @@ const AmbigramItem = ({ src, alt, fileName, wordA, wordB, darkPreview }: { src: 
                 <img
                     src={src}
                     alt={alt}
-                    className="h-auto w-full transition-transform duration-500 ease-in-out"
+                    className={`h-auto w-full transition-transform duration-500 ease-in-out ${isItalian ? "motion-reduce:transition-none motion-reduce:duration-0" : ""}`}
                     style={{ transform: `rotate(${angle}deg)`, filter: darkPreview ? "invert(1)" : undefined }}
                     width={320}
                     height={240}
                 />
             </button>
             {/* Direction labels */}
-            <div className="absolute left-0 right-0 top-0 flex justify-between px-3 pt-2 pointer-events-none">
-                <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${darkPreview ? "bg-white/15 text-white/80" : "bg-slate-900/10 text-slate-600"}`}>
+            <div aria-hidden={isItalian || undefined} className="absolute left-0 right-0 top-0 flex justify-between gap-1 px-3 pt-2 pointer-events-none">
+                <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${isItalian ? "min-w-0 truncate" : ""} ${darkPreview ? "bg-white/15 text-white/80" : "bg-slate-900/10 text-slate-600"}`}>
                     {isFlipped ? `↑ ${wordB}` : `↑ ${wordA}`}
                 </span>
-                <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${darkPreview ? "bg-white/15 text-white/80" : "bg-slate-900/10 text-slate-600"}`}>
+                <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${isItalian ? "min-w-0 truncate" : ""} ${darkPreview ? "bg-white/15 text-white/80" : "bg-slate-900/10 text-slate-600"}`}>
                     {isFlipped ? `↓ ${wordA}` : `↓ ${wordB}`}
                 </span>
             </div>
-            <div className={`pointer-events-none absolute right-2 top-2 rounded-full border p-1.5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${darkPreview ? "border-white/20 bg-white/10 text-white" : "border-white/30 bg-slate-900/65 text-white"}`}>
-                <RotateCw size={16} />
+            {isItalian && (
+                <span id={`ambigram-orientation-${ordinal}`} role="status" className="sr-only">
+                    {t('orientation', { angle: isFlipped ? 180 : 0, word: isFlipped ? wordB : wordA })}
+                </span>
+            )}
+            <div className={`pointer-events-none absolute rounded-full border p-1.5 ${isItalian ? "bottom-2 left-2" : "right-2 top-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"} ${darkPreview ? "border-white/20 bg-white/10 text-white" : "border-white/30 bg-slate-900/65 text-white"}`}>
+                <RotateCw size={16} aria-hidden="true" />
             </div>
             <a
                 href={src}
                 download={fileName}
-                className={`absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-bold shadow-sm transition-all duration-300 hover:-translate-y-0.5 ${darkPreview ? "border-slate-600 bg-slate-800/95 text-slate-300 hover:border-indigo-400 hover:text-indigo-300" : "border-slate-200 bg-white/95 text-slate-700 hover:border-indigo-200 hover:text-indigo-700"}`}
-                aria-label="Download PNG"
+                className={`absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-bold shadow-sm transition-all duration-300 hover:-translate-y-0.5 ${isItalian ? "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 motion-reduce:transition-none motion-reduce:hover:translate-y-0" : ""} ${darkPreview ? "border-slate-600 bg-slate-800/95 text-slate-300 hover:border-indigo-400 hover:text-indigo-300" : "border-slate-200 bg-white/95 text-slate-700 hover:border-indigo-200 hover:text-indigo-700"}`}
+                aria-label={isItalian ? t('downloadResult', { index: ordinal }) : "Download PNG"}
             >
-                <Download size={12} />
-                PNG
+                <Download size={12} aria-hidden="true" />
+                {isItalian ? t('downloadPng') : "PNG"}
             </a>
         </div>
     );
@@ -195,6 +212,7 @@ const createRequest = (id: number, mode: GenerationMode, words: string[], style:
 // --- 3. 主组件: Generator2d ---
 export default function Generator2d({ incomingWordA, incomingWordB, triggerGenerate }: Generator2dProps) {
     const t = useTranslations('Generator2D');
+    const isItalian = useLocale() === 'it';
     const [isTwoWordMode, setIsTwoWordMode] = useState(true);
     const [wordA, setWordA] = useState("love");
     const [wordB, setWordB] = useState("pain");
@@ -205,6 +223,9 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
     const [batch, setBatch] = useState<GeneratedBatch | null>(null);
     const [previewDark, setPreviewDark] = useState(false);
     const [message, setMessage] = useState<{ text: string; type: "error" | "info" } | null>(null);
+    const [showPairValidation, setShowPairValidation] = useState(false);
+    const firstField = useRef<HTMLInputElement>(null);
+    const secondField = useRef<HTMLInputElement>(null);
     const latestRequestId = useRef(0);
 
     const invalidateGeneration = () => {
@@ -216,12 +237,18 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
 
     useEffect(() => () => { latestRequestId.current += 1; }, []);
 
-    // Auto-dismiss message after 4s
+    // Keep the existing timeout on other locales.
     useEffect(() => {
-        if (!message) return;
+        if (isItalian || !message) return;
         const timer = setTimeout(() => setMessage(null), 4000);
         return () => clearTimeout(timer);
-    }, [message]);
+    }, [isItalian, message]);
+    const invalidA = showPairValidation && !isAmbigramWord(wordA);
+    const invalidB = showPairValidation && !isAmbigramWord(wordB);
+    const pairError = invalidA || invalidB
+        ? t(!wordA.trim() || !wordB.trim() ? 'errorBothWords' : 'errorLetters')
+        : null;
+    const feedback = pairError ?? message?.text;
     const preparedInput = isTwoWordMode ? `${wordA.trim()} ${wordB.trim()}` : inputText;
     const mode: GenerationMode = isTwoWordMode ? "pair" : "text";
     const draftWords = isTwoWordMode
@@ -346,7 +373,12 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                     const hint = diff > 2
                         ? `The names differ by ${diff} letters — try shorter names or nicknames (e.g. "Alex" instead of "Alexander").`
                         : `Try different spellings or shorter versions of the names.`;
-                    setMessage({ text: `No match found for "${words[0]}" & "${words[1]}". ${hint}`, type: "error" });
+                    const text = isItalian
+                        ? diff > 2
+                            ? t('errorLengthMismatch', { first: w1, second: w2, count: diff })
+                            : t('errorNoMatch', { first: w1, second: w2 })
+                        : `No match found for "${w1}" & "${w2}". ${hint}`;
+                    setMessage({ text, type: "error" });
                     return;
                 }
 
@@ -393,7 +425,7 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                 }
 
             if (newImages.length === 0) {
-                setMessage({ text: `No ambigrams could be generated for "${w1}" & "${w2}".`, type: "error" });
+                setMessage({ text: isItalian ? t('errorNoImages', { first: w1, second: w2 }) : `No ambigrams could be generated for "${w1}" & "${w2}".`, type: "error" });
                 return;
             }
 
@@ -401,7 +433,7 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
         } catch (e) {
             if (!isCurrent()) return;
             console.error(e);
-            setMessage({ text: "Generation failed. Please try different words.", type: "error" });
+            setMessage({ text: isItalian ? t('errorGeneration') : "Generation failed. Please try different words.", type: "error" });
         } finally {
             if (isCurrent()) setIsLoading(false);
         }
@@ -414,6 +446,12 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
         setIsTwoWordMode(true);
 
         const words = [nextA.trim().toLowerCase(), nextB.trim().toLowerCase()];
+        if (isItalian) {
+            const invalid = !isAmbigramWord(nextA) || !isAmbigramWord(nextB);
+            setShowPairValidation(invalid);
+            if (invalid) return;
+            firstField.current?.focus({ preventScroll: true });
+        }
         if (words.some(word => !/^[a-z]+$/.test(word))) return;
 
         // Reserve the request before the delay so an edit can supersede it.
@@ -428,31 +466,39 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
     }, [incomingWordA, incomingWordB, triggerGenerate]);
 
     const generateAmbigrams = async () => {
+        if (isItalian && isLoading) return;
         const id = invalidateGeneration();
         if (isTwoWordMode) {
-            if (!wordA.trim() || !wordB.trim()) {
+            if (isItalian) {
+                const invalidFirst = !isAmbigramWord(wordA);
+                const invalidSecond = !isAmbigramWord(wordB);
+                setShowPairValidation(invalidFirst || invalidSecond);
+                if (invalidFirst || invalidSecond) {
+                    (invalidFirst ? firstField : secondField).current?.focus();
+                    return;
+                }
+            } else if (!wordA.trim() || !wordB.trim()) {
                 setMessage({ text: "Please enter both words.", type: "error" });
                 return;
-            }
-            if (/[^a-zA-Z]/.test(wordA) || /[^a-zA-Z]/.test(wordB)) {
+            } else if (!isAmbigramWord(wordA) || !isAmbigramWord(wordB)) {
                 setMessage({ text: "Please use only letters in each word.", type: "error" });
                 return;
             }
         } else if (/[^a-zA-Z\s]/.test(preparedInput)) {
-            setMessage({ text: "Please use only letters and spaces.", type: "error" });
+            setMessage({ text: isItalian ? t('errorLettersAndSpaces') : "Please use only letters and spaces.", type: "error" });
             return;
         }
 
         const words = preparedInput.toLowerCase().trim().split(/\s+/).filter(Boolean);
 
         if (isTwoWordMode && words.length !== 2) {
-            setMessage({ text: "Please enter exactly two words.", type: "error" });
+            setMessage({ text: isItalian ? t('errorExactlyTwo') : "Please enter exactly two words.", type: "error" });
             return;
         } else if (words.length > 2) {
-            setMessage({ text: "Please use one or two words.", type: "error" });
+            setMessage({ text: isItalian ? t('errorOneOrTwo') : "Please use one or two words.", type: "error" });
             return;
         } else if (words.length === 0) {
-            setMessage({ text: "Please type something first.", type: "error" });
+            setMessage({ text: isItalian ? t('errorEmpty') : "Please type something first.", type: "error" });
             return;
         }
 
@@ -475,41 +521,62 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                     {/* 输入控制区 */}
                     {isTwoWordMode ? (
                         <div className="space-y-4">
-                            <div>
-                                <label htmlFor="ambigenerator_word_1" className="mb-2 block text-sm font-bold text-slate-700">
-                                    Word Pair
-                                </label>
+                            <fieldset className="min-w-0">
+                                {isItalian ? (
+                                    <>
+                                        <legend className="text-sm font-bold text-slate-700">{t('pairLegend')}</legend>
+                                        <p id="ambigram-pair-help" className="mb-3 mt-1 text-sm text-slate-600">{t('lettersHelp')}</p>
+                                    </>
+                                ) : (
+                                    <label htmlFor="ambigenerator_word_1" className="mb-2 block text-sm font-bold text-slate-700">Word Pair</label>
+                                )}
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <input
-                                        type="text"
-                                        id="ambigenerator_word_1"
-                                        placeholder="Word 1 (e.g. love)"
-                                        className={fieldClass}
-                                        value={wordA}
-                                        onChange={(e) => {
-                                            invalidateGeneration();
-                                            setWordA(e.target.value);
-                                        }}
-                                        onKeyDown={(e) => e.key === "Enter" && generateAmbigrams()}
-                                    />
-                                    <input
-                                        type="text"
-                                        id="ambigenerator_word_2"
-                                        placeholder="Word 2 (e.g. pain)"
-                                        className={fieldClass}
-                                        value={wordB}
-                                        onChange={(e) => {
-                                            invalidateGeneration();
-                                            setWordB(e.target.value);
-                                        }}
-                                        onKeyDown={(e) => e.key === "Enter" && generateAmbigrams()}
-                                    />
+                                    <div>
+                                        {isItalian && <label htmlFor="ambigenerator_word_1" className="mb-1 block text-sm font-medium text-slate-700">{t('firstWordLabel')}</label>}
+                                        <input
+                                            type="text"
+                                            id="ambigenerator_word_1"
+                                            ref={firstField}
+                                            placeholder={isItalian ? t('firstWordPlaceholder') : "Word 1 (e.g. love)"}
+                                            aria-required={isItalian || undefined}
+                                            aria-invalid={invalidA || undefined}
+                                            aria-describedby={isItalian ? (invalidA ? "ambigram-pair-help ambigram-feedback" : "ambigram-pair-help") : undefined}
+                                            className={fieldClass}
+                                            value={wordA}
+                                            onChange={(e) => {
+                                                invalidateGeneration();
+                                                setWordA(e.target.value);
+                                            }}
+                                            onKeyDown={(e) => e.key === "Enter" && !e.nativeEvent.isComposing && generateAmbigrams()}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="ambigenerator_word_2" className={isItalian ? "mb-1 block text-sm font-medium text-slate-700" : "sr-only"}>{isItalian ? t('secondWordLabel') : "Word 2"}</label>
+                                        <input
+                                            type="text"
+                                            id="ambigenerator_word_2"
+                                            ref={secondField}
+                                            placeholder={isItalian ? t('secondWordPlaceholder') : "Word 2 (e.g. pain)"}
+                                            aria-required={isItalian || undefined}
+                                            aria-invalid={invalidB || undefined}
+                                            aria-describedby={isItalian ? (invalidB ? "ambigram-pair-help ambigram-feedback" : "ambigram-pair-help") : undefined}
+                                            className={fieldClass}
+                                            value={wordB}
+                                            onChange={(e) => {
+                                                invalidateGeneration();
+                                                setWordB(e.target.value);
+                                            }}
+                                            onKeyDown={(e) => e.key === "Enter" && !e.nativeEvent.isComposing && generateAmbigrams()}
+                                        />
+                                    </div>
                                 </div>
                                 {/* Compatibility hint */}
-                                {compat && (
+                                {compat && (!isItalian || (!feedback && !isLoading)) && (
                                     <div className={`mt-2 flex items-center gap-2 rounded-lg px-3 py-2 text-[12px] font-medium ${compat.compatible ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>
                                         {compat.compatible ? (
-                                            <span>Great match — these names can form a valid ambigram.</span>
+                                            <span>{isItalian ? t('mightMatch') : "Great match — these names can form a valid ambigram."}</span>
+                                        ) : isItalian ? (
+                                            <span>{t(compat.lengthDiff > 0 ? 'hardMatchUnequal' : 'hardMatch')}</span>
                                         ) : (
                                             <span>
                                                 These names are hard to match.
@@ -520,26 +587,28 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                                         )}
                                     </div>
                                 )}
-                                <div className="mt-2 flex flex-wrap items-center gap-2">
+                                {isItalian && <p id="ambigram-preset-label" className="mt-3 text-xs font-medium text-slate-600">{t('examples')}</p>}
+                                <div className="mt-2 flex flex-wrap items-center gap-2" role={isItalian ? "group" : undefined} aria-labelledby={isItalian ? "ambigram-preset-label" : undefined}>
                                     {quickPairs.map(([a, b]) => (
                                         <button
                                             key={`${a}-${b}`}
                                             type="button"
                                             onClick={() => updateWordPair(a, b)}
                                             className={quickChipClass}
+                                            aria-label={isItalian ? t('useExample', { first: a, second: b }) : undefined}
                                         >
                                             {a} / {b}
                                         </button>
                                     ))}
                                     <button
                                         type="button"
-                                    onClick={() => updateWordPair(wordB, wordA)}
+                                        onClick={() => updateWordPair(wordB, wordA)}
                                         className="rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[11px] font-semibold text-indigo-700 transition-all duration-300 hover:-translate-y-0.5 hover:bg-indigo-100"
                                     >
-                                        Swap
+                                        {isItalian ? t('swap') : "Swap"}
                                     </button>
                                 </div>
-                            </div>
+                            </fieldset>
 
                             <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto] gap-3 items-end">
                                 <div className="sm:max-w-[260px]">
@@ -558,10 +627,13 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                                 </div>
                                 <button
                                     onClick={generateAmbigrams}
-                                    disabled={isLoading}
-                                    className={`${primaryButtonClass} sm:min-w-[230px] sm:w-auto whitespace-nowrap`}
+                                    disabled={!isItalian && isLoading}
+                                    aria-disabled={isItalian && isLoading ? true : undefined}
+                                    className={`${primaryButtonClass} sm:min-w-[230px] sm:w-auto ${isItalian ? "aria-disabled:cursor-not-allowed aria-disabled:opacity-70" : "whitespace-nowrap"}`}
                                 >
-                                    {isLoading ? <Loader2 className="animate-spin" /> : <><PenTool size={18} /> Generate Two-Word</>}
+                                    {isLoading ? (
+                                        <><Loader2 aria-hidden="true" className="animate-spin motion-reduce:animate-none" />{isItalian && t('generating')}</>
+                                    ) : <><PenTool size={18} aria-hidden="true" /> {isItalian ? t('generatePair') : "Generate Two-Word"}</>}
                                 </button>
                             </div>
                         </div>
@@ -596,7 +668,7 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                                 >
                                     <option value="new">{t('styleBlocky')}</option>
                                     <option value="calligraphy">{t('styleCalligraphy')}</option>
-                                    <option value="github">Classic Ambigram</option>
+                                    <option value="github">{isItalian ? t('styleClassic') : "Classic Ambigram"}</option>
                                 </select>
                             </div>
                             <button
@@ -604,13 +676,20 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                                 disabled={isLoading}
                                 className={`${primaryButtonClass} text-lg`}
                             >
-                                {isLoading ? <Loader2 className="animate-spin" /> : <><PenTool size={18} /> {t('buttonGenerate')}</>}
+                                {isLoading ? <><Loader2 aria-hidden="true" className="animate-spin motion-reduce:animate-none" />{isItalian && t('generating')}</> : <><PenTool size={18} aria-hidden="true" /> {t('buttonGenerate')}</>}
                             </button>
                         </div>
                     )}
 
                     {/* Inline message */}
-                    {message && (
+                    {isItalian ? (
+                        <>
+                            <div id="ambigram-feedback" role="alert" className={feedback ? "mt-4 flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700 wrap-anywhere" : undefined}>
+                                {feedback && <><AlertCircle size={16} aria-hidden="true" className="shrink-0" /><span>{feedback}</span></>}
+                            </div>
+                            <div className="sr-only" role="status">{isLoading && t('generating')}</div>
+                        </>
+                    ) : message && (
                         <div className={`mt-4 flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-medium animate-in fade-in slide-in-from-top-1 duration-300 ${message.type === "error" ? "border-red-200 bg-red-50 text-red-700" : "border-blue-200 bg-blue-50 text-blue-700"}`}>
                             <AlertCircle size={16} className="shrink-0" />
                             <span>{message.text}</span>
@@ -619,7 +698,7 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
 
                     {/* 结果展示区 */}
                     <div className="mt-8 border-t border-slate-200 pt-6">
-                        {!batch && !isLoading && (
+                        {!batch && !isLoading && (!isItalian || !feedback) && (
                             <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-10 text-center text-slate-500">
                                 <p>{t('emptyStateText')}</p>
                             </div>
@@ -628,32 +707,38 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                         {batch && (
                             <>
                                 <p role="status" className={`mb-3 break-words rounded-lg px-3 py-2 text-sm font-medium ${isStale ? "bg-amber-50 text-amber-900" : "bg-slate-50 text-slate-700"}`}>
-                                    {isStale
+                                    {isItalian && resultWordA && resultWordB
+                                        ? t(isStale ? 'stalePreview' : 'currentPreview', { first: resultWordA, second: resultWordB, style: resultStyle })
+                                        : isStale
                                         ? `Preview is from ${resultWordA} / ${resultWordB} · ${resultStyle}. Generate to update.`
                                         : `Preview: ${resultWordA} / ${resultWordB} · ${resultStyle}`}
                                 </p>
-                                <div className="mb-5 flex items-center justify-between">
+                                <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
                                     <p className="text-sm font-medium text-slate-500">
                                         {t('rotationHint')}
                                     </p>
                                     <button
                                         type="button"
                                         onClick={() => setPreviewDark(prev => !prev)}
+                                        aria-pressed={isItalian ? previewDark : undefined}
                                         className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-bold transition-all duration-300 ${previewDark ? "border-slate-600 bg-slate-800 text-white" : "border-slate-200 bg-white text-slate-600 hover:border-indigo-200 hover:text-indigo-700"}`}
                                     >
-                                        {previewDark ? "☀️ Light" : "🌙 Dark Preview"}
+                                        {isItalian ? t('darkPreview') : previewDark ? "☀️ Light" : "🌙 Dark Preview"}
                                     </button>
                                 </div>
+                                {isItalian && <p className="mb-3 text-sm text-slate-600">{t('originalPng')}</p>}
                                 <div id="ambigrams" className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 rounded-2xl p-4 ${previewDark ? "bg-slate-950" : "bg-slate-50"}`}>
                                     {batch.images.map(({ dataUrl, ordinal }) => (
                                         <AmbigramItem
                                             key={`${batch.id}-${ordinal}`}
                                             src={dataUrl}
                                             alt={t('altTextResult', { index: ordinal })}
+                                            ordinal={ordinal}
                                             fileName={`${batch.fileStem}-${ordinal}.png`}
                                             wordA={batch.source.wordA.toUpperCase()}
                                             wordB={batch.source.wordB.toUpperCase()}
                                             darkPreview={previewDark}
+                                            isItalian={isItalian}
                                         />
                                     ))}
                                 </div>
