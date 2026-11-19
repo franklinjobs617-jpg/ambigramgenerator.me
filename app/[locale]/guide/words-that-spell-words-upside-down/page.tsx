@@ -1,33 +1,84 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { constructMetadata } from "@/lib/seo";
 import {
     CheckSquare,
     BookOpen,
-    HelpCircle,
     Zap,
-    Type,
     ChevronRight,
-    Search,
     RotateCw,
     Quote
 } from "lucide-react";
+import WordRotationCard from "./WordRotationCard";
 
 const DOMAIN = "https://www.ambigramgenerator.me";
+const description = "See which words read the same upside down in 180° lettering examples. Learn why MOM can become WOW, when MOW stays MOW, and how font shape matters.";
 
-// 1. TDK: 覆盖 "same upside down", "spell words upside down"
-export async function generateMetadata(): Promise<Metadata> {
+type PageProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { locale } = await params;
     return {
         title: "Words That Spell Words Upside Down: Rotational Ambigram List (MOW, POD, SWIMS)",
-        description: "MOW/WOW, POD/BOP, MOM/WOW, SWIMS — the complete rotational ambigram and upside-down word list. What makes a natural rotational ambigram, and how to generate your own.",
+        description: locale === "en" ? description : "MOW/WOW, POD/BOP, MOM/WOW, SWIMS — the complete rotational ambigram and upside-down word list. What makes a natural rotational ambigram, and how to generate your own.",
         alternates: {
             canonical: `${DOMAIN}/guide/words-that-spell-words-upside-down`,
         }
     };
 }
 
-export default async function WordsUpsideDownPage() {
+const examples = [
+    { word: "SOS", reading: "SOS", reason: "The two S shapes trade places and each stays S. O stays O." },
+    { word: "MOM", reading: "WOW", reason: "Both M shapes become W. O stays O." },
+    { word: "MOW", reading: "MOW", reason: "The last W becomes the first M, and the first M becomes the last W." },
+    { word: "POD", reading: "Unverified", reason: "A reading needs a specific drawing and its rotated view." },
+    { word: "SWIMS", reading: "SWIMS", reason: "Possible with S and I shapes that stay legible and matching M/W shapes." },
+    { word: "NOON", reading: "NOON", reason: "Possible with N and O shapes that stay legible after a half-turn." },
+];
+
+const faq = [
+    {
+        question: "Does MOW spell WOW upside down?",
+        answer: "With purpose-drawn M and W shapes that turn into each other and an O that stays O, MOW reads MOW after a half-turn. With the same shapes, MOM can read WOW.",
+    },
+    {
+        question: "What does POD spell upside down?",
+        answer: "POD has no universal 180° reading. You need a specific design and its rotated view to establish what it reads.",
+    },
+    {
+        question: "What word can read the same backwards and upside down?",
+        answer: "NOON reads the same backwards and can be drawn to read the same after a half-turn. SWIMS can read the same after a half-turn in suitable lettering. It spells SMIWS backwards.",
+    },
+    {
+        question: "Can any two words form an ambigram?",
+        answer: "Some letter shapes are hard to reconcile in a single design. Try a few pairs and read the resulting artwork in both orientations.",
+    },
+];
+
+const articleSummary = "Learn how a 180° turn reverses the order of the letters and turns each shape. The reading depends on how the word is drawn.";
+
+const englishJsonLd = [
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: "Words That Spell Words Upside Down",
+        description: articleSummary,
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faq.map(({ question, answer }) => ({
+            "@type": "Question",
+            name: question,
+            acceptedAnswer: { "@type": "Answer", text: answer },
+        })),
+    },
+];
+
+export default async function WordsUpsideDownPage({ params }: PageProps) {
+    const { locale } = await params;
+    const isEnglish = locale === "en";
+    // The shared locale route leaves the existing non-English variant as it was.
     const quickAnswers = [
         { word: "MOW", rotated: "WOW", result: "Different word", note: "M can rotate into W in many simple type styles." },
         { word: "MOM", rotated: "WOW", result: "Different word", note: "A common natural upside-down word pair." },
@@ -79,7 +130,7 @@ export default async function WordsUpsideDownPage() {
 
     return (
         <main className="bg-[#FDFDFF] min-h-screen">
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(isEnglish ? englishJsonLd : jsonLd) }} />
 
             {/* Header Section */}
             <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6 text-center">
@@ -91,7 +142,9 @@ export default async function WordsUpsideDownPage() {
                         Words That Spell <span className="text-indigo-600">Words Upside Down</span>
                     </h1>
                     <p className="text-slate-500 font-medium italic text-lg max-w-2xl mx-auto">
-                        Quick answers for MOW/WOW, POD, MOM/WOW, SWIMS, and other natural ambigram words.
+                        {isEnglish ? (
+                            <>With purpose-drawn letters, <strong>SOS</strong> and <strong>MOW</strong> can read the same after a 180° turn, and <strong>MOM</strong> can read <strong>WOW</strong>. The result depends on the letter shapes.</>
+                        ) : "Quick answers for MOW/WOW, POD, MOM/WOW, SWIMS, and other natural ambigram words."}
                     </p>
                 </div>
             </section>
@@ -108,14 +161,16 @@ export default async function WordsUpsideDownPage() {
                                 <Link href="#same-words" className="flex items-center gap-2 p-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all"><ChevronRight size={14} /> Read Same Upside Down</Link>
                                 <Link href="#different-words" className="flex items-center gap-2 p-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all"><ChevronRight size={14} /> Flip for New Meaning</Link>
                                 <Link href="#meaning" className="flex items-center gap-2 p-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all"><ChevronRight size={14} /> Ambigram Meaning</Link>
-                                <Link href="#swims" className="flex items-center gap-2 p-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all"><ChevronRight size={14} /> The "SWIMS" Secret</Link>
+                                <Link href="#swims" className="flex items-center gap-2 p-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all"><ChevronRight size={14} /> {'The "SWIMS" Secret'}</Link>
                             </nav>
                         </aside>
 
                         {/* RIGHT CONTENT: Main Article */}
-                        <div className="lg:w-3/4 bg-white p-8 md:p-16 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100">
+                        <div className={isEnglish
+                            ? "min-w-0 lg:w-3/4 bg-white px-4 py-8 sm:p-8 md:p-16 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100"
+                            : "lg:w-3/4 bg-white p-8 md:p-16 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100"}>
                             <article className="prose prose-lg prose-slate text-slate-700 max-w-none">
-
+                                {isEnglish ? <EnglishGuide /> : <>
                                 <div id="intro" className="scroll-mt-28 mb-16">
                                     <div className="not-prose mb-10 overflow-hidden rounded-3xl border border-indigo-100 bg-white shadow-sm">
                                         <div className="border-b border-indigo-100 bg-indigo-50/70 px-5 py-4">
@@ -146,7 +201,7 @@ export default async function WordsUpsideDownPage() {
                                         </div>
                                     </div>
                                     <p className="lead text-xl text-slate-600 font-medium">
-                                        Have you ever turned your phone upside down and realized that a word on the screen still makes perfect sense? This is no accident—it's a fascinating typographical phenomenon where <strong>words spell words upside down</strong> through rotational symmetry.
+                                        Have you ever turned your phone upside down and realized that a word on the screen still makes perfect sense? This is no accident—it&apos;s a fascinating typographical phenomenon where <strong>words spell words upside down</strong> through rotational symmetry.
                                     </p>
                                     <p>
                                         In this guide, we’ve compiled the ultimate list of <strong>words that are the same upside down</strong>, explored the hidden <strong>ambigram meaning</strong>, and solved the riddle of the word that stays the same even when flipped and mirrored.
@@ -160,11 +215,11 @@ export default async function WordsUpsideDownPage() {
                                         Words That Read the Same Upside Down
                                     </h2>
                                     <p>
-                                        Some <strong>words look the same upside down</strong> because their letters have natural rotational symmetry. For example, letters like 'o', 's', 'x', 'z', 'H', 'I', 'N', and 'M' are the building blocks of these visual illusions.
+                                        Some <strong>words look the same upside down</strong> because their letters have natural rotational symmetry. For example, letters like &apos;o&apos;, &apos;s&apos;, &apos;x&apos;, &apos;z&apos;, &apos;H&apos;, &apos;I&apos;, &apos;N&apos;, and &apos;M&apos; are the building blocks of these visual illusions.
                                     </p>
 
                                     <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 not-prose my-10">
-                                        <h3 className="text-lg font-bold text-slate-900 mb-4">Top "Same Both Ways" Word List:</h3>
+                                        <h3 className="text-lg font-bold text-slate-900 mb-4">Top &quot;Same Both Ways&quot; Word List:</h3>
                                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                                             {['NOON', 'SIS', 'MOW', 'SOS', 'DEED', 'XOXO'].map(word => (
                                                 <div key={word} className="bg-white p-4 rounded-xl border border-slate-200 text-center font-black text-2xl tracking-widest text-indigo-600 shadow-sm transition-transform hover:rotate-180">
@@ -192,7 +247,7 @@ export default async function WordsUpsideDownPage() {
                                         Words That Change Meaning When Flipped
                                     </h2>
                                     <p>
-                                        Even more impressive are the <strong>words that can be read upside down</strong> to reveal a totally different word. This occurs when one letter rotates to form another (like 'd' turning into 'p', or 'm' into 'w').
+                                        Even more impressive are the <strong>words that can be read upside down</strong> to reveal a totally different word. This occurs when one letter rotates to form another (like &apos;d&apos; turning into &apos;p&apos;, or &apos;m&apos; into &apos;w&apos;).
                                     </p>
                                     <ul>
                                         <li><strong>MOW</strong> flipped upside down often reads as <strong>WOW</strong></li>
@@ -212,7 +267,7 @@ export default async function WordsUpsideDownPage() {
                                         A <strong>rotational ambigram</strong> is a word or design that can be rotated 180° and still be read — either as the same word or as a completely different word. The words above (MOW, SWIMS, NOON) are <em>natural</em> rotational ambigrams: they work in standard fonts without any artistic modification.
                                     </p>
                                     <p>
-                                        Most ambigrams, however, are <em>designed</em> rotational ambigrams — where a typographer or generator carefully shapes each letter so that it reads as one letter right-side up and a different letter when rotated. This is how the classic <strong>Love/Pain ambigram</strong> works: 'L' rotates to become 'P', and 'V' becomes 'A'.
+                                        Most ambigrams, however, are <em>designed</em> rotational ambigrams — where a typographer or generator carefully shapes each letter so that it reads as one letter right-side up and a different letter when rotated. This is how the classic <strong>Love/Pain ambigram</strong> works: &apos;L&apos; rotates to become &apos;P&apos;, and &apos;V&apos; becomes &apos;A&apos;.
                                     </p>
 
                                     <div className="not-prose bg-slate-50 rounded-2xl border border-slate-100 p-6 my-8">
@@ -248,7 +303,7 @@ export default async function WordsUpsideDownPage() {
                                         To truly grasp the <strong>ambigram meaning</strong>, you have to look beyond simple text. An ambigram is a typographic art form where a design is created to have multiple orientations.
                                     </p>
                                     <p>
-                                        While the words above are "natural" ambigrams (they work in standard fonts), the <strong>ambigram definition</strong> usually refers to custom-designed calligraphy where letters are stylistically altered to ensure they flip perfectly.
+                                        While the words above are &quot;natural&quot; ambigrams (they work in standard fonts), the <strong>ambigram definition</strong> usually refers to custom-designed calligraphy where letters are stylistically altered to ensure they flip perfectly.
                                     </p>
 
                                     {/* 
@@ -282,14 +337,14 @@ export default async function WordsUpsideDownPage() {
                                         What word is the same upside down and backwards?
                                     </h2>
                                     <p>
-                                        The most common answer to the puzzle <em>"<strong>what word is the same upside down and backwards</strong>?"</em> is <strong>SWIMS</strong>.
+                                        The most common answer to the puzzle <em>&quot;<strong>what word is the same upside down and backwards</strong>?&quot;</em> is <strong>SWIMS</strong>.
                                     </p>
                                     <div className="p-6 bg-slate-900 text-white rounded-2xl text-center shadow-lg my-8">
                                         <p className="text-4xl font-mono tracking-tighter mb-2">SWIMS</p>
                                         <p className="text-sm text-slate-400 uppercase tracking-widest">Rotational & Backwards Symmetry</p>
                                     </div>
                                     <p>
-                                        Because 'S' rotates to 'S', 'W' rotates to 'M', and 'I' remains 'I', the word <strong>reads the same upside down</strong> as it does right-side up. It's the ultimate example of a natural rotational ambigram.
+                                        Because &apos;S&apos; rotates to &apos;S&apos;, &apos;W&apos; rotates to &apos;M&apos;, and &apos;I&apos; remains &apos;I&apos;, the word <strong>reads the same upside down</strong> as it does right-side up. It&apos;s the ultimate example of a natural rotational ambigram.
                                     </p>
                                 </div>
 
@@ -313,6 +368,7 @@ export default async function WordsUpsideDownPage() {
                                     </div>
                                 </div>
 
+                                </>}
                             </article>
                         </div>
                     </div>
@@ -322,8 +378,122 @@ export default async function WordsUpsideDownPage() {
     );
 }
 
-// 用于内部链接的图标辅助组件
-function ArrowRight(props: any) {
+function EnglishGuide() {
+    return (
+        <>
+            <section id="intro" className="not-prose scroll-mt-28">
+                <h2 className="text-xl font-black text-slate-900">Quick upside-down word answers</h2>
+                <p className="mt-2 text-base text-slate-700">
+                    These readings describe what specific letter shapes can do. To test a word, turn the whole design 180°.
+                </p>
+                <div className="mt-5 overflow-hidden rounded-2xl border border-indigo-100">
+                    <table className="w-full text-left text-sm leading-snug">
+                        <thead className="bg-indigo-50 text-slate-900">
+                            <tr>
+                                <th scope="col" className="px-2 py-3 sm:px-4">Upright</th>
+                                <th scope="col" className="px-2 py-3 sm:px-4">After 180°</th>
+                                <th scope="col" className="px-2 py-3 sm:px-4">What makes it work</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-indigo-100">
+                            {examples.map(({ word, reading, reason }) => (
+                                <tr key={word} className="align-top">
+                                    <th scope="row" className="px-2 py-3 font-bold text-slate-900 sm:px-4">{word}</th>
+                                    <td className="px-2 py-3 font-bold text-indigo-800 sm:px-4">{reading}</td>
+                                    <td className="px-2 py-3 text-slate-700 sm:px-4">{reason}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="same-words" className="not-prose mt-12 scroll-mt-28">
+                <h2 className="text-xl font-black text-slate-900">Try a half-turn</h2>
+                <p className="mb-5 mt-2 text-base text-slate-700">
+                    Use Rotate 180° to turn each drawing. The captions give both readings.
+                </p>
+                <div className="grid gap-3 sm:grid-cols-3">
+                    <WordRotationCard word="SOS" />
+                    <WordRotationCard word="MOM" />
+                    <WordRotationCard word="MOW" />
+                </div>
+            </section>
+
+            <section id="different-words" className="mt-12 scroll-mt-28 space-y-3">
+                <h2 className="text-xl font-black text-slate-900">Why MOM and MOW turn differently</h2>
+                <p>{articleSummary}</p>
+                <p>
+                    The last letter moves into first place as it turns. In a design where M turns into W, W turns
+                    into M, and O stays O, the last M in MOM becomes the first W in WOW. In MOW, the last W
+                    turns into the first M and the first M turns into the last W. The reading stays MOW.
+                </p>
+            </section>
+
+            <section id="rotational-ambigram" className="mt-10 scroll-mt-28 space-y-3">
+                <h2 className="text-xl font-black text-slate-900">What is a rotational ambigram?</h2>
+                <p>
+                    A rotational ambigram is lettering that can be read again after a turn. For a 180° design, the
+                    second reading can be the same word, as with the SOS drawing, or a different word, as with the
+                    MOM/WOW drawing. Each reading depends on the actual strokes.
+                </p>
+            </section>
+
+            <section id="meaning" className="mt-10 scroll-mt-28 space-y-3">
+                <h2 className="text-xl font-black text-slate-900">A half-turn, a mirror flip, and upside-down text</h2>
+                <p>
+                    A mirror flip reflects the design across an axis. A Unicode upside-down text tool substitutes
+                    characters that resemble turned letters. Rotating a text box in Microsoft Word turns the existing
+                    lettering, so readability still depends on the font.
+                </p>
+            </section>
+
+            <section id="swims" className="mt-10 scroll-mt-28 space-y-3">
+                <h2 className="text-xl font-black text-slate-900">Same backwards and same upside down</h2>
+                <p>
+                    A palindrome reads the same when you reverse the spelling. NOON is a palindrome and can also
+                    be drawn to survive a half-turn with suitable N and O shapes. SWIMS spells SMIWS backwards.
+                    In selected lettering, the two S shapes trade places, W and M trade places and turn into each other,
+                    and the I stays I. That can make the rotated design read SWIMS.
+                </p>
+            </section>
+
+            <section className="mt-10 space-y-3">
+                <h2 className="text-xl font-black text-slate-900">How to check a word yourself</h2>
+                <p>
+                    Choose a specific drawing, turn the entire word 180°, and have someone read both directions
+                    before showing them the intended answers. Treat a hard-to-read example as experimental.
+                </p>
+            </section>
+
+            <section id="faq" className="mt-10 scroll-mt-28">
+                <h2 className="text-xl font-black text-slate-900">Frequently asked questions</h2>
+                <dl className="mt-4 space-y-4">
+                    {faq.map(({ question, answer }) => (
+                        <div key={question}>
+                            <dt className="font-bold text-slate-900">{question}</dt>
+                            <dd className="mt-1">{answer}</dd>
+                        </div>
+                    ))}
+                </dl>
+            </section>
+
+            <section id="create" className="mt-10 scroll-mt-28 border-t border-slate-100 pt-8">
+                <h2 className="text-xl font-black text-slate-900">Try your own two-word design</h2>
+                <p className="mt-3">
+                    Open the <Link href="/two-word-ambigram-generator" className="font-semibold text-indigo-700 underline underline-offset-2">2D two-word ambigram generator</Link> and compare both orientations before saving a design.
+                </p>
+                <div className="mt-12 pt-8 border-t border-slate-50 flex flex-wrap justify-center gap-6 text-sm font-bold text-indigo-600">
+                    <Link href="/ambigram-word-tattoos" className="hover:underline">Ambigram Tattoo Ideas</Link>
+                    <Link href="/ambigram-examples" className="hover:underline">Ambigram Examples Gallery</Link>
+                    <Link href="/mirror-text-generator" className="hover:underline">Mirror Text Generator</Link>
+                </div>
+            </section>
+        </>
+    );
+}
+
+function ArrowRight(props: { size: number; className?: string }) {
     return (
         <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
     )
