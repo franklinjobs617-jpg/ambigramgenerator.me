@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Box, PenTool, PlayCircle, Wand2, Zap, Sparkles } from "lucide-react";
+import { isAmbigramWord } from "@/lib/ambigram-input";
 
 interface HeroSectionProps {
     onGenerate: (wordA: string, wordB: string, tab: "3d" | "2d") => void;
@@ -11,9 +12,14 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onGenerate }: HeroSectionProps) {
     const t = useTranslations("HomePage.HeroSection");
+    const tool = useTranslations("Generator2D");
+    const isItalian = useLocale() === "it";
 
     const [wordA, setWordA] = useState("");
     const [wordB, setWordB] = useState("");
+    const [showValidation, setShowValidation] = useState(false);
+    const firstField = useRef<HTMLInputElement>(null);
+    const secondField = useRef<HTMLInputElement>(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
 
@@ -46,7 +52,7 @@ export default function HeroSection({ onGenerate }: HeroSectionProps) {
         return () => clearInterval(interval);
     }, [isPaused, nextSlide]);
 
-    const handleAISuggest = () => {
+    const handleSuggest = () => {
         const pairs: Record<string, string> = {
             LOVE: "HATE",
             ANGEL: "DEVIL",
@@ -57,11 +63,23 @@ export default function HeroSection({ onGenerate }: HeroSectionProps) {
         setWordB(pairs[upperA] || "ALWAYS");
     };
 
+    const finalWordA = wordA || "LOVE";
+    const finalWordB = wordB || "HATE";
+    const invalidA = !isAmbigramWord(finalWordA);
+    const invalidB = !isAmbigramWord(finalWordB);
+    const showError = showValidation && (invalidA || invalidB);
+
     const handleGenerate = (tab: "3d" | "2d") => {
-        const finalWordA = wordA || "LOVE";
-        const finalWordB = wordB || "HATE";
+        if (isItalian && tab === "2d") {
+            setShowValidation(invalidA || invalidB);
+            if (invalidA || invalidB) {
+                (invalidA ? firstField : secondField).current?.focus();
+                return;
+            }
+        }
         onGenerate(finalWordA, finalWordB, tab);
-        document.getElementById("workspace")?.scrollIntoView({ behavior: "smooth" });
+        const reduceMotion = isItalian && tab === "2d" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        document.getElementById("workspace")?.scrollIntoView({ behavior: reduceMotion ? "instant" : "smooth" });
     };
 
     const currentFeature = features[activeIndex] ?? features[0];
@@ -101,34 +119,61 @@ export default function HeroSection({ onGenerate }: HeroSectionProps) {
                             <div className="rounded-2xl border border-indigo-100/70 bg-white/90 p-4 shadow-[0_8px_40px_-12px_rgba(79,70,229,0.13)] backdrop-blur-sm">
                                 {/* Word inputs */}
                                 <div className="flex gap-3">
-                                    <input
-                                        type="text"
-                                        placeholder={t("inputWordAPlaceholder")}
-                                        value={wordA}
-                                        autoFocus
-                                        onChange={(e) => setWordA(e.target.value)}
-                                        onKeyDown={(e) => { if (e.key === "Enter") handleGenerate("2d"); }}
-                                        className="min-w-0 flex-1 rounded-xl border-2 border-slate-100 bg-slate-50/70 px-4 py-3 font-bold text-[#1A1A1B] text-sm outline-none transition-all placeholder:text-slate-400 focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50"
-                                    />
-                                    <div className="relative min-w-0 flex-1">
+                                    <div className="min-w-0 flex-1">
+                                        <label htmlFor="hero-word-a" className={isItalian ? "mb-1 block text-left text-sm font-medium text-slate-700" : "sr-only"}>
+                                            {isItalian ? tool("firstWordLabel") : t("inputWordAPlaceholder")}
+                                        </label>
                                         <input
                                             type="text"
-                                            placeholder={t("inputWordBPlaceholder")}
-                                            value={wordB}
-                                            onChange={(e) => setWordB(e.target.value)}
-                                            onKeyDown={(e) => { if (e.key === "Enter") handleGenerate("2d"); }}
-                                            className="w-full rounded-xl border-2 border-slate-100 bg-slate-50/70 px-4 py-3 pr-11 font-bold text-[#1A1A1B] text-sm outline-none transition-all placeholder:text-slate-400 focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50"
+                                            id="hero-word-a"
+                                            ref={firstField}
+                                            placeholder={isItalian ? tool("firstWordPlaceholder") : t("inputWordAPlaceholder")}
+                                            value={wordA}
+                                            autoFocus={!isItalian}
+                                            aria-invalid={showError && invalidA || undefined}
+                                            aria-describedby={isItalian ? (showError && invalidA ? "hero-word-help hero-word-error" : "hero-word-help") : undefined}
+                                            onChange={(e) => setWordA(e.target.value)}
+                                            onKeyDown={(e) => { if (e.key === "Enter" && !e.nativeEvent.isComposing) handleGenerate("2d"); }}
+                                            className="w-full rounded-xl border-2 border-slate-100 bg-slate-50/70 px-4 py-3 font-bold text-[#1A1A1B] text-sm outline-none transition-all placeholder:text-slate-400 focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50"
                                         />
-                                        <button
-                                            type="button"
-                                            onClick={handleAISuggest}
-                                            title="AI Suggest pair"
-                                            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg border border-indigo-100 bg-white p-1.5 text-indigo-500 shadow-sm transition-all hover:bg-indigo-600 hover:text-white hover:border-indigo-600 active:scale-90"
-                                        >
-                                            <Wand2 size={15} />
-                                        </button>
+                                    </div>
+                                    <div className="min-w-0 flex-1">
+                                        <label htmlFor="hero-word-b" className={isItalian ? "mb-1 block text-left text-sm font-medium text-slate-700" : "sr-only"}>
+                                            {isItalian ? tool("secondWordLabel") : t("inputWordBPlaceholder")}
+                                        </label>
+                                        <div className="relative">
+                                            <input
+                                                type="text"
+                                                id="hero-word-b"
+                                                ref={secondField}
+                                                placeholder={isItalian ? tool("secondWordPlaceholder") : t("inputWordBPlaceholder")}
+                                                value={wordB}
+                                                aria-invalid={showError && invalidB || undefined}
+                                                aria-describedby={isItalian ? (showError && invalidB ? "hero-word-help hero-word-error" : "hero-word-help") : undefined}
+                                                onChange={(e) => setWordB(e.target.value)}
+                                                onKeyDown={(e) => { if (e.key === "Enter" && !e.nativeEvent.isComposing) handleGenerate("2d"); }}
+                                                className="w-full rounded-xl border-2 border-slate-100 bg-slate-50/70 px-4 py-3 pr-11 font-bold text-[#1A1A1B] text-sm outline-none transition-all placeholder:text-slate-400 focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={handleSuggest}
+                                                title={isItalian ? t("suggestPair") : "AI Suggest pair"}
+                                                aria-label={isItalian ? t("suggestPair") : undefined}
+                                                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg border border-indigo-100 bg-white p-1.5 text-indigo-500 shadow-sm transition-all hover:bg-indigo-600 hover:text-white hover:border-indigo-600 active:scale-90"
+                                            >
+                                                <Wand2 size={15} aria-hidden="true" />
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
+                                {isItalian && (
+                                    <>
+                                        <p id="hero-word-help" className="mt-2 text-left text-xs leading-relaxed text-slate-600">{t("wordHelp")} {t("exampleHelp")}</p>
+                                        <div id="hero-word-error" role="alert" className={showError ? "mt-2 text-left text-sm font-medium text-red-700" : undefined}>
+                                            {showError && tool("errorLetters")}
+                                        </div>
+                                    </>
+                                )}
 
                                 {/* Generate buttons */}
                                 <div className="mt-3 flex gap-3">
@@ -151,9 +196,9 @@ export default function HeroSection({ onGenerate }: HeroSectionProps) {
                                     >
                                         <PenTool size={17} className="transition-transform group-hover:-rotate-12" />
                                         <span className="font-black text-sm">{t("btnGenerate2D")}</span>
-                                        <span className="absolute -top-2.5 right-3 flex items-center gap-1 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 px-2.5 py-0.5 text-[10px] font-black text-white shadow-sm">
+                                        {!isItalian && <span className="absolute -top-2.5 right-3 flex items-center gap-1 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 px-2.5 py-0.5 text-[10px] font-black text-white shadow-sm">
                                             <Zap size={8} fill="currentColor" /> {t("badgeTattoo")}
-                                        </span>
+                                        </span>}
                                     </button>
                                 </div>
                             </div>
@@ -233,7 +278,7 @@ export default function HeroSection({ onGenerate }: HeroSectionProps) {
                                             className={`h-1.5 rounded-full transition-all duration-300 ${
                                                 index === activeIndex ? "w-7 bg-indigo-600" : "w-1.5 bg-indigo-200"
                                             }`}
-                                            aria-label={`Switch to preview ${index + 1}`}
+                                            aria-label={isItalian ? t("showPreview", { index: index + 1 }) : `Switch to preview ${index + 1}`}
                                         />
                                     ))}
                                 </div>

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Generator3d from "@/components/Generator3d";
 import Generator2d from "@/components/Generator2d";
 import HeroSection from "@/components/HeroSection";
@@ -42,6 +42,7 @@ function FaqItem({ question, answer }: { question: string; answer: React.ReactNo
 
 export default function HomeContent() {
     const t = useTranslations("HomePage");
+    const isItalian = useLocale() === "it";
 
     const [activeTab, setActiveTab] = useState<WorkspaceTab>("2d");
     const [globalWordA, setGlobalWordA] = useState("");
@@ -216,25 +217,25 @@ export default function HomeContent() {
                         <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50/80 to-transparent p-5 sm:p-6">
                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                 <div className="flex-1">
-                                    <div className="flex items-center gap-2 mb-1">
+                                    {!isItalian && <div className="flex items-center gap-2 mb-1">
                                         <span className="inline-flex items-center gap-1 rounded-full bg-indigo-600 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white">
                                             <Sparkles size={10} /> Pro
                                         </span>
                                         <span className="text-xs text-slate-400 font-medium">Free plan: 2 generations/day · standard resolution</span>
-                                    </div>
-                                    <h2 className="text-base font-black text-[#1A1A1B]">{t("Workspace.tattooToolTitle")}</h2>
+                                    </div>}
+                                    <h2 className="text-base font-black text-[#1A1A1B]">{isItalian ? t("Workspace.aiTattooTitle") : t("Workspace.tattooToolTitle")}</h2>
                                     <p className="mt-1 text-sm text-[#666666] leading-relaxed">
-                                        {t.rich("Workspace.tattooToolDesc", {
+                                        {isItalian ? t("Workspace.aiTattooDescription") : t.rich("Workspace.tattooToolDesc", {
                                             bold: (chunks) => <strong>{chunks}</strong>,
                                             spanClass: (chunks) => <span className="font-bold text-indigo-600">{chunks}</span>,
                                         })}
                                     </p>
                                 </div>
                                 <Link
-                                    href="/ai-tattoo-generator"
-                                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-md transition-all hover:bg-indigo-700 hover:shadow-lg whitespace-nowrap flex-shrink-0"
+                                    href={isItalian ? "/it/ai-tattoo-generator" : "/ai-tattoo-generator"}
+                                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-md transition-all hover:bg-indigo-700 hover:shadow-lg text-center sm:whitespace-nowrap flex-shrink-0"
                                 >
-                                    <Sparkles size={14} /> Unlock HD + Unlimited
+                                    <Sparkles size={14} /> {isItalian ? t("Workspace.aiTattooCta") : "Unlock HD + Unlimited"}
                                 </Link>
                             </div>
                         </div>
@@ -243,7 +244,7 @@ export default function HomeContent() {
             </section>
 
             {/* Pro upgrade banner — secondary CTA */}
-            <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+            {!isItalian && <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
                 <Link
                     href="/ai-tattoo-generator"
                     className="group flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50 to-purple-50 px-6 py-5 transition-all hover:border-indigo-200 hover:shadow-lg"
@@ -264,7 +265,7 @@ export default function HomeContent() {
                         Start Pro <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                     </div>
                 </Link>
-            </section>
+            </section>}
 
             {/* How It Works */}
             <section className="bg-white px-4 sm:px-6 lg:px-8 py-14 sm:py-20">

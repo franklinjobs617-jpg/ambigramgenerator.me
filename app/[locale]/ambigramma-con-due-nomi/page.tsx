@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ChevronRight, HelpCircle, ArrowRight, Sparkles, Check } from "lucide-react";
 
 const DOMAIN = "https://www.ambigramgenerator.me";
+const ITALIAN_2D_TOOL = "/it/two-word-ambigram-generator#two-word-tool";
 
 // Metadata: canonical fisso IT, nessun alternates (pagina esclusivamente italiana)
 // Non usiamo constructMetadata perché questa pagina non ha versioni in altre lingue
@@ -104,10 +105,10 @@ export default async function AmbigrammaConDueNomiPage() {
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-3">
                         <Link
-                            href="/two-word-ambigram-generator"
+                            href={ITALIAN_2D_TOOL}
                             className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-7 py-4 text-sm font-bold text-white shadow-lg shadow-indigo-200 transition-colors hover:bg-indigo-700"
                         >
-                            <Sparkles size={16} /> Crea Ambigramma Gratis
+                            <Sparkles size={16} /> Vai al generatore 2D
                         </Link>
                         {/* query "ambigramma con due nomi 3d" — seconda CTA */}
                         <Link
@@ -154,9 +155,9 @@ export default async function AmbigrammaConDueNomiPage() {
                                     </h2>
                                     <div className="not-prose space-y-3 mb-8">
                                         {[
-                                            ["1", "Inserisci i due nomi", "Scrivi il primo nome nel campo in alto e il secondo in basso. Il generatore accetta nomi italiani, stranieri e qualsiasi parola."],
-                                            ["2", "Scegli lo stile", "Blocky per un look deciso, Calligraphy per tatuaggi e scritte eleganti. L'anteprima si aggiorna in tempo reale."],
-                                            ["3", "Scarica gratis", "Clicca Download per ottenere il PNG in alta risoluzione. Nessuna filigrana, nessun account richiesto."],
+                                            ["1", "Inserisci i due nomi", "Inserisci un nome o una parola per campo. Usa solo lettere dalla A alla Z, senza accenti, spazi o punteggiatura."],
+                                            ["2", "Scegli lo stile e genera", "Scegli Stampatello o Corsivo, poi seleziona «Genera l’ambigramma». Ruota l’anteprima per leggere entrambi i nomi."],
+                                            ["3", "Scarica il PNG", "Per conservare un risultato, seleziona «Scarica PNG»."],
                                         ].map(([n, titolo, desc]) => (
                                             <div key={n} className="flex gap-4 p-5 rounded-2xl border border-slate-100 bg-slate-50/40">
                                                 <div className="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-sm flex-shrink-0">{n}</div>
@@ -168,8 +169,8 @@ export default async function AmbigrammaConDueNomiPage() {
                                         ))}
                                     </div>
                                     <div className="not-prose">
-                                        <Link href="/two-word-ambigram-generator" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-indigo-700 transition-colors">
-                                            Vai al Generatore <ArrowRight size={15} />
+                                        <Link href={ITALIAN_2D_TOOL} className="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-indigo-700 transition-colors">
+                                            Vai al generatore 2D <ArrowRight size={15} />
                                         </Link>
                                     </div>
                                 </div>
@@ -290,9 +291,8 @@ export default async function AmbigrammaConDueNomiPage() {
 
                                 {/* CTA FINALE */}
                                 <div className="border-t border-slate-100 pt-10 mt-10 text-center not-prose">
-                                    <p className="text-slate-500 text-sm mb-5">Pronto? Il generatore è gratuito e non richiede registrazione.</p>
-                                    <Link href="/two-word-ambigram-generator" className="inline-flex items-center gap-2 bg-indigo-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-indigo-700 transition-colors shadow-lg">
-                                        Crea il Tuo Ambigramma Gratis <ArrowRight size={17} />
+                                    <Link href={ITALIAN_2D_TOOL} className="inline-flex items-center gap-2 bg-indigo-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-indigo-700 transition-colors shadow-lg">
+                                        Crea un ambigramma 2D <ArrowRight size={17} />
                                     </Link>
                                     <div className="mt-8 flex flex-wrap justify-center gap-5 text-sm font-bold text-indigo-600">
                                         <Link href="/3d-generator" className="hover:underline">Generatore 3D STL</Link>

@@ -160,6 +160,16 @@ export default async function TwoWordAmbigramGeneratorPage({ params }: Props) {
             : locale === "it"
               ? "Generatore di Ambigrammi con Due Nomi e Due Parole"
               : "Free Two Name & Two Word Ambigram Generator";
+    const isItalian = locale === "it";
+    const toolSteps = isItalian ? [
+        ["1", "Inserisci due nomi o parole", "Prova due nomi di lunghezza simile."],
+        ["2", "Genera e ruota l’anteprima", "Verifica che entrambe le parole si leggano ruotando l’anteprima."],
+        ["3", "Scarica il PNG", "Salva il risultato che preferisci come riferimento."],
+    ] : [
+        ["1", "Enter two words or names", "Short, similar-length pairs produce cleaner rotations."],
+        ["2", "Generate and rotate", "Compare readability before choosing a tattoo or logo reference."],
+        ["3", "Download PNG", "Save the strongest result for your artist or design workflow."],
+    ];
 
     return (
         <main className="bg-[#FDFDFF]">
@@ -169,7 +179,7 @@ export default async function TwoWordAmbigramGeneratorPage({ params }: Props) {
             <section className="bg-gradient-to-b from-indigo-50/50 to-white pt-32 pb-20 px-6">
                 <div className="max-w-6xl mx-auto text-center space-y-6">
                     <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider text-indigo-600 shadow-sm">
-                        <Sparkles size={14} /> Free Tool
+                        <Sparkles size={14} /> {isItalian ? "Strumento online" : "Free Tool"}
                     </div>
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900">
                         {pageTitle}
@@ -184,11 +194,7 @@ export default async function TwoWordAmbigramGeneratorPage({ params }: Props) {
                         that exact task: create fast, compare, then download.
                     </p>
                     <div className="mx-auto grid max-w-3xl gap-3 pt-2 text-left sm:grid-cols-3">
-                        {[
-                            ["1", "Enter two words or names", "Short, similar-length pairs produce cleaner rotations."],
-                            ["2", "Generate and rotate", "Compare readability before choosing a tattoo or logo reference."],
-                            ["3", "Download PNG", "Save the strongest result for your artist or design workflow."],
-                        ].map(([step, title, desc]) => (
+                        {toolSteps.map(([step, title, desc]) => (
                             <div key={step} className="rounded-2xl border border-indigo-100 bg-white p-4 shadow-sm">
                                 <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-indigo-600 text-xs font-black text-white">{step}</span>
                                 <h2 className="mt-3 text-sm font-black text-slate-900">{title}</h2>
@@ -201,25 +207,25 @@ export default async function TwoWordAmbigramGeneratorPage({ params }: Props) {
                             href="#two-word-tool"
                             className="inline-flex items-center justify-center rounded-2xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-sm shadow-indigo-200 transition-all duration-300 hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-200"
                         >
-                            Start Generating
+                            {isItalian ? "Vai al generatore" : "Start Generating"}
                         </Link>
                         <Link
-                            href="/ambigram-word-tattoos"
+                            href={isItalian ? "/it/ambigram-word-tattoos" : "/ambigram-word-tattoos"}
                             className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-200 hover:text-indigo-700 hover:shadow-md hover:shadow-indigo-100"
                         >
-                            Browse Tattoo Word Ideas
+                            {isItalian ? "Sfoglia le idee per tatuaggi" : "Browse Tattoo Word Ideas"}
                         </Link>
                     </div>
                 </div>
             </section>
 
-            <section id="two-word-tool" className="px-6 pb-8 scroll-mt-24">
+            <section id="two-word-tool" tabIndex={isItalian ? -1 : undefined} className="px-6 pb-8 scroll-mt-24">
                 <div className="max-w-7xl mx-auto rounded-[2.5rem] border border-slate-200 bg-white p-4 shadow-2xl shadow-indigo-100/40">
                     <Generator2d />
                 </div>
 
                 {/* Pro upgrade hook — 工具正下方最高意图位置 */}
-                <div className="max-w-7xl mx-auto mt-5 rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50/80 to-transparent p-5">
+                {!isItalian && <div className="max-w-7xl mx-auto mt-5 rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50/80 to-transparent p-5">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
@@ -238,7 +244,7 @@ export default async function TwoWordAmbigramGeneratorPage({ params }: Props) {
                             <Sparkles size={14} /> See Pricing
                         </Link>
                     </div>
-                </div>
+                </div>}
             </section>
 
             {/* 名字配对内容区块 — 覆盖 "two name ambigram" informational query */}
