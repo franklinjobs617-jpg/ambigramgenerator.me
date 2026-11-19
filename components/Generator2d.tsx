@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useEffectEvent, useRef } from "react";
 import { PenTool, Loader2, RotateCw, Download, AlertCircle } from "lucide-react";
 import { useTranslations } from 'next-intl';
 // --- 1. 核心数据与辅助函数 (保留原生逻辑) ---
@@ -126,18 +126,25 @@ const AmbigramItem = ({ src, alt, fileName, wordA, wordB, darkPreview }: { src: 
     return (
         <div
             className={`group relative cursor-pointer overflow-hidden rounded-2xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${darkPreview ? "border-slate-700 bg-slate-900 hover:border-indigo-500 hover:shadow-indigo-900/30" : "border-slate-200 bg-white hover:border-indigo-200 hover:shadow-indigo-100/80"}`}
-            onClick={() => setAngle(prev => prev + 180)}
         >
-            <img
-                src={src}
-                alt={alt}
-                className="h-auto w-full transition-transform duration-500 ease-in-out"
-                style={{
-                    transform: `rotate(${angle}deg)${darkPreview ? " invert(1)" : ""}`,
-                }}
-                width={320}
-                height={240}
-            />
+            <button
+                type="button"
+                className="block w-full cursor-pointer focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-indigo-500"
+                aria-label={`Rotate ${alt}`}
+                aria-pressed={isFlipped}
+                onClick={() => setAngle(prev => prev + 180)}
+            >
+                {/* This PNG is already encoded in the browser. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src={src}
+                    alt={alt}
+                    className="h-auto w-full transition-transform duration-500 ease-in-out"
+                    style={{ transform: `rotate(${angle}deg)`, filter: darkPreview ? "invert(1)" : undefined }}
+                    width={320}
+                    height={240}
+                />
+            </button>
             {/* Direction labels */}
             <div className="absolute left-0 right-0 top-0 flex justify-between px-3 pt-2 pointer-events-none">
                 <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${darkPreview ? "bg-white/15 text-white/80" : "bg-slate-900/10 text-slate-600"}`}>
@@ -153,7 +160,6 @@ const AmbigramItem = ({ src, alt, fileName, wordA, wordB, darkPreview }: { src: 
             <a
                 href={src}
                 download={fileName}
-                onClick={(event) => event.stopPropagation()}
                 className={`absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-bold shadow-sm transition-all duration-300 hover:-translate-y-0.5 ${darkPreview ? "border-slate-600 bg-slate-800/95 text-slate-300 hover:border-indigo-400 hover:text-indigo-300" : "border-slate-200 bg-white/95 text-slate-700 hover:border-indigo-200 hover:text-indigo-700"}`}
                 aria-label="Download PNG"
             >
@@ -170,6 +176,22 @@ type Generator2dProps = {
     triggerGenerate?: number;
 };
 
+type GenerationMode = "pair" | "text";
+
+type GenerationRequest = Readonly<{
+    id: number;
+    source: Readonly<{ mode: GenerationMode; wordA: string; wordB: string; style: string }>;
+    fileStem: string;
+}>;
+
+type GeneratedImage = Readonly<{ dataUrl: string; ordinal: number }>;
+type GeneratedBatch = GenerationRequest & Readonly<{ images: readonly GeneratedImage[] }>;
+
+const createRequest = (id: number, mode: GenerationMode, words: string[], style: string): GenerationRequest => {
+    const [wordA, wordB = wordA] = words;
+    return { id, source: { mode, wordA, wordB, style }, fileStem: words.join("-") };
+};
+
 // --- 3. 主组件: Generator2d ---
 export default function Generator2d({ incomingWordA, incomingWordB, triggerGenerate }: Generator2dProps) {
     const t = useTranslations('Generator2D');
@@ -179,26 +201,20 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
     const [inputText, setInputText] = useState("Hello");
     const [style, setStyle] = useState("new");
 
-    // Receive words from Hero section and auto-generate
-    useEffect(() => {
-        if (incomingWordA && incomingWordB && triggerGenerate && triggerGenerate > 0) {
-            setWordA(incomingWordA);
-            setWordB(incomingWordB);
-            setIsTwoWordMode(true);
-            // Trigger generation after state updates
-            setTimeout(() => {
-                const words = [incomingWordA.toLowerCase().trim(), incomingWordB.toLowerCase().trim()];
-                if (words[0] && words[1] && !/[^a-zA-Z]/.test(words[0]) && !/[^a-zA-Z]/.test(words[1])) {
-                    // Directly call generation logic
-                    generateFromWords(words[0], words[1]);
-                }
-            }, 100);
-        }
-    }, [incomingWordA, incomingWordB, triggerGenerate]);
     const [isLoading, setIsLoading] = useState(false);
-    const [generatedImages, setGeneratedImages] = useState<string[]>([]);
+    const [batch, setBatch] = useState<GeneratedBatch | null>(null);
     const [previewDark, setPreviewDark] = useState(false);
     const [message, setMessage] = useState<{ text: string; type: "error" | "info" } | null>(null);
+    const latestRequestId = useRef(0);
+
+    const invalidateGeneration = () => {
+        const id = ++latestRequestId.current;
+        setIsLoading(false);
+        setMessage(null);
+        return id;
+    };
+
+    useEffect(() => () => { latestRequestId.current += 1; }, []);
 
     // Auto-dismiss message after 4s
     useEffect(() => {
@@ -207,11 +223,18 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
         return () => clearTimeout(timer);
     }, [message]);
     const preparedInput = isTwoWordMode ? `${wordA.trim()} ${wordB.trim()}` : inputText;
-    const lengthGap = Math.abs(wordA.trim().length - wordB.trim().length);
-    const fileStem = (isTwoWordMode ? `${wordA}-${wordB}` : inputText)
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "") || "ambigram";
+    const mode: GenerationMode = isTwoWordMode ? "pair" : "text";
+    const draftWords = isTwoWordMode
+        ? [wordA.trim().toLowerCase(), wordB.trim().toLowerCase()]
+        : inputText.trim().toLowerCase().split(/\s+/);
+    const isStale = batch && (
+        batch.source.mode !== mode || batch.source.style !== style ||
+        batch.source.wordA !== draftWords[0] || batch.source.wordB !== (draftWords[1] ?? draftWords[0]) ||
+        batch.fileStem !== draftWords.join("-")
+    );
+    const resultWordA = batch?.source.wordA.toUpperCase();
+    const resultWordB = batch?.source.wordB.toUpperCase();
+    const resultStyle = batch?.source.style === "calligraphy" ? t('styleCalligraphy') : t('styleBlocky');
     const quickPairs: Array<[string, string]> = [
         ["love", "pain"],
         ["eric", "mary"],
@@ -273,28 +296,28 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
         "rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-600 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-200 hover:text-indigo-700";
     const panelSurfaceClass =
         "mx-auto max-w-4xl rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-indigo-100/40 md:p-8";
-    const applyQuickPair = (nextA: string, nextB: string) => {
+    const updateWordPair = (nextA: string, nextB: string) => {
+        invalidateGeneration();
         setWordA(nextA);
         setWordB(nextB);
-        setGeneratedImages([]);
     };
-    const swapWords = () => {
-        const nextA = wordB;
-        const nextB = wordA;
-        setWordA(nextA);
-        setWordB(nextB);
-        setGeneratedImages([]);
+    const changeStyle = (nextStyle: string) => {
+        invalidateGeneration();
+        setStyle(nextStyle);
     };
 
-    const generateFromWords = async (w1: string, w2: string) => {
+    const generateFromWords = async (request: GenerationRequest) => {
+        const isCurrent = () => latestRequestId.current === request.id;
+        if (!isCurrent()) return;
+
+        const { wordA: w1, wordB: w2, style } = request.source;
         const words = [w1, w2];
         const doubleWords = w1 !== w2;
 
         setIsLoading(true);
-        setGeneratedImages([]);
 
         try {
-            const newImages: string[] = [];
+            const newImages: GeneratedImage[] = [];
 
             // Original variable-width styles (new, calligraphy)
             const glyphs = getPossibleGlyphs(words, style);
@@ -324,7 +347,6 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                         ? `The names differ by ${diff} letters — try shorter names or nicknames (e.g. "Alex" instead of "Alexander").`
                         : `Try different spellings or shorter versions of the names.`;
                     setMessage({ text: `No match found for "${words[0]}" & "${words[1]}". ${hint}`, type: "error" });
-                    setIsLoading(false);
                     return;
                 }
 
@@ -348,6 +370,7 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                         let x = 0;
                         for (const glyph of combo[0]) {
                             const glyphImage = await getGlyphImage(glyph, style);
+                            if (!isCurrent()) return;
                             ctx.drawImage(glyphImage, x, 0);
                             x += strokeWidth * countStrokes([glyph]);
                         }
@@ -357,30 +380,55 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                         x = 0;
                         for (const glyph of combo[1]) {
                             const glyphImage = await getGlyphImage(glyph, style);
+                            if (!isCurrent()) return;
                             ctx.drawImage(glyphImage, x - canvas.width, -canvas.height);
                             x += strokeWidth * countStrokes([glyph]);
                         }
 
-                        newImages.push(canvas.toDataURL());
+                        const dataUrl = canvas.toDataURL("image/png");
+                        if (dataUrl.startsWith("data:image/png;base64,")) {
+                            newImages.push({ dataUrl, ordinal: newImages.length + 1 });
+                        }
                     }
                 }
 
             if (newImages.length === 0) {
                 setMessage({ text: `No ambigrams could be generated for "${w1}" & "${w2}".`, type: "error" });
+                return;
             }
 
-            setGeneratedImages(newImages);
+            if (isCurrent()) setBatch({ ...request, images: newImages });
         } catch (e) {
+            if (!isCurrent()) return;
             console.error(e);
             setMessage({ text: "Generation failed. Please try different words.", type: "error" });
         } finally {
-            setIsLoading(false);
+            if (isCurrent()) setIsLoading(false);
         }
     };
 
+    const scheduleHeroGeneration = useEffectEvent((nextA: string, nextB: string) => {
+        const id = invalidateGeneration();
+        setWordA(nextA);
+        setWordB(nextB);
+        setIsTwoWordMode(true);
+
+        const words = [nextA.trim().toLowerCase(), nextB.trim().toLowerCase()];
+        if (words.some(word => !/^[a-z]+$/.test(word))) return;
+
+        // Reserve the request before the delay so an edit can supersede it.
+        const request = createRequest(id, "pair", words, style);
+        return setTimeout(() => void generateFromWords(request), 100);
+    });
+
+    useEffect(() => {
+        if (!incomingWordA || !incomingWordB || !triggerGenerate || triggerGenerate <= 0) return;
+        const timer = scheduleHeroGeneration(incomingWordA, incomingWordB);
+        return () => clearTimeout(timer);
+    }, [incomingWordA, incomingWordB, triggerGenerate]);
+
     const generateAmbigrams = async () => {
-        setMessage(null);
-        if (!preparedInput) return;
+        const id = invalidateGeneration();
         if (isTwoWordMode) {
             if (!wordA.trim() || !wordB.trim()) {
                 setMessage({ text: "Please enter both words.", type: "error" });
@@ -395,7 +443,7 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
             return;
         }
 
-        let words = preparedInput.toLowerCase().trim().split(/\s+/).filter((w) => w);
+        const words = preparedInput.toLowerCase().trim().split(/\s+/).filter(Boolean);
 
         if (isTwoWordMode && words.length !== 2) {
             setMessage({ text: "Please enter exactly two words.", type: "error" });
@@ -406,11 +454,9 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
         } else if (words.length === 0) {
             setMessage({ text: "Please type something first.", type: "error" });
             return;
-        } else if (words.length === 1) {
-            words = [words[0], words[0]];
         }
 
-        await generateFromWords(words[0], words[1]);
+        await generateFromWords(createRequest(id, mode, words, style));
     };
 
     return (
@@ -440,7 +486,10 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                                         placeholder="Word 1 (e.g. love)"
                                         className={fieldClass}
                                         value={wordA}
-                                        onChange={(e) => setWordA(e.target.value)}
+                                        onChange={(e) => {
+                                            invalidateGeneration();
+                                            setWordA(e.target.value);
+                                        }}
                                         onKeyDown={(e) => e.key === "Enter" && generateAmbigrams()}
                                     />
                                     <input
@@ -449,7 +498,10 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                                         placeholder="Word 2 (e.g. pain)"
                                         className={fieldClass}
                                         value={wordB}
-                                        onChange={(e) => setWordB(e.target.value)}
+                                        onChange={(e) => {
+                                            invalidateGeneration();
+                                            setWordB(e.target.value);
+                                        }}
                                         onKeyDown={(e) => e.key === "Enter" && generateAmbigrams()}
                                     />
                                 </div>
@@ -473,7 +525,7 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                                         <button
                                             key={`${a}-${b}`}
                                             type="button"
-                                            onClick={() => applyQuickPair(a, b)}
+                                            onClick={() => updateWordPair(a, b)}
                                             className={quickChipClass}
                                         >
                                             {a} / {b}
@@ -481,7 +533,7 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                                     ))}
                                     <button
                                         type="button"
-                                        onClick={swapWords}
+                                    onClick={() => updateWordPair(wordB, wordA)}
                                         className="rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[11px] font-semibold text-indigo-700 transition-all duration-300 hover:-translate-y-0.5 hover:bg-indigo-100"
                                     >
                                         Swap
@@ -498,7 +550,7 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                                         id="style_dropdown"
                                         className={selectClass}
                                         value={style}
-                                        onChange={(e) => setStyle(e.target.value)}
+                                        onChange={(e) => changeStyle(e.target.value)}
                                     >
                                         <option value="new">{t('styleBlocky')}</option>
                                         <option value="calligraphy">{t('styleCalligraphy')}</option>
@@ -525,7 +577,10 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                                     placeholder={t('inputPlaceholder')}
                                     className={fieldClass}
                                     value={inputText}
-                                    onChange={(e) => setInputText(e.target.value)}
+                                    onChange={(e) => {
+                                        invalidateGeneration();
+                                        setInputText(e.target.value);
+                                    }}
                                     onKeyDown={(e) => e.key === "Enter" && generateAmbigrams()}
                                 />
                             </div>
@@ -537,7 +592,7 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                                     id="style_dropdown"
                                     className={selectClass}
                                     value={style}
-                                    onChange={(e) => setStyle(e.target.value)}
+                                    onChange={(e) => changeStyle(e.target.value)}
                                 >
                                     <option value="new">{t('styleBlocky')}</option>
                                     <option value="calligraphy">{t('styleCalligraphy')}</option>
@@ -564,14 +619,19 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
 
                     {/* 结果展示区 */}
                     <div className="mt-8 border-t border-slate-200 pt-6">
-                        {generatedImages.length === 0 && !isLoading && (
+                        {!batch && !isLoading && (
                             <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-10 text-center text-slate-500">
                                 <p>{t('emptyStateText')}</p>
                             </div>
                         )}
 
-                        {generatedImages.length > 0 && (
+                        {batch && (
                             <>
+                                <p role="status" className={`mb-3 break-words rounded-lg px-3 py-2 text-sm font-medium ${isStale ? "bg-amber-50 text-amber-900" : "bg-slate-50 text-slate-700"}`}>
+                                    {isStale
+                                        ? `Preview is from ${resultWordA} / ${resultWordB} · ${resultStyle}. Generate to update.`
+                                        : `Preview: ${resultWordA} / ${resultWordB} · ${resultStyle}`}
+                                </p>
                                 <div className="mb-5 flex items-center justify-between">
                                     <p className="text-sm font-medium text-slate-500">
                                         {t('rotationHint')}
@@ -585,14 +645,14 @@ export default function Generator2d({ incomingWordA, incomingWordB, triggerGener
                                     </button>
                                 </div>
                                 <div id="ambigrams" className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 rounded-2xl p-4 ${previewDark ? "bg-slate-950" : "bg-slate-50"}`}>
-                                    {generatedImages.map((imgSrc, index) => (
+                                    {batch.images.map(({ dataUrl, ordinal }) => (
                                         <AmbigramItem
-                                            key={index}
-                                            src={imgSrc}
-                                            alt={t('altTextResult', { index: index + 1 })}
-                                            fileName={`${fileStem}-${index + 1}.png`}
-                                            wordA={isTwoWordMode ? wordA.trim() : inputText.trim()}
-                                            wordB={isTwoWordMode ? wordB.trim() : inputText.trim()}
+                                            key={`${batch.id}-${ordinal}`}
+                                            src={dataUrl}
+                                            alt={t('altTextResult', { index: ordinal })}
+                                            fileName={`${batch.fileStem}-${ordinal}.png`}
+                                            wordA={batch.source.wordA.toUpperCase()}
+                                            wordB={batch.source.wordB.toUpperCase()}
                                             darkPreview={previewDark}
                                         />
                                     ))}
