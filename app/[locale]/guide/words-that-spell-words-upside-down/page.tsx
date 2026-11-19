@@ -411,7 +411,7 @@ function EnglishGuide() {
             <section id="same-words" className="not-prose mt-12 scroll-mt-28">
                 <h2 className="text-xl font-black text-slate-900">Try a half-turn</h2>
                 <p className="mb-5 mt-2 text-base text-slate-700">
-                    Use Rotate 180° to turn each drawing. The captions give both readings.
+                    Each caption gives the reading upright and after a 180° turn.
                 </p>
                 <div className="grid gap-3 sm:grid-cols-3">
                     <WordRotationCard word="SOS" />

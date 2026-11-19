@@ -30,9 +30,10 @@ export default function WordRotationCard({ word }: { word: keyof typeof samples 
 
     return (
         <figure className="m-0 min-w-0 rounded-2xl border border-indigo-100 bg-white p-3 sm:p-4">
-            <div className="flex aspect-[9/5] items-center justify-center rounded-xl bg-indigo-50 px-3">
+            <div className="flex aspect-square items-center justify-center rounded-xl bg-indigo-50 p-3">
+                {/* Center the word at (192, 192) so the padded square contains the full stroke sweep. */}
                 <svg
-                    viewBox="0 0 360 160"
+                    viewBox="0 0 384 384"
                     aria-hidden="true"
                     focusable="false"
                     className="block w-full max-w-[17rem] text-indigo-950"
@@ -47,7 +48,7 @@ export default function WordRotationCard({ word }: { word: keyof typeof samples 
                         style={{ transform: `rotate(${angle}deg)`, transformOrigin: "50% 50%", transformBox: "view-box" }}
                     >
                         {sample.letters.map((letter, index) => (
-                            <g key={index} transform={`translate(${10 + index * 120} 0)`}>
+                            <g key={index} transform={`translate(${22 + index * 120} 112)`}>
                                 {glyphs[letter]}
                             </g>
                         ))}
